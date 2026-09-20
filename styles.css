@@ -96,7 +96,7 @@ body.edit-mode .readonly-only {
 }
 
 .site-header-inner {
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -158,7 +158,7 @@ body.edit-mode .readonly-only {
   position: sticky;
   top: 0;
   z-index: 60;
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
@@ -223,7 +223,7 @@ body.edit-mode .readonly-only {
 /* ---------- 主区域 ---------- */
 
 main {
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 16px;
   display: flex;
@@ -932,7 +932,7 @@ mark.hl {
 /* ---------- 页脚 ---------- */
 
 .site-footer {
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 10px 16px 30px;
   text-align: center;
