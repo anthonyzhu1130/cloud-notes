@@ -52,6 +52,8 @@
       <button type="button" id="btnExport" class="btn btn-ghost">导出 JSON 备份</button>
       <button type="button" id="btnImportPick" class="btn btn-ghost edit-only">导入 JSON</button>
       <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" aria-label="选择要导入的 JSON 文件" />
+      <button type="button" id="btnImportWord" class="btn btn-ghost edit-only">导入 Word</button>
+      <input type="file" id="wordFileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden-input" aria-label="选择要导入的 Word 文档" />
     </div>
 
     <p class="stat-line">
@@ -267,6 +269,48 @@
     <div class="modal-actions">
       <button type="button" id="btnImportConfirm" class="btn btn-danger">确认导入并写入 GitHub</button>
       <button type="button" id="btnImportCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Word 导入窗口 ================= -->
+<div class="modal-backdrop hidden" id="wordImportModal">
+  <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="wordImportTitle">
+    <h2 class="modal-title" id="wordImportTitle">导入 Word 文档</h2>
+
+    <p class="modal-note">
+      识别规则：
+      <br>· Word 中的<b>标题 1</b> → 目录
+      <br>· Word 中的<b>标题 2</b> → 该目录下的笔记标题
+      <br>· 标题 2 下面的正文 → 笔记正文
+      <br>· 标题 3 及以下 → 保留在笔记正文中
+      <br>注意：Word 里的标题必须使用"样式"中的"标题 1""标题 2"，只手动加粗放大字号无法识别。
+    </p>
+
+    <div class="form-row">
+      <label class="field-label" for="wordImportMode">导入方式</label>
+      <select id="wordImportMode" class="input">
+        <option value="h1-h2">按标题层级（标题 1 → 目录，标题 2 → 笔记）</option>
+        <option value="single">整篇文档作为一篇笔记</option>
+      </select>
+    </div>
+
+    <div class="form-row" id="wordImportSingleRow">
+      <label class="field-label" for="wordImportSingleCategory">整篇导入时的目标目录</label>
+      <select id="wordImportSingleCategory" class="input"></select>
+    </div>
+
+    <div id="wordImportSummary" class="import-summary"></div>
+
+    <p class="warn-note">
+      注意：Word 中的图片不会自动上传到 GitHub。导入后，请编辑对应笔记并手动重新上传图片。
+    </p>
+
+    <p id="wordImportError" class="error-text hidden"></p>
+
+    <div class="modal-actions">
+      <button type="button" id="btnWordImportConfirm" class="btn btn-primary">确认导入并写入 GitHub</button>
+      <button type="button" id="btnWordImportCancel" class="btn btn-ghost">取消</button>
     </div>
   </div>
 </div>
