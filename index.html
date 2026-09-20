@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>海光云端笔记</title>
+<meta name="description" content="基于 GitHub Pages 与 GitHub REST API 的云端分类笔记网站" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#mainContent">跳到主要内容</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <h1 id="siteTitle">海光云端笔记</h1>
+    <div class="header-actions">
+      <span id="modeBadge" class="mode-badge mode-readonly">只读模式</span>
+      <button type="button" id="btnEnterEdit" class="btn btn-primary">进入编辑模式</button>
+      <button type="button" id="btnExitEdit" class="btn btn-ghost edit-only">退出编辑模式</button>
+    </div>
+  </div>
+  <p class="privacy-note">
+    隐私提示：本网站是公开的静态页面，请勿存放报关资料、客户信息、合同、密码、证件等敏感内容。
+  </p>
+</header>
+
+<div id="notifyArea" class="notify-area" role="status" aria-live="polite"></div>
+
+<main id="mainContent">
+
+  <!-- ============ 上半部分：搜索与目录导航 ============ -->
+  <section class="panel" aria-labelledby="navHeading">
+    <h2 id="navHeading" class="section-title">搜索与目录导航</h2>
+
+    <div class="search-row">
+      <label class="field-label" for="searchInput">搜索笔记</label>
+      <input
+        type="search"
+        id="searchInput"
+        class="input"
+        placeholder="输入目录名、标题、正文、图片说明或附件名"
+        autocomplete="off"
+      />
+      <button type="button" id="btnSearch" class="btn btn-primary">搜索</button>
+      <button type="button" id="btnClearSearch" class="btn btn-ghost">清除搜索</button>
+    </div>
+
+    <div class="toolbar">
+      <button type="button" id="btnExpandAll" class="btn btn-ghost">全部展开</button>
+      <button type="button" id="btnCollapseAll" class="btn btn-ghost">全部折叠</button>
+      <button type="button" id="btnReload" class="btn btn-ghost">重新加载远端数据</button>
+      <button type="button" id="btnExport" class="btn btn-ghost">导出 JSON 备份</button>
+      <button type="button" id="btnImportPick" class="btn btn-ghost edit-only">导入 JSON</button>
+      <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" aria-label="选择要导入的 JSON 文件" />
+    </div>
+
+    <p class="stat-line">
+      <span id="searchStatus">共 0 篇笔记</span>
+      <span class="sep">·</span>
+      <span id="dataUpdatedAt">数据最后更新时间：读取中…</span>
+    </p>
+
+    <div id="categoryNav" class="category-nav" aria-label="目录与笔记导航"></div>
+  </section>
+
+  <!-- ============ 下半部分：笔记内容 ============ -->
+  <section class="panel" aria-labelledby="notesHeading">
+    <h2 id="notesHeading" class="section-title">笔记内容</h2>
+    <div id="notesContainer" class="notes-container"></div>
+  </section>
+
+  <!-- ============ 新增目录 ============ -->
+  <section class="panel edit-only" aria-labelledby="addCatHeading">
+    <h2 id="addCatHeading" class="section-title">新增目录</h2>
+    <div class="form-row">
+      <label class="field-label" for="newCategoryName">目录名称（不能为空，不能重复）</label>
+      <input type="text" id="newCategoryName" class="input" maxlength="60" placeholder="例如：工作方法" />
+      <button type="button" id="btnAddCategory" class="btn btn-primary">新增目录</button>
+    </div>
+  </section>
+
+  <!-- ============ 新增笔记 ============ -->
+  <section class="panel edit-only" aria-labelledby="addNoteHeading">
+    <h2 id="addNoteHeading" class="section-title">新增笔记</h2>
+
+    <div class="form-row">
+      <label class="field-label" for="newNoteCategory">所属目录</label>
+      <select id="newNoteCategory" class="input"></select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="newNoteTitle">笔记标题（必填）</label>
+      <input type="text" id="newNoteTitle" class="input" maxlength="120" />
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="newNoteContent">笔记正文（可换行，纯文本）</label>
+      <textarea id="newNoteContent" class="input textarea" rows="6"></textarea>
+    </div>
+
+    <div class="form-row checkbox-row">
+      <input type="checkbox" id="newNoteMarked" />
+      <label for="newNoteMarked">设为重点笔记</label>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="newNoteImages">上传图片（JPG / JPEG / PNG / GIF / WebP，单张不超过 5 MB）</label>
+      <input
+        type="file"
+        id="newNoteImages"
+        class="input"
+        accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp"
+        multiple
+      />
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="newNoteFiles">上传附件（PDF / Word / Excel / PPT / TXT / CSV / ZIP，单个不超过 10 MB）</label>
+      <input
+        type="file"
+        id="newNoteFiles"
+        class="input"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip"
+        multiple
+      />
+    </div>
+
+    <p class="warn-note">
+      提醒：附件类型检查不能代替病毒扫描，请不要打开来源不可信的附件。
+    </p>
+
+    <div id="newNoteImagePreview" class="preview-list"></div>
+    <div id="newNoteFilePreview" class="preview-list"></div>
+
+    <div class="form-actions">
+      <button type="button" id="btnSaveNewNote" class="btn btn-primary">保存笔记</button>
+      <button type="button" id="btnCancelNewNote" class="btn btn-ghost">取消</button>
+    </div>
+  </section>
+
+  <!-- ============ 只读提示 ============ -->
+  <section class="panel readonly-only" aria-labelledby="readonlyTipHeading">
+    <h2 id="readonlyTipHeading" class="section-title">只读提示</h2>
+    <p id="readonlyTip">当前为只读模式，如需编辑请进入编辑模式。</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>云端分类笔记 · 数据保存在 GitHub 仓库 · 请勿存放敏感信息</p>
+</footer>
+
+<!-- ================= Token 输入窗口 ================= -->
+<div class="modal-backdrop hidden" id="tokenModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tokenModalTitle">
+    <h2 class="modal-title" id="tokenModalTitle">进入编辑模式</h2>
+    <p class="modal-note">
+      Token 只保存在当前浏览器标签页的 sessionStorage 中，关闭标签页后自动失效。
+      Token 不会写入 notes.json，也不会写入任何网站文件。
+      每台需要编辑的电脑都要单独输入一次 Token。
+    </p>
+
+    <div class="form-row">
+      <label class="field-label" for="tokenInput">GitHub Personal Access Token</label>
+      <div class="token-row">
+        <input type="password" id="tokenInput" class="input" autocomplete="off" spellcheck="false" />
+        <button type="button" id="btnToggleToken" class="btn btn-ghost">显示</button>
+      </div>
+    </div>
+
+    <p id="tokenError" class="error-text hidden"></p>
+
+    <div class="modal-actions">
+      <button type="button" id="btnTokenConfirm" class="btn btn-primary">进入编辑模式</button>
+      <button type="button" id="btnTokenCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 编辑笔记窗口 ================= -->
+<div class="modal-backdrop hidden" id="editNoteModal">
+  <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="editNoteModalTitle">
+    <h2 class="modal-title" id="editNoteModalTitle">编辑笔记</h2>
+
+    <div class="form-row">
+      <label class="field-label" for="editNoteCategory">所属目录</label>
+      <select id="editNoteCategory" class="input"></select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="editNoteTitle">笔记标题（必填）</label>
+      <input type="text" id="editNoteTitle" class="input" maxlength="120" />
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="editNoteContent">笔记正文（可换行，纯文本）</label>
+      <textarea id="editNoteContent" class="input textarea" rows="8"></textarea>
+    </div>
+
+    <div class="form-row checkbox-row">
+      <input type="checkbox" id="editNoteMarked" />
+      <label for="editNoteMarked">设为重点笔记</label>
+    </div>
+
+    <h3 class="sub-title">已有的图片与附件</h3>
+    <div id="editNoteExistingImages" class="preview-list"></div>
+    <div id="editNoteExistingFiles" class="preview-list"></div>
+
+    <h3 class="sub-title">新增图片与附件</h3>
+
+    <div class="form-row">
+      <label class="field-label" for="editNoteImages">添加图片</label>
+      <input
+        type="file"
+        id="editNoteImages"
+        class="input"
+        accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp"
+        multiple
+      />
+    </div>
+
+    <div class="form-row">
+      <label class="field-label" for="editNoteFiles">添加附件</label>
+      <input
+        type="file"
+        id="editNoteFiles"
+        class="input"
+        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip"
+        multiple
+      />
+    </div>
+
+    <div id="editNoteImagePreview" class="preview-list"></div>
+    <div id="editNoteFilePreview" class="preview-list"></div>
+
+    <p id="editNoteError" class="error-text hidden"></p>
+
+    <div class="modal-actions">
+      <button type="button" id="btnSaveEditNote" class="btn btn-primary">保存修改</button>
+      <button type="button" id="btnCancelEditNote" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 确认窗口 ================= -->
+<div class="modal-backdrop hidden" id="confirmModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <h2 class="modal-title" id="confirmTitle">确认操作</h2>
+    <p class="modal-text" id="confirmMessage"></p>
+    <div class="modal-actions">
+      <button type="button" id="confirmOkBtn" class="btn btn-danger">确认删除</button>
+      <button type="button" id="confirmCancelBtn" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 导入预览窗口 ================= -->
+<div class="modal-backdrop hidden" id="importModal">
+  <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+    <h2 class="modal-title" id="importTitle">导入 JSON 预览</h2>
+    <div id="importSummary" class="import-summary"></div>
+    <p class="warn-note">
+      注意：导入 JSON 只导入元数据，不会自动恢复缺失的图片或附件二进制文件。
+      如果导入的数据引用了仓库中不存在的文件，图片和附件将无法显示。
+    </p>
+    <p id="importError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnImportConfirm" class="btn btn-danger">确认导入并写入 GitHub</button>
+      <button type="button" id="btnImportCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <p style="padding:16px;background:#fff3cd;color:#7a4b00;">本网站需要启用 JavaScript 才能运行。</p>
+</noscript>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
