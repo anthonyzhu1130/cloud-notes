@@ -10,7 +10,7 @@
 window.APP_CONFIG = {
 
   /* GitHub 用户名（必改：改成你自己的 GitHub 用户名或组织名） */
-  OWNER: 'YOUR_GITHUB_USERNAME',
+  OWNER: 'anthonyzhu1130',
 
   /* GitHub 仓库名称（必改：如果仓库名不是 cloud-notes，请改成实际名称） */
   REPO: 'cloud-notes',
