@@ -2909,6 +2909,525 @@
     }
   }
 
+  /* =====================================================================
+   * 21. Word 导入（解析 .docx 并按标题层级生成目录与笔记）
+   * =================================================================== */
+
+  const MAMMOTH_CDNS = [
+    'https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js',
+    'https://unpkg.com/mammoth@1.8.0/mammoth.browser.min.js',
+    'https://fastly.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js'
+  ];
+
+  let mammothLoadingPromise = null;
+
+  const wordImportCtx = {
+    blocks: null,
+    fileName: '',
+    mode: 'h1-h2',
+    preview: null
+  };
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      const s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.onload = function () { resolve(); };
+      s.onerror = function () {
+        if (s.parentNode) s.parentNode.removeChild(s);
+        reject(new Error('加载脚本失败：' + src));
+      };
+      document.head.appendChild(s);
+    });
+  }
+
+  function loadMammoth() {
+    if (window.mammoth) {
+      return Promise.resolve();
+    }
+    if (mammothLoadingPromise) {
+      return mammothLoadingPromise;
+    }
+    mammothLoadingPromise = (async function () {
+      for (let i = 0; i < MAMMOTH_CDNS.length; i++) {
+        try {
+          await loadScriptOnce(MAMMOTH_CDNS[i]);
+          if (window.mammoth) {
+            return;
+          }
+        } catch (e) {
+          /* 尝试下一个 CDN */
+        }
+      }
+      mammothLoadingPromise = null;
+      throw new AppError('无法加载 Word 解析库（已尝试多个 CDN 均失败）。请检查网络后重试。', 0);
+    })();
+    return mammothLoadingPromise;
+  }
+
+  async function parseWordToBlocks(file) {
+    await loadMammoth();
+
+    const ext = getExtension(file.name);
+    if (ext !== 'docx') {
+      throw new AppError('只支持 .docx 格式（Word 2007 及以上）。如果使用的是 .doc 老格式，请先在 Word 中另存为 .docx 再导入。', 0);
+    }
+
+    let arrayBuffer;
+    try {
+      arrayBuffer = await readFileAsArrayBuffer(file);
+    } catch (e) {
+      throw new AppError('读取 Word 文件失败：' + ((e && e.message) || ''), 0);
+    }
+
+    let result;
+    try {
+      result = await window.mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+    } catch (e) {
+      throw new AppError('解析 Word 文档失败：' + ((e && e.message) || ''), 0);
+    }
+
+    const html = (result && result.value) ? result.value : '';
+    return extractBlocksFromHtml(html);
+  }
+
+  function extractBlocksFromHtml(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const body = doc.body;
+    const blocks = [];
+
+    function textOf(node) {
+      return String(node.textContent || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function walk(node) {
+      if (!node || node.nodeType !== 1) return;
+      const tag = node.tagName.toLowerCase();
+
+      if (/^h[1-6]$/.test(tag)) {
+        const text = textOf(node);
+        if (text) {
+          blocks.push({
+            type: 'heading',
+            level: parseInt(tag.charAt(1), 10),
+            text: text
+          });
+        }
+        return;
+      }
+
+      if (tag === 'p') {
+        const imgs = node.querySelectorAll('img');
+        const text = textOf(node);
+        if (text) {
+          blocks.push({ type: 'paragraph', text: text });
+        } else if (imgs.length > 0) {
+          blocks.push({ type: 'paragraph', text: '[图片：Word 中的图片不会自动导入，请手动重新上传]' });
+        }
+        return;
+      }
+
+      if (tag === 'ul' || tag === 'ol') {
+        const items = [];
+        Array.prototype.forEach.call(node.children, function (li) {
+          if (li.tagName.toLowerCase() !== 'li') return;
+          const t = textOf(li);
+          if (t) items.push('· ' + t);
+        });
+        if (items.length) {
+          blocks.push({ type: 'paragraph', text: items.join('\n') });
+        }
+        return;
+      }
+
+      if (tag === 'table') {
+        const rows = [];
+        Array.prototype.forEach.call(node.querySelectorAll('tr'), function (tr) {
+          const cells = [];
+          Array.prototype.forEach.call(tr.querySelectorAll('th,td'), function (cell) {
+            cells.push(textOf(cell));
+          });
+          if (cells.length) rows.push(cells.join(' | '));
+        });
+        if (rows.length) {
+          blocks.push({ type: 'paragraph', text: rows.join('\n') });
+        }
+        return;
+      }
+
+      if (tag === 'img') {
+        blocks.push({ type: 'paragraph', text: '[图片：Word 中的图片不会自动导入，请手动重新上传]' });
+        return;
+      }
+
+      if (tag === 'blockquote') {
+        const t = textOf(node);
+        if (t) blocks.push({ type: 'paragraph', text: '> ' + t });
+        return;
+      }
+
+      if (tag === 'hr') {
+        blocks.push({ type: 'paragraph', text: '———' });
+        return;
+      }
+
+      Array.prototype.forEach.call(node.childNodes, walk);
+    }
+
+    Array.prototype.forEach.call(body.childNodes, walk);
+    return blocks;
+  }
+
+  function buildWordPreview(blocks, mode, fileName) {
+    const fallbackName = fileName || '导入的 Word 文档';
+
+    if (mode === 'single') {
+      const lines = [];
+      blocks.forEach(function (b) {
+        if (b.type === 'heading') {
+          lines.push('【' + b.text + '】');
+        } else {
+          lines.push(b.text);
+        }
+      });
+      return {
+        mode: 'single',
+        singleNote: {
+          title: fallbackName,
+          content: lines.join('\n\n')
+        }
+      };
+    }
+
+    const categories = [];
+    let currentCategory = null;
+    let currentNote = null;
+    let buffer = [];
+
+    function ensureCategory(name) {
+      let cat = categories.find(function (c) { return c.name === name; });
+      if (!cat) {
+        cat = { name: name, notes: [] };
+        categories.push(cat);
+      }
+      return cat;
+    }
+
+    function flushNote() {
+      if (!currentCategory) {
+        buffer = [];
+        currentNote = null;
+        return;
+      }
+      if (currentNote || buffer.length > 0) {
+        const title = currentNote || currentCategory.name;
+        currentCategory.notes.push({
+          title: title,
+          content: buffer.join('\n\n').trim()
+        });
+      }
+      buffer = [];
+      currentNote = null;
+    }
+
+    blocks.forEach(function (b) {
+      if (b.type === 'heading') {
+        if (b.level === 1) {
+          flushNote();
+          currentCategory = ensureCategory(b.text);
+        } else if (b.level === 2) {
+          flushNote();
+          if (!currentCategory) {
+            currentCategory = ensureCategory(fallbackName);
+          }
+          currentNote = b.text;
+        } else {
+          if (currentNote) {
+            buffer.push('【' + b.text + '】');
+          } else if (currentCategory) {
+            flushNote();
+            currentNote = b.text;
+          }
+        }
+      } else {
+        buffer.push(b.text);
+      }
+    });
+
+    flushNote();
+
+    const filtered = categories.filter(function (c) { return c.notes.length > 0; });
+
+    return {
+      mode: 'h1-h2',
+      categories: filtered
+    };
+  }
+
+  function renderWordPreviewText(preview) {
+    const lines = [];
+
+    if (preview.mode === 'single') {
+      lines.push('导入方式：整篇文档作为一篇笔记');
+      lines.push('笔记标题：' + preview.singleNote.title);
+      lines.push('内容长度：' + preview.singleNote.content.length + ' 字符');
+      return lines.join('\n');
+    }
+
+    const totalNotes = preview.categories.reduce(function (acc, c) {
+      return acc + c.notes.length;
+    }, 0);
+
+    lines.push('导入方式：按标题层级');
+    lines.push('识别到的目录数量：' + preview.categories.length);
+    lines.push('识别到的笔记数量：' + totalNotes);
+    lines.push('');
+    lines.push('目录结构预览：');
+
+    preview.categories.forEach(function (cat) {
+      lines.push('📁 ' + cat.name + '（' + cat.notes.length + ' 篇）');
+      cat.notes.forEach(function (n) {
+        const preview30 = n.content.slice(0, 30).replace(/\n/g, ' ');
+        lines.push('   📄 ' + n.title + (preview30 ? '  —— ' + preview30 + (n.content.length > 30 ? '…' : '') : ''));
+      });
+    });
+
+    return lines.join('\n');
+  }
+
+  function refreshWordPreview() {
+    if (!wordImportCtx.blocks) return;
+
+    const mode = byId('wordImportMode').value;
+    wordImportCtx.mode = mode;
+
+    const singleRow = byId('wordImportSingleRow');
+    if (singleRow) {
+      singleRow.style.display = (mode === 'single') ? '' : 'none';
+    }
+
+    const preview = buildWordPreview(
+      wordImportCtx.blocks,
+      mode,
+      wordImportCtx.fileName
+    );
+    wordImportCtx.preview = preview;
+
+    const summaryEl = byId('wordImportSummary');
+    if (summaryEl) {
+      summaryEl.textContent = renderWordPreviewText(preview);
+    }
+
+    const errEl = byId('wordImportError');
+    errEl.classList.add('hidden');
+    errEl.textContent = '';
+
+    const confirmBtn = byId('btnWordImportConfirm');
+
+    if (mode === 'h1-h2') {
+      if (preview.categories.length === 0) {
+        confirmBtn.disabled = true;
+        errEl.textContent = '未识别到任何标题结构。请确认 Word 文档使用了"标题 1""标题 2"样式，或改用"整篇文档作为一篇笔记"模式。';
+        errEl.classList.remove('hidden');
+      } else {
+        confirmBtn.disabled = false;
+      }
+    } else {
+      const catId = byId('wordImportSingleCategory').value;
+      if (!catId) {
+        confirmBtn.disabled = true;
+        errEl.textContent = '请选择目标目录。';
+        errEl.classList.remove('hidden');
+      } else {
+        confirmBtn.disabled = false;
+      }
+    }
+  }
+
+  function handleWordFileSelected(file) {
+    if (!state.editing) {
+      notify('warn', '请先进入编辑模式。', 5000);
+      return;
+    }
+
+    wordImportCtx.fileName = file.name.replace(/\.docx$/i, '');
+    wordImportCtx.blocks = null;
+    wordImportCtx.preview = null;
+
+    const loading = notify('info', '正在解析 Word 文档…', 0);
+
+    parseWordToBlocks(file)
+      .then(function (blocks) {
+        loading.remove();
+        if (!blocks.length) {
+          throw new AppError('Word 文档中未找到任何有效内容。', 0);
+        }
+        wordImportCtx.blocks = blocks;
+
+        fillCategorySelect(byId('wordImportSingleCategory'), '');
+
+        byId('wordImportMode').value = 'h1-h2';
+
+        refreshWordPreview();
+        showModal('wordImportModal');
+      })
+      .catch(function (err) {
+        loading.remove();
+        notify('error', (err && err.message) ? err.message : '解析 Word 文档失败。', 12000);
+      });
+  }
+
+  async function executeWordImport() {
+    if (!state.editing) {
+      notify('warn', '请先进入编辑模式。', 5000);
+      return;
+    }
+
+    const preview = wordImportCtx.preview;
+    if (!preview) return;
+
+    const btn = byId('btnWordImportConfirm');
+    if (btn.disabled) return;
+    btn.disabled = true;
+
+    const working = notify('info', '正在保存…', 0);
+    const nowIso = new Date().toISOString();
+
+    try {
+      const next = deepClone(state.data);
+
+      if (preview.mode === 'single') {
+        const categoryId = String(byId('wordImportSingleCategory').value || '');
+        if (!categoryId) {
+          throw new AppError('请选择目标目录。', 0);
+        }
+        next.notes.push({
+          id: newId('note'),
+          categoryId: categoryId,
+          title: preview.singleNote.title,
+          content: preview.singleNote.content,
+          marked: false,
+          collapsed: false,
+          images: [],
+          attachments: [],
+          createdAt: nowIso,
+          updatedAt: nowIso
+        });
+      } else {
+        preview.categories.forEach(function (catPreview) {
+          let cat = next.categories.find(function (c) {
+            return c.name === catPreview.name;
+          });
+          if (!cat) {
+            cat = {
+              id: newId('category'),
+              name: catPreview.name,
+              marked: false,
+              collapsed: false,
+              createdAt: nowIso,
+              updatedAt: nowIso
+            };
+            next.categories.push(cat);
+          }
+          catPreview.notes.forEach(function (notePreview) {
+            next.notes.push({
+              id: newId('note'),
+              categoryId: cat.id,
+              title: notePreview.title,
+              content: notePreview.content,
+              marked: false,
+              collapsed: false,
+              images: [],
+              attachments: [],
+              createdAt: nowIso,
+              updatedAt: nowIso
+            });
+          });
+        });
+      }
+
+      await commitData(next, '从 Word 导入笔记：' + wordImportCtx.fileName);
+
+      working.remove();
+      hideModal('wordImportModal');
+      wordImportCtx.blocks = null;
+      wordImportCtx.preview = null;
+      wordImportCtx.fileName = '';
+
+      notify('success', '已保存到 GitHub。', 6000);
+      render();
+    } catch (err) {
+      working.remove();
+      const errEl = byId('wordImportError');
+      errEl.textContent = (err && err.message) ? err.message : '导入失败。';
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function bindWordImportEvents() {
+    const btnOpen = byId('btnImportWord');
+    if (btnOpen) {
+      btnOpen.addEventListener('click', function () {
+        if (!state.editing) {
+          notify('warn', '请先进入编辑模式。', 5000);
+          return;
+        }
+        byId('wordFileInput').click();
+      });
+    }
+
+    const fileInput = byId('wordFileInput');
+    if (fileInput) {
+      fileInput.addEventListener('change', function (ev) {
+        const file = ev.target.files && ev.target.files[0];
+        ev.target.value = '';
+        if (!file) return;
+        handleWordFileSelected(file);
+      });
+    }
+
+    const modeSel = byId('wordImportMode');
+    if (modeSel) {
+      modeSel.addEventListener('change', function () {
+        refreshWordPreview();
+      });
+    }
+
+    const singleCat = byId('wordImportSingleCategory');
+    if (singleCat) {
+      singleCat.addEventListener('change', function () {
+        refreshWordPreview();
+      });
+    }
+
+    const confirmBtn = byId('btnWordImportConfirm');
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', function () {
+        executeWordImport();
+      });
+    }
+
+    const cancelBtn = byId('btnWordImportCancel');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', function () {
+        wordImportCtx.blocks = null;
+        wordImportCtx.preview = null;
+        wordImportCtx.fileName = '';
+        hideModal('wordImportModal');
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindWordImportEvents);
+  } else {
+    bindWordImportEvents();
+  }
+  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
