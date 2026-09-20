@@ -1,0 +1,47 @@
+
+```gitignore
+# ---------- 本地临时文件 ----------
+*.tmp
+*.temp
+*.bak
+~$*
+*.swp
+*.swo
+*~
+
+# ---------- 编辑器配置 ----------
+.vscode/
+.idea/
+*.iml
+.project
+.settings/
+.editorconfig
+
+# ---------- 操作系统临时文件 ----------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------- 本地密钥与敏感配置 ----------
+.env
+.env.*
+config.local.js
+secrets.json
+secrets.local.json
+*.pem
+*.key
+
+# ---------- 日志 ----------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---------- 本地导出备份 ----------
+notes-backup-*.json
