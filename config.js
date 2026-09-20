@@ -28,7 +28,7 @@ window.APP_CONFIG = {
   FILE_ROOT: 'assets/files',
 
   /* 网站名称 */
-  SITE_TITLE: '海光云端笔记',
+  SITE_TITLE: '我的云端笔记',
 
   /* 单张图片最大字节数（5 MB） */
   MAX_IMAGE_SIZE: 5 * 1024 * 1024,
