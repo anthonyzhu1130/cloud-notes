@@ -51,8 +51,8 @@ window.APP_CONFIG = {
   /* 主页上的常用链接：想加就加一行，想删就删一行 */
   QUICK_LINKS: [
     { name: '百度', url: 'https://www.baidu.com', icon: '🔍' },
-    { name: '光聆导航', url: 'https://anthonyzhu1130.github.io/nav/#/', icon: '🐙' },
+    { name: 'GitHub', url: 'https://github.com', icon: '🐙' },
     { name: '知乎', url: 'https://www.zhihu.com', icon: '📚' },
-    { name: '虫部落', url: 'https://search.chongbuluo.com/', icon: '📺' }
+    { name: 'B 站', url: 'https://www.bilibili.com', icon: '📺' }
   ]
 };
