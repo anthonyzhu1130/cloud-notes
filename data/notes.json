@@ -1,10 +1,11 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-18T09:00:00.000Z",
+  "updatedAt": "2026-09-21T12:21:03.874Z",
   "categories": [
     {
       "id": "category-work-method",
       "name": "工作方法",
+      "parentId": null,
       "marked": true,
       "collapsed": false,
       "createdAt": "2026-09-18T09:00:00.000Z",
@@ -13,6 +14,7 @@
     {
       "id": "category-learning",
       "name": "学习记录",
+      "parentId": null,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-09-18T09:00:00.000Z",
@@ -26,18 +28,6 @@
       "title": "欢迎使用云端分类笔记",
       "content": "这是一篇示例笔记，用于演示网站的基本功能。\n\n你可以：\n1. 在只读模式下浏览、搜索、展开和折叠目录与笔记。\n2. 点击“进入编辑模式”，输入 GitHub Token 后新增、编辑、删除目录与笔记。\n3. 上传图片与附件，它们会保存到 GitHub 仓库的 assets 目录中。\n\n注意：本网站是公开的静态页面，请不要存放任何敏感信息。",
       "marked": true,
-      "collapsed": false,
-      "images": [],
-      "attachments": [],
-      "createdAt": "2026-09-18T09:00:00.000Z",
-      "updatedAt": "2026-09-18T09:00:00.000Z"
-    },
-    {
-      "id": "note-how-to-search",
-      "categoryId": "category-work-method",
-      "title": "如何搜索笔记",
-      "content": "在页面顶部的搜索框输入关键词，然后按回车或点击“搜索”。\n\n搜索会同时匹配：\n· 目录名称\n· 笔记标题\n· 笔记正文\n· 图片说明\n· 附件原始文件名\n\n搜索结果会用黄色高亮显示，点击目录中的标题可以跳转到对应笔记。",
-      "marked": false,
       "collapsed": false,
       "images": [],
       "attachments": [],
