@@ -58,8 +58,8 @@
     searchKeyword: '',
     busy: false,
     collapsedCategories: Object.create(null),
-    collapsedNotes: Object.create(null)
-    currentView: 'dashboard', // 'dashboard' 或 'note'
+    collapsedNotes: Object.create(null),
+    currentView: 'dashboard',
     currentNoteId: null
   };
 
