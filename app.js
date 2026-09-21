@@ -624,72 +624,127 @@
     if (index < source.length) el.appendChild(document.createTextNode(source.slice(index)));
   }
 
-  function renderSidebar() {
+   function renderSidebar() {
     var container = byId('categoryNav'); if (!container) return;
     container.textContent = '';
-    if (!state.data) { var p = document.createElement('p'); p.className = 'empty-hint'; p.textContent = '加载中...'; container.appendChild(p); return; }
+    if (!state.data) {
+      var p = document.createElement('p'); p.className = 'empty-hint'; p.textContent = '加载中...'; container.appendChild(p); return;
+    }
     var keyword = String(state.searchKeyword || '').trim().toLowerCase();
     var level1s = getLevel1Categories();
-    if (level1s.length === 0) { var p2 = document.createElement('p'); p2.className = 'empty-hint'; p2.textContent = keyword ? '未找到匹配' : '暂无目录'; container.appendChild(p2); return; }
+    if (level1s.length === 0) {
+      var p2 = document.createElement('p'); p2.className = 'empty-hint';
+      p2.textContent = keyword ? '未找到匹配' : '暂无目录';
+      container.appendChild(p2); return;
+    }
+
+    function buildNoteList(notes, kw) {
+      var ul = document.createElement('ul'); ul.className = 'cat-nav-notes';
+      if (notes.length === 0) {
+        var li0 = document.createElement('li');
+        li0.className = 'empty-hint';
+        li0.style.fontSize = '0.8rem';
+        li0.style.padding = '4px 12px';
+        li0.textContent = '（无笔记）';
+        ul.appendChild(li0);
+      } else {
+        notes.forEach(function (note) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.className = 'cat-nav-link' + (state.currentView === 'note' && state.currentNoteId === note.id ? ' active' : '');
+          a.href = '#';
+          setHighlightedText(a, note.title, kw);
+          if (note.marked) a.textContent = a.textContent + ' ⭐';
+          a.addEventListener('click', function (e) {
+            e.preventDefault();
+            state.currentView = 'note';
+            state.currentNoteId = note.id;
+            render();
+          });
+          li.appendChild(a); ul.appendChild(li);
+        });
+      }
+      return ul;
+    }
 
     level1s.forEach(function (cat) {
       var children = getChildren(cat.id);
       var notesAtL1 = getSortedNotes(cat.id);
       var totalNotes = notesAtL1.length;
       children.forEach(function (ch) { totalNotes += getSortedNotes(ch.id).length; });
+
       if (keyword) {
         var hasMatch = (String(cat.name || '').toLowerCase().indexOf(keyword) !== -1) ||
           children.some(function (ch) { return String(ch.name || '').toLowerCase().indexOf(keyword) !== -1; }) ||
           notesAtL1.some(function (n) { return noteMatches(n, keyword); }) ||
-          children.some(function (ch) { return getSortedNotes(ch.id).some(function (n) { return noteMatches(n, keyword); }); });
+          children.some(function (ch) {
+            return getSortedNotes(ch.id).some(function (n) { return noteMatches(n, keyword); });
+          });
         if (!hasMatch) return;
       }
+
       var collapsed = isCategoryCollapsed(cat);
       var item = document.createElement('div'); item.className = 'cat-nav-item';
+
       var head = document.createElement('div'); head.className = 'cat-nav-head level-1';
-      head.addEventListener('click', function () { state.collapsedCategories[cat.id] = !isCategoryCollapsed(cat); renderSidebar(); });
-      var toggle = document.createElement('span'); toggle.textContent = collapsed ? '▶' : '▼'; toggle.style.fontSize = '0.7rem'; toggle.style.width = '12px';
+      head.addEventListener('click', function () {
+        state.collapsedCategories[cat.id] = !isCategoryCollapsed(cat);
+        renderSidebar();
+      });
+      var toggle = document.createElement('span');
+      toggle.textContent = collapsed ? '▶' : '▼';
+      toggle.style.fontSize = '0.7rem';
+      toggle.style.width = '12px';
       head.appendChild(toggle);
-      var nameEl = document.createElement('span'); nameEl.className = 'cat-nav-name'; setHighlightedText(nameEl, cat.name, keyword); head.appendChild(nameEl);
-      var countEl = document.createElement('span'); countEl.className = 'cat-nav-count'; countEl.textContent = String(totalNotes); head.appendChild(countEl);
+      var nameEl = document.createElement('span'); nameEl.className = 'cat-nav-name';
+      setHighlightedText(nameEl, cat.name, keyword); head.appendChild(nameEl);
+      var countEl = document.createElement('span'); countEl.className = 'cat-nav-count';
+      countEl.textContent = String(totalNotes); head.appendChild(countEl);
       item.appendChild(head);
 
       if (!collapsed) {
+        // 1) 先渲染挂在一级目录下的直属笔记
+        var visibleL1Notes = keyword
+          ? notesAtL1.filter(function (n) { return noteMatches(n, keyword); })
+          : notesAtL1;
+        if (visibleL1Notes.length > 0) {
+          var l1NotesWrap = document.createElement('div');
+          l1NotesWrap.className = 'cat-nav-l1-notes';
+          l1NotesWrap.appendChild(buildNoteList(visibleL1Notes, keyword));
+          item.appendChild(l1NotesWrap);
+        }
+
+        // 2) 再渲染二级目录（如果有）
         children.forEach(function (child) {
           var childNotes = getSortedNotes(child.id);
           if (keyword) {
-            var cm = (String(child.name || '').toLowerCase().indexOf(keyword) !== -1) || childNotes.some(function (n) { return noteMatches(n, keyword); });
+            var cm = (String(child.name || '').toLowerCase().indexOf(keyword) !== -1) ||
+              childNotes.some(function (n) { return noteMatches(n, keyword); });
             if (!cm) return;
           }
           var childCollapsed = isCategoryCollapsed(child);
           var childItem = document.createElement('div'); childItem.className = 'cat-nav-children';
           var chHead = document.createElement('div'); chHead.className = 'cat-nav-head';
-          chHead.addEventListener('click', function () { state.collapsedCategories[child.id] = !isCategoryCollapsed(child); renderSidebar(); });
-          var chToggle = document.createElement('span'); chToggle.textContent = childCollapsed ? '▶' : '▼'; chToggle.style.fontSize = '0.7rem'; chToggle.style.width = '12px';
+          chHead.addEventListener('click', function () {
+            state.collapsedCategories[child.id] = !isCategoryCollapsed(child);
+            renderSidebar();
+          });
+          var chToggle = document.createElement('span');
+          chToggle.textContent = childCollapsed ? '▶' : '▼';
+          chToggle.style.fontSize = '0.7rem';
+          chToggle.style.width = '12px';
           chHead.appendChild(chToggle);
-          var chName = document.createElement('span'); chName.className = 'cat-nav-name'; setHighlightedText(chName, child.name, keyword); chHead.appendChild(chName);
-          var chCount = document.createElement('span'); chCount.className = 'cat-nav-count'; chCount.textContent = String(childNotes.length); chHead.appendChild(chCount);
+          var chName = document.createElement('span'); chName.className = 'cat-nav-name';
+          setHighlightedText(chName, child.name, keyword); chHead.appendChild(chName);
+          var chCount = document.createElement('span'); chCount.className = 'cat-nav-count';
+          chCount.textContent = String(childNotes.length); chHead.appendChild(chCount);
           childItem.appendChild(chHead);
 
           if (!childCollapsed) {
-            var ul = document.createElement('ul'); ul.className = 'cat-nav-notes';
-            var visibleNotes = keyword ? childNotes.filter(function (n) { return noteMatches(n, keyword); }) : childNotes;
-            if (visibleNotes.length === 0) {
-              var li0 = document.createElement('li'); li0.className = 'empty-hint'; li0.style.fontSize = '0.8rem'; li0.style.padding = '4px 12px'; li0.textContent = '（无笔记）';
-              ul.appendChild(li0);
-            } else {
-              visibleNotes.forEach(function (note) {
-                var li = document.createElement('li');
-                var a = document.createElement('a');
-                a.className = 'cat-nav-link' + (state.currentView === 'note' && state.currentNoteId === note.id ? ' active' : '');
-                a.href = '#';
-                setHighlightedText(a, note.title, keyword);
-                if (note.marked) a.textContent = a.textContent + ' ⭐';
-                a.addEventListener('click', function (e) { e.preventDefault(); state.currentView = 'note'; state.currentNoteId = note.id; render(); });
-                li.appendChild(a); ul.appendChild(li);
-              });
-            }
-            childItem.appendChild(ul);
+            var visibleNotes = keyword
+              ? childNotes.filter(function (n) { return noteMatches(n, keyword); })
+              : childNotes;
+            childItem.appendChild(buildNoteList(visibleNotes, keyword));
           }
           item.appendChild(childItem);
         });
@@ -1274,9 +1329,10 @@
       if (!c) { c = { name: name, notes: [] }; parent.children.push(c); }
       return c;
     }
+    
     function flushNote() {
       if (!currentNote) return;
-      currentNote.content = currentNote.content.join('\n\n').trim();
+      // 注意：不要 join，保持数组，因为后面还要按顺序处理图片对象
       if (currentL2) currentL2.notes.push(currentNote);
       else if (currentL1) currentL1.notes.push(currentNote);
       currentNote = null;
@@ -1529,10 +1585,19 @@
     safeBind('tokenInput', 'keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); confirmEnterEditMode(); } });
     safeBind('confirmOkBtn', 'click', function () { resolveConfirm(true); });
     safeBind('confirmCancelBtn', 'click', function () { resolveConfirm(false); });
-    safeBind('btnToggleSidebar', 'click', function () {
-      byId('sidebar').classList.toggle('collapsed');
-      byId('btnToggleSidebar').textContent = byId('sidebar').classList.contains('collapsed') ? '▶' : '◀';
-    });
+    function toggleSidebarCollapse() {
+      var sidebar = byId('sidebar');
+      var isCollapsed = sidebar.classList.toggle('collapsed');
+      var btnToggle = byId('btnToggleSidebar');
+      if (btnToggle) btnToggle.textContent = isCollapsed ? '◀' : '◀';
+      var btnOpen = byId('btnOpenSidebar');
+      if (btnOpen) {
+        if (isCollapsed) btnOpen.classList.remove('hidden');
+        else btnOpen.classList.add('hidden');
+      }
+    }
+    safeBind('btnToggleSidebar', 'click', toggleSidebarCollapse);
+    safeBind('btnOpenSidebar', 'click', toggleSidebarCollapse);
     ['sideToolDashboard', 'sideToolPomodoro', 'sideToolTimer'].forEach(function (id) {
       safeBind(id, 'click', function () {
         if (id === 'sideToolDashboard') state.currentView = 'dashboard';
