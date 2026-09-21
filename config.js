@@ -1,11 +1,11 @@
 window.APP_CONFIG = {
-  OWNER: 'YOUR_GITHUB_USERNAME',
+  OWNER: 'anthonyzhu1130',
   REPO: 'cloud-notes',
   BRANCH: 'main',
   NOTES_PATH: 'data/notes.json',
   IMAGE_ROOT: 'assets/images',
   FILE_ROOT: 'assets/files',
-  SITE_TITLE: '海光云端笔记',
+  SITE_TITLE: 'MY笔记',
   MAX_IMAGE_SIZE: 5 * 1024 * 1024,
   MAX_FILE_SIZE: 10 * 1024 * 1024,
   ALLOWED_IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
