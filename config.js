@@ -13,11 +13,17 @@ window.APP_CONFIG = {
   API_VERSION: '2022-11-28',
   SHOW_SAMPLE_DATA: false,
   QUICK_LINKS: [
-    { name: '光聆导航', url: 'https://anthonyzhu1130.github.io/nav/#/', icon: '📚' },
+    { name: '光聆导航', url: 'https://anthonyzhu1024.github.io/nav/#/', icon: '🧭' },
+    { name: 'DeepSeek', url: 'https://chat.deepseek.com', icon: '🐳' },
+    { name: '豆包', url: 'https://www.doubao.com', icon: '🫘' },
+    { name: '虫部落', url: 'https://www.chongbuluo.com', icon: '🐛' },
+    { name: '必应搜索', url: 'https://www.bing.com', icon: '🔍' },
     { name: '百度', url: 'https://www.baidu.com', icon: '🔍' },
-    { name: '虫部落', url: 'https://search.chongbuluo.com/, icon: '📺' },
+    { name: '铁路12306', url: 'https://www.12306.cn', icon: '🚄' },
+    { name: '果汁工具', url: 'http://guozhivip.com/tool', icon: '🧃' },
+    { name: '果汁搜索', url: 'http://guozhivip.com/so', icon: '🔍' },
     { name: 'GitHub', url: 'https://github.com', icon: '🐙' },
-    { name: 'DeepSeek', url: 'https://www.zhihu.com', icon: '📚' },
-    { name: '豆包', url: 'https://www.doubao.com/chat', icon: '📺' }
+    { name: '知乎', url: 'https://www.zhihu.com', icon: '📚' },
+    { name: 'B 站', url: 'https://www.bilibili.com', icon: '📺' }
   ]
 };
