@@ -54,7 +54,7 @@
         <h3>常用链接</h3>
         <div class="quick-links-grid" id="quickLinksGrid"></div>
       </div>
-      <div class="pinned-reminders-section" id="pinnedRemindersSection">
+      <div class="pinned-reminders-section" id="pinnedRemindersSection" style="display:none;">
         <h3>前台显示提醒</h3>
         <div class="pinned-reminders-list" id="pinnedRemindersList"></div>
       </div>
@@ -82,7 +82,6 @@
         <h2 id="noteViewTitle" class="note-view-title"></h2>
         <div class="note-view-meta" id="noteViewMeta"></div>
         <div class="note-view-content" id="noteViewContent"></div>
-        <div id="noteViewGallery" class="note-gallery"></div>
         <ul id="noteViewAttachments" class="note-attachments"></ul>
       </div>
     </section>
@@ -108,7 +107,6 @@
         <button type="button" id="btnBackFromTimer" class="btn btn-ghost">← 返回主页</button>
         <h2 class="tool-view-title">⏰ 定时提醒</h2>
       </div>
-
       <div class="reminder-toolbar">
         <div class="reminder-row">
           <span class="filter-label">名称</span>
@@ -126,25 +124,14 @@
           <button type="button" id="btnReminderReset" class="btn btn-ghost">重置</button>
         </div>
       </div>
-
       <div class="reminder-cat-tabs" id="reminderCatTabs"></div>
-
       <div class="reminder-actions-row">
         <button type="button" id="btnReminderAdd" class="btn btn-primary">+ 新增提醒</button>
       </div>
-
       <div class="reminder-list-wrap">
         <table class="reminder-table">
           <thead>
-            <tr>
-              <th>名称</th>
-              <th>分类</th>
-              <th>重复</th>
-              <th>提醒</th>
-              <th>剩余时间</th>
-              <th>下次提醒</th>
-              <th>操作</th>
-            </tr>
+            <tr><th>名称</th><th>分类</th><th>重复</th><th>提醒</th><th>剩余时间</th><th>下次提醒</th><th>操作</th></tr>
           </thead>
           <tbody id="reminderTbody"></tbody>
         </table>
@@ -153,7 +140,6 @@
   </main>
 </div>
 
-<!-- Token -->
 <div class="modal-backdrop hidden" id="tokenModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title">进入编辑模式</h2>
@@ -173,21 +159,26 @@
   </div>
 </div>
 
-<!-- 笔记编辑 -->
 <div class="modal-backdrop hidden" id="editNoteModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="editNoteModalTitle">编辑笔记</h2>
-    <div class="form-row"><label class="field-label" for="editNoteCategory">所属目录</label><select id="editNoteCategory" class="input"></select></div>
+    <div class="form-row">
+      <label class="field-label" for="editNoteCategory">所属目录（二级目录）</label>
+      <select id="editNoteCategory" class="input"></select>
+    </div>
     <div class="form-row"><label class="field-label" for="editNoteTitle">笔记标题（必填）</label><input type="text" id="editNoteTitle" class="input" maxlength="120" /></div>
-    <div class="form-row"><label class="field-label" for="editNoteContent">笔记正文</label><textarea id="editNoteContent" class="input textarea" rows="8"></textarea></div>
+    <div class="form-row">
+      <label class="field-label" for="editNoteContent">笔记正文</label>
+      <div class="editor-toolbar">
+        <button type="button" id="btnInsertImage" class="btn btn-ghost btn-small">📷 在光标处插入图片</button>
+        <span class="toolbar-hint">图片会上传到 GitHub，并在光标位置自动插入</span>
+      </div>
+      <textarea id="editNoteContent" class="input textarea" rows="10"></textarea>
+    </div>
     <div class="form-row checkbox-row"><input type="checkbox" id="editNoteMarked" /><label for="editNoteMarked">设为重点笔记</label></div>
-    <h3 class="sub-title">已有的图片与附件</h3>
-    <div id="editNoteExistingImages" class="preview-list"></div>
+    <h3 class="sub-title">附件</h3>
     <div id="editNoteExistingFiles" class="preview-list"></div>
-    <h3 class="sub-title">新增图片与附件</h3>
-    <div class="form-row"><label class="field-label" for="editNoteImages">添加图片</label><input type="file" id="editNoteImages" class="input" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" multiple /></div>
     <div class="form-row"><label class="field-label" for="editNoteFiles">添加附件</label><input type="file" id="editNoteFiles" class="input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" multiple /></div>
-    <div id="editNoteImagePreview" class="preview-list"></div>
     <div id="editNoteFilePreview" class="preview-list"></div>
     <p id="editNoteError" class="error-text hidden"></p>
     <div class="modal-actions">
@@ -197,7 +188,6 @@
   </div>
 </div>
 
-<!-- 确认 -->
 <div class="modal-backdrop hidden" id="confirmModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="confirmTitle">确认操作</h2>
@@ -209,36 +199,17 @@
   </div>
 </div>
 
-<!-- 新增提醒 -->
 <div class="modal-backdrop hidden" id="reminderModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="reminderModalTitle">新增倒计时</h2>
-    <div class="form-row">
-      <label class="field-label" for="reminderName">名称 *</label>
-      <input type="text" id="reminderName" class="input" placeholder="例如：期末考试" maxlength="80" />
-    </div>
-    <div class="form-row">
-      <label class="field-label" for="reminderDate">日期 *</label>
-      <input type="date" id="reminderDate" class="input" />
-    </div>
+    <div class="form-row"><label class="field-label" for="reminderName">名称 *</label><input type="text" id="reminderName" class="input" placeholder="例如：期末考试" maxlength="80" /></div>
+    <div class="form-row"><label class="field-label" for="reminderDate">日期 *</label><input type="date" id="reminderDate" class="input" /></div>
     <div class="form-row reminder-2col">
-      <div>
-        <label class="field-label" for="reminderTime">时间 *</label>
-        <input type="time" id="reminderTime" class="input" />
-      </div>
-      <div>
-        <label class="field-label" for="reminderCat">分类</label>
-        <select id="reminderCat" class="input"></select>
-      </div>
+      <div><label class="field-label" for="reminderTime">时间 *</label><input type="time" id="reminderTime" class="input" /></div>
+      <div><label class="field-label" for="reminderCat">分类</label><select id="reminderCat" class="input"></select></div>
     </div>
-    <div class="form-row">
-      <label class="field-label" for="reminderRepeat">重复</label>
-      <select id="reminderRepeat" class="input"></select>
-    </div>
-    <div class="form-row checkbox-row">
-      <input type="checkbox" id="reminderEmail" />
-      <label for="reminderEmail">发送邮件提醒</label>
-    </div>
+    <div class="form-row"><label class="field-label" for="reminderRepeat">重复</label><select id="reminderRepeat" class="input"></select></div>
+    <div class="form-row checkbox-row"><input type="checkbox" id="reminderEmail" /><label for="reminderEmail">发送邮件提醒</label></div>
     <p class="tool-hint" style="text-align:left;">需在设置-提醒设置中配置收件邮箱</p>
     <p id="reminderError" class="error-text hidden"></p>
     <div class="modal-actions">
@@ -248,13 +219,17 @@
   </div>
 </div>
 
-<!-- Word 导入 -->
 <div class="modal-backdrop hidden" id="wordImportModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title">导入 Word 文档</h2>
-    <p class="modal-note">识别规则：<b>标题 1</b> → 目录；<b>标题 2</b> → 该目录下的笔记标题；正文 → 笔记正文。</p>
-    <div class="form-row"><label class="field-label" for="wordImportMode">导入方式</label><select id="wordImportMode" class="input"><option value="h1-h2">按标题层级</option><option value="single">整篇文档作为一篇笔记</option></select></div>
-    <div class="form-row" id="wordImportSingleRow"><label class="field-label" for="wordImportSingleCategory">目标目录</label><select id="wordImportSingleCategory" class="input"></select></div>
+    <p class="modal-note">
+      识别规则：<br>
+      · Word 中的 <b>标题 1</b> → 一级目录<br>
+      · Word 中的 <b>标题 2</b> → 该一级目录下的二级目录<br>
+      · Word 中的 <b>标题 3</b> → 该二级目录下的笔记标题<br>
+      · 标题 3 下面的正文 → 笔记正文<br>
+      · 文档中的图片会自动上传到 GitHub 并按原位置插入
+    </p>
     <div id="wordImportSummary" class="import-summary"></div>
     <p id="wordImportError" class="error-text hidden"></p>
     <div class="modal-actions">
@@ -266,6 +241,7 @@
 
 <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" />
 <input type="file" id="wordFileInput" accept=".docx" class="hidden-input" />
+<input type="file" id="editNoteImageInput" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" class="hidden-input" />
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>
