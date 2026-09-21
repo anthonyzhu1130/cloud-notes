@@ -13,7 +13,7 @@ window.APP_CONFIG = {
   API_VERSION: '2022-11-28',
   SHOW_SAMPLE_DATA: false,
   QUICK_LINKS: [
-    { name: '光聆导航', url: 'https://anthonyzhu1024.github.io/nav/#/', icon: '🧭' },
+    { name: '光聆导航', url: 'https://anthonyzhu1130.github.io/nav/#/', icon: '🧭' },
     { name: 'DeepSeek', url: 'https://chat.deepseek.com', icon: '🐳' },
     { name: '豆包', url: 'https://www.doubao.com', icon: '🫘' },
     { name: '虫部落', url: 'https://www.chongbuluo.com', icon: '🐛' },
@@ -23,7 +23,8 @@ window.APP_CONFIG = {
     { name: '果汁工具', url: 'http://guozhivip.com/tool', icon: '🧃' },
     { name: '果汁搜索', url: 'http://guozhivip.com/so', icon: '🔍' },
     { name: 'GitHub', url: 'https://github.com', icon: '🐙' },
-    { name: '知乎', url: 'https://www.zhihu.com', icon: '📚' },
+    { name: 'ITHY-AI-搜索', url: 'https://ithy.com', icon: '📚' },
+    { name: '找工具', url: 'https://www.tskau.com', icon: '📚' },
     { name: 'B 站', url: 'https://www.bilibili.com', icon: '📺' }
   ]
 };
