@@ -7,24 +7,20 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
 <div class="app-layout">
-  <!-- ================= 左侧边栏 ================= -->
+  <!-- 左侧边栏 -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h1 class="sidebar-title">📝 工作台</h1>
       <button type="button" id="btnToggleSidebar" class="btn-icon" title="收起侧边栏">◀</button>
     </div>
-
     <div class="sidebar-search">
       <input type="text" id="searchInput" placeholder="搜索笔记或目录..." autocomplete="off" />
       <button type="button" id="btnClearSearch" class="btn-icon" title="清除搜索">✕</button>
     </div>
-
     <nav class="category-nav" id="categoryNav" aria-label="目录导航">
       <p class="empty-hint">加载中...</p>
     </nav>
-
     <div class="sidebar-footer">
       <button type="button" id="btnEnterEdit" class="btn btn-primary">进入编辑模式</button>
       <button type="button" id="btnExitEdit" class="btn btn-ghost edit-only">退出编辑模式</button>
@@ -32,15 +28,15 @@
     </div>
   </aside>
 
-  <!-- ================= 右侧主内容区 ================= -->
+  <!-- 右侧主内容区 -->
   <main class="main-content" id="mainContent">
     <div id="notifyArea" class="notify-area" role="status" aria-live="polite"></div>
-
-    <!-- 视图 1：仪表盘首页 -->
+    
+    <!-- 视图1：仪表盘首页 -->
     <section id="dashboardView" class="view-section">
       <div class="dashboard-header">
         <div class="welcome-text">
-          <h2 id="greetingText">早上好，欢迎回来</h2>
+          <h2 id="greetingText">上午好，欢迎回来</h2>
           <p>把今天要做的事，一件一件完成吧</p>
         </div>
         <div class="datetime-widget">
@@ -50,20 +46,33 @@
       </div>
 
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">📋</div>
-          <div class="stat-value" id="statTotalNotes">0</div>
-          <div class="stat-label">笔记总数</div>
+        <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-value" id="statTotalNotes">0</div><div class="stat-label">笔记总数</div></div>
+        <div class="stat-card"><div class="stat-icon">📌</div><div class="stat-value" id="statMarkedNotes">0</div><div class="stat-label">重点笔记</div></div>
+        <div class="stat-card"><div class="stat-icon">📁</div><div class="stat-value" id="statTotalCategories">0</div><div class="stat-label">目录数量</div></div>
+      </div>
+
+      <!-- 新增的工具区：番茄钟 + 定时提醒 -->
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3>🍅 番茄钟</h3>
+          <div class="timer-display" id="pomodoroDisplay">25:00</div>
+          <div class="tool-actions">
+            <button type="button" id="btnPomodoroStart" class="btn btn-primary">开始</button>
+            <button type="button" id="btnPomodoroPause" class="btn btn-ghost">暂停</button>
+            <button type="button" id="btnPomodoroReset" class="btn btn-ghost">重置</button>
+          </div>
+          <p class="tool-hint">今日完成番茄：<span id="pomodoroCount">0</span> 个</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">📌</div>
-          <div class="stat-value" id="statMarkedNotes">0</div>
-          <div class="stat-label">重点笔记</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">📁</div>
-          <div class="stat-value" id="statTotalCategories">0</div>
-          <div class="stat-label">目录数量</div>
+        <div class="tool-card">
+          <h3>⏰ 定时提醒 (倒计时)</h3>
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          <div class="tool-actions">
+            <input type="number" id="timerMinutes" class="input" min="1" max="120" value="5" style="width:60px; padding:4px;" placeholder="分钟" />
+            <button type="button" id="btnTimerStart" class="btn btn-primary">开始</button>
+            <button type="button" id="btnTimerPause" class="btn btn-ghost">暂停</button>
+            <button type="button" id="btnTimerReset" class="btn btn-ghost">重置</button>
+          </div>
+          <p class="tool-hint">倒计时结束后会有弹窗提醒</p>
         </div>
       </div>
 
@@ -78,14 +87,14 @@
       </div>
     </section>
 
-    <!-- 视图 2：笔记详情页 -->
+    <!-- 视图2：笔记详情页 -->
     <section id="noteView" class="view-section hidden">
       <div class="note-view-header">
         <button type="button" id="btnBackToDash" class="btn btn-ghost">← 返回工作台</button>
         <div class="note-view-actions edit-only">
           <button type="button" id="btnEditCurrentNote" class="btn btn-edit">编辑</button>
-          <button type="button" id="btnDeleteCurrentNote" class="btn btn-danger">删除</button>
           <button type="button" id="btnToggleMarkCurrentNote" class="btn btn-mark">设为重点</button>
+          <button type="button" id="btnDeleteCurrentNote" class="btn btn-danger">删除</button>
         </div>
       </div>
       <div class="note-view-body">
@@ -99,7 +108,7 @@
   </main>
 </div>
 
-<!-- ================= Token 输入窗口 ================= -->
+<!-- Token 输入窗口 -->
 <div class="modal-backdrop hidden" id="tokenModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title">进入编辑模式</h2>
@@ -119,38 +128,20 @@
   </div>
 </div>
 
-<!-- ================= 新增/编辑笔记窗口 ================= -->
+<!-- 新增/编辑笔记窗口 -->
 <div class="modal-backdrop hidden" id="editNoteModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="editNoteModalTitle">编辑笔记</h2>
-    <div class="form-row">
-      <label class="field-label" for="editNoteCategory">所属目录</label>
-      <select id="editNoteCategory" class="input"></select>
-    </div>
-    <div class="form-row">
-      <label class="field-label" for="editNoteTitle">笔记标题（必填）</label>
-      <input type="text" id="editNoteTitle" class="input" maxlength="120" />
-    </div>
-    <div class="form-row">
-      <label class="field-label" for="editNoteContent">笔记正文</label>
-      <textarea id="editNoteContent" class="input textarea" rows="8"></textarea>
-    </div>
-    <div class="form-row checkbox-row">
-      <input type="checkbox" id="editNoteMarked" />
-      <label for="editNoteMarked">设为重点笔记</label>
-    </div>
+    <div class="form-row"><label class="field-label" for="editNoteCategory">所属目录</label><select id="editNoteCategory" class="input"></select></div>
+    <div class="form-row"><label class="field-label" for="editNoteTitle">笔记标题（必填）</label><input type="text" id="editNoteTitle" class="input" maxlength="120" /></div>
+    <div class="form-row"><label class="field-label" for="editNoteContent">笔记正文</label><textarea id="editNoteContent" class="input textarea" rows="8"></textarea></div>
+    <div class="form-row checkbox-row"><input type="checkbox" id="editNoteMarked" /><label for="editNoteMarked">设为重点笔记</label></div>
     <h3 class="sub-title">已有的图片与附件</h3>
     <div id="editNoteExistingImages" class="preview-list"></div>
     <div id="editNoteExistingFiles" class="preview-list"></div>
     <h3 class="sub-title">新增图片与附件</h3>
-    <div class="form-row">
-      <label class="field-label" for="editNoteImages">添加图片</label>
-      <input type="file" id="editNoteImages" class="input" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" multiple />
-    </div>
-    <div class="form-row">
-      <label class="field-label" for="editNoteFiles">添加附件</label>
-      <input type="file" id="editNoteFiles" class="input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" multiple />
-    </div>
+    <div class="form-row"><label class="field-label" for="editNoteImages">添加图片</label><input type="file" id="editNoteImages" class="input" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" multiple /></div>
+    <div class="form-row"><label class="field-label" for="editNoteFiles">添加附件</label><input type="file" id="editNoteFiles" class="input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" multiple /></div>
     <div id="editNoteImagePreview" class="preview-list"></div>
     <div id="editNoteFilePreview" class="preview-list"></div>
     <p id="editNoteError" class="error-text hidden"></p>
@@ -161,7 +152,7 @@
   </div>
 </div>
 
-<!-- ================= 确认窗口 ================= -->
+<!-- 确认窗口 -->
 <div class="modal-backdrop hidden" id="confirmModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="confirmTitle">确认操作</h2>
@@ -173,24 +164,13 @@
   </div>
 </div>
 
-<!-- ================= Word 导入窗口 ================= -->
+<!-- Word 导入窗口 -->
 <div class="modal-backdrop hidden" id="wordImportModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title">导入 Word 文档</h2>
-    <p class="modal-note">
-      识别规则：<br>· Word 中的<b>标题 1</b> → 目录<br>· Word 中的<b>标题 2</b> → 该目录下的笔记标题<br>· 标题 2 下面的正文 → 笔记正文
-    </p>
-    <div class="form-row">
-      <label class="field-label" for="wordImportMode">导入方式</label>
-      <select id="wordImportMode" class="input">
-        <option value="h1-h2">按标题层级（标题 1 → 目录，标题 2 → 笔记）</option>
-        <option value="single">整篇文档作为一篇笔记</option>
-      </select>
-    </div>
-    <div class="form-row" id="wordImportSingleRow">
-      <label class="field-label" for="wordImportSingleCategory">整篇导入时的目标目录</label>
-      <select id="wordImportSingleCategory" class="input"></select>
-    </div>
+    <p class="modal-note">识别规则：<br>· Word 中的<b>标题 1</b> → 目录<br>· Word 中的<b>标题 2</b> → 该目录下的笔记标题<br>· 标题 2 下面的正文 → 笔记正文</p>
+    <div class="form-row"><label class="field-label" for="wordImportMode">导入方式</label><select id="wordImportMode" class="input"><option value="h1-h2">按标题层级（标题 1 → 目录，标题 2 → 笔记）</option><option value="single">整篇文档作为一篇笔记</option></select></div>
+    <div class="form-row" id="wordImportSingleRow"><label class="field-label" for="wordImportSingleCategory">整篇导入时的目标目录</label><select id="wordImportSingleCategory" class="input"></select></div>
     <div id="wordImportSummary" class="import-summary"></div>
     <p id="wordImportError" class="error-text hidden"></p>
     <div class="modal-actions">
@@ -200,10 +180,8 @@
   </div>
 </div>
 
-<!-- 隐藏的文件输入 -->
 <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" />
 <input type="file" id="wordFileInput" accept=".docx" class="hidden-input" />
-
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>
