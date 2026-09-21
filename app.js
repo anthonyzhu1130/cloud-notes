@@ -3783,3 +3783,209 @@
   }
 
 })();
+
+/* =========================================================================
+ * 独立补丁：时钟 + 侧边栏工具入口 + 番茄钟 + 倒计时
+ * 该补丁完全独立，放在 app.js 末尾即可，不会与前面的代码冲突。
+ * 使用事件委托（绑定在 document 上），即使按钮是后创建的也能响应。
+ * ========================================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- 工具状态（独立变量，不与前面的代码冲突） ---------- */
+  var __pomodoroTimer = null;
+  var __pomodoroTotal = 25 * 60;
+  var __pomodoroTime = __pomodoroTotal;
+  var __pomodoroCount = 0;
+  var __timerInterval = null;
+  var __timerRemaining = 0;
+
+  try {
+    __pomodoroCount = parseInt(localStorage.getItem('pomodoroCount') || '0', 10) || 0;
+  } catch (e) { /* 忽略 */ }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  /* ---------- 时钟：每秒从系统时间读取一次 ---------- */
+  function updateClock() {
+    var now = new Date();
+    var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    var t = document.getElementById('currentTime');
+    var d = document.getElementById('currentDate');
+    if (t) {
+      t.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    }
+    if (d) {
+      d.textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + days[now.getDay()];
+    }
+  }
+
+  /* ---------- 简易通知：不依赖前面的 notify 函数 ---------- */
+  function showLocalNotify(msg, kind) {
+    var area = document.getElementById('notifyArea');
+    if (!area) { try { alert(msg); } catch (e) {} return; }
+    var div = document.createElement('div');
+    div.className = 'notify notify-' + (kind || 'info');
+    var span = document.createElement('span');
+    span.textContent = msg;
+    div.appendChild(span);
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'notify-close';
+    btn.textContent = '×';
+    btn.setAttribute('aria-label', '关闭提示');
+    btn.addEventListener('click', function () { if (div.parentNode) div.parentNode.removeChild(div); });
+    div.appendChild(btn);
+    area.appendChild(div);
+    setTimeout(function () { if (div.parentNode) div.parentNode.removeChild(div); }, 10000);
+  }
+
+  /* ---------- 视图切换 ---------- */
+  function showView(name) {
+    ['dashboardView', 'noteView', 'pomodoroView', 'timerView'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.add('hidden');
+    });
+    var map = { dashboard: 'dashboardView', pomodoro: 'pomodoroView', timer: 'timerView' };
+    var el = document.getElementById(map[name]);
+    if (el) el.classList.remove('hidden');
+  }
+
+  function highlightSideTool(id) {
+    ['sideToolDashboard', 'sideToolPomodoro', 'sideToolTimer'].forEach(function (x) {
+      var e = document.getElementById(x);
+      if (e) e.classList.remove('active');
+    });
+    var active = document.getElementById(id);
+    if (active) active.classList.add('active');
+  }
+
+  /* ---------- 番茄钟 ---------- */
+  function updatePomodoroDisplay() {
+    var el = document.getElementById('pomodoroDisplay');
+    if (el) {
+      el.textContent = pad(Math.floor(__pomodoroTime / 60)) + ':' + pad(__pomodoroTime % 60);
+    }
+    var c = document.getElementById('pomodoroCount');
+    if (c) c.textContent = String(__pomodoroCount);
+  }
+
+  function startPomodoro() {
+    if (__pomodoroTimer) return;
+    if (__pomodoroTime <= 0) __pomodoroTime = __pomodoroTotal;
+    __pomodoroTimer = setInterval(function () {
+      __pomodoroTime--;
+      updatePomodoroDisplay();
+      if (__pomodoroTime <= 0) {
+        clearInterval(__pomodoroTimer);
+        __pomodoroTimer = null;
+        __pomodoroCount++;
+        try { localStorage.setItem('pomodoroCount', String(__pomodoroCount)); } catch (e) {}
+        __pomodoroTime = __pomodoroTotal;
+        updatePomodoroDisplay();
+        showLocalNotify('🍅 番茄钟时间到！休息一下吧。', 'success');
+      }
+    }, 1000);
+  }
+
+  function pausePomodoro() {
+    if (__pomodoroTimer) { clearInterval(__pomodoroTimer); __pomodoroTimer = null; }
+  }
+
+  function resetPomodoro() {
+    pausePomodoro();
+    __pomodoroTime = __pomodoroTotal;
+    updatePomodoroDisplay();
+  }
+
+  /* ---------- 倒计时 ---------- */
+  function updateTimerDisplay() {
+    var el = document.getElementById('timerDisplay');
+    if (!el) return;
+    el.textContent = pad(Math.floor(__timerRemaining / 60)) + ':' + pad(__timerRemaining % 60);
+  }
+
+  function startTimer() {
+    if (__timerInterval) return;
+    if (__timerRemaining <= 0) {
+      var inp = document.getElementById('timerMinutes');
+      var mins = parseInt((inp && inp.value) || '5', 10) || 5;
+      __timerRemaining = mins * 60;
+    }
+    __timerInterval = setInterval(function () {
+      __timerRemaining--;
+      updateTimerDisplay();
+      if (__timerRemaining <= 0) {
+        clearInterval(__timerInterval);
+        __timerInterval = null;
+        __timerRemaining = 0;
+        updateTimerDisplay();
+        showLocalNotify('⏰ 定时提醒时间到！', 'warn');
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (__timerInterval) { clearInterval(__timerInterval); __timerInterval = null; }
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    __timerRemaining = 0;
+    updateTimerDisplay();
+  }
+
+  /* ---------- 事件委托 1：侧边栏工具入口 ---------- */
+  document.addEventListener('click', function (ev) {
+    var node = ev.target;
+    while (node && node !== document.body) {
+      if (node.classList && node.classList.contains('side-tool-item')) {
+        var id = node.id;
+        if (id === 'sideToolDashboard') {
+          showView('dashboard');
+          highlightSideTool(id);
+        } else if (id === 'sideToolPomodoro') {
+          showView('pomodoro');
+          highlightSideTool(id);
+          updatePomodoroDisplay();
+        } else if (id === 'sideToolTimer') {
+          showView('timer');
+          highlightSideTool(id);
+          updateTimerDisplay();
+        }
+        return;
+      }
+      node = node.parentNode;
+    }
+  });
+
+  /* ---------- 事件委托 2：番茄钟 / 倒计时 按钮 ---------- */
+  document.addEventListener('click', function (ev) {
+    var node = ev.target;
+    var id = null;
+    while (node && node !== document.body) {
+      if (node.id) { id = node.id; break; }
+      node = node.parentNode;
+    }
+    if (!id) return;
+    if (id === 'btnPomodoroStart') startPomodoro();
+    else if (id === 'btnPomodoroPause') pausePomodoro();
+    else if (id === 'btnPomodoroReset') resetPomodoro();
+    else if (id === 'btnTimerStart') startTimer();
+    else if (id === 'btnTimerPause') pauseTimer();
+    else if (id === 'btnTimerReset') resetTimer();
+    else if (id === 'btnBackFromPomodoro' || id === 'btnBackFromTimer') {
+      showView('dashboard');
+      highlightSideTool('sideToolDashboard');
+    }
+  });
+
+  /* ---------- 启动时钟：立即执行一次，然后每秒刷新 ---------- */
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  /* ---------- 初始化显示 ---------- */
+  updatePomodoroDisplay();
+  updateTimerDisplay();
+
+})();
