@@ -30,6 +30,7 @@
       <div class="mode-badge mode-readonly" id="modeBadge">只读模式</div>
     </div>
   </aside>
+
   <main class="main-content" id="mainContent">
     <div id="notifyArea" class="notify-area" role="status" aria-live="polite"></div>
 
@@ -52,6 +53,10 @@
       <div class="quick-links-section">
         <h3>常用链接</h3>
         <div class="quick-links-grid" id="quickLinksGrid"></div>
+      </div>
+      <div class="pinned-reminders-section" id="pinnedRemindersSection">
+        <h3>前台显示提醒</h3>
+        <div class="pinned-reminders-list" id="pinnedRemindersList"></div>
       </div>
       <div class="dashboard-actions">
         <h3>快捷操作</h3>
@@ -103,21 +108,52 @@
         <button type="button" id="btnBackFromTimer" class="btn btn-ghost">← 返回主页</button>
         <h2 class="tool-view-title">⏰ 定时提醒</h2>
       </div>
-      <div class="tool-view-body">
-        <div class="timer-display-big" id="timerDisplay">00:00</div>
-        <div class="tool-actions">
-          <input type="number" id="timerMinutes" class="input timer-input" min="1" max="120" value="5" />
-          <span class="tool-hint">分钟</span>
-          <button type="button" id="btnTimerStart" class="btn btn-primary">开始</button>
-          <button type="button" id="btnTimerPause" class="btn btn-ghost">暂停</button>
-          <button type="button" id="btnTimerReset" class="btn btn-ghost">重置</button>
+
+      <div class="reminder-toolbar">
+        <div class="reminder-row">
+          <span class="filter-label">名称</span>
+          <input type="text" id="reminderSearch" class="input reminder-search" placeholder="按名称查询..." />
+          <select id="reminderCatFilter" class="input reminder-select"></select>
+          <span class="filter-label">排序类型</span>
+          <select id="reminderSort" class="input reminder-select">
+            <option value="remaining">剩余时间</option>
+            <option value="created">创建时间</option>
+            <option value="name">名称</option>
+          </select>
+          <button type="button" id="btnReminderSortDir" class="btn btn-ghost">↑ 升序</button>
+          <span style="flex:1"></span>
+          <button type="button" id="btnReminderSearch" class="btn btn-primary">查询</button>
+          <button type="button" id="btnReminderReset" class="btn btn-ghost">重置</button>
         </div>
-        <p class="tool-hint">修改分钟数后点“开始”即会重新计时。</p>
+      </div>
+
+      <div class="reminder-cat-tabs" id="reminderCatTabs"></div>
+
+      <div class="reminder-actions-row">
+        <button type="button" id="btnReminderAdd" class="btn btn-primary">+ 新增提醒</button>
+      </div>
+
+      <div class="reminder-list-wrap">
+        <table class="reminder-table">
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>分类</th>
+              <th>重复</th>
+              <th>提醒</th>
+              <th>剩余时间</th>
+              <th>下次提醒</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="reminderTbody"></tbody>
+        </table>
       </div>
     </section>
   </main>
 </div>
 
+<!-- Token -->
 <div class="modal-backdrop hidden" id="tokenModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title">进入编辑模式</h2>
@@ -137,6 +173,7 @@
   </div>
 </div>
 
+<!-- 笔记编辑 -->
 <div class="modal-backdrop hidden" id="editNoteModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="editNoteModalTitle">编辑笔记</h2>
@@ -160,6 +197,7 @@
   </div>
 </div>
 
+<!-- 确认 -->
 <div class="modal-backdrop hidden" id="confirmModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title" id="confirmTitle">确认操作</h2>
@@ -171,12 +209,52 @@
   </div>
 </div>
 
+<!-- 新增提醒 -->
+<div class="modal-backdrop hidden" id="reminderModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-title" id="reminderModalTitle">新增倒计时</h2>
+    <div class="form-row">
+      <label class="field-label" for="reminderName">名称 *</label>
+      <input type="text" id="reminderName" class="input" placeholder="例如：期末考试" maxlength="80" />
+    </div>
+    <div class="form-row">
+      <label class="field-label" for="reminderDate">日期 *</label>
+      <input type="date" id="reminderDate" class="input" />
+    </div>
+    <div class="form-row reminder-2col">
+      <div>
+        <label class="field-label" for="reminderTime">时间 *</label>
+        <input type="time" id="reminderTime" class="input" />
+      </div>
+      <div>
+        <label class="field-label" for="reminderCat">分类</label>
+        <select id="reminderCat" class="input"></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label" for="reminderRepeat">重复</label>
+      <select id="reminderRepeat" class="input"></select>
+    </div>
+    <div class="form-row checkbox-row">
+      <input type="checkbox" id="reminderEmail" />
+      <label for="reminderEmail">发送邮件提醒</label>
+    </div>
+    <p class="tool-hint" style="text-align:left;">需在设置-提醒设置中配置收件邮箱</p>
+    <p id="reminderError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnReminderSave" class="btn btn-primary">添加</button>
+      <button type="button" id="btnReminderCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- Word 导入 -->
 <div class="modal-backdrop hidden" id="wordImportModal">
   <div class="modal modal-wide" role="dialog" aria-modal="true">
     <h2 class="modal-title">导入 Word 文档</h2>
     <p class="modal-note">识别规则：<b>标题 1</b> → 目录；<b>标题 2</b> → 该目录下的笔记标题；正文 → 笔记正文。</p>
     <div class="form-row"><label class="field-label" for="wordImportMode">导入方式</label><select id="wordImportMode" class="input"><option value="h1-h2">按标题层级</option><option value="single">整篇文档作为一篇笔记</option></select></div>
-    <div class="form-row" id="wordImportSingleRow"><label class="field-label" for="wordImportSingleCategory">整篇导入时的目标目录</label><select id="wordImportSingleCategory" class="input"></select></div>
+    <div class="form-row" id="wordImportSingleRow"><label class="field-label" for="wordImportSingleCategory">目标目录</label><select id="wordImportSingleCategory" class="input"></select></div>
     <div id="wordImportSummary" class="import-summary"></div>
     <p id="wordImportError" class="error-text hidden"></p>
     <div class="modal-actions">
