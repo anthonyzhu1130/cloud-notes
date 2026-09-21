@@ -146,3 +146,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 .sub-title{margin:18px 0 8px;font-size:1rem;font-weight:800;color:var(--text-muted)}
 mark.hl{background:#ffe680;color:#3d2a00;padding:0 2px;border-radius:3px}
 @media(max-width:768px){.sidebar{position:absolute;z-index:100;height:100%}.sidebar.collapsed{width:0}.main-content{padding:16px}.stats-grid{grid-template-columns:1fr}.dashboard-header{flex-direction:column;gap:12px}.datetime-widget{text-align:left}.timer-display-big{font-size:3rem}.quick-links-grid{grid-template-columns:repeat(2,1fr)}.reminder-2col{grid-template-columns:1fr}}
+.btn-open-sidebar{position:fixed;top:12px;left:12px;z-index:150;width:36px;height:36px;border-radius:8px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.btn-open-sidebar:hover{background:#4a7336}
+.cat-nav-l1-notes{padding-left:0}
