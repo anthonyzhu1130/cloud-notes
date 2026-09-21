@@ -59,6 +59,8 @@
     busy: false,
     collapsedCategories: Object.create(null),
     collapsedNotes: Object.create(null)
+    currentView: 'dashboard', // 'dashboard' 或 'note'
+    currentNoteId: null
   };
 
   const newNoteCtx = {
@@ -882,10 +884,73 @@
   }
 
   function render() {
-    renderNav();
-    renderNotes();
+    renderSidebar();
+    if (state.currentView === 'dashboard') {
+      renderDashboard();
+    } else if (state.currentView === 'note') {
+      renderNoteView(state.currentNoteId);
+    }
     renderStats();
     renderCategorySelects();
+  }
+
+  function renderDashboard() {
+    byId('dashboardView').classList.remove('hidden');
+    byId('noteView').classList.add('hidden');
+    const hour = new Date().getHours();
+    let greeting = '早上好';
+    if (hour >= 12 && hour < 18) greeting = '下午好';
+    else if (hour >= 18) greeting = '晚上好';
+    byId('greetingText').textContent = greeting + '，欢迎回来';
+    const now = new Date();
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    byId('currentTime').textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+    byId('currentDate').textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + days[now.getDay()];
+    if (state.data) {
+      byId('statTotalNotes').textContent = state.data.notes.length;
+      byId('statMarkedNotes').textContent = state.data.notes.filter(n => n.marked).length;
+      byId('statTotalCategories').textContent = state.data.categories.length;
+    }
+  }
+
+  function renderNoteView(noteId) {
+    byId('dashboardView').classList.add('hidden');
+    byId('noteView').classList.remove('hidden');
+    const note = state.data.notes.find(n => n.id === noteId);
+    if (!note) {
+      byId('noteViewTitle').textContent = '笔记不存在';
+      byId('noteViewContent').textContent = '该笔记可能已被删除，请返回工作台重新加载。';
+      return;
+    }
+    const cat = state.data.categories.find(c => c.id === note.categoryId);
+    byId('noteViewTitle').textContent = note.title;
+    byId('noteViewMeta').textContent = '所属目录：' + (cat ? cat.name : '未知') + ' · 创建：' + formatTime(note.createdAt) + ' · 最后修改：' + formatTime(note.updatedAt) + (note.marked ? ' · ⭐ 重点笔记' : '');
+    byId('noteViewContent').textContent = note.content || '（无正文）';
+    const gallery = byId('noteViewGallery');
+    gallery.textContent = '';
+    if (note.images && note.images.length) {
+      note.images.forEach(img => {
+        const fig = document.createElement('figure'); fig.className = 'note-figure';
+        const a = document.createElement('a'); a.href = assetUrl(img.path); a.target = '_blank'; a.rel = 'noopener noreferrer';
+        const im = document.createElement('img'); im.src = assetUrl(img.path); im.alt = img.description || img.originalName;
+        a.appendChild(im); fig.appendChild(a);
+        const cap = document.createElement('figcaption'); cap.textContent = img.description || img.originalName;
+        fig.appendChild(cap); gallery.appendChild(fig);
+      });
+    }
+    const atts = byId('noteViewAttachments');
+    atts.textContent = '';
+    if (note.attachments && note.attachments.length) {
+      note.attachments.forEach(f => {
+        const li = document.createElement('li');
+        const a = document.createElement('a'); a.href = assetUrl(f.path); a.download = f.originalName; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = '📎 ' + f.originalName;
+        li.appendChild(a);
+        const size = document.createElement('span'); size.className = 'file-info'; size.textContent = '（' + formatSize(f.size) + '）';
+        li.appendChild(size); atts.appendChild(li);
+      });
+    }
+    const markBtn = byId('btnToggleMarkCurrentNote');
+    if (markBtn) markBtn.textContent = note.marked ? '取消重点' : '设为重点';
   }
 
   function renderStats() {
@@ -927,17 +992,49 @@
     document.body.classList.toggle('edit-mode', !!state.editing);
   }
 
-  function renderNav() {
+  function renderSidebar() {
     const container = byId('categoryNav');
     container.textContent = '';
-
-    if (!state.data) {
-      const p = document.createElement('p');
-      p.className = 'empty-hint';
-      p.textContent = '正在读取数据…';
-      container.appendChild(p);
+    if (!state.data) { container.innerHTML = '<p class="empty-hint">加载中...</p>'; return; }
+    const keyword = String(state.searchKeyword || '').trim().toLowerCase();
+    const groups = getVisibleGroups();
+    if (groups.length === 0) {
+      container.innerHTML = '<p class="empty-hint">' + (keyword ? '未找到匹配的笔记' : '暂无目录') + '</p>';
       return;
     }
+    groups.forEach(group => {
+      const cat = group.category;
+      const collapsed = isCategoryCollapsed(cat);
+      const item = document.createElement('div'); item.className = 'cat-nav-item';
+      const head = document.createElement('div'); head.className = 'cat-nav-head';
+      head.addEventListener('click', () => { state.collapsedCategories[cat.id] = !isCategoryCollapsed(cat); renderSidebar(); });
+      const toggle = document.createElement('span'); toggle.textContent = collapsed ? '▶' : '▼'; toggle.style.fontSize = '0.7rem'; toggle.style.width = '12px';
+      head.appendChild(toggle);
+      const nameEl = document.createElement('span'); nameEl.className = 'cat-nav-name'; setHighlightedText(nameEl, cat.name, keyword);
+      head.appendChild(nameEl);
+      const countEl = document.createElement('span'); countEl.className = 'cat-nav-count'; countEl.textContent = group.notes.length;
+      head.appendChild(countEl);
+      item.appendChild(head);
+      if (!collapsed) {
+        const ul = document.createElement('ul'); ul.className = 'cat-nav-notes';
+        group.notes.forEach(note => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.className = 'cat-nav-link' + (state.currentView === 'note' && state.currentNoteId === note.id ? ' active' : '');
+          a.href = '#';
+          setHighlightedText(a, note.title, keyword);
+          if (note.marked) a.textContent += ' ⭐';
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.currentView = 'note'; state.currentNoteId = note.id; render();
+          });
+          li.appendChild(a); ul.appendChild(li);
+        });
+        item.appendChild(ul);
+      }
+      container.appendChild(item);
+    });
+  }
 
     const keyword = String(state.searchKeyword || '').trim();
     const groups = getVisibleGroups();
@@ -2038,24 +2135,23 @@
 
   function openEditNote(noteId) {
     if (!state.editing) return;
-
-    const note = state.data.notes.find(function (n) { return n.id === noteId; });
-    if (!note) {
-      notify('error', '找不到该笔记，可能已被其他设备删除，请重新加载远端数据。', 8000);
-      return;
+    if (noteId) {
+      const note = state.data.notes.find(function (n) { return n.id === noteId; });
+      if (!note) { notify('error', '找不到该笔记，可能已被其他设备删除，请重新加载远端数据。', 8000); return; }
+      editNoteCtx.noteId = noteId;
+      byId('editNoteModalTitle').textContent = '编辑笔记';
+      byId('editNoteTitle').value = note.title;
+      byId('editNoteContent').value = note.content || '';
+      byId('editNoteMarked').checked = !!note.marked;
+      fillCategorySelect(byId('editNoteCategory'), note.categoryId);
+    } else {
+      editNoteCtx.noteId = null;
+      byId('editNoteModalTitle').textContent = '新增笔记';
+      byId('editNoteTitle').value = '';
+      byId('editNoteContent').value = '';
+      byId('editNoteMarked').checked = false;
+      fillCategorySelect(byId('editNoteCategory'), '');
     }
-
-    editNoteCtx.noteId = noteId;
-    editNoteCtx.images = [];
-    editNoteCtx.files = [];
-    editNoteCtx.removedImages = [];
-    editNoteCtx.removedFiles = [];
-
-    byId('editNoteTitle').value = note.title;
-    byId('editNoteContent').value = note.content || '';
-    byId('editNoteMarked').checked = !!note.marked;
-
-    fillCategorySelect(byId('editNoteCategory'), note.categoryId);
 
     byId('editNoteImages').value = '';
     byId('editNoteFiles').value = '';
@@ -2244,13 +2340,14 @@
   async function saveEditNote() {
     if (!state.editing) return;
 
-    const noteId = editNoteCtx.noteId;
-    const note = state.data.notes.find(function (n) { return n.id === noteId; });
-    if (!note) {
-      notify('error', '找不到要编辑的笔记（可能已被其他设备删除），请重新加载远端数据。', 10000);
-      closeEditNoteModal();
-      return;
-    }
+  const isNew = !editNoteCtx.noteId;
+  const noteId = isNew ? newId('note') : editNoteCtx.noteId;
+  const note = isNew ? null : state.data.notes.find(function (n) { return n.id === noteId; });
+  if (!isNew && !note) {
+    notify('error', '找不到要编辑的笔记（可能已被其他设备删除），请重新加载远端数据。', 10000);
+    closeEditNoteModal();
+    return;
+  }
 
     const title = String(byId('editNoteTitle').value || '').trim();
     const content = String(byId('editNoteContent').value || '');
@@ -2275,12 +2372,12 @@
       return;
     }
 
-    const keptImages = (note.images || []).filter(function (img) {
+    const keptImages = note ? (note.images || []).filter(function (img) {
       return editNoteCtx.removedImages.indexOf(img.id) === -1;
-    });
-    const keptFiles = (note.attachments || []).filter(function (f) {
+    }) : [];
+    const keptFiles = note ? (note.attachments || []).filter(function (f) {
       return editNoteCtx.removedFiles.indexOf(f.id) === -1;
-    });
+    }) : [];
 
     if (!content.trim() && keptImages.length === 0 && editNoteCtx.images.length === 0 &&
         keptFiles.length === 0 && editNoteCtx.files.length === 0) {
@@ -2375,7 +2472,25 @@
         .filter(function (f) { return reallyRemovedFiles.indexOf(f.id) === -1; })
         .concat(uploadedFiles);
 
-      const next = deepClone(state.data);
+    const next = deepClone(state.data);
+    const nowIso = new Date().toISOString();
+
+    if (isNew) {
+      // 新建笔记：push 一条新记录
+      next.notes.push({
+        id: noteId,
+        categoryId: categoryId,
+        title: title,
+        content: content,
+        marked: marked,
+        collapsed: false,
+        images: finalImages,
+        attachments: finalFiles,
+        createdAt: nowIso,
+        updatedAt: nowIso
+      });
+    } else {
+      // 编辑笔记：更新已有记录
       const target = next.notes.find(function (n) { return n.id === noteId; });
       target.categoryId = categoryId;
       target.title = title;
@@ -2383,11 +2498,12 @@
       target.marked = marked;
       target.images = finalImages;
       target.attachments = finalFiles;
-      target.updatedAt = new Date().toISOString();
+      target.updatedAt = nowIso;
+    }
 
-      try {
-        await commitData(next, '编辑笔记：' + title);
-      } catch (err) {
+    try {
+      await commitData(next, (isNew ? '新增笔记：' : '编辑笔记：') + title);
+    } catch (err) {
         if (uploadedImages.length || uploadedFiles.length) {
           const paths = uploadedImages.concat(uploadedFiles).map(function (x) {
             return x.path;
@@ -2407,6 +2523,11 @@
         warnings.length ? 15000 : 6000);
 
       closeEditNoteModal();
+    if (isNew) {                                        // ← 新增
+      state.currentView = 'note';                       // ← 新增
+      state.currentNoteId = noteId;                     // ← 新增
+    }                                                    // ← 新增
+      
       render();
     } catch (err) {
       working.remove();
@@ -2676,47 +2797,47 @@
       }
     });
 
-    byId('btnTokenConfirm').addEventListener('click', function () {
+    byId('btnTokenConfirm').addEventListener('click',  () {
       confirmEnterEditMode();
     });
 
-    byId('btnTokenCancel').addEventListener('click', function () {
+    byId('btnTokenCancel').addEventListener('click',  () {
       byId('tokenInput').value = '';
       hideModal('tokenModal');
     });
 
-    byId('tokenInput').addEventListener('keydown', function (ev) {
+    byId('tokenInput').addEventListener('keydown',  (ev) {
       if (ev.key === 'Enter') {
         ev.preventDefault();
         confirmEnterEditMode();
       }
     });
 
-    byId('confirmOkBtn').addEventListener('click', function () {
+    byId('confirmOkBtn').addEventListener('click',  () {
       resolveConfirm(true);
     });
 
-    byId('confirmCancelBtn').addEventListener('click', function () {
+    byId('confirmCancelBtn').addEventListener('click',  () {
       resolveConfirm(false);
     });
 
-    byId('btnSearch').addEventListener('click', function () {
+    byId('btnSearch').addEventListener('click',  () {
       state.searchKeyword = String(byId('searchInput').value || '');
       render();
     });
 
-    byId('btnClearSearch').addEventListener('click', function () {
+    byId('btnClearSearch').addEventListener('click',  () {
       byId('searchInput').value = '';
       state.searchKeyword = '';
       render();
     });
 
-    byId('searchInput').addEventListener('input', function () {
+    byId('searchInput').addEventListener('input',  () {
       state.searchKeyword = String(byId('searchInput').value || '');
       render();
     });
 
-    byId('searchInput').addEventListener('keydown', function (ev) {
+    byId('searchInput').addEventListener('keydown',  (ev) {
       if (ev.key === 'Enter') {
         ev.preventDefault();
         state.searchKeyword = String(byId('searchInput').value || '');
@@ -2724,108 +2845,108 @@
       }
     });
 
-    byId('btnExpandAll').addEventListener('click', function () {
+    byId('btnExpandAll').addEventListener('click',  () {
       if (!state.data) return;
-      state.data.categories.forEach(function (c) {
+      state.data.categories.forEach( (c) {
         state.collapsedCategories[c.id] = false;
       });
-      state.data.notes.forEach(function (n) {
+      state.data.notes.forEach( (n) {
         state.collapsedNotes[n.id] = false;
       });
       render();
     });
 
-    byId('btnCollapseAll').addEventListener('click', function () {
+    byId('btnCollapseAll').addEventListener('click',  () {
       if (!state.data) return;
-      state.data.categories.forEach(function (c) {
+      state.data.categories.forEach( (c) {
         state.collapsedCategories[c.id] = true;
       });
-      state.data.notes.forEach(function (n) {
+      state.data.notes.forEach( (n) {
         state.collapsedNotes[n.id] = true;
       });
       render();
     });
 
-    byId('btnReload').addEventListener('click', function () {
+    byId('btnReload').addEventListener('click',  () {
       loadRemoteData({});
     });
 
-    byId('btnExport').addEventListener('click', function () {
+    byId('btnExport').addEventListener('click',  () {
       exportBackup();
     });
 
-    byId('btnImportPick').addEventListener('click', function () {
+    byId('btnImportPick').addEventListener('click',  () {
       byId('importFileInput').click();
     });
 
-    byId('importFileInput').addEventListener('change', function (ev) {
+    byId('importFileInput').addEventListener('change',  (ev) {
       const file = ev.target.files && ev.target.files[0];
       ev.target.value = '';
       if (!file) return;
       handleImportFile(file);
     });
 
-    byId('btnImportConfirm').addEventListener('click', function () {
+    byId('btnImportConfirm').addEventListener('click',  () {
       confirmImport();
     });
 
-    byId('btnImportCancel').addEventListener('click', function () {
+    byId('btnImportCancel').addEventListener('click',  () {
       importCandidate = null;
       hideModal('importModal');
     });
 
-    byId('btnAddCategory').addEventListener('click', function () {
+    byId('btnAddCategory').addEventListener('click',  () {
       addCategory();
     });
 
-    byId('newCategoryName').addEventListener('keydown', function (ev) {
+    byId('newCategoryName').addEventListener('keydown',  (ev) {
       if (ev.key === 'Enter') {
         ev.preventDefault();
         addCategory();
       }
     });
 
-    byId('newNoteImages').addEventListener('change', function (ev) {
+    byId('newNoteImages').addEventListener('change',  (ev) {
       const files = ev.target.files;
       ev.target.value = '';
       if (!files || !files.length) return;
       handleNewNoteImageSelect(files);
     });
 
-    byId('newNoteFiles').addEventListener('change', function (ev) {
+    byId('newNoteFiles').addEventListener('change',  (ev) {
       const files = ev.target.files;
       ev.target.value = '';
       if (!files || !files.length) return;
       handleNewNoteFileSelect(files);
     });
 
-    byId('btnSaveNewNote').addEventListener('click', function () {
+    byId('btnSaveNewNote').addEventListener('click',  () {
       saveNewNote();
     });
 
-    byId('btnCancelNewNote').addEventListener('click', function () {
+    byId('btnCancelNewNote').addEventListener('click',  () {
       cancelNewNote();
     });
 
-    byId('editNoteImages').addEventListener('change', function (ev) {
+    byId('editNoteImages').addEventListener('change',  (ev) {
       const files = ev.target.files;
       ev.target.value = '';
       if (!files || !files.length) return;
       handleEditNoteImageSelect(files);
     });
 
-    byId('editNoteFiles').addEventListener('change', function (ev) {
+    byId('editNoteFiles').addEventListener('change',  (ev) {
       const files = ev.target.files;
       ev.target.value = '';
       if (!files || !files.length) return;
       handleEditNoteFileSelect(files);
     });
 
-    byId('btnSaveEditNote').addEventListener('click', function () {
+    byId('btnSaveEditNote').addEventListener('click',  () {
       saveEditNote();
     });
 
-    byId('btnCancelEditNote').addEventListener('click', async function () {
+    byId('btnCancelEditNote').addEventListener('click', async  () {
       const dirty = editNoteCtx.images.length > 0 || editNoteCtx.files.length > 0 ||
         editNoteCtx.removedImages.length > 0 || editNoteCtx.removedFiles.length > 0;
 
@@ -2841,7 +2962,7 @@
       closeEditNoteModal();
     });
 
-    document.addEventListener('keydown', function (ev) {
+    document.addEventListener('keydown',  (ev) {
       if (ev.key !== 'Escape') return;
 
       if (!byId('confirmModal').classList.contains('hidden')) {
@@ -2863,16 +2984,87 @@
       }
     });
 
-    window.addEventListener('offline', function () {
+    window.addEventListener('offline',  () {
       notify('warn', '网络已断开，保存操作会失败，请恢复网络后重试。', 8000);
     });
 
-    window.addEventListener('online', function () {
+    window.addEventListener('online',  () {
       notify('info', '网络已恢复，可以继续操作。', 5000);
     });
+    // 侧边栏收起/展开
+    byId('btnToggleSidebar').addEventListener('click', () => {
+      byId('sidebar').classList.toggle('collapsed');
+      byId('btnToggleSidebar').textContent = byId('sidebar').classList.contains('collapsed') ? '▶' : '◀';
+    });
+    // 返回工作台
+    byId('btnBackToDash').addEventListener('click', () => { state.currentView = 'dashboard'; state.currentNoteId = null; render(); });
+    // 仪表盘快捷操作
+    byId('btnQuickAddNote').addEventListener('click', () => { openEditNote(null); });
+    byId('btnQuickReload').addEventListener('click', () => { loadRemoteData({}); });
+    byId('btnQuickExport').addEventListener('click', () => { exportBackup(); });
+    byId('btnImportWordDash').addEventListener('click', () => { byId('wordFileInput').click(); });
+    // 笔记详情页操作
+    byId('btnEditCurrentNote').addEventListener('click', () => { if (state.currentNoteId) openEditNote(state.currentNoteId); });
+    byId('btnDeleteCurrentNote').addEventListener('click', () => { if (state.currentNoteId) deleteNote(state.currentNoteId); });
+    byId('btnToggleMarkCurrentNote').addEventListener('click', () => { if (state.currentNoteId) toggleNoteMarked(state.currentNoteId); });
+
+    // ===== 番茄钟逻辑 =====
+    let pomodoroTimer = null, pomodoroTime = 25 * 60, pomodoroCount = parseInt(localStorage.getItem('pomodoroCount') || '0');
+    byId('pomodoroCount').textContent = pomodoroCount;
+    function updatePomodoroDisplay() {
+      const m = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
+      const s = String(pomodoroTime % 60).padStart(2, '0');
+      byId('pomodoroDisplay').textContent = m + ':' + s;
+    }
+    byId('btnPomodoroStart').addEventListener('click', () => {
+      if (pomodoroTimer) return;
+      pomodoroTimer = setInterval(() => {
+        pomodoroTime--;
+        updatePomodoroDisplay();
+        if (pomodoroTime <= 0) {
+          clearInterval(pomodoroTimer); pomodoroTimer = null;
+          pomodoroCount++; localStorage.setItem('pomodoroCount', pomodoroCount);
+          byId('pomodoroCount').textContent = pomodoroCount;
+          notify('success', '🍅 番茄钟时间到！休息一下吧。', 10000);
+          pomodoroTime = 25 * 60; updatePomodoroDisplay();
+        }
+      }, 1000);
+    });
+    byId('btnPomodoroPause').addEventListener('click', () => { if (pomodoroTimer) { clearInterval(pomodoroTimer); pomodoroTimer = null; } });
+    byId('btnPomodoroReset').addEventListener('click', () => { if (pomodoroTimer) { clearInterval(pomodoroTimer); pomodoroTimer = null; } pomodoroTime = 25 * 60; updatePomodoroDisplay(); });
+    updatePomodoroDisplay();
+
+    // ===== 定时提醒（倒计时）逻辑 =====
+    let timerInterval = null, timerRemaining = 0;
+    function updateTimerDisplay() {
+      const m = String(Math.floor(timerRemaining / 60)).padStart(2, '0');
+      const s = String(timerRemaining % 60).padStart(2, '0');
+      byId('timerDisplay').textContent = m + ':' + s;
+    }
+    byId('btnTimerStart').addEventListener('click', () => {
+      if (timerInterval) return;
+      if (timerRemaining <= 0) {
+        const mins = parseInt(byId('timerMinutes').value) || 5;
+        timerRemaining = mins * 60;
+      }
+      timerInterval = setInterval(() => {
+        timerRemaining--;
+        updateTimerDisplay();
+        if (timerRemaining <= 0) {
+          clearInterval(timerInterval); timerInterval = null;
+          notify('warn', '⏰ 定时提醒时间到！', 15000);
+          timerRemaining = 0; updateTimerDisplay();
+        }
+      }, 1000);
+    });
+    byId('btnTimerPause').addEventListener('click', () => { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } });
+    byId('btnTimerReset').addEventListener('click', () => { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } timerRemaining = 0; updateTimerDisplay(); });
+    updateTimerDisplay();
+
+
   }
 
-  async function init() {
+  async  init() {
     if (CONFIG.SITE_TITLE) {
       byId('siteTitle').textContent = CONFIG.SITE_TITLE;
       document.title = CONFIG.SITE_TITLE;
