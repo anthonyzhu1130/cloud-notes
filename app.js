@@ -18,25 +18,16 @@
   };
 
   var toolState = {
-    pomodoroTimer: null,
-    pomodoroTime: 25 * 60,
-    pomodoroTotal: 25 * 60,
-    pomodoroCount: 0
+    pomodoroTimer: null, pomodoroTime: 25 * 60, pomodoroTotal: 25 * 60, pomodoroCount: 0
   };
 
   var REMINDER_CATS = [
-    { key: 'work', label: '工作' },
-    { key: 'study', label: '学习' },
-    { key: 'sport', label: '运动' },
-    { key: 'food', label: '饮食' },
-    { key: 'sleep', label: '睡眠' }
+    { key: 'work', label: '工作' }, { key: 'study', label: '学习' }, { key: 'sport', label: '运动' },
+    { key: 'food', label: '饮食' }, { key: 'sleep', label: '睡眠' }
   ];
-
   var REMINDER_REPEATS = [
-    { key: 'once', label: '一次性' },
-    { key: 'daily', label: '每天' },
-    { key: 'weekly', label: '每周' },
-    { key: 'monthly', label: '每月' }
+    { key: 'once', label: '一次性' }, { key: 'daily', label: '每天' },
+    { key: 'weekly', label: '每周' }, { key: 'monthly', label: '每月' }
   ];
 
   var reminderState = {
@@ -46,8 +37,7 @@
     notified: {}
   };
 
-  var editNoteCtx = { noteId: null, images: [], files: [], removedImages: [], removedFiles: [] };
-  var newNoteCtx = { images: [], files: [] };
+  var editNoteCtx = { noteId: null, images: [], files: [], removedFiles: [] };
   var importCandidate = null;
 
   function byId(id) { return document.getElementById(id); }
@@ -107,6 +97,15 @@
     return map[ext] || 'application/octet-stream';
   }
 
+  function extFromMime(mimeType) {
+    var m = String(mimeType || '').toLowerCase();
+    if (m.indexOf('jpeg') >= 0 || m.indexOf('jpg') >= 0) return 'jpg';
+    if (m.indexOf('png') >= 0) return 'png';
+    if (m.indexOf('gif') >= 0) return 'gif';
+    if (m.indexOf('webp') >= 0) return 'webp';
+    return 'png';
+  }
+
   function assetUrl(path) { return String(path || '').split('/').map(encodeURIComponent).join('/'); }
 
   function utf8ToBase64(str) {
@@ -154,14 +153,14 @@
   function describeError(status, detail) {
     var tail = detail ? '（' + detail + '）' : '';
     switch (status) {
-      case 0: return '网络请求失败，请检查网络连接。' + tail;
-      case 401: return '身份验证失败，请检查 Token。' + tail;
-      case 403: return /rate limit/i.test(detail) ? 'API 请求次数受限。' + tail : '权限不足（403）。' + tail;
-      case 404: return '未找到资源（404）：检查用户名、仓库名、分支、路径、Token 权限。' + tail;
-      case 409: return '远端文件已变化，请重新加载后再编辑。' + tail;
+      case 0: return '网络请求失败。' + tail;
+      case 401: return '身份验证失败。' + tail;
+      case 403: return /rate limit/i.test(detail) ? 'API 请求受限。' + tail : '权限不足（403）。' + tail;
+      case 404: return '未找到资源（404）。' + tail;
+      case 409: return '远端文件已变化，请重新加载。' + tail;
       case 413: return '请求内容过大（413）。' + tail;
       case 422: return '请求参数错误（422）。' + tail;
-      default: return 'GitHub API 请求失败（HTTP ' + status + '）。' + tail;
+      default: return 'GitHub API 请求失败（' + status + '）。' + tail;
     }
   }
 
@@ -173,8 +172,7 @@
     if (options.body !== undefined && options.body !== null) { headers['Content-Type'] = 'application/json; charset=utf-8'; init.body = JSON.stringify(options.body); }
     return fetch(url, init).then(function (res) {
       if (!res.ok) return res.text().then(function (text) {
-        var detail = '';
-        try { detail = JSON.parse(text).message || ''; } catch (e) {}
+        var detail = ''; try { detail = JSON.parse(text).message || ''; } catch (e) {}
         throw new AppError(describeError(res.status, detail), res.status, detail);
       });
       if (res.status === 204) return null;
@@ -184,7 +182,7 @@
 
   function parseNotesJson(text, sha) {
     var json;
-    try { json = JSON.parse(text); } catch (e) { throw new AppError('远端 notes.json 不是合法 JSON。', 0); }
+    try { json = JSON.parse(text); } catch (e) { throw new AppError('notes.json 不是合法 JSON。', 0); }
     return { json: normalizeData(json), sha: sha || null };
   }
 
@@ -220,10 +218,11 @@
     if (raw.categories !== undefined && !Array.isArray(raw.categories)) throw new AppError('categories 必须是数组。', 0);
     if (raw.notes !== undefined && !Array.isArray(raw.notes)) throw new AppError('notes 必须是数组。', 0);
     var nowIso = new Date().toISOString();
-    var data = { version: (typeof raw.version === 'number') ? raw.version : 1, updatedAt: (typeof raw.updatedAt === 'string') ? raw.updatedAt : nowIso, categories: [], notes: [] };
+    var data = { version: (typeof raw.version === 'number') ? raw.version : 2, updatedAt: (typeof raw.updatedAt === 'string') ? raw.updatedAt : nowIso, categories: [], notes: [] };
     (raw.categories || []).forEach(function (c) {
       if (!c || typeof c !== 'object') return;
       data.categories.push({ id: String(c.id || newId('category')), name: String(c.name || '未命名目录'),
+        parentId: (c.parentId == null) ? null : String(c.parentId),
         marked: !!c.marked, collapsed: !!c.collapsed,
         createdAt: String(c.createdAt || nowIso), updatedAt: String(c.updatedAt || c.createdAt || nowIso) });
     });
@@ -245,7 +244,7 @@
       if (remote && state.remoteUpdatedAt && remote.json.updatedAt && remote.json.updatedAt !== state.remoteUpdatedAt) {
         throw new AppError('远端文件已变化，请重新加载后再编辑。', 409);
       }
-      nextData.version = nextData.version || 1;
+      nextData.version = nextData.version || 2;
       nextData.updatedAt = new Date().toISOString();
       var body = { message: message, content: utf8ToBase64(JSON.stringify(nextData, null, 2) + '\n'), branch: CONFIG.BRANCH || 'main' };
       if (remote && remote.sha) body.sha = remote.sha;
@@ -307,16 +306,25 @@
     });
   }
 
+  function uploadBase64Image(base64, mimeType, noteId, originalName) {
+    var id = newId('image');
+    var ext = extFromMime(mimeType);
+    var storedName = id + '-word.' + ext;
+    var path = (CONFIG.IMAGE_ROOT || 'assets/images') + '/' + noteId + '/' + storedName;
+    return putRepoFile(path, base64, 'Word 导入图片：' + storedName).then(function (res) {
+      var sha = (res && res.content && res.content.sha) ? res.content.sha : '';
+      return { id: id, originalName: originalName || ('word.' + ext), storedName: storedName, path: path,
+        mimeType: mimeType, size: Math.ceil(base64.length * 3 / 4), sha: sha,
+        description: '', createdAt: new Date().toISOString() };
+    });
+  }
+
   function notify(kind, message, timeout) {
-    var area = byId('notifyArea');
-    if (!area) return null;
-    var div = document.createElement('div');
-    div.className = 'notify notify-' + kind;
-    var span = document.createElement('span');
-    span.textContent = String(message);
-    div.appendChild(span);
-    var close = document.createElement('button');
-    close.type = 'button'; close.className = 'notify-close'; close.setAttribute('aria-label', '关闭提示'); close.textContent = '×';
+    var area = byId('notifyArea'); if (!area) return null;
+    var div = document.createElement('div'); div.className = 'notify notify-' + kind;
+    var span = document.createElement('span'); span.textContent = String(message); div.appendChild(span);
+    var close = document.createElement('button'); close.type = 'button'; close.className = 'notify-close';
+    close.setAttribute('aria-label', '关闭'); close.textContent = '×';
     close.addEventListener('click', function () { if (div.parentNode) div.parentNode.removeChild(div); });
     div.appendChild(close); area.appendChild(div);
     if (timeout === undefined) timeout = 6000;
@@ -332,28 +340,24 @@
     options = options || {};
     return new Promise(function (resolve) {
       confirmResolver = resolve;
-      byId('confirmTitle').textContent = options.title || '确认操作';
+      byId('confirmTitle').textContent = options.title || '确认';
       byId('confirmMessage').textContent = options.message || '';
       byId('confirmOkBtn').textContent = options.confirmText || '确认';
-      showModal('confirmModal');
-      byId('confirmOkBtn').focus();
+      showModal('confirmModal'); byId('confirmOkBtn').focus();
     });
   }
   function resolveConfirm(v) { hideModal('confirmModal'); var r = confirmResolver; confirmResolver = null; if (r) r(v); }
 
-  /* ===== 时钟（关键修复：单独 try-catch + 在 renderDashboard 里也调用） ===== */
   function updateClock() {
     try {
       var now = new Date();
       var days = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
-      var t = byId('currentTime');
-      var d = byId('currentDate');
+      var t = byId('currentTime'), d = byId('currentDate');
       if (t) t.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
       if (d) d.textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + days[now.getDay()];
-    } catch (e) { /* 忽略 */ }
+    } catch (e) {}
   }
 
-  /* ===== 番茄钟 ===== */
   function updatePomodoroDisplay() {
     var el = byId('pomodoroDisplay');
     if (el) el.textContent = pad(Math.floor(toolState.pomodoroTime / 60)) + ':' + pad(toolState.pomodoroTime % 60);
@@ -370,24 +374,18 @@
         toolState.pomodoroCount++;
         try { localStorage.setItem('pomodoroCount', String(toolState.pomodoroCount)); } catch (e) {}
         toolState.pomodoroTime = toolState.pomodoroTotal; updatePomodoroDisplay();
-        notify('success', '🍅 番茄钟时间到！休息一下吧。', 10000);
+        notify('success', '🍅 番茄钟时间到！', 10000);
       }
     }, 1000);
   }
   function pausePomodoro() { if (toolState.pomodoroTimer) { clearInterval(toolState.pomodoroTimer); toolState.pomodoroTimer = null; } }
   function resetPomodoro() { pausePomodoro(); toolState.pomodoroTime = toolState.pomodoroTotal; updatePomodoroDisplay(); }
 
-  /* ===== 定时提醒 ===== */
   function loadRemindersFromStorage() {
-    try {
-      var s = localStorage.getItem(REMINDER_STORAGE_KEY);
-      reminderState.list = s ? JSON.parse(s) : [];
-      if (!Array.isArray(reminderState.list)) reminderState.list = [];
-    } catch (e) { reminderState.list = []; }
+    try { var s = localStorage.getItem(REMINDER_STORAGE_KEY); reminderState.list = s ? JSON.parse(s) : []; if (!Array.isArray(reminderState.list)) reminderState.list = []; }
+    catch (e) { reminderState.list = []; }
   }
-  function saveRemindersToStorage() {
-    try { localStorage.setItem(REMINDER_STORAGE_KEY, JSON.stringify(reminderState.list)); } catch (e) {}
-  }
+  function saveRemindersToStorage() { try { localStorage.setItem(REMINDER_STORAGE_KEY, JSON.stringify(reminderState.list)); } catch (e) {} }
   function catLabel(key) { for (var i = 0; i < REMINDER_CATS.length; i++) if (REMINDER_CATS[i].key === key) return REMINDER_CATS[i].label; return key || '工作'; }
   function repeatLabel(key) { for (var i = 0; i < REMINDER_REPEATS.length; i++) if (REMINDER_REPEATS[i].key === key) return REMINDER_REPEATS[i].label; return key || '一次性'; }
 
@@ -411,45 +409,24 @@
   function formatRemaining(ms) {
     if (ms <= 0) return '已到期';
     var s = Math.floor(ms / 1000);
-    var d = Math.floor(s / 86400);
-    var h = Math.floor((s % 86400) / 3600);
-    var m = Math.floor((s % 3600) / 60);
+    var d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
     if (d > 0) return '剩余 ' + d + ' 天 ' + h + ' 小时';
     if (h > 0) return '剩余 ' + h + ' 小时 ' + m + ' 分钟';
     if (m > 0) return '剩余 ' + m + ' 分钟';
     return '不到 1 分钟';
   }
-
-  function formatDateTime(d) {
-    if (!d) return '—';
-    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
-  }
+  function formatDateTime(d) { if (!d) return '—'; return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
 
   function initReminderSelects() {
     var catSel = byId('reminderCat');
-    if (catSel) {
-      catSel.textContent = '';
-      REMINDER_CATS.forEach(function (c) {
-        var o = document.createElement('option'); o.value = c.key; o.textContent = c.label;
-        catSel.appendChild(o);
-      });
-    }
+    if (catSel) { catSel.textContent = ''; REMINDER_CATS.forEach(function (c) { var o = document.createElement('option'); o.value = c.key; o.textContent = c.label; catSel.appendChild(o); }); }
     var repSel = byId('reminderRepeat');
-    if (repSel) {
-      repSel.textContent = '';
-      REMINDER_REPEATS.forEach(function (r) {
-        var o = document.createElement('option'); o.value = r.key; o.textContent = r.label;
-        repSel.appendChild(o);
-      });
-    }
+    if (repSel) { repSel.textContent = ''; REMINDER_REPEATS.forEach(function (r) { var o = document.createElement('option'); o.value = r.key; o.textContent = r.label; repSel.appendChild(o); }); }
     var catFilter = byId('reminderCatFilter');
     if (catFilter) {
       catFilter.textContent = '';
-      var o0 = document.createElement('option'); o0.value = 'all'; o0.textContent = '请选择分类'; catFilter.appendChild(o0);
-      REMINDER_CATS.forEach(function (c) {
-        var o = document.createElement('option'); o.value = c.key; o.textContent = c.label;
-        catFilter.appendChild(o);
-      });
+      var o0 = document.createElement('option'); o0.value = 'all'; o0.textContent = '全部'; catFilter.appendChild(o0);
+      REMINDER_CATS.forEach(function (c) { var o = document.createElement('option'); o.value = c.key; o.textContent = c.label; catFilter.appendChild(o); });
     }
   }
 
@@ -457,8 +434,7 @@
     var box = byId('reminderCatTabs'); if (!box) return;
     box.textContent = '';
     function mk(key, label) {
-      var b = document.createElement('button');
-      b.type = 'button';
+      var b = document.createElement('button'); b.type = 'button';
       b.className = 'reminder-cat-tab' + (reminderState.filter.cat === key ? ' active' : '');
       b.textContent = label;
       b.addEventListener('click', function () { reminderState.filter.cat = key; renderReminderCatTabs(); renderReminderList(); });
@@ -477,56 +453,35 @@
     if (f.search) { var kw = f.search.toLowerCase(); list = list.filter(function (r) { return String(r.name || '').toLowerCase().indexOf(kw) !== -1; }); }
     list.sort(function (a, b) {
       var va, vb;
-      if (f.sort === 'name') {
-        va = String(a.name || ''); vb = String(b.name || '');
-        return f.dir === 'asc' ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh');
-      }
+      if (f.sort === 'name') { va = String(a.name || ''); vb = String(b.name || ''); return f.dir === 'asc' ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh'); }
       if (f.sort === 'created') { va = new Date(a.createdAt || 0).getTime(); vb = new Date(b.createdAt || 0).getTime(); }
       else { var na = computeNextAt(a), nb = computeNextAt(b); va = na ? na.getTime() : Infinity; vb = nb ? nb.getTime() : Infinity; }
       return f.dir === 'asc' ? va - vb : vb - va;
     });
     if (list.length === 0) {
-      var tr = document.createElement('tr');
-      var td = document.createElement('td'); td.colSpan = 7; td.className = 'reminder-empty'; td.textContent = '暂无提醒事项';
-      tr.appendChild(td); tbody.appendChild(tr);
-      return;
+      var tr0 = document.createElement('tr');
+      var td0 = document.createElement('td'); td0.colSpan = 7; td0.className = 'reminder-empty'; td0.textContent = '暂无提醒事项';
+      tr0.appendChild(td0); tbody.appendChild(tr0); return;
     }
     list.forEach(function (r) {
       var nextAt = computeNextAt(r);
       var remaining = nextAt ? (nextAt.getTime() - Date.now()) : 0;
       var tr = document.createElement('tr');
-
       var td1 = document.createElement('td'); td1.textContent = r.name || '未命名'; tr.appendChild(td1);
-
       var td2 = document.createElement('td');
-      var span2 = document.createElement('span');
-      span2.className = 'reminder-cat-badge cat-' + (r.category || 'work');
-      span2.textContent = catLabel(r.category);
+      var span2 = document.createElement('span'); span2.className = 'reminder-cat-badge cat-' + (r.category || 'work'); span2.textContent = catLabel(r.category);
       td2.appendChild(span2); tr.appendChild(td2);
-
       var td3 = document.createElement('td'); td3.textContent = repeatLabel(r.repeat); tr.appendChild(td3);
       var td4 = document.createElement('td'); td4.textContent = r.emailNotify ? '邮件' : '—'; tr.appendChild(td4);
-
-      var td5 = document.createElement('td'); td5.className = 'reminder-remaining';
-      td5.textContent = formatRemaining(remaining); tr.appendChild(td5);
-
+      var td5 = document.createElement('td'); td5.className = 'reminder-remaining'; td5.textContent = formatRemaining(remaining); tr.appendChild(td5);
       var td6 = document.createElement('td'); td6.textContent = formatDateTime(nextAt); tr.appendChild(td6);
-
       var td7 = document.createElement('td');
-      var pinBtn = document.createElement('button');
-      pinBtn.type = 'button';
-      pinBtn.className = 'btn btn-small btn-ghost';
+      var pinBtn = document.createElement('button'); pinBtn.type = 'button'; pinBtn.className = 'btn btn-small btn-ghost';
       pinBtn.textContent = r.pinned ? '取消前台' : '前台显示';
-      pinBtn.addEventListener('click', function () {
-        r.pinned = !r.pinned; saveRemindersToStorage(); renderReminderList(); renderDashboard();
-      });
+      pinBtn.addEventListener('click', function () { r.pinned = !r.pinned; saveRemindersToStorage(); renderReminderList(); renderDashboard(); });
       td7.appendChild(pinBtn);
-
-      var delBtn = document.createElement('button');
-      delBtn.type = 'button';
-      delBtn.className = 'btn btn-small btn-danger';
-      delBtn.textContent = '删除';
-      delBtn.style.marginLeft = '6px';
+      var delBtn = document.createElement('button'); delBtn.type = 'button'; delBtn.className = 'btn btn-small btn-danger';
+      delBtn.textContent = '删除'; delBtn.style.marginLeft = '6px';
       delBtn.addEventListener('click', function () {
         askConfirm({ title: '删除提醒', message: '确认删除「' + (r.name || '') + '」吗？', confirmText: '确认删除' }).then(function (ok) {
           if (!ok) return;
@@ -535,16 +490,12 @@
           notify('success', '已删除。', 4000);
         });
       });
-      td7.appendChild(delBtn);
-
-      tr.appendChild(td7);
-      tbody.appendChild(tr);
+      td7.appendChild(delBtn); tr.appendChild(td7); tbody.appendChild(tr);
     });
   }
 
   function renderPinnedReminders() {
-    var box = byId('pinnedRemindersList');
-    var section = byId('pinnedRemindersSection');
+    var box = byId('pinnedRemindersList'), section = byId('pinnedRemindersSection');
     if (!box || !section) return;
     var list = reminderState.list.filter(function (r) { return r.pinned; });
     box.textContent = '';
@@ -552,14 +503,12 @@
     section.style.display = '';
     list.forEach(function (r) {
       var nextAt = computeNextAt(r);
-      var card = document.createElement('div');
-      card.className = 'pinned-reminder-card';
+      var card = document.createElement('div'); card.className = 'pinned-reminder-card';
       var name = document.createElement('span'); name.className = 'pinned-reminder-name'; name.textContent = '⏰ ' + (r.name || '');
       card.appendChild(name);
       var t = document.createElement('span'); t.className = 'pinned-reminder-time';
       t.textContent = formatDateTime(nextAt) + ' · ' + formatRemaining(nextAt ? (nextAt.getTime() - Date.now()) : 0);
-      card.appendChild(t);
-      box.appendChild(card);
+      card.appendChild(t); box.appendChild(card);
     });
   }
 
@@ -572,10 +521,8 @@
     byId('reminderCat').value = r ? (r.category || 'work') : 'work';
     byId('reminderRepeat').value = r ? (r.repeat || 'once') : 'once';
     byId('reminderEmail').checked = r ? !!r.emailNotify : false;
-    byId('reminderError').classList.add('hidden');
-    byId('reminderError').textContent = '';
-    showModal('reminderModal');
-    byId('reminderName').focus();
+    byId('reminderError').classList.add('hidden'); byId('reminderError').textContent = '';
+    showModal('reminderModal'); byId('reminderName').focus();
   }
 
   function saveReminderFromModal() {
@@ -585,37 +532,24 @@
     var cat = String(byId('reminderCat').value || 'work');
     var rep = String(byId('reminderRepeat').value || 'once');
     var email = !!byId('reminderEmail').checked;
-    var errEl = byId('reminderError');
-    errEl.classList.add('hidden'); errEl.textContent = '';
+    var errEl = byId('reminderError'); errEl.classList.add('hidden'); errEl.textContent = '';
     if (!name) { errEl.textContent = '名称不能为空。'; errEl.classList.remove('hidden'); return; }
     if (!date) { errEl.textContent = '请选择日期。'; errEl.classList.remove('hidden'); return; }
     if (!time) { errEl.textContent = '请选择时间。'; errEl.classList.remove('hidden'); return; }
     if (reminderState.editing) {
       var target = reminderState.list.find(function (x) { return x.id === reminderState.editing.id; });
-      if (target) {
-        target.name = name; target.date = date; target.time = time;
-        target.category = cat; target.repeat = rep; target.emailNotify = email;
-      }
+      if (target) { target.name = name; target.date = date; target.time = time; target.category = cat; target.repeat = rep; target.emailNotify = email; }
     } else {
-      reminderState.list.push({
-        id: newId('reminder'), name: name, date: date, time: time,
-        category: cat, repeat: rep, emailNotify: email, pinned: false,
-        createdAt: new Date().toISOString()
-      });
+      reminderState.list.push({ id: newId('reminder'), name: name, date: date, time: time, category: cat, repeat: rep, emailNotify: email, pinned: false, createdAt: new Date().toISOString() });
     }
-    saveRemindersToStorage();
-    hideModal('reminderModal');
-    reminderState.editing = null;
-    renderReminderList();
-    renderDashboard();
-    notify('success', '已保存。', 4000);
+    saveRemindersToStorage(); hideModal('reminderModal'); reminderState.editing = null;
+    renderReminderList(); renderDashboard(); notify('success', '已保存。', 4000);
   }
 
   function checkDueReminders() {
     var now = Date.now();
     reminderState.list.forEach(function (r) {
-      var nextAt = computeNextAt(r);
-      if (!nextAt) return;
+      var nextAt = computeNextAt(r); if (!nextAt) return;
       var diff = nextAt.getTime() - now;
       var key = r.id + '_' + nextAt.getTime();
       if (diff <= 0 && diff > -60000 && !reminderState.notified[key]) {
@@ -625,15 +559,22 @@
     });
   }
 
-  /* ===== 排序 / 筛选 ===== */
-  function getSortedCategories() {
+  /* ===== 目录层级工具 ===== */
+  function isLevel1(cat) { return !cat.parentId; }
+  function getLevel1Categories() {
     if (!state.data) return [];
-    var list = state.data.categories.slice();
+    var list = state.data.categories.filter(isLevel1);
     list.sort(function (a, b) {
       var ma = a.marked ? 1 : 0, mb = b.marked ? 1 : 0;
       if (ma !== mb) return mb - ma;
       return (new Date(b.updatedAt || 0).getTime() || 0) - (new Date(a.updatedAt || 0).getTime() || 0);
     });
+    return list;
+  }
+  function getChildren(parentId) {
+    if (!state.data) return [];
+    var list = state.data.categories.filter(function (c) { return c.parentId === parentId; });
+    list.sort(function (a, b) { return (new Date(b.updatedAt || 0).getTime() || 0) - (new Date(a.updatedAt || 0).getTime() || 0); });
     return list;
   }
   function getSortedNotes(categoryId) {
@@ -646,6 +587,7 @@
     });
     return list;
   }
+  function getCategoryById(id) { if (!state.data) return null; return state.data.categories.find(function (c) { return c.id === id; }) || null; }
 
   function noteMatches(note, keyword) {
     if (!keyword) return false;
@@ -658,21 +600,6 @@
     });
     (note.attachments || []).forEach(function (f) { if (String(f.originalName || '').toLowerCase().indexOf(keyword) !== -1) hit = true; });
     return hit;
-  }
-
-  function getVisibleGroups() {
-    var keyword = String(state.searchKeyword || '').trim().toLowerCase();
-    var groups = [];
-    getSortedCategories().forEach(function (cat) {
-      var notes = getSortedNotes(cat.id);
-      var visible;
-      if (!keyword) visible = notes;
-      else if (String(cat.name || '').toLowerCase().indexOf(keyword) !== -1) visible = notes;
-      else visible = notes.filter(function (n) { return noteMatches(n, keyword); });
-      if (keyword && visible.length === 0) return;
-      groups.push({ category: cat, notes: visible });
-    });
-    return groups;
   }
 
   function isCategoryCollapsed(cat) {
@@ -702,34 +629,70 @@
     container.textContent = '';
     if (!state.data) { var p = document.createElement('p'); p.className = 'empty-hint'; p.textContent = '加载中...'; container.appendChild(p); return; }
     var keyword = String(state.searchKeyword || '').trim().toLowerCase();
-    var groups = getVisibleGroups();
-    if (groups.length === 0) { var p2 = document.createElement('p'); p2.className = 'empty-hint'; p2.textContent = keyword ? '未找到匹配的笔记' : '暂无目录'; container.appendChild(p2); return; }
-    groups.forEach(function (group) {
-      var cat = group.category;
+    var level1s = getLevel1Categories();
+    if (level1s.length === 0) { var p2 = document.createElement('p'); p2.className = 'empty-hint'; p2.textContent = keyword ? '未找到匹配' : '暂无目录'; container.appendChild(p2); return; }
+
+    level1s.forEach(function (cat) {
+      var children = getChildren(cat.id);
+      var notesAtL1 = getSortedNotes(cat.id);
+      var totalNotes = notesAtL1.length;
+      children.forEach(function (ch) { totalNotes += getSortedNotes(ch.id).length; });
+      if (keyword) {
+        var hasMatch = (String(cat.name || '').toLowerCase().indexOf(keyword) !== -1) ||
+          children.some(function (ch) { return String(ch.name || '').toLowerCase().indexOf(keyword) !== -1; }) ||
+          notesAtL1.some(function (n) { return noteMatches(n, keyword); }) ||
+          children.some(function (ch) { return getSortedNotes(ch.id).some(function (n) { return noteMatches(n, keyword); }); });
+        if (!hasMatch) return;
+      }
       var collapsed = isCategoryCollapsed(cat);
       var item = document.createElement('div'); item.className = 'cat-nav-item';
-      var head = document.createElement('div'); head.className = 'cat-nav-head';
+      var head = document.createElement('div'); head.className = 'cat-nav-head level-1';
       head.addEventListener('click', function () { state.collapsedCategories[cat.id] = !isCategoryCollapsed(cat); renderSidebar(); });
       var toggle = document.createElement('span'); toggle.textContent = collapsed ? '▶' : '▼'; toggle.style.fontSize = '0.7rem'; toggle.style.width = '12px';
       head.appendChild(toggle);
       var nameEl = document.createElement('span'); nameEl.className = 'cat-nav-name'; setHighlightedText(nameEl, cat.name, keyword); head.appendChild(nameEl);
-      var countEl = document.createElement('span'); countEl.className = 'cat-nav-count'; countEl.textContent = String(group.notes.length); head.appendChild(countEl);
+      var countEl = document.createElement('span'); countEl.className = 'cat-nav-count'; countEl.textContent = String(totalNotes); head.appendChild(countEl);
       item.appendChild(head);
+
       if (!collapsed) {
-        var ul = document.createElement('ul'); ul.className = 'cat-nav-notes';
-        group.notes.forEach(function (note) {
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          a.className = 'cat-nav-link' + (state.currentView === 'note' && state.currentNoteId === note.id ? ' active' : '');
-          a.href = '#';
-          setHighlightedText(a, note.title, keyword);
-          if (note.marked) a.textContent = a.textContent + ' ⭐';
-          a.addEventListener('click', function (e) {
-            e.preventDefault(); state.currentView = 'note'; state.currentNoteId = note.id; render();
-          });
-          li.appendChild(a); ul.appendChild(li);
+        children.forEach(function (child) {
+          var childNotes = getSortedNotes(child.id);
+          if (keyword) {
+            var cm = (String(child.name || '').toLowerCase().indexOf(keyword) !== -1) || childNotes.some(function (n) { return noteMatches(n, keyword); });
+            if (!cm) return;
+          }
+          var childCollapsed = isCategoryCollapsed(child);
+          var childItem = document.createElement('div'); childItem.className = 'cat-nav-children';
+          var chHead = document.createElement('div'); chHead.className = 'cat-nav-head';
+          chHead.addEventListener('click', function () { state.collapsedCategories[child.id] = !isCategoryCollapsed(child); renderSidebar(); });
+          var chToggle = document.createElement('span'); chToggle.textContent = childCollapsed ? '▶' : '▼'; chToggle.style.fontSize = '0.7rem'; chToggle.style.width = '12px';
+          chHead.appendChild(chToggle);
+          var chName = document.createElement('span'); chName.className = 'cat-nav-name'; setHighlightedText(chName, child.name, keyword); chHead.appendChild(chName);
+          var chCount = document.createElement('span'); chCount.className = 'cat-nav-count'; chCount.textContent = String(childNotes.length); chHead.appendChild(chCount);
+          childItem.appendChild(chHead);
+
+          if (!childCollapsed) {
+            var ul = document.createElement('ul'); ul.className = 'cat-nav-notes';
+            var visibleNotes = keyword ? childNotes.filter(function (n) { return noteMatches(n, keyword); }) : childNotes;
+            if (visibleNotes.length === 0) {
+              var li0 = document.createElement('li'); li0.className = 'empty-hint'; li0.style.fontSize = '0.8rem'; li0.style.padding = '4px 12px'; li0.textContent = '（无笔记）';
+              ul.appendChild(li0);
+            } else {
+              visibleNotes.forEach(function (note) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.className = 'cat-nav-link' + (state.currentView === 'note' && state.currentNoteId === note.id ? ' active' : '');
+                a.href = '#';
+                setHighlightedText(a, note.title, keyword);
+                if (note.marked) a.textContent = a.textContent + ' ⭐';
+                a.addEventListener('click', function (e) { e.preventDefault(); state.currentView = 'note'; state.currentNoteId = note.id; render(); });
+                li.appendChild(a); ul.appendChild(li);
+              });
+            }
+            childItem.appendChild(ul);
+          }
+          item.appendChild(childItem);
         });
-        item.appendChild(ul);
       }
       container.appendChild(item);
     });
@@ -746,35 +709,24 @@
     var grid = byId('quickLinksGrid'); if (!grid) return;
     grid.textContent = '';
     var links = CONFIG.QUICK_LINKS || [];
-    if (links.length === 0) {
-      var p = document.createElement('p'); p.className = 'empty-hint';
-      p.textContent = '暂无常用链接，可在 config.js 中修改 QUICK_LINKS。';
-      grid.appendChild(p); return;
-    }
+    if (links.length === 0) { var p = document.createElement('p'); p.className = 'empty-hint'; p.textContent = '暂无常用链接。'; grid.appendChild(p); return; }
     links.forEach(function (link) {
-      var a = document.createElement('a');
-      a.className = 'quick-link-card';
-      a.href = link.url || '#';
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      var icon = document.createElement('div'); icon.className = 'quick-link-icon'; icon.textContent = link.icon || '🔗';
-      a.appendChild(icon);
-      var name = document.createElement('div'); name.className = 'quick-link-name'; name.textContent = link.name || link.url || '';
-      a.appendChild(name);
+      var a = document.createElement('a'); a.className = 'quick-link-card'; a.href = link.url || '#';
+      a.target = '_blank'; a.rel = 'noopener noreferrer';
+      var icon = document.createElement('div'); icon.className = 'quick-link-icon'; icon.textContent = link.icon || '🔗'; a.appendChild(icon);
+      var name = document.createElement('div'); name.className = 'quick-link-name'; name.textContent = link.name || link.url || ''; a.appendChild(name);
       grid.appendChild(a);
     });
   }
 
   function renderDashboard() {
-    var dv = byId('dashboardView');
-    if (dv) dv.classList.remove('hidden');
-    updateClock();  // ★ 每次进主页刷新时间
+    var dv = byId('dashboardView'); if (dv) dv.classList.remove('hidden');
+    updateClock();
     var hour = new Date().getHours();
     var greeting = '早上好';
     if (hour >= 12 && hour < 18) greeting = '下午好';
     else if (hour >= 18) greeting = '晚上好';
-    var gEl = byId('greetingText');
-    if (gEl) gEl.textContent = greeting + '，欢迎回来';
+    var gEl = byId('greetingText'); if (gEl) gEl.textContent = greeting + '，欢迎回来';
     if (state.data) {
       byId('statTotalNotes').textContent = String(state.data.notes.length);
       byId('statMarkedNotes').textContent = String(state.data.notes.filter(function (n) { return n.marked; }).length);
@@ -784,27 +736,68 @@
     renderPinnedReminders();
   }
 
+  /* 渲染笔记正文：把 [[img:ID]] 变成图片 */
+  function renderContentWithImages(container, content, images, keyword) {
+    container.textContent = '';
+    var imageMap = {};
+    (images || []).forEach(function (img) { imageMap[img.id] = img; });
+
+    if (!content) {
+      var p0 = document.createElement('p'); p0.className = 'note-body-text'; p0.style.color = 'var(--text-muted)'; p0.style.fontStyle = 'italic';
+      p0.textContent = '（无正文）';
+      container.appendChild(p0);
+      return;
+    }
+
+    var regex = /\[\[img:([a-zA-Z0-9_-]+)\]\]/g;
+    var lastIndex = 0, match;
+    function addText(t) {
+      if (!t || !t.trim()) return;
+      var p = document.createElement('p'); p.className = 'note-body-text';
+      if (keyword) setHighlightedText(p, t, keyword);
+      else p.textContent = t;
+      container.appendChild(p);
+    }
+    function addImage(id) {
+      var img = imageMap[id];
+      if (!img) {
+        var miss = document.createElement('p'); miss.className = 'missing-image';
+        miss.textContent = '[图片未找到：' + id + ']';
+        container.appendChild(miss);
+        return;
+      }
+      var fig = document.createElement('figure'); fig.className = 'note-figure-inline';
+      var a = document.createElement('a'); a.href = assetUrl(img.path); a.target = '_blank'; a.rel = 'noopener noreferrer';
+      var im = document.createElement('img'); im.src = assetUrl(img.path); im.alt = img.description || img.originalName || ''; im.loading = 'lazy';
+      a.appendChild(im); fig.appendChild(a);
+      if (img.description || img.originalName) {
+        var cap = document.createElement('figcaption'); cap.textContent = img.description || img.originalName; fig.appendChild(cap);
+      }
+      container.appendChild(fig);
+    }
+
+    while ((match = regex.exec(content)) !== null) {
+      if (match.index > lastIndex) addText(content.slice(lastIndex, match.index));
+      addImage(match[1]);
+      lastIndex = regex.lastIndex;
+    }
+    if (lastIndex < content.length) addText(content.slice(lastIndex));
+  }
+
   function renderNoteView(noteId) {
     byId('noteView').classList.remove('hidden');
     var note = state.data.notes.find(function (n) { return n.id === noteId; });
     if (!note) {
       byId('noteViewTitle').textContent = '笔记不存在';
-      byId('noteViewContent').textContent = '该笔记可能已被删除，请返回主页。';
+      byId('noteViewContent').textContent = '该笔记可能已被删除。';
       return;
     }
-    var cat = state.data.categories.find(function (c) { return c.id === note.categoryId; });
+    var cat = getCategoryById(note.categoryId);
+    var parent = cat && cat.parentId ? getCategoryById(cat.parentId) : null;
     byId('noteViewTitle').textContent = note.title;
-    byId('noteViewMeta').textContent = '所属目录：' + (cat ? cat.name : '未知') + ' · 创建：' + formatTime(note.createdAt) + ' · 最后修改：' + formatTime(note.updatedAt) + (note.marked ? ' · ⭐ 重点笔记' : '');
-    byId('noteViewContent').textContent = note.content || '（无正文）';
-    var gallery = byId('noteViewGallery'); gallery.textContent = '';
-    (note.images || []).forEach(function (img) {
-      var fig = document.createElement('figure'); fig.className = 'note-figure';
-      var a = document.createElement('a'); a.href = assetUrl(img.path); a.target = '_blank'; a.rel = 'noopener noreferrer';
-      var im = document.createElement('img'); im.src = assetUrl(img.path); im.alt = img.description || img.originalName;
-      a.appendChild(im); fig.appendChild(a);
-      var cap = document.createElement('figcaption'); cap.textContent = img.description || img.originalName;
-      fig.appendChild(cap); gallery.appendChild(fig);
-    });
+    var catPath = parent ? (parent.name + ' / ' + cat.name) : (cat ? cat.name : '未知');
+    byId('noteViewMeta').textContent = '所属目录：' + catPath + ' · 创建：' + formatTime(note.createdAt) + ' · 最后修改：' + formatTime(note.updatedAt) + (note.marked ? ' · ⭐ 重点笔记' : '');
+    renderContentWithImages(byId('noteViewContent'), note.content, note.images, '');
     var atts = byId('noteViewAttachments'); atts.textContent = '';
     (note.attachments || []).forEach(function (f) {
       var li = document.createElement('li');
@@ -818,9 +811,7 @@
   }
 
   function hideAllViews() {
-    ['dashboardView', 'noteView', 'pomodoroView', 'timerView'].forEach(function (id) {
-      var el = byId(id); if (el) el.classList.add('hidden');
-    });
+    ['dashboardView', 'noteView', 'pomodoroView', 'timerView'].forEach(function (id) { var el = byId(id); if (el) el.classList.add('hidden'); });
   }
 
   function render() {
@@ -836,12 +827,25 @@
   function fillCategorySelect(select, selectedId) {
     if (!select) return;
     select.textContent = '';
-    var cats = getSortedCategories();
-    if (cats.length === 0) { var o = document.createElement('option'); o.value = ''; o.textContent = '（暂无目录）'; select.appendChild(o); return; }
-    cats.forEach(function (c) {
-      var o = document.createElement('option'); o.value = c.id; o.textContent = c.name + (c.marked ? '（重点）' : '');
-      if (c.id === selectedId) o.selected = true;
-      select.appendChild(o);
+    var level1s = getLevel1Categories();
+    if (level1s.length === 0) { var o = document.createElement('option'); o.value = ''; o.textContent = '（暂无目录）'; select.appendChild(o); return; }
+    level1s.forEach(function (p) {
+      var children = getChildren(p.id);
+      if (children.length === 0) {
+        var og = document.createElement('option'); og.value = p.id; og.textContent = '【一级】' + p.name;
+        if (p.id === selectedId) og.selected = true; select.appendChild(og);
+        return;
+      }
+      var group = document.createElement('optgroup'); group.label = '【一级】' + p.name;
+      var optP = document.createElement('option'); optP.value = p.id; optP.textContent = '（直属 ' + p.name + '）';
+      if (p.id === selectedId) optP.selected = true;
+      group.appendChild(optP);
+      children.forEach(function (ch) {
+        var o2 = document.createElement('option'); o2.value = ch.id; o2.textContent = '　' + ch.name;
+        if (ch.id === selectedId) o2.selected = true;
+        group.appendChild(o2);
+      });
+      select.appendChild(group);
     });
   }
 
@@ -858,14 +862,13 @@
       if (tip) tip.remove();
       if (!options.silent) notify('success', '远端数据已加载。', 4000);
     }).catch(function (err) {
-      if (tip) tip.remove();
-      render();
+      if (tip) tip.remove(); render();
       notify('error', (err && err.message) || '读取远端数据失败。', 12000);
     }).then(function () { state.busy = false; });
   }
 
   function verifyToken(token) {
-    if (!CONFIG.OWNER || !CONFIG.REPO) return Promise.reject(new AppError('config.js 中 OWNER 或 REPO 未填写。', 0));
+    if (!CONFIG.OWNER || !CONFIG.REPO) return Promise.reject(new AppError('config.js 未配置。', 0));
     return ghFetch(apiBase(), { token: token }).then(function (info) {
       if (!info || !info.full_name) throw new AppError('无法访问该仓库。', 404);
       return fetchRemoteNotes(token).catch(function (err) {
@@ -877,14 +880,12 @@
 
   function enterEditMode() {
     if (state.editing) { notify('info', '当前已是编辑模式。', 4000); return; }
-    byId('tokenInput').value = '';
-    byId('tokenError').classList.add('hidden'); byId('tokenError').textContent = '';
-    showModal('tokenModal');
-    byId('tokenInput').focus();
+    byId('tokenInput').value = ''; byId('tokenError').classList.add('hidden'); byId('tokenError').textContent = '';
+    showModal('tokenModal'); byId('tokenInput').focus();
   }
 
   function confirmEnterEditMode() {
-    var input = byId('tokenInput'); var errEl = byId('tokenError'); var btn = byId('btnTokenConfirm');
+    var input = byId('tokenInput'), errEl = byId('tokenError'), btn = byId('btnTokenConfirm');
     var token = String(input.value || '').trim();
     errEl.classList.add('hidden'); errEl.textContent = '';
     if (!token) { errEl.textContent = '请输入 Token。'; errEl.classList.remove('hidden'); return; }
@@ -892,15 +893,11 @@
     verifyToken(token).then(function () {
       state.token = token; state.editing = true;
       try { sessionStorage.setItem(TOKEN_STORAGE_KEY, token); } catch (e) {}
-      input.value = '';
-      hideModal('tokenModal');
-      document.body.classList.add('edit-mode');
-      render();
+      input.value = ''; hideModal('tokenModal'); document.body.classList.add('edit-mode'); render();
       notify('success', '已进入编辑模式。', 8000);
       return loadRemoteData({ silent: true });
     }).catch(function (err) {
-      errEl.textContent = (err && err.message) || 'Token 验证失败。';
-      errEl.classList.remove('hidden');
+      errEl.textContent = (err && err.message) || 'Token 验证失败。'; errEl.classList.remove('hidden');
     }).then(function () { btn.disabled = false; btn.textContent = '进入编辑模式'; });
   }
 
@@ -908,16 +905,15 @@
     state.token = null; state.editing = false;
     try { sessionStorage.removeItem(TOKEN_STORAGE_KEY); } catch (e) {}
     byId('tokenInput').value = '';
-    editNoteCtx.noteId = null; editNoteCtx.images = []; editNoteCtx.files = [];
-    editNoteCtx.removedImages = []; editNoteCtx.removedFiles = [];
+    editNoteCtx.noteId = null; editNoteCtx.images = []; editNoteCtx.files = []; editNoteCtx.removedFiles = [];
     hideModal('editNoteModal'); hideModal('tokenModal');
-    document.body.classList.remove('edit-mode');
-    render();
+    document.body.classList.remove('edit-mode'); render();
     notify('info', '已退出编辑模式。', 5000);
   }
 
   function openEditNote(noteId) {
     if (!state.editing) return;
+    editNoteCtx.images = []; editNoteCtx.files = []; editNoteCtx.removedFiles = [];
     if (noteId) {
       var note = state.data.notes.find(function (n) { return n.id === noteId; });
       if (!note) { notify('error', '找不到该笔记。', 8000); return; }
@@ -926,44 +922,29 @@
       byId('editNoteTitle').value = note.title;
       byId('editNoteContent').value = note.content || '';
       byId('editNoteMarked').checked = !!note.marked;
+      editNoteCtx.images = (note.images || []).slice();
       fillCategorySelect(byId('editNoteCategory'), note.categoryId);
     } else {
-      editNoteCtx.noteId = null;
+      editNoteCtx.noteId = newId('note');
       byId('editNoteModalTitle').textContent = '新增笔记';
       byId('editNoteTitle').value = '';
       byId('editNoteContent').value = '';
       byId('editNoteMarked').checked = false;
       fillCategorySelect(byId('editNoteCategory'), '');
     }
-    editNoteCtx.images = []; editNoteCtx.files = [];
-    editNoteCtx.removedImages = []; editNoteCtx.removedFiles = [];
-    byId('editNoteImages').value = ''; byId('editNoteFiles').value = '';
+    byId('editNoteFiles').value = '';
     byId('editNoteError').classList.add('hidden'); byId('editNoteError').textContent = '';
-    renderEditExistingMedia(); bindEditNotePreviews();
+    renderEditExistingFiles();
+    bindEditNotePreviews();
     showModal('editNoteModal'); byId('editNoteTitle').focus();
   }
 
-  function renderEditExistingMedia() {
-    var imgBox = byId('editNoteExistingImages'); var fileBox = byId('editNoteExistingFiles');
-    imgBox.textContent = ''; fileBox.textContent = '';
+  function renderEditExistingFiles() {
+    var fileBox = byId('editNoteExistingFiles'); fileBox.textContent = '';
     if (!editNoteCtx.noteId) return;
-    var note = state.data.notes.find(function (n) { return n.id === editNoteCtx.noteId; });
+    var note = state.data ? state.data.notes.find(function (n) { return n.id === editNoteCtx.noteId; }) : null;
     if (!note) return;
-    var images = (note.images || []).filter(function (img) { return editNoteCtx.removedImages.indexOf(img.id) === -1; });
     var files = (note.attachments || []).filter(function (f) { return editNoteCtx.removedFiles.indexOf(f.id) === -1; });
-    if (images.length === 0) { var p = document.createElement('p'); p.className = 'empty-hint'; p.textContent = '暂无图片'; imgBox.appendChild(p); }
-    else images.forEach(function (img) {
-      var row = document.createElement('div'); row.className = 'pending-item';
-      var im = document.createElement('img'); im.src = assetUrl(img.path); im.alt = img.originalName || ''; row.appendChild(im);
-      var name = document.createElement('span'); name.className = 'pending-name'; name.textContent = (img.originalName || '') + '（' + formatSize(img.size) + '）'; row.appendChild(name);
-      var del = document.createElement('button'); del.type = 'button'; del.className = 'btn btn-small btn-danger'; del.textContent = '删除';
-      del.addEventListener('click', function () {
-        askConfirm({ title: '删除图片', message: '确认删除图片「' + (img.originalName || '') + '」吗？', confirmText: '标记删除' }).then(function (ok) {
-          if (!ok) return; editNoteCtx.removedImages.push(img.id); renderEditExistingMedia();
-        });
-      });
-      row.appendChild(del); imgBox.appendChild(row);
-    });
     if (files.length === 0) { var p2 = document.createElement('p'); p2.className = 'empty-hint'; p2.textContent = '暂无附件'; fileBox.appendChild(p2); }
     else files.forEach(function (f) {
       var row = document.createElement('div'); row.className = 'pending-item';
@@ -971,7 +952,7 @@
       var del = document.createElement('button'); del.type = 'button'; del.className = 'btn btn-small btn-danger'; del.textContent = '删除';
       del.addEventListener('click', function () {
         askConfirm({ title: '删除附件', message: '确认删除附件「' + (f.originalName || '') + '」吗？', confirmText: '标记删除' }).then(function (ok) {
-          if (!ok) return; editNoteCtx.removedFiles.push(f.id); renderEditExistingMedia();
+          if (!ok) return; editNoteCtx.removedFiles.push(f.id); renderEditExistingFiles();
         });
       });
       row.appendChild(del); fileBox.appendChild(row);
@@ -986,26 +967,12 @@
       if (kind === 'image') { var im = document.createElement('img'); im.src = item.previewUrl; im.alt = item.file.name; row.appendChild(im); }
       var nameEl = document.createElement('span'); nameEl.className = 'pending-name';
       nameEl.textContent = item.file.name + '（' + formatSize(item.file.size) + '）'; row.appendChild(nameEl);
-      if (kind === 'image') {
-        var descWrap = document.createElement('div'); descWrap.className = 'pending-desc';
-        var label = document.createElement('label'); label.className = 'field-label'; label.textContent = '图片说明';
-        var id = 'desc-' + item.id; label.setAttribute('for', id);
-        var inp = document.createElement('input'); inp.type = 'text'; inp.id = id; inp.value = item.description || ''; inp.maxLength = 200;
-        inp.addEventListener('input', function () { item.description = inp.value; });
-        descWrap.appendChild(label); descWrap.appendChild(inp); row.appendChild(descWrap);
-      }
       var status = document.createElement('span'); status.className = 'pending-status status-' + item.status; status.textContent = item.statusText;
       row.appendChild(status); item.statusEl = status;
       var del = document.createElement('button'); del.type = 'button'; del.className = 'btn btn-small btn-danger'; del.textContent = '移除';
       del.addEventListener('click', function () { onRemove(item); });
-      row.appendChild(del);
-      container.appendChild(row);
+      row.appendChild(del); container.appendChild(row);
     });
-  }
-
-  function removePendingItem(list, item) {
-    var idx = list.indexOf(item); if (idx !== -1) list.splice(idx, 1);
-    if (item.previewUrl) { try { URL.revokeObjectURL(item.previewUrl); } catch (e) {} }
   }
 
   function updatePendingStatus(item, status) {
@@ -1015,19 +982,10 @@
   }
 
   function bindEditNotePreviews() {
-    renderPendingList(byId('editNoteImagePreview'), editNoteCtx.images, 'image', function (item) { removePendingItem(editNoteCtx.images, item); bindEditNotePreviews(); });
-    renderPendingList(byId('editNoteFilePreview'), editNoteCtx.files, 'file', function (item) { removePendingItem(editNoteCtx.files, item); bindEditNotePreviews(); });
-  }
-
-  function handleEditNoteImageSelect(files) {
-    var problems = [];
-    Array.prototype.forEach.call(files, function (file) {
-      var err = validateImageFile(file);
-      if (err) { problems.push(file.name + '：' + err); return; }
-      editNoteCtx.images.push({ id: newId('image'), file: file, description: '', previewUrl: URL.createObjectURL(file), status: 'waiting', statusText: '等待上传' });
+    renderPendingList(byId('editNoteFilePreview'), editNoteCtx.files, 'file', function (item) {
+      var idx = editNoteCtx.files.indexOf(item); if (idx !== -1) editNoteCtx.files.splice(idx, 1);
+      bindEditNotePreviews();
     });
-    if (problems.length) notify('error', '以下图片未通过校验：\n' + problems.join('\n'), 12000);
-    bindEditNotePreviews();
   }
 
   function handleEditNoteFileSelect(files) {
@@ -1041,45 +999,68 @@
     bindEditNotePreviews();
   }
 
+  /* 在光标处插入图片 */
+  function insertImageAtCursor() {
+    if (!editNoteCtx.noteId) { notify('error', '请先填写笔记标题并选择目录。', 6000); return; }
+    var input = byId('editNoteImageInput');
+    input.value = '';
+    input.click();
+  }
+
+  function handleInsertImageFile(file) {
+    var err = validateImageFile(file);
+    if (err) { notify('error', file.name + '：' + err, 8000); return; }
+    var working = notify('info', '正在上传图片到 GitHub…', 0);
+    var noteId = editNoteCtx.noteId;
+    var id = newId('image');
+    var item = { id: id, file: file };
+    uploadAttachment('image', noteId, item).then(function (meta) {
+      working.remove();
+      // 追加到 editNoteCtx.images
+      editNoteCtx.images.push(meta);
+      // 插入到 textarea 光标位置
+      var ta = byId('editNoteContent');
+      var tag = '\n[[img:' + meta.id + ']]\n';
+      var start = ta.selectionStart || ta.value.length;
+      var end = ta.selectionEnd || ta.value.length;
+      ta.value = ta.value.slice(0, start) + tag + ta.value.slice(end);
+      ta.selectionStart = ta.selectionEnd = start + tag.length;
+      ta.focus();
+      notify('success', '图片已上传并在光标处插入。', 6000);
+    }).catch(function (e) {
+      working.remove();
+      notify('error', '图片上传失败：' + ((e && e.message) || ''), 10000);
+    });
+  }
+
   function closeEditNoteModal() {
-    editNoteCtx.images.forEach(function (it) { if (it.previewUrl) { try { URL.revokeObjectURL(it.previewUrl); } catch (e) {} } });
-    editNoteCtx.noteId = null; editNoteCtx.images = []; editNoteCtx.files = [];
-    editNoteCtx.removedImages = []; editNoteCtx.removedFiles = [];
+    editNoteCtx.noteId = null; editNoteCtx.images = []; editNoteCtx.files = []; editNoteCtx.removedFiles = [];
     hideModal('editNoteModal');
   }
 
   function saveEditNote() {
     if (!state.editing) return;
-    var isNew = !editNoteCtx.noteId;
-    var noteId = isNew ? newId('note') : editNoteCtx.noteId;
+    var isNew = !state.data.notes.some(function (n) { return n.id === editNoteCtx.noteId; });
+    var noteId = editNoteCtx.noteId;
     var title = String(byId('editNoteTitle').value || '').trim();
     var content = String(byId('editNoteContent').value || '');
     var marked = !!byId('editNoteMarked').checked;
     var categoryId = String(byId('editNoteCategory').value || '');
-    var saveBtn = byId('btnSaveEditNote'); var errEl = byId('editNoteError');
+    var saveBtn = byId('btnSaveEditNote'), errEl = byId('editNoteError');
     errEl.classList.add('hidden'); errEl.textContent = '';
     if (!title) { errEl.textContent = '笔记标题必须填写。'; errEl.classList.remove('hidden'); return; }
     if (!categoryId) { errEl.textContent = '请选择所属目录。'; errEl.classList.remove('hidden'); return; }
     var note = isNew ? null : state.data.notes.find(function (n) { return n.id === noteId; });
-    if (!isNew && !note) { errEl.textContent = '找不到要编辑的笔记。'; errEl.classList.remove('hidden'); return; }
-    var keptImages = note ? (note.images || []).filter(function (img) { return editNoteCtx.removedImages.indexOf(img.id) === -1; }) : [];
     var keptFiles = note ? (note.attachments || []).filter(function (f) { return editNoteCtx.removedFiles.indexOf(f.id) === -1; }) : [];
-    if (!content.trim() && keptImages.length === 0 && editNoteCtx.images.length === 0 && keptFiles.length === 0 && editNoteCtx.files.length === 0) {
+    if (!content.trim() && editNoteCtx.images.length === 0 && keptFiles.length === 0 && editNoteCtx.files.length === 0) {
       errEl.textContent = '标题、图片和附件不能全部为空。'; errEl.classList.remove('hidden'); return;
     }
     if (saveBtn.disabled) return;
     saveBtn.disabled = true;
     var working = notify('info', '正在保存…', 0);
     var warnings = [];
-    var uploadedImages = [], uploadedFiles = [], reallyRemovedImages = [], reallyRemovedFiles = [];
+    var uploadedFiles = [], reallyRemovedFiles = [];
     var chain = Promise.resolve();
-    editNoteCtx.images.forEach(function (item) {
-      chain = chain.then(function () {
-        updatePendingStatus(item, 'uploading');
-        return uploadAttachment('image', noteId, item).then(function (meta) { uploadedImages.push(meta); updatePendingStatus(item, 'done'); })
-          .catch(function (err) { updatePendingStatus(item, 'error'); throw new AppError('图片「' + item.file.name + '」上传失败：' + ((err && err.message) || ''), err && err.status); });
-      });
-    });
     editNoteCtx.files.forEach(function (item) {
       chain = chain.then(function () {
         updatePendingStatus(item, 'uploading');
@@ -1088,13 +1069,6 @@
       });
     });
     if (!isNew) {
-      (note.images || []).forEach(function (img) {
-        if (editNoteCtx.removedImages.indexOf(img.id) === -1) return;
-        chain = chain.then(function () {
-          return deleteRepoFile(img.path, '删除图片：' + (img.originalName || '')).then(function () { reallyRemovedImages.push(img.id); })
-            .catch(function (err) { if (err && err.status === 404) reallyRemovedImages.push(img.id); else warnings.push('图片删除失败：' + img.path); });
-        });
-      });
       (note.attachments || []).forEach(function (f) {
         if (editNoteCtx.removedFiles.indexOf(f.id) === -1) return;
         chain = chain.then(function () {
@@ -1104,15 +1078,25 @@
       });
     }
     chain.then(function () {
+      // 清理不再被 content 引用的图片
+      var finalImages = editNoteCtx.images.slice();
+      if (!isNew) {
+        (note.images || []).forEach(function (oldImg) {
+          var stillUsed = content.indexOf('[[img:' + oldImg.id + ']]') !== -1;
+          if (stillUsed && !finalImages.some(function (x) { return x.id === oldImg.id; })) {
+            finalImages.push(oldImg);
+          }
+        });
+      }
       var next = deepClone(state.data);
       var nowIso = new Date().toISOString();
       if (isNew) {
         next.notes.push({ id: noteId, categoryId: categoryId, title: title, content: content, marked: marked, collapsed: false,
-          images: uploadedImages, attachments: uploadedFiles, createdAt: nowIso, updatedAt: nowIso });
+          images: finalImages, attachments: uploadedFiles, createdAt: nowIso, updatedAt: nowIso });
       } else {
         var target = next.notes.find(function (n) { return n.id === noteId; });
         target.categoryId = categoryId; target.title = title; target.content = content; target.marked = marked;
-        target.images = (note.images || []).filter(function (img) { return reallyRemovedImages.indexOf(img.id) === -1; }).concat(uploadedImages);
+        target.images = finalImages;
         target.attachments = (note.attachments || []).filter(function (f) { return reallyRemovedFiles.indexOf(f.id) === -1; }).concat(uploadedFiles);
         target.updatedAt = nowIso;
       }
@@ -1131,18 +1115,22 @@
     }).then(function () { saveBtn.disabled = false; });
   }
 
-  function addCategory() {
-    if (!state.editing) { notify('warn', '请先进入编辑模式。', 5000); return; }
-    var input = byId('newCategoryName'); if (!input) return;
-    var name = String(input.value || '').trim();
-    if (!name) { notify('error', '目录名称不能为空。', 5000); return; }
-    if (state.data.categories.some(function (c) { return c.name === name; })) { notify('error', '已存在同名目录。', 5000); return; }
-    var nowIso = new Date().toISOString();
-    var next = deepClone(state.data);
-    next.categories.push({ id: newId('category'), name: name, marked: false, collapsed: false, createdAt: nowIso, updatedAt: nowIso });
-    var tip = notify('info', '正在保存…', 0);
-    commitData(next, '新增目录：' + name).then(function () { input.value = ''; tip.remove(); notify('success', '已保存到 GitHub。', 5000); render(); })
-      .catch(function (err) { tip.remove(); notify('error', (err && err.message) || '保存失败。', 12000); });
+  /* ===== 创建目录（简化为仅 Word 导入用） ===== */
+  function findOrCreateLevel1(next, name, nowIso) {
+    var c = next.categories.find(function (x) { return x.parentId == null && x.name === name; });
+    if (!c) {
+      c = { id: newId('category'), name: name, parentId: null, marked: false, collapsed: false, createdAt: nowIso, updatedAt: nowIso };
+      next.categories.push(c);
+    }
+    return c;
+  }
+  function findOrCreateLevel2(next, parentId, name, nowIso) {
+    var c = next.categories.find(function (x) { return x.parentId === parentId && x.name === name; });
+    if (!c) {
+      c = { id: newId('category'), name: name, parentId: parentId, marked: false, collapsed: false, createdAt: nowIso, updatedAt: nowIso };
+      next.categories.push(c);
+    }
+    return c;
   }
 
   function toggleNoteMarked(id) {
@@ -1152,7 +1140,7 @@
     if (!note) return;
     note.marked = !note.marked; note.updatedAt = new Date().toISOString();
     var tip = notify('info', '正在保存…', 0);
-    commitData(next, (note.marked ? '设为重点笔记：' : '取消重点笔记：') + note.title).then(function () { tip.remove(); notify('success', '已保存到 GitHub。', 5000); render(); })
+    commitData(next, (note.marked ? '设为重点：' : '取消重点：') + note.title).then(function () { tip.remove(); notify('success', '已保存到 GitHub。', 5000); render(); })
       .catch(function (err) { tip.remove(); notify('error', (err && err.message) || '保存失败。', 12000); });
   }
 
@@ -1170,15 +1158,11 @@
       var chain = Promise.resolve();
       (note.images || []).forEach(function (img) {
         if (!img.path) return;
-        chain = chain.then(function () {
-          return deleteRepoFile(img.path, '删除图片：' + (img.originalName || '')).catch(function (err) { if (!err || err.status !== 404) warnings.push('图片删除失败：' + img.path); });
-        });
+        chain = chain.then(function () { return deleteRepoFile(img.path, '删除图片：' + (img.originalName || '')).catch(function (err) { if (!err || err.status !== 404) warnings.push('图片删除失败：' + img.path); }); });
       });
       (note.attachments || []).forEach(function (f) {
         if (!f.path) return;
-        chain = chain.then(function () {
-          return deleteRepoFile(f.path, '删除附件：' + (f.originalName || '')).catch(function (err) { if (!err || err.status !== 404) warnings.push('附件删除失败：' + f.path); });
-        });
+        chain = chain.then(function () { return deleteRepoFile(f.path, '删除附件：' + (f.originalName || '')).catch(function (err) { if (!err || err.status !== 404) warnings.push('附件删除失败：' + f.path); }); });
       });
       chain.then(function () {
         var next = deepClone(state.data);
@@ -1198,115 +1182,192 @@
     var text = JSON.stringify(state.data, null, 2);
     var blob = new Blob([text], { type: 'application/json;charset=utf-8' });
     var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    var stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    var a = document.createElement('a'); var stamp = new Date().toISOString().replace(/[:.]/g, '-');
     a.href = url; a.download = 'notes-backup-' + stamp + '.json';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
     notify('success', '已导出 JSON 备份。', 9000);
   }
 
-  function handleImportFile(file) {
-    var reader = new FileReader();
-    reader.onload = function () {
-      var raw;
-      try { raw = JSON.parse(String(reader.result)); } catch (e) { notify('error', '导入失败：不是合法 JSON。', 10000); return; }
-      var summaryEl = byId('importSummary'), errEl = byId('importError');
-      summaryEl.textContent = ''; errEl.classList.add('hidden');
-      if (!raw || typeof raw !== 'object' || !Array.isArray(raw.categories) || !Array.isArray(raw.notes)) {
-        summaryEl.textContent = '导入失败：categories 或 notes 不是数组。';
-        byId('btnImportConfirm').disabled = true; importCandidate = null; showModal('importModal'); return;
-      }
-      try {
-        var normalized = normalizeData(raw);
-        importCandidate = normalized;
-        summaryEl.textContent = '结构校验通过。\n\n· 目录数量：' + normalized.categories.length + '\n· 笔记数量：' + normalized.notes.length + '\n\n确认导入后将覆盖 GitHub 上的 ' + CONFIG.NOTES_PATH + '。';
-        byId('btnImportConfirm').disabled = false;
-        showModal('importModal');
-      } catch (e) {
-        summaryEl.textContent = '导入失败：' + ((e && e.message) || '');
-        byId('btnImportConfirm').disabled = true; importCandidate = null; showModal('importModal');
-      }
-    };
-    reader.onerror = function () { notify('error', '读取 JSON 文件失败。', 8000); };
-    reader.readAsText(file, 'utf-8');
-  }
-
-  function confirmImport() {
-    if (!importCandidate) return;
-    if (!state.editing) { notify('warn', '请先进入编辑模式。', 6000); return; }
-    var btn = byId('btnImportConfirm'); btn.disabled = true;
-    var tip = notify('info', '正在保存…', 0);
-    commitData(importCandidate, '导入并覆盖 notes.json').then(function () {
-      tip.remove(); hideModal('importModal'); importCandidate = null;
-      notify('success', '已保存到 GitHub。', 6000); render();
-    }).catch(function (err) {
-      tip.remove();
-      var errEl = byId('importError'); errEl.textContent = (err && err.message) || '导入失败。'; errEl.classList.remove('hidden');
-    }).then(function () { btn.disabled = false; });
-  }
-
   /* ===== Word 导入 ===== */
   var MAMMOTH_CDNS = ['https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js', 'https://unpkg.com/mammoth@1.8.0/mammoth.browser.min.js'];
   var mammothPromise = null;
   var wordCtx = { blocks: null, fileName: '', preview: null };
-  function loadScriptOnce(src) { return new Promise(function (resolve, reject) { var s = document.createElement('script'); s.src = src; s.async = true; s.onload = function () { resolve(); }; s.onerror = function () { if (s.parentNode) s.parentNode.removeChild(s); reject(new Error('脚本加载失败')); }; document.head.appendChild(s); }); }
-  function loadMammoth() { if (window.mammoth) return Promise.resolve(); if (mammothPromise) return mammothPromise; mammothPromise = (function () { var p = Promise.reject(); MAMMOTH_CDNS.forEach(function (url) { p = p.catch(function () { return loadScriptOnce(url).then(function () { if (!window.mammoth) throw new Error('mammoth 未加载'); }); }); }); return p.catch(function () { mammothPromise = null; throw new AppError('无法加载 Word 解析库。', 0); }); })(); return mammothPromise; }
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script'); s.src = src; s.async = true;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { if (s.parentNode) s.parentNode.removeChild(s); reject(new Error('加载失败')); };
+      document.head.appendChild(s);
+    });
+  }
+  function loadMammoth() {
+    if (window.mammoth) return Promise.resolve();
+    if (mammothPromise) return mammothPromise;
+    mammothPromise = (function () {
+      var p = Promise.reject();
+      MAMMOTH_CDNS.forEach(function (url) {
+        p = p.catch(function () { return loadScriptOnce(url).then(function () { if (!window.mammoth) throw new Error('mammoth 未加载'); }); });
+      });
+      return p.catch(function () { mammothPromise = null; throw new AppError('无法加载 Word 解析库。', 0); });
+    })();
+    return mammothPromise;
+  }
+
   function extractBlocksFromHtml(html) {
-    var parser = new DOMParser(); var doc = parser.parseFromString(html, 'text/html'); var blocks = [];
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    var blocks = [];
     function textOf(node) { return String(node.textContent || '').replace(/\s+/g, ' ').trim(); }
+    function pushImage(imgEl) {
+      var src = imgEl.getAttribute('src') || '';
+      var m = /^data:([^;]+);base64,(.+)$/.exec(src);
+      if (m) blocks.push({ type: 'image', mimeType: m[1], base64: m[2] });
+    }
     function walk(node) {
       if (!node || node.nodeType !== 1) return;
       var tag = node.tagName.toLowerCase();
-      if (/^h[1-6]$/.test(tag)) { var t = textOf(node); if (t) blocks.push({ type: 'heading', level: parseInt(tag.charAt(1), 10), text: t }); return; }
-      if (tag === 'p') { var imgs = node.querySelectorAll('img'); var t2 = textOf(node); if (t2) blocks.push({ type: 'paragraph', text: t2 }); else if (imgs.length) blocks.push({ type: 'paragraph', text: '[图片]' }); return; }
-      if (tag === 'ul' || tag === 'ol') { var items = []; Array.prototype.forEach.call(node.children, function (li) { if (li.tagName.toLowerCase() !== 'li') return; var t3 = textOf(li); if (t3) items.push('· ' + t3); }); if (items.length) blocks.push({ type: 'paragraph', text: items.join('\n') }); return; }
+      if (/^h[1-6]$/.test(tag)) {
+        var t = textOf(node);
+        if (t) blocks.push({ type: 'heading', level: parseInt(tag.charAt(1), 10), text: t });
+        return;
+      }
+      if (tag === 'p') {
+        var imgs = node.querySelectorAll('img');
+        var textOnly = '';
+        Array.prototype.forEach.call(node.childNodes, function (child) {
+          if (child.nodeType === 3) textOnly += child.textContent;
+          else if (child.nodeType === 1 && child.tagName.toLowerCase() !== 'img') textOnly += child.textContent;
+        });
+        textOnly = textOnly.replace(/\s+/g, ' ').trim();
+        if (textOnly) blocks.push({ type: 'paragraph', text: textOnly });
+        Array.prototype.forEach.call(imgs, pushImage);
+        return;
+      }
+      if (tag === 'img') { pushImage(node); return; }
+      if (tag === 'ul' || tag === 'ol') {
+        var items = [];
+        Array.prototype.forEach.call(node.children, function (li) {
+          if (li.tagName.toLowerCase() !== 'li') return;
+          var t2 = textOf(li); if (t2) items.push('· ' + t2);
+        });
+        if (items.length) blocks.push({ type: 'paragraph', text: items.join('\n') });
+        return;
+      }
       Array.prototype.forEach.call(node.childNodes, walk);
     }
     Array.prototype.forEach.call(doc.body.childNodes, walk);
     return blocks;
   }
-  function buildWordPreview(blocks, mode, fileName) {
-    if (mode === 'single') {
-      var lines = []; blocks.forEach(function (b) { if (b.type === 'heading') lines.push('【' + b.text + '】'); else lines.push(b.text); });
-      return { mode: 'single', singleNote: { title: fileName || 'Word', content: lines.join('\n\n') } };
+
+  function buildWordPreview(blocks, fileName) {
+    var tree = []; // 一级目录列表
+    var currentL1 = null, currentL2 = null, currentNote = null;
+    function ensureL1(name) {
+      var c = tree.find(function (x) { return x.name === name; });
+      if (!c) { c = { name: name, children: [], notes: [] }; tree.push(c); }
+      return c;
     }
-    var categories = []; var currentCat = null, currentNoteTitle = null, buffer = [];
-    function ensureCat(name) { var c = categories.find(function (x) { return x.name === name; }); if (!c) { c = { name: name, notes: [] }; categories.push(c); } return c; }
-    function flush() { if (currentCat && (currentNoteTitle || buffer.length)) currentCat.notes.push({ title: currentNoteTitle || currentCat.name, content: buffer.join('\n\n').trim() }); buffer = []; currentNoteTitle = null; }
+    function ensureL2(parent, name) {
+      var c = parent.children.find(function (x) { return x.name === name; });
+      if (!c) { c = { name: name, notes: [] }; parent.children.push(c); }
+      return c;
+    }
+    function flushNote() {
+      if (!currentNote) return;
+      currentNote.content = currentNote.content.join('\n\n').trim();
+      if (currentL2) currentL2.notes.push(currentNote);
+      else if (currentL1) currentL1.notes.push(currentNote);
+      currentNote = null;
+    }
+    function currentCat() { return currentL2 || currentL1; }
     blocks.forEach(function (b) {
       if (b.type === 'heading') {
-        if (b.level === 1) { flush(); currentCat = ensureCat(b.text); }
-        else if (b.level === 2) { flush(); if (!currentCat) currentCat = ensureCat(fileName || 'Word'); currentNoteTitle = b.text; }
-        else { if (currentNoteTitle) buffer.push('【' + b.text + '】'); }
-      } else buffer.push(b.text);
+        if (b.level === 1) {
+          flushNote();
+          currentL1 = ensureL1(b.text);
+          currentL2 = null;
+        } else if (b.level === 2) {
+          flushNote();
+          if (!currentL1) currentL1 = ensureL1(fileName || 'Word');
+          currentL2 = ensureL2(currentL1, b.text);
+        } else if (b.level === 3) {
+          flushNote();
+          if (!currentL1) currentL1 = ensureL1(fileName || 'Word');
+          currentNote = { title: b.text, content: [] };
+        } else {
+          if (currentNote) currentNote.content.push('【' + b.text + '】');
+        }
+      } else if (b.type === 'paragraph') {
+        if (currentNote) currentNote.content.push(b.text);
+        else {
+          // 没有笔记标题时的正文：如果有一级或二级目录，自动创建一篇笔记
+          var cat = currentCat();
+          if (cat && b.text) {
+            currentNote = { title: cat.name, content: [b.text] };
+            flushNote();
+          }
+        }
+      } else if (b.type === 'image') {
+        if (currentNote) currentNote.content.push({ __imageBase64: b.base64, __imageMime: b.mimeType });
+        else {
+          var cat2 = currentCat();
+          if (cat2) {
+            currentNote = { title: cat2.name, content: [{ __imageBase64: b.base64, __imageMime: b.mimeType }] };
+            flushNote();
+          }
+        }
+      }
     });
-    flush();
-    return { mode: 'h1-h2', categories: categories.filter(function (c) { return c.notes.length > 0; }) };
+    flushNote();
+    return { mode: 'h1-h2-h3', tree: tree.filter(function (c) { return c.notes.length > 0 || c.children.some(function (x) { return x.notes.length > 0; }); }) };
   }
-  function refreshWordPreview() {
-    if (!wordCtx.blocks) return;
-    var mode = byId('wordImportMode').value;
-    var singleRow = byId('wordImportSingleRow'); if (singleRow) singleRow.style.display = (mode === 'single') ? '' : 'none';
-    var preview = buildWordPreview(wordCtx.blocks, mode, wordCtx.fileName); wordCtx.preview = preview;
+
+  function countPreviewStats(preview) {
+    var totalNotes = 0, totalImages = 0, totalL1 = preview.tree.length, totalL2 = 0;
+    preview.tree.forEach(function (l1) {
+      l1.notes.forEach(function (n) { totalNotes++; });
+      l1.notes.forEach(function (n) { n.content.forEach(function (c) { if (typeof c === 'object') totalImages++; }); });
+      l1.children.forEach(function (l2) {
+        totalL2++;
+        l2.notes.forEach(function (n) { totalNotes++; });
+        l2.notes.forEach(function (n) { n.content.forEach(function (c) { if (typeof c === 'object') totalImages++; }); });
+      });
+    });
+    return { totalNotes: totalNotes, totalImages: totalImages, totalL1: totalL1, totalL2: totalL2 };
+  }
+
+  function renderWordPreview() {
+    if (!wordCtx.preview) return;
     var summaryEl = byId('wordImportSummary'), errEl = byId('wordImportError');
     errEl.classList.add('hidden');
-    if (mode === 'h1-h2') {
-      var totalNotes = preview.categories.reduce(function (acc, c) { return acc + c.notes.length; }, 0);
-      var s = '导入方式：按标题层级\n识别到 ' + preview.categories.length + ' 个目录、' + totalNotes + ' 篇笔记\n\n';
-      preview.categories.forEach(function (c) { s += '📁 ' + c.name + '（' + c.notes.length + ' 篇）\n'; c.notes.forEach(function (n) { s += '   📄 ' + n.title + '\n'; }); });
-      summaryEl.textContent = s;
-      byId('btnWordImportConfirm').disabled = preview.categories.length === 0;
-      if (preview.categories.length === 0) { errEl.textContent = '未识别到标题结构。'; errEl.classList.remove('hidden'); }
-    } else {
-      summaryEl.textContent = '导入方式：整篇文档\n标题：' + preview.singleNote.title + '\n内容长度：' + preview.singleNote.content.length + ' 字符';
-      byId('btnWordImportConfirm').disabled = false;
-    }
+    var preview = wordCtx.preview;
+    var stats = countPreviewStats(preview);
+    var lines = ['识别方式：标题 1 → 一级目录；标题 2 → 二级目录；标题 3 → 笔记标题',
+      '一级目录：' + stats.totalL1 + ' 个',
+      '二级目录：' + stats.totalL2 + ' 个',
+      '笔记：' + stats.totalNotes + ' 篇',
+      '图片：' + stats.totalImages + ' 张（导入时自动上传到 GitHub）',
+      ''];
+    preview.tree.forEach(function (l1) {
+      lines.push('📁 ' + l1.name);
+      l1.notes.forEach(function (n) { lines.push('   📄 ' + n.title + '（直属）'); });
+      l1.children.forEach(function (l2) {
+        lines.push('   📁 ' + l2.name);
+        l2.notes.forEach(function (n) { lines.push('      📄 ' + n.title); });
+      });
+    });
+    summaryEl.textContent = lines.join('\n');
+    byId('btnWordImportConfirm').disabled = (stats.totalNotes === 0);
+    if (stats.totalNotes === 0) { errEl.textContent = '未识别到任何笔记，请检查 Word 是否使用了"标题 1/2/3"样式。'; errEl.classList.remove('hidden'); }
   }
+
   function handleWordFile(file) {
     if (!state.editing) { notify('warn', '请先进入编辑模式。', 5000); return; }
-    if (getExtension(file.name) !== 'docx') { notify('error', '只支持 .docx。', 8000); return; }
-    wordCtx.fileName = file.name.replace(/\.docx$/i, ''); wordCtx.blocks = null; wordCtx.preview = null;
+    if (getExtension(file.name) !== 'docx') { notify('error', '只支持 .docx 文件。', 8000); return; }
+    wordCtx.fileName = file.name.replace(/\.docx$/i, '');
+    wordCtx.blocks = null; wordCtx.preview = null;
     var loading = notify('info', '正在解析 Word…', 0);
     loadMammoth().then(function () { return readFileAsArrayBuffer(file); })
       .then(function (buffer) { return window.mammoth.convertToHtml({ arrayBuffer: buffer }); })
@@ -1315,53 +1376,148 @@
         var blocks = extractBlocksFromHtml((result && result.value) || '');
         if (!blocks.length) throw new AppError('Word 中未找到有效内容。', 0);
         wordCtx.blocks = blocks;
-        fillCategorySelect(byId('wordImportSingleCategory'), '');
-        byId('wordImportMode').value = 'h1-h2';
-        refreshWordPreview(); showModal('wordImportModal');
+        wordCtx.preview = buildWordPreview(blocks, wordCtx.fileName);
+        renderWordPreview();
+        showModal('wordImportModal');
       }).catch(function (err) { loading.remove(); notify('error', (err && err.message) || '解析 Word 失败。', 12000); });
   }
+
   function executeWordImport() {
     if (!state.editing) { notify('warn', '请先进入编辑模式。', 5000); return; }
     var preview = wordCtx.preview; if (!preview) return;
     var btn = byId('btnWordImportConfirm'); if (btn.disabled) return; btn.disabled = true;
-    var working = notify('info', '正在保存…', 0);
+    var working = notify('info', '正在导入并上传图片…', 0);
     var nowIso = new Date().toISOString();
-    try {
-      var next = deepClone(state.data);
-      if (preview.mode === 'single') {
-        var categoryId = String(byId('wordImportSingleCategory').value || '');
-        if (!categoryId) throw new AppError('请选择目标目录。', 0);
-        next.notes.push({ id: newId('note'), categoryId: categoryId, title: preview.singleNote.title, content: preview.singleNote.content,
-          marked: false, collapsed: false, images: [], attachments: [], createdAt: nowIso, updatedAt: nowIso });
-      } else {
-        preview.categories.forEach(function (cp) {
-          var cat = next.categories.find(function (c) { return c.name === cp.name; });
-          if (!cat) { cat = { id: newId('category'), name: cp.name, marked: false, collapsed: false, createdAt: nowIso, updatedAt: nowIso }; next.categories.push(cat); }
-          cp.notes.forEach(function (np) {
-            next.notes.push({ id: newId('note'), categoryId: cat.id, title: np.title, content: np.content, marked: false, collapsed: false, images: [], attachments: [], createdAt: nowIso, updatedAt: nowIso });
+
+    var next = deepClone(state.data);
+    var chain = Promise.resolve();
+
+    function processNote(noteData, categoryId) {
+      var noteId = newId('note');
+      var images = [];
+      var contentParts = [];
+      var textBuffer = [];
+      noteData.content.forEach(function (part) {
+        if (typeof part === 'string') {
+          textBuffer.push(part);
+        } else {
+          if (textBuffer.length) { contentParts.push(textBuffer.join('\n\n')); textBuffer = []; }
+          chain = chain.then(function () {
+            return uploadBase64Image(part.__imageBase64, part.__imageMime, noteId, 'word-image.' + extFromMime(part.__imageMime)).then(function (meta) {
+              images.push(meta);
+              contentParts.push('[[img:' + meta.id + ']]');
+            }).catch(function (err) {
+              contentParts.push('[图片上传失败：' + ((err && err.message) || '') + ']');
+            });
           });
-        });
-      }
-      commitData(next, '从 Word 导入：' + wordCtx.fileName).then(function () {
-        working.remove(); hideModal('wordImportModal');
-        wordCtx.blocks = null; wordCtx.preview = null; wordCtx.fileName = '';
-        notify('success', '已保存到 GitHub。', 6000); render();
-      }).catch(function (err) {
-        working.remove();
-        var errEl = byId('wordImportError'); errEl.textContent = (err && err.message) || '导入失败。'; errEl.classList.remove('hidden');
-      }).then(function () { btn.disabled = false; });
-    } catch (err) {
-      working.remove(); btn.disabled = false;
-      notify('error', (err && err.message) || '导入失败。', 12000);
+        }
+      });
+      if (textBuffer.length) contentParts.push(textBuffer.join('\n\n'));
+      // 由于 contentParts 中的图片标记是在异步中 push 的，这里需要用最终顺序：
+      // 我们采用另一种方式：先构建占位符顺序
+      // 简化：先放文本，再放图片（保证图片位置正确）
+      // 重新构建：
+      var finalParts = [];
+      var tBuf2 = [];
+      noteData.content.forEach(function (part) {
+        if (typeof part === 'string') tBuf2.push(part);
+        else {
+          if (tBuf2.length) { finalParts.push({ type: 'text', value: tBuf2.join('\n\n') }); tBuf2 = []; }
+          finalParts.push({ type: 'image', base64: part.__imageBase64, mime: part.__imageMime });
+        }
+      });
+      if (tBuf2.length) finalParts.push({ type: 'text', value: tBuf2.join('\n\n') });
+
+      // 重新按顺序执行上传和内容构建
+      // 由于上面已经执行了一遍上传，这里改为在下面统一构建。
+      // 简化为：只用一个 chain 顺序处理
+      return { noteId: noteId, finalParts: finalParts, categoryId: categoryId };
     }
+
+    var pendingNotes = [];
+    preview.tree.forEach(function (l1) {
+      var l1Cat = findOrCreateLevel1(next, l1.name, nowIso);
+      l1.notes.forEach(function (n) {
+        pendingNotes.push({ data: n, categoryId: l1Cat.id });
+      });
+      l1.children.forEach(function (l2) {
+        var l2Cat = findOrCreateLevel2(next, l1Cat.id, l2.name, nowIso);
+        l2.notes.forEach(function (n) {
+          pendingNotes.push({ data: n, categoryId: l2Cat.id });
+        });
+      });
+    });
+
+    // 顺序处理每篇笔记，把图片上传并构建 content
+    pendingNotes.forEach(function (p) {
+      var noteId = newId('note');
+      var imagesForThis = [];
+      var finalContent = '';
+      var segments = p.data.content;
+      // 先构建 segments 顺序
+      var segs = [];
+      var tBuf = [];
+      segments.forEach(function (part) {
+        if (typeof part === 'string') tBuf.push(part);
+        else {
+          if (tBuf.length) { segs.push({ type: 'text', value: tBuf.join('\n\n') }); tBuf = []; }
+          segs.push({ type: 'image', base64: part.__imageBase64, mime: part.__imageMime });
+        }
+      });
+      if (tBuf.length) segs.push({ type: 'text', value: tBuf.join('\n\n') });
+
+      chain = chain.then(function () {
+        var idx = 0;
+        function step() {
+          if (idx >= segs.length) {
+            var nowIso2 = new Date().toISOString();
+            next.notes.push({
+              id: noteId, categoryId: p.categoryId, title: p.data.title,
+              content: finalContent.trim(), marked: false, collapsed: false,
+              images: imagesForThis, attachments: [], createdAt: nowIso2, updatedAt: nowIso2
+            });
+            return Promise.resolve();
+          }
+          var seg = segs[idx++];
+          if (seg.type === 'text') {
+            if (finalContent) finalContent += '\n\n';
+            finalContent += seg.value;
+            return step();
+          } else {
+            return uploadBase64Image(seg.base64, seg.mime, noteId, 'word-image.' + extFromMime(seg.mime))
+              .then(function (meta) {
+                imagesForThis.push(meta);
+                if (finalContent) finalContent += '\n\n';
+                finalContent += '[[img:' + meta.id + ']]';
+                return step();
+              }).catch(function (err) {
+                if (finalContent) finalContent += '\n\n';
+                finalContent += '[图片上传失败：' + ((err && err.message) || '') + ']';
+                return step();
+              });
+          }
+        }
+        return step();
+      });
+    });
+
+    chain.then(function () {
+      return commitData(next, '从 Word 导入：' + wordCtx.fileName);
+    }).then(function () {
+      working.remove();
+      hideModal('wordImportModal');
+      wordCtx.blocks = null; wordCtx.preview = null; wordCtx.fileName = '';
+      notify('success', '已保存到 GitHub。', 6000);
+      render();
+    }).catch(function (err) {
+      working.remove();
+      var errEl = byId('wordImportError'); errEl.textContent = (err && err.message) || '导入失败。'; errEl.classList.remove('hidden');
+    }).then(function () { btn.disabled = false; });
   }
 
-  /* ===== 事件绑定 ===== */
   function bindEvents() {
-    function safeBind(id, event, handler) {
-      var el = byId(id);
-      if (el) el.addEventListener(event, handler);
-    }
+    function safeBind(id, event, handler) { var el = byId(id); if (el) el.addEventListener(event, handler); }
+
     safeBind('btnEnterEdit', 'click', enterEditMode);
     safeBind('btnExitEdit', 'click', exitEditMode);
     safeBind('btnToggleToken', 'click', function () {
@@ -1401,29 +1557,17 @@
       renderReminderCatTabs(); renderReminderList();
     });
     safeBind('reminderSearch', 'keydown', function (ev) {
-      if (ev.key === 'Enter') {
-        ev.preventDefault();
-        reminderState.filter.search = String(byId('reminderSearch').value || '');
-        renderReminderList();
-      }
+      if (ev.key === 'Enter') { ev.preventDefault(); reminderState.filter.search = String(byId('reminderSearch').value || ''); renderReminderList(); }
     });
-    safeBind('reminderCatFilter', 'change', function () {
-      reminderState.filter.cat = String(byId('reminderCatFilter').value || 'all');
-      renderReminderCatTabs(); renderReminderList();
-    });
-    safeBind('reminderSort', 'change', function () {
-      reminderState.filter.sort = String(byId('reminderSort').value || 'remaining');
-      renderReminderList();
-    });
+    safeBind('reminderCatFilter', 'change', function () { reminderState.filter.cat = String(byId('reminderCatFilter').value || 'all'); renderReminderCatTabs(); renderReminderList(); });
+    safeBind('reminderSort', 'change', function () { reminderState.filter.sort = String(byId('reminderSort').value || 'remaining'); renderReminderList(); });
     safeBind('btnReminderSortDir', 'click', function () {
       reminderState.filter.dir = reminderState.filter.dir === 'asc' ? 'desc' : 'asc';
       byId('btnReminderSortDir').textContent = reminderState.filter.dir === 'asc' ? '↑ 升序' : '↓ 降序';
       renderReminderList();
     });
     safeBind('btnReminderReset', 'click', function () {
-      byId('reminderSearch').value = '';
-      byId('reminderCatFilter').value = 'all';
-      byId('reminderSort').value = 'remaining';
+      byId('reminderSearch').value = ''; byId('reminderCatFilter').value = 'all'; byId('reminderSort').value = 'remaining';
       reminderState.filter = { search: '', cat: 'all', sort: 'remaining', dir: 'asc' };
       byId('btnReminderSortDir').textContent = '↑ 升序';
       renderReminderCatTabs(); renderReminderList();
@@ -1439,18 +1583,12 @@
     safeBind('btnEditCurrentNote', 'click', function () { if (state.currentNoteId) openEditNote(state.currentNoteId); });
     safeBind('btnDeleteCurrentNote', 'click', function () { if (state.currentNoteId) deleteNote(state.currentNoteId); });
     safeBind('btnToggleMarkCurrentNote', 'click', function () { if (state.currentNoteId) toggleNoteMarked(state.currentNoteId); });
-    safeBind('btnAddCategory', 'click', addCategory);
-    safeBind('newCategoryName', 'keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); addCategory(); } });
-    safeBind('editNoteImages', 'change', function (ev) { var files = ev.target.files; ev.target.value = ''; if (files && files.length) handleEditNoteImageSelect(files); });
     safeBind('editNoteFiles', 'change', function (ev) { var files = ev.target.files; ev.target.value = ''; if (files && files.length) handleEditNoteFileSelect(files); });
+    safeBind('editNoteImageInput', 'change', function (ev) { var f = ev.target.files && ev.target.files[0]; ev.target.value = ''; if (f) handleInsertImageFile(f); });
+    safeBind('btnInsertImage', 'click', insertImageAtCursor);
     safeBind('btnSaveEditNote', 'click', saveEditNote);
     safeBind('btnCancelEditNote', 'click', closeEditNoteModal);
-    safeBind('importFileInput', 'change', function (ev) { var f = ev.target.files && ev.target.files[0]; ev.target.value = ''; if (f) handleImportFile(f); });
-    safeBind('btnImportConfirm', 'click', confirmImport);
-    safeBind('btnImportCancel', 'click', function () { importCandidate = null; hideModal('importModal'); });
     safeBind('wordFileInput', 'change', function (ev) { var f = ev.target.files && ev.target.files[0]; ev.target.value = ''; if (f) handleWordFile(f); });
-    safeBind('wordImportMode', 'change', refreshWordPreview);
-    safeBind('wordImportSingleCategory', 'change', refreshWordPreview);
     safeBind('btnWordImportConfirm', 'click', executeWordImport);
     safeBind('btnWordImportCancel', 'click', function () { wordCtx.blocks = null; wordCtx.preview = null; wordCtx.fileName = ''; hideModal('wordImportModal'); });
 
@@ -1458,7 +1596,6 @@
       if (ev.key !== 'Escape') return;
       if (!byId('confirmModal').classList.contains('hidden')) { resolveConfirm(false); return; }
       if (!byId('tokenModal').classList.contains('hidden')) { byId('tokenInput').value = ''; hideModal('tokenModal'); return; }
-      if (!byId('importModal') || !byId('importModal').classList.contains('hidden')) { importCandidate = null; if (byId('importModal')) hideModal('importModal'); return; }
       if (!byId('editNoteModal').classList.contains('hidden')) { closeEditNoteModal(); return; }
       if (!byId('reminderModal').classList.contains('hidden')) { reminderState.editing = null; hideModal('reminderModal'); return; }
       if (!byId('wordImportModal').classList.contains('hidden')) { hideModal('wordImportModal'); return; }
@@ -1467,29 +1604,20 @@
 
   function init() {
     if (CONFIG.SITE_TITLE) document.title = CONFIG.SITE_TITLE;
-
-    // 1) 最先启动时钟（即使后面出错也能运行）
     updateClock();
     setInterval(updateClock, 1000);
-
     try {
       var saved = sessionStorage.getItem(TOKEN_STORAGE_KEY);
       if (saved) { state.token = saved; state.editing = true; document.body.classList.add('edit-mode'); }
     } catch (e) {}
     try { toolState.pomodoroCount = parseInt(localStorage.getItem('pomodoroCount') || '0', 10) || 0; } catch (e) {}
-
     loadRemindersFromStorage();
     initReminderSelects();
-
     try { bindEvents(); } catch (e) { console.error('bindEvents 出错：', e); }
     try { render(); } catch (e) { console.error('render 出错：', e); }
-
     updatePomodoroDisplay();
     renderReminderList();
-
-    // 每 30 秒检查一次到期提醒
     setInterval(checkDueReminders, 30000);
-
     loadRemoteData({ silent: true });
   }
 
