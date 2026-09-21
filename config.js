@@ -46,8 +46,10 @@ window.APP_CONFIG = {
   API_VERSION: '2022-11-28',
 
   /* 是否显示示例数据提示（true / false） */
-  SHOW_SAMPLE_DATA: false
-    QUICK_LINKS: [
+  SHOW_SAMPLE_DATA: false,
+
+  /* 主页上的常用链接：想加就加一行，想删就删一行 */
+  QUICK_LINKS: [
     { name: '百度', url: 'https://www.baidu.com', icon: '🔍' },
     { name: '光聆导航', url: 'https://anthonyzhu1130.github.io/nav/#/', icon: '🐙' },
     { name: '知乎', url: 'https://www.zhihu.com', icon: '📚' },
