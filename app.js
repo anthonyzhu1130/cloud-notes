@@ -63,6 +63,16 @@
     currentNoteId: null
   };
 
+  // 番茄钟 / 倒计时的全局状态，只在页面初始化时创建一次
+  const toolState = {
+    pomodoroTimer: null,
+    pomodoroTime: 25 * 60,
+    pomodoroTotal: 25 * 60,
+    pomodoroCount: 0,
+    timerInterval: null,
+    timerRemaining: 0
+  };
+
   const newNoteCtx = {
     images: [],
     files: []
@@ -883,34 +893,193 @@
     return b;
   }
 
+  function hideAllViews() {
+    ['dashboardView', 'noteView', 'pomodoroView', 'timerView'].forEach(function (id) {
+      const el = byId(id);
+      if (el) el.classList.add('hidden');
+    });
+  }
+
   function render() {
     renderSidebar();
+    renderSidebarActive();
+    hideAllViews();
     if (state.currentView === 'dashboard') {
       renderDashboard();
     } else if (state.currentView === 'note') {
       renderNoteView(state.currentNoteId);
+    } else if (state.currentView === 'pomodoro') {
+      const v = byId('pomodoroView');
+      if (v) v.classList.remove('hidden');
+      updatePomodoroDisplay();
+    } else if (state.currentView === 'timer') {
+      const v = byId('timerView');
+      if (v) v.classList.remove('hidden');
+      updateTimerDisplay();
     }
     renderStats();
     renderCategorySelects();
   }
 
+  function renderSidebarActive() {
+    const map = { dashboard: 'sideToolDashboard', pomodoro: 'sideToolPomodoro', timer: 'sideToolTimer' };
+    ['sideToolDashboard', 'sideToolPomodoro', 'sideToolTimer'].forEach(function (id) {
+      const el = byId(id);
+      if (el) el.classList.remove('active');
+    });
+    if (map[state.currentView]) {
+      const el = byId(map[state.currentView]);
+      if (el) el.classList.add('active');
+    }
+  }
+
+  /* ============ 时钟：每秒从系统时间读取一次 ============ */
+  function updateClock() {
+    const now = new Date();
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const timeEl = byId('currentTime');
+    const dateEl = byId('currentDate');
+    if (timeEl) {
+      timeEl.textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+    }
+    if (dateEl) {
+      dateEl.textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + days[now.getDay()];
+    }
+  }
+
+  /* ============ 番茄钟 ============ */
+  function updatePomodoroDisplay() {
+    const el = byId('pomodoroDisplay');
+    if (el) {
+      const m = String(Math.floor(toolState.pomodoroTime / 60)).padStart(2, '0');
+      const s = String(toolState.pomodoroTime % 60).padStart(2, '0');
+      el.textContent = m + ':' + s;
+    }
+    const cEl = byId('pomodoroCount');
+    if (cEl) cEl.textContent = String(toolState.pomodoroCount);
+  }
+
+  function startPomodoro() {
+    if (toolState.pomodoroTimer) return;
+    if (toolState.pomodoroTime <= 0) toolState.pomodoroTime = toolState.pomodoroTotal;
+    toolState.pomodoroTimer = setInterval(function () {
+      toolState.pomodoroTime--;
+      updatePomodoroDisplay();
+      if (toolState.pomodoroTime <= 0) {
+        clearInterval(toolState.pomodoroTimer);
+        toolState.pomodoroTimer = null;
+        toolState.pomodoroCount++;
+        try { localStorage.setItem('pomodoroCount', String(toolState.pomodoroCount)); } catch (e) {}
+        toolState.pomodoroTime = toolState.pomodoroTotal;
+        updatePomodoroDisplay();
+        notify('success', '🍅 番茄钟时间到！休息一下吧。', 10000);
+      }
+    }, 1000);
+  }
+
+  function pausePomodoro() {
+    if (toolState.pomodoroTimer) {
+      clearInterval(toolState.pomodoroTimer);
+      toolState.pomodoroTimer = null;
+    }
+  }
+
+  function resetPomodoro() {
+    pausePomodoro();
+    toolState.pomodoroTime = toolState.pomodoroTotal;
+    updatePomodoroDisplay();
+  }
+
+  /* ============ 定时提醒（倒计时） ============ */
+  function updateTimerDisplay() {
+    const el = byId('timerDisplay');
+    if (!el) return;
+    const m = String(Math.floor(toolState.timerRemaining / 60)).padStart(2, '0');
+    const s = String(toolState.timerRemaining % 60).padStart(2, '0');
+    el.textContent = m + ':' + s;
+  }
+
+  function startTimer() {
+    if (toolState.timerInterval) return;
+    if (toolState.timerRemaining <= 0) {
+      const minsInput = byId('timerMinutes');
+      const mins = parseInt((minsInput && minsInput.value) || '5', 10) || 5;
+      toolState.timerRemaining = mins * 60;
+    }
+    toolState.timerInterval = setInterval(function () {
+      toolState.timerRemaining--;
+      updateTimerDisplay();
+      if (toolState.timerRemaining <= 0) {
+        clearInterval(toolState.timerInterval);
+        toolState.timerInterval = null;
+        toolState.timerRemaining = 0;
+        updateTimerDisplay();
+        notify('warn', '⏰ 定时提醒时间到！', 15000);
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (toolState.timerInterval) {
+      clearInterval(toolState.timerInterval);
+      toolState.timerInterval = null;
+    }
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    toolState.timerRemaining = 0;
+    updateTimerDisplay();
+  }
+
   function renderDashboard() {
     byId('dashboardView').classList.remove('hidden');
-    byId('noteView').classList.add('hidden');
+
     const hour = new Date().getHours();
     let greeting = '早上好';
     if (hour >= 12 && hour < 18) greeting = '下午好';
     else if (hour >= 18) greeting = '晚上好';
     byId('greetingText').textContent = greeting + '，欢迎回来';
-    const now = new Date();
-    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    byId('currentTime').textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-    byId('currentDate').textContent = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + days[now.getDay()];
+
     if (state.data) {
       byId('statTotalNotes').textContent = state.data.notes.length;
       byId('statMarkedNotes').textContent = state.data.notes.filter(n => n.marked).length;
       byId('statTotalCategories').textContent = state.data.categories.length;
     }
+
+    renderQuickLinks();
+  }
+
+  function renderQuickLinks() {
+    const grid = byId('quickLinksGrid');
+    if (!grid) return;
+    grid.textContent = '';
+
+    const links = CONFIG.QUICK_LINKS || [];
+    if (links.length === 0) {
+      const p = document.createElement('p');
+      p.className = 'empty-hint';
+      p.textContent = '暂无常用链接。可在 config.js 中修改 QUICK_LINKS 来添加。';
+      grid.appendChild(p);
+      return;
+    }
+
+    links.forEach(function (link) {
+      const a = document.createElement('a');
+      a.className = 'quick-link-card';
+      a.href = link.url || '#';
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      const icon = document.createElement('div');
+      icon.className = 'quick-link-icon';
+      icon.textContent = link.icon || '🔗';
+      a.appendChild(icon);
+      const name = document.createElement('div');
+      name.className = 'quick-link-name';
+      name.textContent = link.name || link.url || '未命名';
+      a.appendChild(name);
+      grid.appendChild(a);
+    });
   }
 
   function renderNoteView(noteId) {
@@ -3008,59 +3177,35 @@
     byId('btnDeleteCurrentNote').addEventListener('click', () => { if (state.currentNoteId) deleteNote(state.currentNoteId); });
     byId('btnToggleMarkCurrentNote').addEventListener('click', () => { if (state.currentNoteId) toggleNoteMarked(state.currentNoteId); });
 
-    // ===== 番茄钟逻辑 =====
-    let pomodoroTimer = null, pomodoroTime = 25 * 60, pomodoroCount = parseInt(localStorage.getItem('pomodoroCount') || '0');
-    byId('pomodoroCount').textContent = pomodoroCount;
-    function updatePomodoroDisplay() {
-      const m = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
-      const s = String(pomodoroTime % 60).padStart(2, '0');
-      byId('pomodoroDisplay').textContent = m + ':' + s;
-    }
-    byId('btnPomodoroStart').addEventListener('click', () => {
-      if (pomodoroTimer) return;
-      pomodoroTimer = setInterval(() => {
-        pomodoroTime--;
-        updatePomodoroDisplay();
-        if (pomodoroTime <= 0) {
-          clearInterval(pomodoroTimer); pomodoroTimer = null;
-          pomodoroCount++; localStorage.setItem('pomodoroCount', pomodoroCount);
-          byId('pomodoroCount').textContent = pomodoroCount;
-          notify('success', '🍅 番茄钟时间到！休息一下吧。', 10000);
-          pomodoroTime = 25 * 60; updatePomodoroDisplay();
-        }
-      }, 1000);
+    // 侧边栏固定入口
+    ['sideToolDashboard', 'sideToolPomodoro', 'sideToolTimer'].forEach(function (id) {
+      const el = byId(id);
+      if (!el) return;
+      el.addEventListener('click', function () {
+        if (id === 'sideToolDashboard') state.currentView = 'dashboard';
+        else if (id === 'sideToolPomodoro') state.currentView = 'pomodoro';
+        else if (id === 'sideToolTimer') state.currentView = 'timer';
+        render();
+      });
     });
-    byId('btnPomodoroPause').addEventListener('click', () => { if (pomodoroTimer) { clearInterval(pomodoroTimer); pomodoroTimer = null; } });
-    byId('btnPomodoroReset').addEventListener('click', () => { if (pomodoroTimer) { clearInterval(pomodoroTimer); pomodoroTimer = null; } pomodoroTime = 25 * 60; updatePomodoroDisplay(); });
-    updatePomodoroDisplay();
 
-    // ===== 定时提醒（倒计时）逻辑 =====
-    let timerInterval = null, timerRemaining = 0;
-    function updateTimerDisplay() {
-      const m = String(Math.floor(timerRemaining / 60)).padStart(2, '0');
-      const s = String(timerRemaining % 60).padStart(2, '0');
-      byId('timerDisplay').textContent = m + ':' + s;
-    }
-    byId('btnTimerStart').addEventListener('click', () => {
-      if (timerInterval) return;
-      if (timerRemaining <= 0) {
-        const mins = parseInt(byId('timerMinutes').value) || 5;
-        timerRemaining = mins * 60;
-      }
-      timerInterval = setInterval(() => {
-        timerRemaining--;
-        updateTimerDisplay();
-        if (timerRemaining <= 0) {
-          clearInterval(timerInterval); timerInterval = null;
-          notify('warn', '⏰ 定时提醒时间到！', 15000);
-          timerRemaining = 0; updateTimerDisplay();
-        }
-      }, 1000);
+    // 工具视图返回按钮
+    byId('btnBackFromPomodoro').addEventListener('click', function () {
+      state.currentView = 'dashboard'; render();
     });
-    byId('btnTimerPause').addEventListener('click', () => { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } });
-    byId('btnTimerReset').addEventListener('click', () => { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } timerRemaining = 0; updateTimerDisplay(); });
-    updateTimerDisplay();
+    byId('btnBackFromTimer').addEventListener('click', function () {
+      state.currentView = 'dashboard'; render();
+    });
 
+    // 番茄钟按钮
+    byId('btnPomodoroStart').addEventListener('click', startPomodoro);
+    byId('btnPomodoroPause').addEventListener('click', pausePomodoro);
+    byId('btnPomodoroReset').addEventListener('click', resetPomodoro);
+
+    // 倒计时按钮
+    byId('btnTimerStart').addEventListener('click', startTimer);
+    byId('btnTimerPause').addEventListener('click', pauseTimer);
+    byId('btnTimerReset').addEventListener('click', resetTimer);
 
   }
 
@@ -3096,6 +3241,17 @@
 
     await loadRemoteData({ silent: true });
 
+        // 启动时钟（只启动一次）
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 恢复番茄钟计数（从 localStorage）
+    try {
+      toolState.pomodoroCount = parseInt(localStorage.getItem('pomodoroCount') || '0', 10) || 0;
+    } catch (e) {}
+    updatePomodoroDisplay();
+    updateTimerDisplay();
+    
     if (state.editing) {
       notify('info', '已恢复编辑模式（Token 来自本标签页的 sessionStorage）。', 6000);
     }
