@@ -296,13 +296,24 @@
     <h2 class="modal-title">设置额外城市</h2>
     <p class="modal-note">输入城市名称后点击"搜索"，从结果中选择一个，主页上就会显示该城市的 7 天天气预报。定位城市由浏览器自动获取，不需设置。</p>
     <div class="form-row">
-      <label class="field-label" for="weatherCityInput">城市名称</label>
+      <label class="field-label" for="weatherCityInput">额外城市名称</label>
       <div class="token-row">
         <input type="text" id="weatherCityInput" class="input" placeholder="例如：上海、Tokyo、New York" maxlength="60" />
-        <button type="button" id="btnWeatherCitySearch" class="btn btn-primary">搜索</button>
+        <button type="button" id="btnWeatherCitySearch" class="btn btn-primary">搜索并设为额外</button>
       </div>
     </div>
     <div id="weatherCityResults" class="weather-city-results"></div>
+
+    <hr style="margin:16px 0;border:none;border-top:1px dashed var(--border);" />
+
+    <div class="form-row">
+      <label class="field-label" for="weatherAutoCityInput">定位城市（手动指定，留空则用浏览器定位）</label>
+      <div class="token-row">
+        <input type="text" id="weatherAutoCityInput" class="input" placeholder="例如：北京、上海" maxlength="60" />
+        <button type="button" id="btnWeatherAutoCitySearch" class="btn btn-primary">搜索并设为定位城市</button>
+      </div>
+    </div>
+    <div id="weatherAutoCityResults" class="weather-city-results"></div>
     <p id="weatherCityError" class="error-text hidden"></p>
     <div class="modal-actions">
       <button type="button" id="btnWeatherCityClear" class="btn btn-danger">清除额外城市</button>
