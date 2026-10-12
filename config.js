@@ -1,4 +1,4 @@
-window.APP_CONFIG = {
+  window.APP_CONFIG = {
   OWNER: 'anthonyzhu1130',
   REPO: 'cloud-notes',
   BRANCH: 'main',
