@@ -292,6 +292,204 @@
       }
     });
   }
+  /* ================= 天气 ================= */
+  var WEATHER_KEY_EXTRA = 'cloudNotes.weather.extraCity';
+  var WEATHER_KEY_AUTO = 'cloudNotes.weather.autoCity';
+  var WEATHER_REFRESH_INTERVAL = 60 * 60 * 1000; // 1 小时
+
+  var weatherState = {
+    autoCity: null,
+    extraCity: null,
+    data: { auto: null, extra: null },
+    lastUpdated: 0,
+    loading: false
+  };
+
+  var WEATHER_CODE_MAP = {
+    0:{icon:'☀️',label:'晴'},1:{icon:'🌤️',label:'基本晴'},2:{icon:'⛅',label:'多云'},3:{icon:'☁️',label:'阴'},
+    45:{icon:'🌫️',label:'雾'},48:{icon:'🌫️',label:'霜雾'},
+    51:{icon:'🌦️',label:'小毛毛雨'},53:{icon:'🌦️',label:'毛毛雨'},55:{icon:'🌧️',label:'大毛毛雨'},
+    56:{icon:'🌧️',label:'冻毛毛雨'},57:{icon:'🌧️',label:'冻毛毛雨'},
+    61:{icon:'🌧️',label:'小雨'},63:{icon:'🌧️',label:'中雨'},65:{icon:'🌧️',label:'大雨'},
+    66:{icon:'🌧️',label:'冻雨'},67:{icon:'🌧️',label:'冻雨'},
+    71:{icon:'🌨️',label:'小雪'},73:{icon:'🌨️',label:'中雪'},75:{icon:'❄️',label:'大雪'},77:{icon:'❄️',label:'雪粒'},
+    80:{icon:'🌦️',label:'阵雨'},81:{icon:'🌧️',label:'中阵雨'},82:{icon:'⛈️',label:'强阵雨'},
+    85:{icon:'🌨️',label:'阵雪'},86:{icon:'❄️',label:'强阵雪'},
+    95:{icon:'⛈️',label:'雷暴'},96:{icon:'⛈️',label:'雷暴冰雹'},99:{icon:'⛈️',label:'强雷暴冰雹'}
+  };
+  function wIcon(code){var m=WEATHER_CODE_MAP[code];return m?m.icon:'❓';}
+  function wLabel(code){var m=WEATHER_CODE_MAP[code];return m?m.label:'未知';}
+
+  function loadWeatherFromStorage(){
+    try{var s1=localStorage.getItem(WEATHER_KEY_EXTRA);if(s1)weatherState.extraCity=JSON.parse(s1);}catch(e){}
+    try{
+      var s2=localStorage.getItem(WEATHER_KEY_AUTO);
+      if(s2){var c=JSON.parse(s2);if(c&&c.timestamp&&(Date.now()-c.timestamp<7*24*60*60*1000))weatherState.autoCity=c;}
+    }catch(e){}
+  }
+  function saveWeatherExtraCity(city){
+    weatherState.extraCity=city;
+    try{if(city)localStorage.setItem(WEATHER_KEY_EXTRA,JSON.stringify(city));else localStorage.removeItem(WEATHER_KEY_EXTRA);}catch(e){}
+  }
+  function saveWeatherAutoCity(city){
+    weatherState.autoCity=city?Object.assign({},city,{timestamp:Date.now()}):null;
+    try{if(weatherState.autoCity)localStorage.setItem(WEATHER_KEY_AUTO,JSON.stringify(weatherState.autoCity));else localStorage.removeItem(WEATHER_KEY_AUTO);}catch(e){}
+  }
+
+  function fetchGeocode(name){
+    var url='https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(name)+'&count=8&language=zh&format=json';
+    return fetch(url,{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw new Error('城市搜索失败（'+r.status+'）');
+      return r.json();
+    }).then(function(data){
+      if(!data||!Array.isArray(data.results))return [];
+      return data.results.map(function(r){
+        return {name:r.name+(r.admin1?'，'+r.admin1:'')+(r.country?'（'+r.country+'）':''),shortName:r.name,latitude:r.latitude,longitude:r.longitude};
+      });
+    });
+  }
+
+  function fetchReverseGeocode(lat,lon){
+    var url='https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage=zh';
+    return fetch(url,{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw new Error('反查定位失败');
+      return r.json();
+    }).then(function(d){
+      var n=d.city||d.locality||d.principalSubdivision||'当前位置';
+      return {name:n,latitude:lat,longitude:lon};
+    }).catch(function(){return {name:'当前位置',latitude:lat,longitude:lon};});
+  }
+
+  function fetchWeather(lat,lon){
+    var url='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7';
+    return fetch(url,{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw new Error('天气查询失败（'+r.status+'）');
+      return r.json();
+    }).then(function(data){
+      if(!data||!data.daily)throw new Error('天气数据格式不正确');
+      var out=[];
+      for(var i=0;i<data.daily.time.length&&i<7;i++){
+        out.push({date:data.daily.time[i],code:data.daily.weather_code[i],tMax:data.daily.temperature_2m_max[i],tMin:data.daily.temperature_2m_min[i]});
+      }
+      return out;
+    });
+  }
+
+  function locateAutoCity(){
+    return new Promise(function(resolve,reject){
+      if(!navigator.geolocation){reject(new Error('当前浏览器不支持定位'));return;}
+      navigator.geolocation.getCurrentPosition(function(pos){
+        fetchReverseGeocode(pos.coords.latitude,pos.coords.longitude).then(resolve).catch(reject);
+      },function(err){reject(new Error((err&&err.message)||'定位权限被拒绝'));},{timeout:8000,maximumAge:3600000});
+    });
+  }
+
+  function buildWeatherCard(city,days,tag){
+    var card=document.createElement('div');card.className='weather-city-card';
+    var header=document.createElement('div');header.className='weather-city-name';
+    var nameSpan=document.createElement('span');nameSpan.textContent=city?city.name:'（未设置）';header.appendChild(nameSpan);
+    var tagSpan=document.createElement('span');tagSpan.className='city-tag';tagSpan.textContent=tag;header.appendChild(tagSpan);
+    card.appendChild(header);
+    if(!days||days.length===0){
+      var emp=document.createElement('div');emp.className='weather-city-empty';
+      emp.textContent=city?'暂无数据':'等待设置…';
+      card.appendChild(emp);return card;
+    }
+    var grid=document.createElement('div');grid.className='weather-days';
+    var wk=['日','一','二','三','四','五','六'];
+    days.forEach(function(d){
+      var dt=new Date(d.date+'T00:00:00');
+      var day=document.createElement('div');day.className='weather-day';
+      var dL=document.createElement('div');dL.className='wd-date';
+      dL.textContent=(dt.getMonth()+1)+'/'+dt.getDate()+' 周'+wk[dt.getDay()];day.appendChild(dL);
+      var iL=document.createElement('div');iL.className='wd-icon';iL.textContent=wIcon(d.code);iL.title=wLabel(d.code);day.appendChild(iL);
+      var tL=document.createElement('div');tL.className='wd-temp';
+      var tMax=document.createElement('span');tMax.textContent=Math.round(d.tMax)+'°';tL.appendChild(tMax);
+      var tMin=document.createElement('span');tMin.className='wd-temp-min';tMin.textContent='/'+Math.round(d.tMin)+'°';tL.appendChild(tMin);
+      day.appendChild(tL);grid.appendChild(day);
+    });
+    card.appendChild(grid);return card;
+  }
+
+  function renderWeather(){
+    var grid=byId('weatherGrid');if(!grid)return;
+    grid.textContent='';
+    grid.appendChild(buildWeatherCard(weatherState.autoCity,weatherState.data.auto,'定位'));
+    grid.appendChild(buildWeatherCard(weatherState.extraCity,weatherState.data.extra,'额外'));
+    var upd=byId('weatherUpdatedAt');
+    if(upd){
+      if(weatherState.lastUpdated)upd.textContent='更新于 '+formatTime(new Date(weatherState.lastUpdated).toISOString());
+      else upd.textContent='';
+    }
+  }
+
+  function loadAllWeather(force){
+    if(weatherState.loading)return Promise.resolve();
+    var now=Date.now();
+    if(!force&&weatherState.lastUpdated&&(now-weatherState.lastUpdated<WEATHER_REFRESH_INTERVAL)){renderWeather();return Promise.resolve();}
+    weatherState.loading=true;
+    var tasks=[];
+    tasks.push((function(){
+      if(weatherState.autoCity){
+        return fetchWeather(weatherState.autoCity.latitude,weatherState.autoCity.longitude)
+          .then(function(d){weatherState.data.auto=d;})
+          .catch(function(e){console.warn('定位天气失败：',e);});
+      }
+      return locateAutoCity().then(function(city){
+        saveWeatherAutoCity(city);
+        return fetchWeather(city.latitude,city.longitude).then(function(d){weatherState.data.auto=d;});
+      }).catch(function(e){console.warn('定位失败：',e);});
+    })());
+    tasks.push((function(){
+      if(!weatherState.extraCity)return Promise.resolve();
+      return fetchWeather(weatherState.extraCity.latitude,weatherState.extraCity.longitude)
+        .then(function(d){weatherState.data.extra=d;})
+        .catch(function(e){console.warn('额外城市天气失败：',e);});
+    })());
+    return Promise.all(tasks).then(function(){
+      weatherState.lastUpdated=Date.now();
+      weatherState.loading=false;
+      renderWeather();
+    }).catch(function(e){
+      weatherState.loading=false;
+      console.warn('天气加载出错：',e);
+      renderWeather();
+    });
+  }
+
+  function openWeatherCityModal(){
+    if(!state.editing){notify('warn','请先进入编辑模式。',5000);return;}
+    byId('weatherCityInput').value=weatherState.extraCity?(weatherState.extraCity.shortName||weatherState.extraCity.name):'';
+    byId('weatherCityResults').textContent='';
+    byId('weatherCityError').classList.add('hidden');byId('weatherCityError').textContent='';
+    showModal('weatherCityModal');byId('weatherCityInput').focus();
+  }
+
+  function searchWeatherCity(){
+    var q=String(byId('weatherCityInput').value||'').trim();
+    var box=byId('weatherCityResults'),errEl=byId('weatherCityError');
+    errEl.classList.add('hidden');errEl.textContent='';box.textContent='';
+    if(!q){errEl.textContent='请输入城市名称。';errEl.classList.remove('hidden');return;}
+    var tip=notify('info','正在搜索…',0);
+    fetchGeocode(q).then(function(list){
+      tip.remove();
+      if(list.length===0){errEl.textContent='未找到该城市，请换个名称试试。';errEl.classList.remove('hidden');return;}
+      list.forEach(function(r){
+        var btn=document.createElement('button');btn.type='button';btn.className='weather-city-result';btn.textContent=r.name;
+        btn.addEventListener('click',function(){
+          saveWeatherExtraCity({name:r.name,shortName:r.shortName,latitude:r.latitude,longitude:r.longitude});
+          hideModal('weatherCityModal');
+          weatherState.data.extra=null;weatherState.lastUpdated=0;
+          notify('success','已设置额外城市：'+r.name,5000);
+          loadAllWeather(true);
+        });
+        box.appendChild(btn);
+      });
+    }).catch(function(e){
+      tip.remove();
+      errEl.textContent=(e&&e.message)||'搜索失败。';errEl.classList.remove('hidden');
+    });
+  }
 
   /* ================= 富文本内容处理 ================= */
   function looksLikeHtml(s){
@@ -1305,6 +1503,27 @@
     safeBind('btnQuickReload','click',function(){loadRemoteData({});});
     safeBind('btnQuickExport','click',exportBackup);
     safeBind('btnImportWordDash','click',function(){byId('wordFileInput').click();});
+    // 天气相关
+    safeBind('btnWeatherRefresh','click',function(){
+      weatherState.lastUpdated=0;
+      notify('info','正在刷新天气…',3000);
+      loadAllWeather(true).then(function(){notify('success','天气已更新。',4000);});
+    });
+    safeBind('btnEditExtraCity','click',openWeatherCityModal);
+    safeBind('btnWeatherCitySearch','click',searchWeatherCity);
+    safeBind('weatherCityInput','keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();searchWeatherCity();}});
+    safeBind('btnWeatherCityClear','click',function(){
+      askConfirm({title:'清除额外城市',message:'确认清除额外城市设置吗？',confirmText:'清除'}).then(function(ok){
+        if(!ok)return;
+        saveWeatherExtraCity(null);
+        weatherState.data.extra=null;
+        hideModal('weatherCityModal');
+        renderWeather();
+        notify('info','已清除额外城市。',4000);
+      });
+    });
+    safeBind('btnWeatherCityCancel','click',function(){hideModal('weatherCityModal');});
+    
     safeBind('btnBackToDash','click',function(){state.currentView='dashboard';state.currentNoteId=null;render();});
     safeBind('btnEditCurrentNote','click',function(){if(state.currentNoteId)openEditNote(state.currentNoteId);});
     safeBind('btnDeleteCurrentNote','click',function(){if(state.currentNoteId)deleteNote(state.currentNoteId);});
@@ -1360,6 +1579,7 @@
       if(!byId('tokenModal').classList.contains('hidden')){byId('tokenInput').value='';hideModal('tokenModal');return;}
       if(!byId('editNoteModal').classList.contains('hidden')){closeEditNoteModal();return;}
       if(!byId('reminderModal').classList.contains('hidden')){reminderState.editing=null;hideModal('reminderModal');return;}
+      if(!byId('weatherCityModal').classList.contains('hidden')){hideModal('weatherCityModal');return;}
       if(!byId('wordImportModal').classList.contains('hidden')){hideModal('wordImportModal');return;}
     });
   }
@@ -1374,6 +1594,10 @@
     try{render();}catch(e){console.error('render 出错：',e);}
     updatePomodoroDisplay();renderReminderList();
     setInterval(checkDueReminders,30000);
+   // 天气：读取配置并加载
+    loadWeatherFromStorage();
+    loadAllWeather(false);
+    setInterval(function(){loadAllWeather(true);},WEATHER_REFRESH_INTERVAL);
     loadRemoteData({silent:true});
   }
 
