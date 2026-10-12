@@ -73,6 +73,22 @@
           <button type="button" id="btnImportWordDash" class="btn btn-ghost edit-only">📄 导入 Word</button>
         </div>
       </div>
+      <!-- 天气面板 -->
+      <div class="weather-section">
+        <div class="weather-header">
+          <h3>🌤️ 7 天天气预报</h3>
+          <div class="weather-header-actions">
+            <button type="button" id="btnWeatherRefresh" class="btn btn-small btn-ghost">🔄 刷新</button>
+            <button type="button" id="btnEditExtraCity" class="btn btn-small btn-ghost edit-only">✏️ 设置额外城市</button>
+            <span class="weather-updated" id="weatherUpdatedAt"></span>
+          </div>
+        </div>
+        <div class="weather-grid" id="weatherGrid">
+          <p class="empty-hint">加载中…</p>
+        </div>
+      </div>
+      <div class="tips-section">
+      
       <div class="tips-section">
         <h3>💡 温馨提示</h3>
         <p class="tips-intro">你可以：</p>
@@ -274,6 +290,26 @@
 <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" />
 <input type="file" id="wordFileInput" accept=".docx" class="hidden-input" />
 <input type="file" id="editNoteImageInput" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" class="hidden-input" />
+<!-- 设置额外城市窗口 -->
+<div class="modal-backdrop hidden" id="weatherCityModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-title">设置额外城市</h2>
+    <p class="modal-note">输入城市名称后点击"搜索"，从结果中选择一个，主页上就会显示该城市的 7 天天气预报。定位城市由浏览器自动获取，不需设置。</p>
+    <div class="form-row">
+      <label class="field-label" for="weatherCityInput">城市名称</label>
+      <div class="token-row">
+        <input type="text" id="weatherCityInput" class="input" placeholder="例如：上海、Tokyo、New York" maxlength="60" />
+        <button type="button" id="btnWeatherCitySearch" class="btn btn-primary">搜索</button>
+      </div>
+    </div>
+    <div id="weatherCityResults" class="weather-city-results"></div>
+    <p id="weatherCityError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnWeatherCityClear" class="btn btn-danger">清除额外城市</button>
+      <button type="button" id="btnWeatherCityCancel" class="btn btn-ghost">关闭</button>
+    </div>
+  </div>
+</div>  
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>
