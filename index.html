@@ -17,6 +17,10 @@
       <input type="text" id="searchInput" placeholder="搜索笔记或目录..." autocomplete="off" />
       <button type="button" id="btnClearSearch" class="btn-icon" title="清除搜索">✕</button>
     </div>
+    <div class="sidebar-batch-bar">
+      <button type="button" id="btnBatchMode" class="btn btn-small btn-ghost edit-only">🔲 批量选择</button>
+      <span id="batchModeHint" class="batch-hint hidden">勾选下方项目</span>
+    </div>
     <div class="sidebar-tools">
       <div class="side-tool-item active" id="sideToolDashboard">🏠 主页</div>
       <div class="side-tool-item" id="sideToolPomodoro">🍅 番茄钟</div>
@@ -142,6 +146,15 @@
   </main>
 </div>
 
+<div class="batch-action-bar hidden" id="batchActionBar">
+  <span id="batchCountLabel">已选 0 项</span>
+  <button type="button" id="btnBatchMark" class="btn btn-small btn-mark">设为重点</button>
+  <button type="button" id="btnBatchUnmark" class="btn btn-small btn-ghost">取消重点</button>
+  <button type="button" id="btnBatchDelete" class="btn btn-small btn-danger">批量删除</button>
+  <button type="button" id="btnBatchClear" class="btn btn-small btn-ghost">清空</button>
+  <button type="button" id="btnBatchExit" class="btn btn-small btn-ghost">退出批量</button>
+</div>
+
 <div class="modal-backdrop hidden" id="tokenModal">
   <div class="modal" role="dialog" aria-modal="true">
     <h2 class="modal-title">进入编辑模式</h2>
@@ -170,12 +183,19 @@
     </div>
     <div class="form-row"><label class="field-label" for="editNoteTitle">笔记标题（必填）</label><input type="text" id="editNoteTitle" class="input" maxlength="120" /></div>
     <div class="form-row">
-      <label class="field-label" for="editNoteContent">笔记正文</label>
+      <label class="field-label">笔记正文（支持加粗、颜色等格式）</label>
       <div class="editor-toolbar">
-        <button type="button" id="btnInsertImage" class="btn btn-ghost btn-small">📷 在光标处插入图片</button>
-        <span class="toolbar-hint">图片会上传到 GitHub，并在光标位置自动插入</span>
+        <button type="button" id="btnInsertImage" class="btn btn-ghost btn-small" title="插入图片">📷 插入图片</button>
+        <span class="toolbar-sep">|</span>
+        <button type="button" class="btn btn-ghost btn-small fmt-btn" data-cmd="bold" title="加粗"><b>B</b></button>
+        <button type="button" class="btn btn-ghost btn-small fmt-btn" data-cmd="italic" title="斜体"><i>I</i></button>
+        <button type="button" class="btn btn-ghost btn-small fmt-btn" data-cmd="underline" title="下划线"><u>U</u></button>
+        <button type="button" class="btn btn-ghost btn-small fmt-btn" data-cmd="strikeThrough" title="删除线"><s>S</s></button>
+        <span class="toolbar-sep">|</span>
+        <label class="color-label" title="文字颜色">A<input type="color" id="editTextColor" value="#c62828" /></label>
+        <label class="color-label" title="背景色">🖍<input type="color" id="editBgColor" value="#fff59d" /></label>
       </div>
-      <textarea id="editNoteContent" class="input textarea" rows="10"></textarea>
+      <div id="editNoteContent" class="rich-editor" contenteditable="true"></div>
     </div>
     <div class="form-row checkbox-row"><input type="checkbox" id="editNoteMarked" /><label for="editNoteMarked">设为重点笔记</label></div>
     <h3 class="sub-title">附件</h3>
@@ -212,7 +232,6 @@
     </div>
     <div class="form-row"><label class="field-label" for="reminderRepeat">重复</label><select id="reminderRepeat" class="input"></select></div>
     <div class="form-row checkbox-row"><input type="checkbox" id="reminderEmail" /><label for="reminderEmail">发送邮件提醒</label></div>
-    <p class="tool-hint" style="text-align:left;">需在设置-提醒设置中配置收件邮箱</p>
     <p id="reminderError" class="error-text hidden"></p>
     <div class="modal-actions">
       <button type="button" id="btnReminderSave" class="btn btn-primary">添加</button>
@@ -230,7 +249,7 @@
       · Word 中的 <b>标题 2</b> → 该一级目录下的二级目录<br>
       · Word 中的 <b>标题 3</b> → 该二级目录下的笔记标题<br>
       · 标题 3 下面的正文 → 笔记正文<br>
-      · 文档中的图片会自动上传到 GitHub 并按原位置插入
+      · 文档中的加粗、斜体、下划线、删除线、颜色、图片会尽量保留
     </p>
     <div id="wordImportSummary" class="import-summary"></div>
     <p id="wordImportError" class="error-text hidden"></p>
