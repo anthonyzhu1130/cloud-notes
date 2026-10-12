@@ -376,11 +376,35 @@
   }
 
   function locateAutoCity(){
-    return new Promise(function(resolve,reject){
-      if(!navigator.geolocation){reject(new Error('当前浏览器不支持定位'));return;}
+    return new Promise(function(resolve){
+      // 兜底：如果 10 秒内定位不成功，直接返回北京
+      var finished=false;
+      function fallback(){
+        if(finished)return;
+        finished=true;
+        resolve({name:'北京',shortName:'北京',latitude:39.9042,longitude:116.4074,fallback:true});
+      }
+      var timer=setTimeout(fallback,10000);
+
+      if(!navigator.geolocation){fallback();return;}
       navigator.geolocation.getCurrentPosition(function(pos){
-        fetchReverseGeocode(pos.coords.latitude,pos.coords.longitude).then(resolve).catch(reject);
-      },function(err){reject(new Error((err&&err.message)||'定位权限被拒绝'));},{timeout:8000,maximumAge:3600000});
+        if(finished)return;
+        fetchReverseGeocode(pos.coords.latitude,pos.coords.longitude)
+          .then(function(city){
+            if(finished)return;
+            finished=true;clearTimeout(timer);
+            resolve(city);
+          })
+          .catch(function(){
+            if(finished)return;
+            finished=true;clearTimeout(timer);
+            // 反向地理编码失败，直接用坐标配一个"当前位置"
+            resolve({name:'当前位置',shortName:'当前位置',latitude:pos.coords.latitude,longitude:pos.coords.longitude});
+          });
+      },function(){
+        if(finished)return;
+        fallback();
+      },{timeout:8000,maximumAge:3600000});
     });
   }
 
@@ -428,25 +452,34 @@
     var now=Date.now();
     if(!force&&weatherState.lastUpdated&&(now-weatherState.lastUpdated<WEATHER_REFRESH_INTERVAL)){renderWeather();return Promise.resolve();}
     weatherState.loading=true;
-    var tasks=[];
-    tasks.push((function(){
-      if(weatherState.autoCity){
-        return fetchWeather(weatherState.autoCity.latitude,weatherState.autoCity.longitude)
-          .then(function(d){weatherState.data.auto=d;})
-          .catch(function(e){console.warn('定位天气失败：',e);});
-      }
+    renderWeather(); // 先渲染一次（可能已有缓存城市）
+
+    function ensureAutoCity(){
+      if(weatherState.autoCity)return Promise.resolve(weatherState.autoCity);
       return locateAutoCity().then(function(city){
         saveWeatherAutoCity(city);
-        return fetchWeather(city.latitude,city.longitude).then(function(d){weatherState.data.auto=d;});
-      }).catch(function(e){console.warn('定位失败：',e);});
-    })());
-    tasks.push((function(){
-      if(!weatherState.extraCity)return Promise.resolve();
-      return fetchWeather(weatherState.extraCity.latitude,weatherState.extraCity.longitude)
-        .then(function(d){weatherState.data.extra=d;})
-        .catch(function(e){console.warn('额外城市天气失败：',e);});
-    })());
-    return Promise.all(tasks).then(function(){
+        // 立刻重绘，让城市名先显示出来
+        renderWeather();
+        return city;
+      });
+    }
+
+    return ensureAutoCity().then(function(city){
+      return fetchWeather(city.latitude,city.longitude).then(function(d){
+        weatherState.data.auto=d;
+      }).catch(function(e){
+        console.warn('定位天气失败：',e);
+      });
+    }).catch(function(e){
+      console.warn('定位失败：',e);
+    }).then(function(){
+      if(!weatherState.extraCity)return;
+      return fetchWeather(weatherState.extraCity.latitude,weatherState.extraCity.longitude).then(function(d){
+        weatherState.data.extra=d;
+      }).catch(function(e){
+        console.warn('额外城市天气失败：',e);
+      });
+    }).then(function(){
       weatherState.lastUpdated=Date.now();
       weatherState.loading=false;
       renderWeather();
