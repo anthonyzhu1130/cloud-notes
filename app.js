@@ -494,6 +494,10 @@
     if(!state.editing){notify('warn','请先进入编辑模式。',5000);return;}
     byId('weatherCityInput').value=weatherState.extraCity?(weatherState.extraCity.shortName||weatherState.extraCity.name):'';
     byId('weatherCityResults').textContent='';
+    var autoIn=byId('weatherAutoCityInput');
+    if(autoIn)autoIn.value=weatherState.autoCity?(weatherState.autoCity.shortName||weatherState.autoCity.name):'';
+    var autoRes=byId('weatherAutoCityResults');
+    if(autoRes)autoRes.textContent='';
     byId('weatherCityError').classList.add('hidden');byId('weatherCityError').textContent='';
     showModal('weatherCityModal');byId('weatherCityInput').focus();
   }
@@ -1544,6 +1548,30 @@
     });
     safeBind('btnEditExtraCity','click',openWeatherCityModal);
     safeBind('btnWeatherCitySearch','click',searchWeatherCity);
+        safeBind('btnWeatherAutoCitySearch','click',function(){
+      var q=String(byId('weatherAutoCityInput').value||'').trim();
+      var box=byId('weatherAutoCityResults');
+      box.textContent='';
+      if(!q){notify('warn','请输入定位城市名称。',4000);return;}
+      var tip=notify('info','正在搜索…',0);
+      fetchGeocode(q).then(function(list){
+        tip.remove();
+        if(list.length===0){notify('error','未找到该城市。',6000);return;}
+        list.forEach(function(r){
+          var btn=document.createElement('button');btn.type='button';btn.className='weather-city-result';btn.textContent=r.name;
+          btn.addEventListener('click',function(){
+            saveWeatherAutoCity({name:r.name,shortName:r.shortName,latitude:r.latitude,longitude:r.longitude});
+            weatherState.data.auto=null;weatherState.lastUpdated=0;
+            hideModal('weatherCityModal');
+            notify('success','已设置定位城市：'+r.name,5000);
+            loadAllWeather(true);
+          });
+          box.appendChild(btn);
+        });
+      }).catch(function(e){
+        tip.remove();notify('error',(e&&e.message)||'搜索失败。',6000);
+      });
+    });
     safeBind('weatherCityInput','keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();searchWeatherCity();}});
     safeBind('btnWeatherCityClear','click',function(){
       askConfirm({title:'清除额外城市',message:'确认清除额外城市设置吗？',confirmText:'清除'}).then(function(ok){
