@@ -187,3 +187,20 @@ mark.hl{background:#ffe680;color:#3d2a00;padding:0 2px;border-radius:3px}
 .weather-city-result{padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:0.9rem;text-align:left;font-family:inherit;color:var(--text-main)}
 .weather-city-result:hover{background:var(--primary-light);border-color:var(--primary)}
 @media(max-width:768px){.weather-grid{grid-template-columns:1fr}.weather-days{grid-template-columns:repeat(4,1fr)}}
+/* ========= 笔记内表格 & 高亮 ========= */
+.note-view-content table,
+.rich-editor table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.9rem;background:#fff;border:1px solid var(--border);table-layout:auto}
+.note-view-content table th,
+.note-view-content table td,
+.rich-editor table th,
+.rich-editor table td{border:1px solid var(--border);padding:6px 10px;text-align:left;vertical-align:top;word-break:break-word;line-height:1.5}
+.note-view-content table th,
+.rich-editor table th{background:#f0f6ea;font-weight:700;color:var(--primary)}
+.note-view-content table tr:nth-child(even) td,
+.rich-editor table tr:nth-child(even) td{background:#fafdf7}
+.note-view-content table img,
+.rich-editor table img{max-width:100%;height:auto;display:block;margin:2px 0}
+.note-view-content mark,
+.rich-editor mark{background:#fff59d;color:inherit;padding:0 2px;border-radius:3px}
+.note-view-content [style*="background-color"],
+.rich-editor [style*="background-color"]{padding:0 2px;border-radius:3px}
