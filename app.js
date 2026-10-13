@@ -1378,6 +1378,10 @@
       Array.prototype.forEach.call(node.childNodes,walk);
     }
 
+    Array.prototype.forEach.call(doc.body.childNodes,walk);
+    return blocks;
+  }
+
   function buildWordPreview(blocks,fileName){
     var tree=[];
     var curL1=null,curL2=null,curNote=null;
