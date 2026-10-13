@@ -1240,6 +1240,41 @@
     return mammothPromise;
   }
 
+    var JSZIP_CDNS=['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'];
+  var jszipPromise=null;
+  function loadJSZip(){
+    if(window.JSZip)return Promise.resolve();
+    if(jszipPromise)return jszipPromise;
+    jszipPromise=(function(){var p=Promise.reject();JSZIP_CDNS.forEach(function(url){p=p.catch(function(){return loadScriptOnce(url).then(function(){if(!window.JSZip)throw new Error('JSZip 未加载');});});});return p.catch(function(){jszipPromise=null;throw new Error('无法加载 JSZip');});})();
+    return jszipPromise;
+  }
+
+  function highlightColorToHex(name){
+    var map={
+      yellow:'#ffff00',green:'#00ff00',cyan:'#00ffff',magenta:'#ff00ff',
+      blue:'#0000ff',red:'#ff0000',
+      darkBlue:'#000080',darkCyan:'#008080',darkGreen:'#008000',
+      darkMagenta:'#800080',darkRed:'#800000',darkYellow:'#808000',
+      darkGray:'#808080',lightGray:'#c0c0c0',black:'#000000'
+    };
+    return map[name]||'#ffff00';
+  }
+
+  function parseHighlightColors(arrayBuffer){
+    if(!window.JSZip)return Promise.resolve([]);
+    return window.JSZip.loadAsync(arrayBuffer).then(function(zip){
+      var f=zip.file('word/document.xml');
+      if(!f)return [];
+      return f.async('string');
+    }).then(function(xml){
+      var colors=[];
+      var re=/<w:highlight\s+w:val="([^"]+)"[^>]*\/?>/g;
+      var m;
+      while((m=re.exec(xml))!==null){colors.push(m[1]);}
+      return colors;
+    }).catch(function(){return [];});
+  }
+  
   /* mammoth 输出的 HTML 里提取段落、标题、图片（含样式） */
   function extractBlocksFromHtml(html){
     var parser=new DOMParser();
@@ -1443,26 +1478,45 @@
     if(getExt(file.name)!=='docx'){notify('error','只支持 .docx 文件。',8000);return;}
     wordCtx.fileName=file.name.replace(/\.docx$/i,'');wordCtx.blocks=null;wordCtx.preview=null;
     var loading=notify('info','正在解析 Word…',0);
-    loadMammoth().then(function(){return readFileAsArrayBuffer(file);})
-      .then(function(buf){
-        return window.mammoth.convertToHtml({arrayBuffer:buf}, {
+
+    Promise.all([
+      loadMammoth(),
+      loadJSZip().catch(function(){return null;}),  // JSZip 加载失败不阻断流程
+      readFileAsArrayBuffer(file)
+    ]).then(function(results){
+      var buf = results[2];
+      // 从 docx 内部 XML 提取 highlight 颜色序列
+      return parseHighlightColors(buf).then(function(colors){
+        return window.mammoth.convertToHtml({arrayBuffer: buf}, {
           styleMap: [
-            "mark => mark",
             "r[style-name='Highlight'] => mark",
             "r[style-name='highlight'] => mark",
             "r[style-name='高亮'] => mark"
           ]
+        }).then(function(res){
+          var html = (res && res.value) || '';
+          // 按出现顺序，把 <mark> 替换为带原始颜色的 <span>
+          var idx = 0;
+          html = html.replace(/<mark(\s[^>]*)?>/g, function(){
+            var c = colors[idx++] || 'yellow';
+            return '<span style="background-color:' + highlightColorToHex(c) + '">';
+          });
+          html = html.replace(/<\/mark>/g, '</span>');
+          return html;
         });
-      })
-      .then(function(res){
-        loading.remove();
-        var blocks=extractBlocksFromHtml((res&&res.value)||'');
-        if(!blocks.length)throw new AppError('Word 中未找到有效内容。',0);
-        wordCtx.blocks=blocks;
-        wordCtx.preview=buildWordPreview(blocks,wordCtx.fileName);
-        renderWordPreview();
-        showModal('wordImportModal');
-      }).catch(function(e){loading.remove();notify('error',(e&&e.message)||'解析 Word 失败。',12000);});
+      });
+    }).then(function(html){
+      loading.remove();
+      var blocks = extractBlocksFromHtml(html);
+      if(!blocks.length) throw new AppError('Word 中未找到有效内容。', 0);
+      wordCtx.blocks = blocks;
+      wordCtx.preview = buildWordPreview(blocks, wordCtx.fileName);
+      renderWordPreview();
+      showModal('wordImportModal');
+    }).catch(function(e){
+      loading.remove();
+      notify('error', (e && e.message) || '解析 Word 失败。', 12000);
+    });
   }
 
   function executeWordImport(){
