@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-13T07:18:47.089Z",
+  "updatedAt": "2026-10-13T07:42:28.448Z",
   "categories": [
     {
       "id": "category-b33e87ac-9fad-4217-a9c2-aa37a41531d1",
@@ -4250,18 +4250,6 @@
       "attachments": [],
       "createdAt": "2026-10-12T09:52:25.533Z",
       "updatedAt": "2026-10-12T09:52:25.533Z"
-    },
-    {
-      "id": "note-adb1e9f6-7103-4f45-bc32-c9bca91bf8cb",
-      "categoryId": "category-53b22496-f727-40e1-bea0-7bb5c0ce8d69",
-      "title": "含电池类运输鉴定情况说明",
-      "content": "<b>尊敬的嘉兴海关</b><br>      我司出口至荷兰的一票货物，发票号HS-SG-NLD261008-3，其中G1-G5项为电子货架标签ELECTRONIC SHELF LABEL，电子货架标签由PC+亚克力材质外壳、pcb主板(含无线接收模块)、EPD（电子墨水）显示屏、锂电池组等部件组成，用于超市等场所货架上，通过无线接收信号，并通过显示屏显示价格信息文字和简单的图形。我公司产品是本商品<br>主要用于显示价格信息文字和简单的图形，其属于品目85.3项下的“电气音响或视<br>觉信号装置”，本商品为电子墨水显示，不属于液晶装置或发光二极管的显示板，<br>依据归类总 规则一及六，归入税号8531809000。<br><table><tr><td>项</td><td>申报品名</td><td>申报型号</td><td>锂电池种类</td><td>鉴定编号</td></tr><tr><td>G1</td><td>电子货架标签</td><td>Nebular Ultra-260WF-N</td><td>锂二氧化锰电池-不可充电锂金属电池芯</td><td>212600957397635</td></tr><tr><td>G2</td><td>电子货架标签</td><td>Nebular Ultra-260WF-N</td><td>锂二氧化锰电池-不可充电锂金属电池芯</td><td>212600957397635</td></tr><tr><td>G3</td><td>电子货架标签</td><td>Nebular Ultra-260WQ-N</td><td>锂二氧化锰电池-不可充电锂金属电池组</td><td>212600742609997</td></tr><tr><td>G4</td><td>电子货架标签</td><td>Nebular Ultra-260WQ-N</td><td>锂二氧化锰电池-不可充电锂金属电池芯</td><td>212600742609997</td></tr><tr><td>G5</td><td>电子货架标签</td><td>Nebular Ultra-750Q-N</td><td>锂二氧化锰电池-不可充电锂金属电池芯</td><td>212601882681700</td></tr></table>",
-      "marked": false,
-      "collapsed": false,
-      "images": [],
-      "attachments": [],
-      "createdAt": "2026-10-13T07:18:45.439Z",
-      "updatedAt": "2026-10-13T07:18:45.439Z"
     }
   ]
 }
