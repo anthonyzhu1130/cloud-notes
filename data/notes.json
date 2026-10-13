@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-13T05:35:32.615Z",
+  "updatedAt": "2026-10-13T06:19:29.714Z",
   "categories": [
     {
       "id": "category-b33e87ac-9fad-4217-a9c2-aa37a41531d1",
@@ -154,24 +154,6 @@
       "collapsed": false,
       "createdAt": "2026-10-12T09:52:25.533Z",
       "updatedAt": "2026-10-12T09:52:25.533Z"
-    },
-    {
-      "id": "category-deff2ed9-0fc7-40e3-9881-7c8551c3f3ae",
-      "name": "情况说明",
-      "parentId": null,
-      "marked": false,
-      "collapsed": false,
-      "createdAt": "2026-10-13T05:35:19.797Z",
-      "updatedAt": "2026-10-13T05:35:19.797Z"
-    },
-    {
-      "id": "category-aeeeafc2-4ab4-45fd-a866-3917b8ef938d",
-      "name": "运输鉴定类情况说明",
-      "parentId": "category-deff2ed9-0fc7-40e3-9881-7c8551c3f3ae",
-      "marked": false,
-      "collapsed": false,
-      "createdAt": "2026-10-13T05:35:19.797Z",
-      "updatedAt": "2026-10-13T05:35:19.797Z"
     }
   ],
   "notes": [
@@ -4250,18 +4232,6 @@
       "attachments": [],
       "createdAt": "2026-10-12T09:52:25.533Z",
       "updatedAt": "2026-10-12T09:52:25.533Z"
-    },
-    {
-      "id": "note-7049796c-e14f-4d90-b529-ba0c47c10fd3",
-      "categoryId": "category-aeeeafc2-4ab4-45fd-a866-3917b8ef938d",
-      "title": "含电池类运输鉴定情况说明",
-      "content": "<b>尊敬的嘉兴海关</b><br>      我司出口至荷兰的一票货物，发票号HS-SG-NLD261008-3，其中G1-G5项为电子货架标签ELECTRONIC SHELF LABEL，电子货架标签由PC+亚克力材质外壳、pcb主板(含无线接收模块)、EPD（电子墨水）显示屏、锂电池组等部件组成，用于超市等场所货架上，通过无线接收信号，并通过显示屏显示价格信息文字和简单的图形。我公司产品是本商品<br>主要用于显示价格信息文字和简单的图形，其属于品目85.3项下的“电气音响或视<br>觉信号装置”，本商品为电子墨水显示，不属于液晶装置或发光二极管的显示板，<br>依据归类总 规则一及六，归入税号8531809000。<br>项<br>申报品名<br>申报型号<br>锂电池种类<br>鉴定编号<br>G1<br>电子货架标签<br>Nebular Ultra-260WF-N<br>锂二氧化锰电池-不可充电锂金属电池芯<br>212600957397635<br>G2<br>电子货架标签<br>Nebular Ultra-260WF-N<br>锂二氧化锰电池-不可充电锂金属电池芯<br>212600957397635<br>G3<br>电子货架标签<br>Nebular Ultra-260WQ-N<br>锂二氧化锰电池-不可充电锂金属电池组<br>212600742609997<br>G4<br>电子货架标签<br>Nebular Ultra-260WQ-N<br>锂二氧化锰电池-不可充电锂金属电池芯<br>212600742609997<br>G5<br>电子货架标签<br>Nebular Ultra-750Q-N<br>锂二氧化锰电池-不可充电锂金属电池芯<br>212601882681700",
-      "marked": false,
-      "collapsed": false,
-      "images": [],
-      "attachments": [],
-      "createdAt": "2026-10-13T05:35:19.797Z",
-      "updatedAt": "2026-10-13T05:35:19.797Z"
     }
   ]
 }
