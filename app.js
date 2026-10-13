@@ -1260,20 +1260,69 @@
     return map[name]||'#ffff00';
   }
 
-  function parseHighlightColors(arrayBuffer){
+  function extractHighlightSpans(arrayBuffer){
     if(!window.JSZip)return Promise.resolve([]);
     return window.JSZip.loadAsync(arrayBuffer).then(function(zip){
       var f=zip.file('word/document.xml');
       if(!f)return [];
       return f.async('string');
     }).then(function(xml){
-      var colors=[];
-      // 宽松的正则：兼容双引号、单引号、任意属性顺序
-      var re=/<w:highlight[^>]*?w:val\s*=\s*["']([^"']+)["'][^>]*?\/?>/g;
-      var m;
-      while((m=re.exec(xml))!==null){colors.push(m[1]);}
-      return colors;
-    }).catch(function(){return [];});
+      var parser=new DOMParser();
+      var doc=parser.parseFromString(xml,'application/xml');
+      var ns='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+      var result=[];
+      var runs=doc.getElementsByTagNameNS(ns,'r');
+      for(var i=0;i<runs.length;i++){
+        var run=runs[i];
+        var rPr=run.getElementsByTagNameNS(ns,'rPr')[0];
+        if(!rPr)continue;
+        var hs=rPr.getElementsByTagNameNS(ns,'highlight');
+        if(hs.length===0)continue;
+        var hlVal=hs[0].getAttributeNS(ns,'val')||hs[0].getAttribute('w:val')||'yellow';
+        var texts=run.getElementsByTagNameNS(ns,'t');
+        var txt='';
+        for(var k=0;k<texts.length;k++)txt+=(texts[k].textContent||'');
+        if(txt)result.push({text:txt,color:hlVal});
+      }
+      return result;
+    }).catch(function(e){console.warn('提取高亮失败',e);return [];});
+  }
+
+  function applyHighlightSpans(html,spans){
+    if(!spans||spans.length===0)return html;
+    var wrap=document.createElement('div');
+    wrap.innerHTML=html;
+    spans.forEach(function(span){
+      var target=span.text;
+      if(!target)return;
+      var textNodes=[];
+      (function collect(node){
+        Array.prototype.forEach.call(node.childNodes,function(ch){
+          if(ch.nodeType===3){if(ch.textContent)textNodes.push(ch);}
+          else if(ch.nodeType===1){collect(ch);}
+        });
+      })(wrap);
+      for(var i=0;i<textNodes.length;i++){
+        var node=textNodes[i];
+        var txt=node.textContent;
+        var idx=txt.indexOf(target);
+        if(idx===-1)continue;
+        var before=txt.slice(0,idx);
+        var match=txt.slice(idx,idx+target.length);
+        var after=txt.slice(idx+target.length);
+        var parent=node.parentNode;
+        if(!parent)continue;
+        var spanEl=document.createElement('span');
+        spanEl.setAttribute('style','background-color:'+highlightColorToHex(span.color));
+        spanEl.textContent=match;
+        if(before)parent.insertBefore(document.createTextNode(before),node);
+        parent.insertBefore(spanEl,node);
+        if(after)parent.insertBefore(document.createTextNode(after),node);
+        parent.removeChild(node);
+        break;
+      }
+    });
+    return wrap.innerHTML;
   }
   
   /* mammoth 输出的 HTML 里提取段落、标题、图片（含样式） */
@@ -1485,41 +1534,27 @@
       loadJSZip().catch(function(){return null;}),
       readFileAsArrayBuffer(file)
     ]).then(function(results){
-      var buf = results[2];
-      return parseHighlightColors(buf).then(function(colors){
-        console.log('[Word导入] 从 XML 提取到高亮颜色数：', colors.length, colors);
-        return window.mammoth.convertToHtml({arrayBuffer: buf}, {
-          styleMap: [
-            "r[highlight] => mark",
-            "r[style-name='Highlight'] => mark",
-            "r[style-name='highlight'] => mark",
-            "r[style-name='高亮'] => mark"
-          ]
-        }).then(function(res){
-          var html = (res && res.value) || '';
-          var markCount = (html.match(/<mark[\s>]/g) || []).length;
-          console.log('[Word导入] mammoth 输出的 <mark> 数量：', markCount);
-          console.log('[Word导入] mammoth HTML 前 500 字符：', html.slice(0, 500));
-          var idx = 0;
-          html = html.replace(/<mark(\s[^>]*)?>/g, function(){
-            var c = colors[idx++] || 'yellow';
-            return '<span style="background-color:' + highlightColorToHex(c) + '">';
-          });
-          html = html.replace(/<\/mark>/g, '</span>');
+      var buf=results[2];
+      return extractHighlightSpans(buf).then(function(spans){
+        console.log('[Word导入] 提取到高亮片段：',spans.length,spans);
+        return window.mammoth.convertToHtml({arrayBuffer:buf}).then(function(res){
+          var html=(res&&res.value)||'';
+          html=applyHighlightSpans(html,spans);
+          console.log('[Word导入] 处理后的 HTML 前 500 字符：',html.slice(0,500));
           return html;
         });
       });
     }).then(function(html){
       loading.remove();
-      var blocks = extractBlocksFromHtml(html);
-      if(!blocks.length) throw new AppError('Word 中未找到有效内容。', 0);
-      wordCtx.blocks = blocks;
-      wordCtx.preview = buildWordPreview(blocks, wordCtx.fileName);
+      var blocks=extractBlocksFromHtml(html);
+      if(!blocks.length)throw new AppError('Word 中未找到有效内容。',0);
+      wordCtx.blocks=blocks;
+      wordCtx.preview=buildWordPreview(blocks,wordCtx.fileName);
       renderWordPreview();
       showModal('wordImportModal');
     }).catch(function(e){
       loading.remove();
-      notify('error', (e && e.message) || '解析 Word 失败。', 12000);
+      notify('error',(e&&e.message)||'解析 Word 失败。',12000);
     });
   }
   
