@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-13T07:44:29.510Z",
+  "updatedAt": "2026-10-13T07:45:10.247Z",
   "categories": [
     {
       "id": "category-b33e87ac-9fad-4217-a9c2-aa37a41531d1",
@@ -154,24 +154,6 @@
       "collapsed": false,
       "createdAt": "2026-10-12T09:52:25.533Z",
       "updatedAt": "2026-10-12T09:52:25.533Z"
-    },
-    {
-      "id": "category-8da322e7-d34d-4b9b-82d1-4f0759060d83",
-      "name": "情况说明",
-      "parentId": null,
-      "marked": false,
-      "collapsed": false,
-      "createdAt": "2026-10-13T06:53:24.987Z",
-      "updatedAt": "2026-10-13T06:53:24.987Z"
-    },
-    {
-      "id": "category-53b22496-f727-40e1-bea0-7bb5c0ce8d69",
-      "name": "运输鉴定类情况说明",
-      "parentId": "category-8da322e7-d34d-4b9b-82d1-4f0759060d83",
-      "marked": false,
-      "collapsed": false,
-      "createdAt": "2026-10-13T06:53:24.987Z",
-      "updatedAt": "2026-10-13T06:53:24.987Z"
     }
   ],
   "notes": [
