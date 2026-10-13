@@ -1268,7 +1268,8 @@
       return f.async('string');
     }).then(function(xml){
       var colors=[];
-      var re=/<w:highlight\s+w:val="([^"]+)"[^>]*\/?>/g;
+      // 宽松的正则：兼容双引号、单引号、任意属性顺序
+      var re=/<w:highlight[^>]*?w:val\s*=\s*["']([^"']+)["'][^>]*?\/?>/g;
       var m;
       while((m=re.exec(xml))!==null){colors.push(m[1]);}
       return colors;
@@ -1481,21 +1482,24 @@
 
     Promise.all([
       loadMammoth(),
-      loadJSZip().catch(function(){return null;}),  // JSZip 加载失败不阻断流程
+      loadJSZip().catch(function(){return null;}),
       readFileAsArrayBuffer(file)
     ]).then(function(results){
       var buf = results[2];
-      // 从 docx 内部 XML 提取 highlight 颜色序列
       return parseHighlightColors(buf).then(function(colors){
+        console.log('[Word导入] 从 XML 提取到高亮颜色数：', colors.length, colors);
         return window.mammoth.convertToHtml({arrayBuffer: buf}, {
           styleMap: [
+            "r[highlight] => mark",
             "r[style-name='Highlight'] => mark",
             "r[style-name='highlight'] => mark",
             "r[style-name='高亮'] => mark"
           ]
         }).then(function(res){
           var html = (res && res.value) || '';
-          // 按出现顺序，把 <mark> 替换为带原始颜色的 <span>
+          var markCount = (html.match(/<mark[\s>]/g) || []).length;
+          console.log('[Word导入] mammoth 输出的 <mark> 数量：', markCount);
+          console.log('[Word导入] mammoth HTML 前 500 字符：', html.slice(0, 500));
           var idx = 0;
           html = html.replace(/<mark(\s[^>]*)?>/g, function(){
             var c = colors[idx++] || 'yellow';
@@ -1518,7 +1522,7 @@
       notify('error', (e && e.message) || '解析 Word 失败。', 12000);
     });
   }
-
+  
   function executeWordImport(){
     if(!state.editing){notify('warn','请先进入编辑模式。',5000);return;}
     var pv=wordCtx.preview;if(!pv)return;
