@@ -20,6 +20,7 @@
     { name: '必应搜索', url: 'https://www.bing.com', icon: '🔍' },
     { name: '百度', url: 'https://www.baidu.com', icon: '🔍' },
     { name: '铁路12306', url: 'https://www.12306.cn', icon: '🚄' },
+    { name: '工具神器库', url: 'https://shenqiku.cn', icon: '🧃' },
     { name: '果汁工具', url: 'http://guozhivip.com/tool', icon: '🧃' },
     { name: '果汁搜索', url: 'http://guozhivip.com/so', icon: '🔍' },
     { name: 'GitHub', url: 'https://github.com', icon: '🐙' },
