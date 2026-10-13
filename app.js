@@ -67,12 +67,24 @@
   function parseNotesJson(t,sha){var j;try{j=JSON.parse(t);}catch(e){throw new AppError('notes.json 不是合法 JSON。',0);}return {json:normalizeData(j),sha:sha||null};}
 
   function fetchRemoteNotes(token){
-    var url=contentsUrl(CONFIG.NOTES_PATH)+'?ref='+encodeURIComponent(CONFIG.BRANCH||'main')+'&t='+Date.now();
-    return ghFetch(url,{token:token||state.token||null}).then(function(r){
-      if(!r)throw new AppError('远端 notes.json 返回空数据。',0);
-      if(r.content&&r.encoding==='base64')return parseNotesJson(base64ToUtf8(r.content),r.sha);
-      if(r.download_url)return fetch(r.download_url+'?t='+Date.now(),{cache:'no-store'}).then(function(x){if(!x.ok)throw new AppError('下载失败。',x.status);return x.text();}).then(function(t){return parseNotesJson(t,r.sha);});
-      throw new AppError('无法读取远端 notes.json。',0);
+    var tok = token || state.token || null;
+    var url = contentsUrl(CONFIG.NOTES_PATH) + '?ref=' + encodeURIComponent(CONFIG.BRANCH||'main') + '&t=' + Date.now();
+    return ghFetch(url, {token: tok}).then(function(r){
+      if(!r) throw new AppError('远端 notes.json 返回空数据。', 0);
+      // 小文件：GitHub 直接返回 base64 内容
+      if(r.content && r.encoding === 'base64'){
+        return parseNotesJson(base64ToUtf8(r.content), r.sha);
+      }
+      // 大文件（超过 1 MB）：GitHub 不给 content，用 git/blobs API 拿完整内容
+      // 这个 API 和 contents API 一样在 api.github.com 下，不会走 raw.githubusercontent.com
+      if(r.sha){
+        var blobUrl = apiBase() + '/git/blobs/' + encodeURIComponent(r.sha) + '?t=' + Date.now();
+        return ghFetch(blobUrl, {token: tok}).then(function(b){
+          if(!b || !b.content) throw new AppError('无法读取远端 notes.json 的 blob 内容。', 0);
+          return parseNotesJson(base64ToUtf8(b.content), r.sha);
+        });
+      }
+      throw new AppError('无法读取远端 notes.json。', 0);
     });
   }
 
