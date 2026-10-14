@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-13T08:50:21.000Z",
+  "updatedAt": "2026-10-14T08:05:40.657Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -154,6 +154,24 @@
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
       "updatedAt": "2026-10-13T08:33:08.508Z"
+    },
+    {
+      "id": "category-997b8db3-35b1-4434-b8f9-585360f13e36",
+      "name": "特殊商品申报",
+      "parentId": null,
+      "marked": false,
+      "collapsed": false,
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "category-751d35fa-cb82-4e0c-9aef-734cb80d31a2",
+      "name": "软件类别",
+      "parentId": "category-997b8db3-35b1-4434-b8f9-585360f13e36",
+      "marked": false,
+      "collapsed": false,
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
     }
   ],
   "notes": [
@@ -4248,8 +4266,8 @@
           "path": "assets/images/note-40600a19-2f3e-40bd-9739-837c70639d79/image-ee2a478f-fb79-4baa-9c15-d03791bf8bc3-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 47463,
-          "sha": "e4ac2d653ade03e51141b1777e0146b60d31c892",
           "description": "",
+          "sha": "e4ac2d653ade03e51141b1777e0146b60d31c892",
           "createdAt": "2026-10-13T08:42:23.359Z"
         }
       ],
@@ -4284,8 +4302,8 @@
           "path": "assets/images/note-b1b6ee54-5238-426b-a9f9-fd22f310be0f/image-e9ea6951-a21c-4101-9204-995f3724daef-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 39552,
-          "sha": "eb9e74a465e747736fa62d3b5b73f35ee351d468",
           "description": "",
+          "sha": "eb9e74a465e747736fa62d3b5b73f35ee351d468",
           "createdAt": "2026-10-13T08:42:26.054Z"
         },
         {
@@ -4295,8 +4313,8 @@
           "path": "assets/images/note-b1b6ee54-5238-426b-a9f9-fd22f310be0f/image-8d483924-a9f3-4980-98f5-5ea7b3d53884-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 67074,
-          "sha": "8ba60efb5b9a7fd78011d5cde255cba3dc45e71e",
           "description": "",
+          "sha": "8ba60efb5b9a7fd78011d5cde255cba3dc45e71e",
           "createdAt": "2026-10-13T08:42:28.723Z"
         },
         {
@@ -4306,8 +4324,8 @@
           "path": "assets/images/note-b1b6ee54-5238-426b-a9f9-fd22f310be0f/image-8aec549f-a1c2-4c33-a672-44535c601a85-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 33321,
-          "sha": "cc2d94757e268c8122fde5a9823a6eedeeac7bb8",
           "description": "",
+          "sha": "cc2d94757e268c8122fde5a9823a6eedeeac7bb8",
           "createdAt": "2026-10-13T08:42:31.245Z"
         }
       ],
@@ -4342,8 +4360,8 @@
           "path": "assets/images/note-2ac6ffb2-cdc3-49c0-a585-1c0b42422e44/image-6659fc4f-ab11-4e5c-851c-3f64bb8b6f36-word-image.png.png",
           "mimeType": "image/png",
           "size": 896979,
-          "sha": "9d26180322af40b2ba8ad2a2caf37bb53a004c27",
           "description": "",
+          "sha": "9d26180322af40b2ba8ad2a2caf37bb53a004c27",
           "createdAt": "2026-10-13T08:42:34.894Z"
         },
         {
@@ -4353,8 +4371,8 @@
           "path": "assets/images/note-2ac6ffb2-cdc3-49c0-a585-1c0b42422e44/image-8c4ef1cb-937b-46d8-876d-f30e1ee60a65-word-image.png.png",
           "mimeType": "image/png",
           "size": 1224285,
-          "sha": "8d57e4e995143a7698b2c0f32cf4d34cfb57f15f",
           "description": "",
+          "sha": "8d57e4e995143a7698b2c0f32cf4d34cfb57f15f",
           "createdAt": "2026-10-13T08:42:38.671Z"
         },
         {
@@ -4364,8 +4382,8 @@
           "path": "assets/images/note-2ac6ffb2-cdc3-49c0-a585-1c0b42422e44/image-973e10d0-25cd-474b-b188-dbf7adf997b5-word-image.png.png",
           "mimeType": "image/png",
           "size": 1049181,
-          "sha": "fe25231363c8063ee63cee6da8c50e308bc46e1f",
           "description": "",
+          "sha": "fe25231363c8063ee63cee6da8c50e308bc46e1f",
           "createdAt": "2026-10-13T08:42:42.266Z"
         },
         {
@@ -4375,8 +4393,8 @@
           "path": "assets/images/note-2ac6ffb2-cdc3-49c0-a585-1c0b42422e44/image-51d40b48-ab1a-4b81-aef5-30f41e8e4185-word-image.png.png",
           "mimeType": "image/png",
           "size": 967284,
-          "sha": "a84180cccb068bc3c53288ab387403681ef18a7c",
           "description": "",
+          "sha": "a84180cccb068bc3c53288ab387403681ef18a7c",
           "createdAt": "2026-10-13T08:42:46.684Z"
         },
         {
@@ -4386,8 +4404,8 @@
           "path": "assets/images/note-2ac6ffb2-cdc3-49c0-a585-1c0b42422e44/image-5e818ac1-8383-47a8-9b60-6adc7bb2ea35-word-image.png.png",
           "mimeType": "image/png",
           "size": 945432,
-          "sha": "a78f9317798cceeee58a4fff513f22553fa9c763",
           "description": "",
+          "sha": "a78f9317798cceeee58a4fff513f22553fa9c763",
           "createdAt": "2026-10-13T08:42:50.358Z"
         }
       ],
@@ -4422,8 +4440,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-ae3585bc-70a4-424e-a9f4-1dc2513ce638-word-image.png.png",
           "mimeType": "image/png",
           "size": 14553,
-          "sha": "3e7d92a354daccd5d54626b326c8ef4763e52aa6",
           "description": "",
+          "sha": "3e7d92a354daccd5d54626b326c8ef4763e52aa6",
           "createdAt": "2026-10-13T08:42:52.688Z"
         },
         {
@@ -4433,8 +4451,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-59bdc3c4-5bec-41da-a88d-ce428b58f376-word-image.png.png",
           "mimeType": "image/png",
           "size": 25320,
-          "sha": "4a6bbe78b92e05f49d25112ee6d5a33e71d20c38",
           "description": "",
+          "sha": "4a6bbe78b92e05f49d25112ee6d5a33e71d20c38",
           "createdAt": "2026-10-13T08:42:55.075Z"
         },
         {
@@ -4444,8 +4462,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-87f6144f-4e1a-4ddf-9580-9dbb421046c2-word-image.png.png",
           "mimeType": "image/png",
           "size": 60069,
-          "sha": "85d3304040d705de2bc4d5f9246a7f1bf8e22858",
           "description": "",
+          "sha": "85d3304040d705de2bc4d5f9246a7f1bf8e22858",
           "createdAt": "2026-10-13T08:42:57.661Z"
         },
         {
@@ -4455,8 +4473,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-9466973a-7014-4a33-80ba-8a82858ba8f5-word-image.png.png",
           "mimeType": "image/png",
           "size": 14562,
-          "sha": "a218ff1740c0ee30297b8e63891793f7de6ddbbc",
           "description": "",
+          "sha": "a218ff1740c0ee30297b8e63891793f7de6ddbbc",
           "createdAt": "2026-10-13T08:42:59.843Z"
         },
         {
@@ -4466,8 +4484,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-531ab37b-e27f-42e5-9ced-1a51b4b233b8-word-image.png.png",
           "mimeType": "image/png",
           "size": 45000,
-          "sha": "1f23ff2aae675b156d82377f091f0a504eafd778",
           "description": "",
+          "sha": "1f23ff2aae675b156d82377f091f0a504eafd778",
           "createdAt": "2026-10-13T08:43:03.165Z"
         },
         {
@@ -4477,8 +4495,8 @@
           "path": "assets/images/note-26cc50d5-10a3-48fc-beca-90693ed06b98/image-d551f334-7e4a-4b5c-b4e5-1b4a64534ef2-word-image.png.png",
           "mimeType": "image/png",
           "size": 158718,
-          "sha": "896f6277e2b5f238c7a67397f73bd2330dbe1f87",
           "description": "",
+          "sha": "896f6277e2b5f238c7a67397f73bd2330dbe1f87",
           "createdAt": "2026-10-13T08:43:06.687Z"
         }
       ],
@@ -4501,8 +4519,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-c6afe39b-3573-4458-a59d-23108dc5b59f-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 33549,
-          "sha": "b88fe183c03a540a619c7bf75a4115588a13909b",
           "description": "",
+          "sha": "b88fe183c03a540a619c7bf75a4115588a13909b",
           "createdAt": "2026-10-13T08:43:09.978Z"
         },
         {
@@ -4512,8 +4530,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-438c981e-975d-471f-8a8c-08f91ddf68fc-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 79134,
-          "sha": "cd7e0bc6cf7a80dad53c81b1450841a2de7865a4",
           "description": "",
+          "sha": "cd7e0bc6cf7a80dad53c81b1450841a2de7865a4",
           "createdAt": "2026-10-13T08:43:12.937Z"
         },
         {
@@ -4523,8 +4541,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-a4c9d8dd-e439-4fb0-a0bc-195f4aacb6c7-word-image.png.png",
           "mimeType": "image/png",
           "size": 138147,
-          "sha": "e0539784f36fa76abd4950a215e4a673671861fa",
           "description": "",
+          "sha": "e0539784f36fa76abd4950a215e4a673671861fa",
           "createdAt": "2026-10-13T08:43:16.357Z"
         },
         {
@@ -4534,8 +4552,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-9234cfbb-47fa-4838-8830-9d2ec99dc970-word-image.png.png",
           "mimeType": "image/png",
           "size": 38277,
-          "sha": "7fac98d3937cc67ca737731a574f02e11d76b263",
           "description": "",
+          "sha": "7fac98d3937cc67ca737731a574f02e11d76b263",
           "createdAt": "2026-10-13T08:43:18.708Z"
         },
         {
@@ -4545,8 +4563,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-962ba62c-8990-473d-9847-d069d104f30f-word-image.png.png",
           "mimeType": "image/png",
           "size": 136131,
-          "sha": "4d4cf9bf38e8bff29bd3129e9967bcd5abdeb70c",
           "description": "",
+          "sha": "4d4cf9bf38e8bff29bd3129e9967bcd5abdeb70c",
           "createdAt": "2026-10-13T08:43:21.769Z"
         },
         {
@@ -4556,8 +4574,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-8866bd5b-0068-4e8a-8918-6c8f61bf2328-word-image.png.png",
           "mimeType": "image/png",
           "size": 56607,
-          "sha": "db81c1b0aee58f5ae8106f897ea5e97c3d915c54",
           "description": "",
+          "sha": "db81c1b0aee58f5ae8106f897ea5e97c3d915c54",
           "createdAt": "2026-10-13T08:43:24.853Z"
         },
         {
@@ -4567,8 +4585,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-89a5304e-6ee7-473b-ac15-35b44bd4958d-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 43416,
-          "sha": "fb298adc16a2ea65537e719338216ed17d1307f8",
           "description": "",
+          "sha": "fb298adc16a2ea65537e719338216ed17d1307f8",
           "createdAt": "2026-10-13T08:43:27.417Z"
         },
         {
@@ -4578,8 +4596,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-33af4074-b12e-4d84-b9ea-ae3dc886a283-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 96546,
-          "sha": "587c1aa0257c4ece0d6ad39da57c7d2064dedafb",
           "description": "",
+          "sha": "587c1aa0257c4ece0d6ad39da57c7d2064dedafb",
           "createdAt": "2026-10-13T08:43:30.184Z"
         },
         {
@@ -4589,8 +4607,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-5b8603c6-4a33-422b-b0c5-10c8e353a968-word-image.png.png",
           "mimeType": "image/png",
           "size": 127101,
-          "sha": "4b717dcf5c043adf59b626da8b96fa8a98b6421c",
           "description": "",
+          "sha": "4b717dcf5c043adf59b626da8b96fa8a98b6421c",
           "createdAt": "2026-10-13T08:43:33.349Z"
         },
         {
@@ -4600,8 +4618,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-ae067938-260d-4cb3-b1dc-5965458994c7-word-image.png.png",
           "mimeType": "image/png",
           "size": 259824,
-          "sha": "de92af099054aac2b93c537ed75cf3165566452e",
           "description": "",
+          "sha": "de92af099054aac2b93c537ed75cf3165566452e",
           "createdAt": "2026-10-13T08:43:36.490Z"
         },
         {
@@ -4611,8 +4629,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-8e3acd4e-153f-41eb-93d3-ca8d72442bd3-word-image.png.png",
           "mimeType": "image/png",
           "size": 71868,
-          "sha": "287669fc704abd22c4c814b65d4b70a9d04b7e54",
           "description": "",
+          "sha": "287669fc704abd22c4c814b65d4b70a9d04b7e54",
           "createdAt": "2026-10-13T08:43:38.952Z"
         },
         {
@@ -4622,8 +4640,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-068277e8-8525-4a83-8ccd-3461d5a3cfb5-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 50268,
-          "sha": "7c8976ca4066f49aefdefa87032d8917ea2eb029",
           "description": "",
+          "sha": "7c8976ca4066f49aefdefa87032d8917ea2eb029",
           "createdAt": "2026-10-13T08:43:41.682Z"
         },
         {
@@ -4633,8 +4651,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-5e49ffcc-42c4-4ad9-b177-d9de4722e099-word-image.png.png",
           "mimeType": "image/png",
           "size": 148725,
-          "sha": "8f36228ffc935d18afb47adacfffaebd24142754",
           "description": "",
+          "sha": "8f36228ffc935d18afb47adacfffaebd24142754",
           "createdAt": "2026-10-13T08:43:45.409Z"
         },
         {
@@ -4644,8 +4662,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-b12d9439-0333-4556-b2fe-ff45264b9455-word-image.png.png",
           "mimeType": "image/png",
           "size": 252567,
-          "sha": "36a7d9791f7929d074f270499f451759cbcb2e0f",
           "description": "",
+          "sha": "36a7d9791f7929d074f270499f451759cbcb2e0f",
           "createdAt": "2026-10-13T08:43:48.291Z"
         },
         {
@@ -4655,8 +4673,8 @@
           "path": "assets/images/note-b6e8a1b6-97d0-4bb1-97cb-d7b3172cf688/image-53b0df7c-01a3-4a72-bafc-d92118a2dcee-word-image.png.png",
           "mimeType": "image/png",
           "size": 316635,
-          "sha": "a8dea81fe9c4fcc2560f71b5e88a46ce620b1710",
           "description": "",
+          "sha": "a8dea81fe9c4fcc2560f71b5e88a46ce620b1710",
           "createdAt": "2026-10-13T08:43:52.257Z"
         }
       ],
@@ -4679,8 +4697,8 @@
           "path": "assets/images/note-e11c1bbf-836f-4258-894e-e75f713e54ee/image-861688d8-e62d-4480-888d-5c80c4460187-word-image.png.png",
           "mimeType": "image/png",
           "size": 97758,
-          "sha": "e656033ea4da26c63a2931423eef766a77caae75",
           "description": "",
+          "sha": "e656033ea4da26c63a2931423eef766a77caae75",
           "createdAt": "2026-10-13T08:43:55.229Z"
         }
       ],
@@ -4703,8 +4721,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-63d93c6a-7267-416a-8a1f-1c3ebee8b27c-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 33549,
-          "sha": "b88fe183c03a540a619c7bf75a4115588a13909b",
           "description": "",
+          "sha": "b88fe183c03a540a619c7bf75a4115588a13909b",
           "createdAt": "2026-10-13T08:43:58.059Z"
         },
         {
@@ -4714,8 +4732,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-3a406a8a-7481-4147-832d-2a020027bf94-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 73170,
-          "sha": "0c94de5e464be9e1ab97c039f039e48f3531ac09",
           "description": "",
+          "sha": "0c94de5e464be9e1ab97c039f039e48f3531ac09",
           "createdAt": "2026-10-13T08:44:00.726Z"
         },
         {
@@ -4725,8 +4743,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-8c0ad16d-83ac-47f7-bb42-514780495ee5-word-image.png.png",
           "mimeType": "image/png",
           "size": 138147,
-          "sha": "e0539784f36fa76abd4950a215e4a673671861fa",
           "description": "",
+          "sha": "e0539784f36fa76abd4950a215e4a673671861fa",
           "createdAt": "2026-10-13T08:44:03.857Z"
         },
         {
@@ -4736,8 +4754,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-6a2fa47c-39d1-441e-9c94-911751d94a02-word-image.png.png",
           "mimeType": "image/png",
           "size": 38277,
-          "sha": "7fac98d3937cc67ca737731a574f02e11d76b263",
           "description": "",
+          "sha": "7fac98d3937cc67ca737731a574f02e11d76b263",
           "createdAt": "2026-10-13T08:44:07.048Z"
         },
         {
@@ -4747,8 +4765,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-5715dafa-c975-433a-ac76-44ddc58e785a-word-image.png.png",
           "mimeType": "image/png",
           "size": 136131,
-          "sha": "4d4cf9bf38e8bff29bd3129e9967bcd5abdeb70c",
           "description": "",
+          "sha": "4d4cf9bf38e8bff29bd3129e9967bcd5abdeb70c",
           "createdAt": "2026-10-13T08:44:09.850Z"
         },
         {
@@ -4758,8 +4776,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-3101d305-18c5-46e9-b93e-ef78d73d0168-word-image.png.png",
           "mimeType": "image/png",
           "size": 56607,
-          "sha": "db81c1b0aee58f5ae8106f897ea5e97c3d915c54",
           "description": "",
+          "sha": "db81c1b0aee58f5ae8106f897ea5e97c3d915c54",
           "createdAt": "2026-10-13T08:44:13.025Z"
         },
         {
@@ -4769,8 +4787,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-7db75dd1-a0ab-45b7-8919-5f3c4d539c0f-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 51999,
-          "sha": "c9ae788cf8e691348701e2d89c49d2bc32e31f42",
           "description": "",
+          "sha": "c9ae788cf8e691348701e2d89c49d2bc32e31f42",
           "createdAt": "2026-10-13T08:44:15.768Z"
         },
         {
@@ -4780,8 +4798,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-3c9ad460-191d-463e-bf25-3be633982aec-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 73044,
-          "sha": "f9a8199c5f271c05db518f8b964277ca4a3a9f9c",
           "description": "",
+          "sha": "f9a8199c5f271c05db518f8b964277ca4a3a9f9c",
           "createdAt": "2026-10-13T08:44:18.273Z"
         },
         {
@@ -4791,8 +4809,8 @@
           "path": "assets/images/note-952f2c0f-378d-4fdb-841b-12958f624419/image-d30eebac-241e-4da3-9781-9e2e66e11dbc-word-image.png.png",
           "mimeType": "image/png",
           "size": 127101,
-          "sha": "4b717dcf5c043adf59b626da8b96fa8a98b6421c",
           "description": "",
+          "sha": "4b717dcf5c043adf59b626da8b96fa8a98b6421c",
           "createdAt": "2026-10-13T08:44:21.077Z"
         }
       ],
@@ -4815,8 +4833,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-466237ad-198d-48f5-8096-4e318b6d3508-word-image.png.png",
           "mimeType": "image/png",
           "size": 259824,
-          "sha": "de92af099054aac2b93c537ed75cf3165566452e",
           "description": "",
+          "sha": "de92af099054aac2b93c537ed75cf3165566452e",
           "createdAt": "2026-10-13T08:44:24.103Z"
         },
         {
@@ -4826,8 +4844,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-2bf4ad73-0d3e-4cdf-93fc-ddaa4218e476-word-image.png.png",
           "mimeType": "image/png",
           "size": 70938,
-          "sha": "4784701d79394b22af8bdb8200f3c4ea33c6fc94",
           "description": "",
+          "sha": "4784701d79394b22af8bdb8200f3c4ea33c6fc94",
           "createdAt": "2026-10-13T08:44:26.926Z"
         },
         {
@@ -4837,8 +4855,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-df83ab28-6f0a-4ec4-82cb-a2b2c1ba7367-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 34458,
-          "sha": "652c244c7a51b42d76e39f53ac7af00518eb32f4",
           "description": "",
+          "sha": "652c244c7a51b42d76e39f53ac7af00518eb32f4",
           "createdAt": "2026-10-13T08:44:29.313Z"
         },
         {
@@ -4848,8 +4866,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-ce3e84c0-2861-4994-9d44-82b33b0e8ca0-word-image.png.png",
           "mimeType": "image/png",
           "size": 325740,
-          "sha": "b0a70f6d6a57745b564196a5acebcef2bace8d5b",
           "description": "",
+          "sha": "b0a70f6d6a57745b564196a5acebcef2bace8d5b",
           "createdAt": "2026-10-13T08:44:32.670Z"
         },
         {
@@ -4859,8 +4877,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-568ea869-534e-4314-9168-ac1cfee352cd-word-image.png.png",
           "mimeType": "image/png",
           "size": 242784,
-          "sha": "dc65418f2030390270e857e74dcee1a955e66937",
           "description": "",
+          "sha": "dc65418f2030390270e857e74dcee1a955e66937",
           "createdAt": "2026-10-13T08:44:35.967Z"
         },
         {
@@ -4870,8 +4888,8 @@
           "path": "assets/images/note-b97a6848-b8b1-4156-b8e5-c937fd46a1f2/image-37c0cec0-0807-47a7-bc2b-bda8f28aca12-word-image.png.png",
           "mimeType": "image/png",
           "size": 316635,
-          "sha": "a8dea81fe9c4fcc2560f71b5e88a46ce620b1710",
           "description": "",
+          "sha": "a8dea81fe9c4fcc2560f71b5e88a46ce620b1710",
           "createdAt": "2026-10-13T08:44:40.147Z"
         }
       ],
@@ -4894,8 +4912,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-372de95d-db70-4cf0-8872-643d9c664b94-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 8007,
-          "sha": "3a015f94814651865ec9ba9e20b92cc9322e31eb",
           "description": "",
+          "sha": "3a015f94814651865ec9ba9e20b92cc9322e31eb",
           "createdAt": "2026-10-13T08:44:42.597Z"
         },
         {
@@ -4905,8 +4923,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-55d53ef9-7ad9-467f-a238-45ea4bfa0060-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 9342,
-          "sha": "f64bbf72b5c9958794a5661911de7484c5c46286",
           "description": "",
+          "sha": "f64bbf72b5c9958794a5661911de7484c5c46286",
           "createdAt": "2026-10-13T08:44:45.027Z"
         },
         {
@@ -4916,8 +4934,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-df95c27c-8ec5-46eb-883c-ebd41eeb66e7-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 336,
-          "sha": "ddbb9637ab6cb7ae852131d9604d58a89c0397d2",
           "description": "",
+          "sha": "ddbb9637ab6cb7ae852131d9604d58a89c0397d2",
           "createdAt": "2026-10-13T08:44:47.083Z"
         },
         {
@@ -4927,8 +4945,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-299abb1e-e28d-4c53-a9fc-5601cea0699d-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 99,
-          "sha": "b58cf5c3a5d3046ce0d6e0f2b52aa9cd08f9bf0a",
           "description": "",
+          "sha": "b58cf5c3a5d3046ce0d6e0f2b52aa9cd08f9bf0a",
           "createdAt": "2026-10-13T08:44:49.438Z"
         },
         {
@@ -4938,8 +4956,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-a3a6a08f-7ca8-48eb-b83e-52c9a5eed8e6-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 135,
-          "sha": "28252d2a44930c3d6c2e47b115c0bf1072ba3bc8",
           "description": "",
+          "sha": "28252d2a44930c3d6c2e47b115c0bf1072ba3bc8",
           "createdAt": "2026-10-13T08:44:51.693Z"
         },
         {
@@ -4949,8 +4967,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-1b32dad5-2222-4bf0-816e-c02cfaeaf01e-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 696,
-          "sha": "22f875f0efaa47135cbe0c917cbdb56ca1e79497",
           "description": "",
+          "sha": "22f875f0efaa47135cbe0c917cbdb56ca1e79497",
           "createdAt": "2026-10-13T08:44:54.438Z"
         },
         {
@@ -4960,8 +4978,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-b2045ce4-0c77-46d0-91e9-6c6081fb2040-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 102,
-          "sha": "1ffc43d00ea11361c5431f5258a00bdd89a10575",
           "description": "",
+          "sha": "1ffc43d00ea11361c5431f5258a00bdd89a10575",
           "createdAt": "2026-10-13T08:44:56.883Z"
         },
         {
@@ -4971,8 +4989,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-5ccfc127-7cdd-461c-8681-381a033b8ea8-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 111,
-          "sha": "7fb722d0225b5e74cdaa9b3ef504c341716de6be",
           "description": "",
+          "sha": "7fb722d0225b5e74cdaa9b3ef504c341716de6be",
           "createdAt": "2026-10-13T08:44:58.972Z"
         },
         {
@@ -4982,8 +5000,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-d205852c-6c9b-4798-8db1-d3adc459a2b4-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 624,
-          "sha": "a79ba62ba884c8408ae740385c90df3dcade34a1",
           "description": "",
+          "sha": "a79ba62ba884c8408ae740385c90df3dcade34a1",
           "createdAt": "2026-10-13T08:45:01.233Z"
         },
         {
@@ -4993,8 +5011,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-9a00f36e-0cf8-4e43-8bac-d62399d982ba-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 129,
-          "sha": "4fa074fa1366d59f094af4ece3670c45a4cfe36a",
           "description": "",
+          "sha": "4fa074fa1366d59f094af4ece3670c45a4cfe36a",
           "createdAt": "2026-10-13T08:45:03.489Z"
         },
         {
@@ -5004,8 +5022,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-21a5a15c-6681-4f64-a8ec-f44e10de9268-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 1209,
-          "sha": "7a9077021a54d207a4ebbd3776189e0e4ee8e085",
           "description": "",
+          "sha": "7a9077021a54d207a4ebbd3776189e0e4ee8e085",
           "createdAt": "2026-10-13T08:45:05.846Z"
         },
         {
@@ -5015,8 +5033,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-baedd8dd-d6c2-40f4-a1d1-d658c9e3262b-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 342,
-          "sha": "664da30b6b7d6cc41264ea76ba36dff904482fb8",
           "description": "",
+          "sha": "664da30b6b7d6cc41264ea76ba36dff904482fb8",
           "createdAt": "2026-10-13T08:45:08.125Z"
         },
         {
@@ -5026,8 +5044,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-9bccb747-62a2-4658-8b1e-7f2733079a2c-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 129,
-          "sha": "8ad56f7beca21422c9d8c2b29df15f1c895a3d89",
           "description": "",
+          "sha": "8ad56f7beca21422c9d8c2b29df15f1c895a3d89",
           "createdAt": "2026-10-13T08:45:11.145Z"
         },
         {
@@ -5037,8 +5055,8 @@
           "path": "assets/images/note-358f3a9b-4ec4-44e2-a338-806d16917749/image-2e8d6f3a-3cc1-46a6-8312-18b05409301d-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 2049,
-          "sha": "b4173189abaaf973e11b4e057f4a518131478679",
           "description": "",
+          "sha": "b4173189abaaf973e11b4e057f4a518131478679",
           "createdAt": "2026-10-13T08:45:13.113Z"
         }
       ],
@@ -5061,8 +5079,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-f87e343e-29e8-4852-9e06-ebd74dd047a6-word-image.png.png",
           "mimeType": "image/png",
           "size": 93990,
-          "sha": "4e92ab549b866e92ffafc5d0d68af5e752cb469a",
           "description": "",
+          "sha": "4e92ab549b866e92ffafc5d0d68af5e752cb469a",
           "createdAt": "2026-10-13T08:45:16.056Z"
         },
         {
@@ -5072,8 +5090,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-576bc242-5122-4a3e-bf9d-3847394a6919-word-image.png.png",
           "mimeType": "image/png",
           "size": 3654,
-          "sha": "6eaa658762b6e0c7af2129532235aaa7cdf1c921",
           "description": "",
+          "sha": "6eaa658762b6e0c7af2129532235aaa7cdf1c921",
           "createdAt": "2026-10-13T08:45:18.269Z"
         },
         {
@@ -5083,8 +5101,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-cf6a8fa7-450b-4d14-8c15-195b2dd6ea9c-word-image.png.png",
           "mimeType": "image/png",
           "size": 283296,
-          "sha": "f775240d7b020481994ed4ca5ace2aef108022d1",
           "description": "",
+          "sha": "f775240d7b020481994ed4ca5ace2aef108022d1",
           "createdAt": "2026-10-13T08:45:21.670Z"
         },
         {
@@ -5094,8 +5112,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-34ba656e-39e9-4f56-9095-0ebaa89f8adb-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 41358,
-          "sha": "c265e6195f24c485fdf6d1566259218e8af46705",
           "description": "",
+          "sha": "c265e6195f24c485fdf6d1566259218e8af46705",
           "createdAt": "2026-10-13T08:45:24.016Z"
         },
         {
@@ -5105,8 +5123,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-e3925940-865e-4007-a432-437439477811-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 121956,
-          "sha": "e574f2b138c8a719cd969c9ff9b65ebc2c2bb8c2",
           "description": "",
+          "sha": "e574f2b138c8a719cd969c9ff9b65ebc2c2bb8c2",
           "createdAt": "2026-10-13T08:45:27.422Z"
         },
         {
@@ -5116,8 +5134,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-45662c1e-4f88-4713-9162-7d9a9b0a53f0-word-image.png.png",
           "mimeType": "image/png",
           "size": 162036,
-          "sha": "bc01569b3b6c3317da62f4762b1f34f4a92ef1d5",
           "description": "",
+          "sha": "bc01569b3b6c3317da62f4762b1f34f4a92ef1d5",
           "createdAt": "2026-10-13T08:45:30.946Z"
         },
         {
@@ -5127,8 +5145,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-2e9b3827-dd4a-49a4-95a6-e7bb47cea7ae-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 55053,
-          "sha": "fb64df3f29bc698b819468816a045fe35aaec59c",
           "description": "",
+          "sha": "fb64df3f29bc698b819468816a045fe35aaec59c",
           "createdAt": "2026-10-13T08:45:33.373Z"
         },
         {
@@ -5138,8 +5156,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-1befa043-ed59-4aa7-92f9-7774b1516c8a-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 86421,
-          "sha": "12423213a00a73eb3310576b09d250804e31156f",
           "description": "",
+          "sha": "12423213a00a73eb3310576b09d250804e31156f",
           "createdAt": "2026-10-13T08:45:36.061Z"
         },
         {
@@ -5149,8 +5167,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-185afb80-4aa5-4777-8279-2e8a7308c7e8-word-image.png.png",
           "mimeType": "image/png",
           "size": 90153,
-          "sha": "1100b05363099b353258e0f6474043ed1f1a2366",
           "description": "",
+          "sha": "1100b05363099b353258e0f6474043ed1f1a2366",
           "createdAt": "2026-10-13T08:45:39.572Z"
         },
         {
@@ -5160,8 +5178,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-8968c666-c487-4265-b243-8ff40cc55289-word-image.png.png",
           "mimeType": "image/png",
           "size": 216099,
-          "sha": "2f6d4430e68ad6b9857f0aadb1f9c120f80ca77c",
           "description": "",
+          "sha": "2f6d4430e68ad6b9857f0aadb1f9c120f80ca77c",
           "createdAt": "2026-10-13T08:45:42.890Z"
         },
         {
@@ -5171,8 +5189,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-ce7e8553-8a34-4e2c-9d3f-afc0618a22bb-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 137844,
-          "sha": "6e1215658587d0113a54c3d3d1b201649f6d2664",
           "description": "",
+          "sha": "6e1215658587d0113a54c3d3d1b201649f6d2664",
           "createdAt": "2026-10-13T08:45:45.700Z"
         },
         {
@@ -5182,8 +5200,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-d92ce2d7-b2c1-466d-a3ea-d8b1578672e8-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 51573,
-          "sha": "160620dc192b36c29f5a6ed9b08fd937861d4ef3",
           "description": "",
+          "sha": "160620dc192b36c29f5a6ed9b08fd937861d4ef3",
           "createdAt": "2026-10-13T08:45:48.558Z"
         },
         {
@@ -5193,8 +5211,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-3b602471-0781-4a94-8523-59177d00eaeb-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 18681,
-          "sha": "b055d6de2868a9fbd28145663f82b98ac93c0aaf",
           "description": "",
+          "sha": "b055d6de2868a9fbd28145663f82b98ac93c0aaf",
           "createdAt": "2026-10-13T08:45:51.291Z"
         },
         {
@@ -5204,8 +5222,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-bfb48084-0996-45ae-9528-f55db3980725-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 20352,
-          "sha": "fdccc6b4f93964607395d6e5520c219b285f3a48",
           "description": "",
+          "sha": "fdccc6b4f93964607395d6e5520c219b285f3a48",
           "createdAt": "2026-10-13T08:45:53.848Z"
         },
         {
@@ -5215,8 +5233,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-142604ea-1749-41cd-84d2-9c6829813580-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 75540,
-          "sha": "eebae836f9078731e1b798345bbd67ef66dbd317",
           "description": "",
+          "sha": "eebae836f9078731e1b798345bbd67ef66dbd317",
           "createdAt": "2026-10-13T08:45:56.365Z"
         },
         {
@@ -5226,8 +5244,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-c0147b1d-c944-488a-be65-6a43af708d62-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 81645,
-          "sha": "774d773331ff09e24b7a34158b7694bdb1bc4cac",
           "description": "",
+          "sha": "774d773331ff09e24b7a34158b7694bdb1bc4cac",
           "createdAt": "2026-10-13T08:45:59.679Z"
         },
         {
@@ -5237,8 +5255,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-e95081b5-1e5a-47ae-8df8-2297b25fa03d-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 130515,
-          "sha": "6540dff0997ed1e9781442dce3d61aee4cf7cf0e",
           "description": "",
+          "sha": "6540dff0997ed1e9781442dce3d61aee4cf7cf0e",
           "createdAt": "2026-10-13T08:46:02.403Z"
         },
         {
@@ -5248,8 +5266,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-042725c3-2e54-46d0-b50c-8ce76dfa7f09-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 108768,
-          "sha": "b778c62179023dc87a6bccbb2314bd2ef0b96ac0",
           "description": "",
+          "sha": "b778c62179023dc87a6bccbb2314bd2ef0b96ac0",
           "createdAt": "2026-10-13T08:46:05.133Z"
         },
         {
@@ -5259,8 +5277,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-b22f56e9-1175-48be-9246-2949aa75f2a0-word-image.png.png",
           "mimeType": "image/png",
           "size": 10566,
-          "sha": "48dac5cb05b11c9a744b055236efb567e29e4d87",
           "description": "",
+          "sha": "48dac5cb05b11c9a744b055236efb567e29e4d87",
           "createdAt": "2026-10-13T08:46:07.355Z"
         },
         {
@@ -5270,8 +5288,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-1390d633-5d10-4d10-9c71-1cfe781ff4b6-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 35160,
-          "sha": "be1b2c2e4ea665360a1660488821b92331b75a91",
           "description": "",
+          "sha": "be1b2c2e4ea665360a1660488821b92331b75a91",
           "createdAt": "2026-10-13T08:46:09.861Z"
         },
         {
@@ -5281,8 +5299,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-cf6e8ab2-c8f6-49e9-a1ef-40569b851dfe-word-image.png.png",
           "mimeType": "image/png",
           "size": 120540,
-          "sha": "904b7016365ccd2b349694e5b2b390b4909fb901",
           "description": "",
+          "sha": "904b7016365ccd2b349694e5b2b390b4909fb901",
           "createdAt": "2026-10-13T08:46:13.031Z"
         },
         {
@@ -5292,8 +5310,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-26c4493b-aba3-4a11-a171-881c1872efc1-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 114393,
-          "sha": "ef97f789da7a03943ce48d883583449816601049",
           "description": "",
+          "sha": "ef97f789da7a03943ce48d883583449816601049",
           "createdAt": "2026-10-13T08:46:15.842Z"
         },
         {
@@ -5303,8 +5321,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-5cf4daf9-0a5b-4643-8ea0-02eec4037818-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 77982,
-          "sha": "04275fb12bf32dfaa6a7f71b4bb14186262c1809",
           "description": "",
+          "sha": "04275fb12bf32dfaa6a7f71b4bb14186262c1809",
           "createdAt": "2026-10-13T08:46:18.498Z"
         },
         {
@@ -5314,8 +5332,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-3842df88-4c16-45b2-b2eb-1e7a60784cce-word-image.png.png",
           "mimeType": "image/png",
           "size": 610416,
-          "sha": "6f0e9ccc0045306767e79487251dab2e053f6ceb",
           "description": "",
+          "sha": "6f0e9ccc0045306767e79487251dab2e053f6ceb",
           "createdAt": "2026-10-13T08:46:22.003Z"
         },
         {
@@ -5325,8 +5343,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-d6ac202e-d3b7-4bfd-af1f-86b770ae62e8-word-image.png.png",
           "mimeType": "image/png",
           "size": 671766,
-          "sha": "c36d68c42d0eaa50831e1eaeb9349d4ea891c968",
           "description": "",
+          "sha": "c36d68c42d0eaa50831e1eaeb9349d4ea891c968",
           "createdAt": "2026-10-13T08:46:25.617Z"
         },
         {
@@ -5336,8 +5354,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-021d3af5-f9cf-4b37-b48a-4cf8297d9b99-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 115293,
-          "sha": "5f881f4126a244a95d417e459a2af5e02a17c44a",
           "description": "",
+          "sha": "5f881f4126a244a95d417e459a2af5e02a17c44a",
           "createdAt": "2026-10-13T08:46:28.874Z"
         },
         {
@@ -5347,8 +5365,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-1c94fe68-3d27-4bdf-853a-a8f3af036c0f-word-image.png.png",
           "mimeType": "image/png",
           "size": 629265,
-          "sha": "34d310fe25619bf593998faf189e95e256989c3d",
           "description": "",
+          "sha": "34d310fe25619bf593998faf189e95e256989c3d",
           "createdAt": "2026-10-13T08:46:32.541Z"
         },
         {
@@ -5358,8 +5376,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-bdd28d3d-0d5d-4e9b-bc85-671dbad98717-word-image.png.png",
           "mimeType": "image/png",
           "size": 576531,
-          "sha": "10c4636c521edb355b0c265fad5a6af9bcc4fbfa",
           "description": "",
+          "sha": "10c4636c521edb355b0c265fad5a6af9bcc4fbfa",
           "createdAt": "2026-10-13T08:46:36.129Z"
         },
         {
@@ -5369,8 +5387,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-b1bb57ca-35f3-4faa-ae7c-4f9f94ad6be1-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 169074,
-          "sha": "23c299a20d1d54b3c4b3112d5e07c7352a643a39",
           "description": "",
+          "sha": "23c299a20d1d54b3c4b3112d5e07c7352a643a39",
           "createdAt": "2026-10-13T08:46:38.995Z"
         },
         {
@@ -5380,8 +5398,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-d25b9360-bbeb-41a3-9431-e7368420b7bb-word-image.png.png",
           "mimeType": "image/png",
           "size": 63945,
-          "sha": "286f8212f415f8ce5126e28ba829608de2ab83e6",
           "description": "",
+          "sha": "286f8212f415f8ce5126e28ba829608de2ab83e6",
           "createdAt": "2026-10-13T08:46:42.128Z"
         },
         {
@@ -5391,8 +5409,8 @@
           "path": "assets/images/note-87851377-918d-4b31-9ff3-93d790f3bc1d/image-e24f83f3-69b0-4cd9-beac-0063ad2d4c90-word-image.png.png",
           "mimeType": "image/png",
           "size": 237486,
-          "sha": "78df5161d3884fc19659b7de36e37b30cf96b9d2",
           "description": "",
+          "sha": "78df5161d3884fc19659b7de36e37b30cf96b9d2",
           "createdAt": "2026-10-13T08:46:45.776Z"
         }
       ],
@@ -5415,8 +5433,8 @@
           "path": "assets/images/note-2dc07d38-4fc9-47d4-b6e4-7143fd92ec94/image-1cd5d4f7-e960-48a0-a84d-ccb9c017f3d6-word-image.png.png",
           "mimeType": "image/png",
           "size": 221955,
-          "sha": "e04667bb2e1b8bf04bd04b47055558fd62699d75",
           "description": "",
+          "sha": "e04667bb2e1b8bf04bd04b47055558fd62699d75",
           "createdAt": "2026-10-13T08:46:48.921Z"
         },
         {
@@ -5426,8 +5444,8 @@
           "path": "assets/images/note-2dc07d38-4fc9-47d4-b6e4-7143fd92ec94/image-36ddc374-c886-480d-a999-1c3a2fb3b9fc-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 27291,
-          "sha": "643ad6f67b5a169b429061fa2ce3db24cc968585",
           "description": "",
+          "sha": "643ad6f67b5a169b429061fa2ce3db24cc968585",
           "createdAt": "2026-10-13T08:46:51.612Z"
         }
       ],
@@ -5450,8 +5468,8 @@
           "path": "assets/images/note-aa6e9b80-8002-413e-b232-00337bd95c0a/image-d4ba94da-b30a-48ed-8cfc-f5aaba726d3b-word-image.png.png",
           "mimeType": "image/png",
           "size": 199983,
-          "sha": "2542e72d69569bce41d3c12c0cfb68395cc74bf4",
           "description": "",
+          "sha": "2542e72d69569bce41d3c12c0cfb68395cc74bf4",
           "createdAt": "2026-10-13T08:46:54.886Z"
         },
         {
@@ -5461,8 +5479,8 @@
           "path": "assets/images/note-aa6e9b80-8002-413e-b232-00337bd95c0a/image-7625fa13-17cc-44fb-83e5-c156333a3bec-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 23046,
-          "sha": "2725598c8707c3b17bb2802dd54fdbe2613f5a90",
           "description": "",
+          "sha": "2725598c8707c3b17bb2802dd54fdbe2613f5a90",
           "createdAt": "2026-10-13T08:46:57.426Z"
         },
         {
@@ -5472,8 +5490,8 @@
           "path": "assets/images/note-aa6e9b80-8002-413e-b232-00337bd95c0a/image-d2d9ab93-0bcb-49b8-ace3-3a0547ca06d6-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 27537,
-          "sha": "24c97003284ca8bfb1084795f6c9a231d576ce88",
           "description": "",
+          "sha": "24c97003284ca8bfb1084795f6c9a231d576ce88",
           "createdAt": "2026-10-13T08:46:59.547Z"
         },
         {
@@ -5483,8 +5501,8 @@
           "path": "assets/images/note-aa6e9b80-8002-413e-b232-00337bd95c0a/image-645bcc49-830a-4a98-ac5f-9d77bad922c5-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 35817,
-          "sha": "3963c4a6c61afb92709a4667753e61b7a4297b6c",
           "description": "",
+          "sha": "3963c4a6c61afb92709a4667753e61b7a4297b6c",
           "createdAt": "2026-10-13T08:47:02.070Z"
         },
         {
@@ -5494,8 +5512,8 @@
           "path": "assets/images/note-aa6e9b80-8002-413e-b232-00337bd95c0a/image-221fe6c4-5966-4858-877b-8d7671ac4f92-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 10911,
-          "sha": "fb95f9cba6876d5dedc81c73b7a546c21c66d788",
           "description": "",
+          "sha": "fb95f9cba6876d5dedc81c73b7a546c21c66d788",
           "createdAt": "2026-10-13T08:47:04.782Z"
         }
       ],
@@ -5518,8 +5536,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-33663ba9-1ea6-4eb6-a22b-08ed134050a1-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 44079,
-          "sha": "2e2d2458c7b87ae4a5225515d7456c4d93ad6c5e",
           "description": "",
+          "sha": "2e2d2458c7b87ae4a5225515d7456c4d93ad6c5e",
           "createdAt": "2026-10-13T08:47:07.343Z"
         },
         {
@@ -5529,8 +5547,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-c55915d2-a53f-486e-83ce-19350265a10c-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 18669,
-          "sha": "9302753ec7d8abdefdadd202ebbaede58d2e2b5f",
           "description": "",
+          "sha": "9302753ec7d8abdefdadd202ebbaede58d2e2b5f",
           "createdAt": "2026-10-13T08:47:09.884Z"
         },
         {
@@ -5540,8 +5558,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-5d5c267a-72e4-40fd-a1b4-ffdf6ac19d06-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 61839,
-          "sha": "c631bd2d8ddc2ad741ba01d058b31c72e818ab26",
           "description": "",
+          "sha": "c631bd2d8ddc2ad741ba01d058b31c72e818ab26",
           "createdAt": "2026-10-13T08:47:12.609Z"
         },
         {
@@ -5551,8 +5569,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-30d01feb-6d61-41ff-8ac4-f91c8873d0b6-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 45738,
-          "sha": "6cad92594e00cffa4024ce80a635f4d4b7466c21",
           "description": "",
+          "sha": "6cad92594e00cffa4024ce80a635f4d4b7466c21",
           "createdAt": "2026-10-13T08:47:15.348Z"
         },
         {
@@ -5562,8 +5580,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-6eab98f2-f6c7-40a9-82f3-5159d639c296-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 24126,
-          "sha": "396e555dbfd707af98dec525ed4ec1a580482dfc",
           "description": "",
+          "sha": "396e555dbfd707af98dec525ed4ec1a580482dfc",
           "createdAt": "2026-10-13T08:47:18.028Z"
         },
         {
@@ -5573,8 +5591,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-b4133d2a-0093-479b-9ba4-470480a71a57-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 35565,
-          "sha": "82f1781c41b482654486584c8c8f3139be47f4a4",
           "description": "",
+          "sha": "82f1781c41b482654486584c8c8f3139be47f4a4",
           "createdAt": "2026-10-13T08:47:20.289Z"
         },
         {
@@ -5584,8 +5602,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-745e8ba9-dbfe-4ca8-8250-3847956c4965-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 38445,
-          "sha": "2b4585ffca323b52032a0721562dcdfb9f04e123",
           "description": "",
+          "sha": "2b4585ffca323b52032a0721562dcdfb9f04e123",
           "createdAt": "2026-10-13T08:47:22.822Z"
         },
         {
@@ -5595,8 +5613,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-d59975b7-e085-4822-aa33-890273c3b035-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 126435,
-          "sha": "4ee6bd69d899c4ba6fff81b504b50f8a276263ab",
           "description": "",
+          "sha": "4ee6bd69d899c4ba6fff81b504b50f8a276263ab",
           "createdAt": "2026-10-13T08:47:25.583Z"
         },
         {
@@ -5606,8 +5624,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-197644e5-ca1e-4b2a-964b-a8bc89bb1d45-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 9177,
-          "sha": "22f39e6fee673405aaa1ec5e4a8ff6f470ce800b",
           "description": "",
+          "sha": "22f39e6fee673405aaa1ec5e4a8ff6f470ce800b",
           "createdAt": "2026-10-13T08:47:27.719Z"
         },
         {
@@ -5617,8 +5635,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-6a892cfc-02da-400a-b4a9-d381af0d0ecb-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 36195,
-          "sha": "46dd27f84c23fa083b3f45f63e4010a07804fc16",
           "description": "",
+          "sha": "46dd27f84c23fa083b3f45f63e4010a07804fc16",
           "createdAt": "2026-10-13T08:47:30.229Z"
         },
         {
@@ -5628,8 +5646,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-ee261189-31ac-44ad-b71e-58226a2856ff-word-image.png.png",
           "mimeType": "image/png",
           "size": 201591,
-          "sha": "5766af4fe047f7d6f3914422fe9dbc62a1dcda79",
           "description": "",
+          "sha": "5766af4fe047f7d6f3914422fe9dbc62a1dcda79",
           "createdAt": "2026-10-13T08:47:33.432Z"
         },
         {
@@ -5639,8 +5657,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-573aa7dd-7211-4c2e-a980-4581e11ddfa6-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 50658,
-          "sha": "8e600e4daeb87534c7574f76b438b507af6b5a09",
           "description": "",
+          "sha": "8e600e4daeb87534c7574f76b438b507af6b5a09",
           "createdAt": "2026-10-13T08:47:36.069Z"
         },
         {
@@ -5650,8 +5668,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-e8e7ebe4-6e58-42f7-b064-4167721045f8-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 76014,
-          "sha": "e87ccd95c0d5d023b330f03d91a6730a71749a9f",
           "description": "",
+          "sha": "e87ccd95c0d5d023b330f03d91a6730a71749a9f",
           "createdAt": "2026-10-13T08:47:38.755Z"
         },
         {
@@ -5661,8 +5679,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-2b27465d-3393-41f0-a771-038e3ec5b273-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 18117,
-          "sha": "5818509f944dbe4be06bc146d27f258792d7de10",
           "description": "",
+          "sha": "5818509f944dbe4be06bc146d27f258792d7de10",
           "createdAt": "2026-10-13T08:47:41.337Z"
         },
         {
@@ -5672,8 +5690,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-bab66434-b72c-465a-9941-761671647d49-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 70914,
-          "sha": "69c8fa6d09ee7aaa3fcd439dd9022a19f6cb9ba3",
           "description": "",
+          "sha": "69c8fa6d09ee7aaa3fcd439dd9022a19f6cb9ba3",
           "createdAt": "2026-10-13T08:47:43.753Z"
         },
         {
@@ -5683,8 +5701,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-f128ada1-9a2a-4cb0-8471-f4dc4d092e14-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 11910,
-          "sha": "595177b8a97df29320d27421fca77aed21807d38",
           "description": "",
+          "sha": "595177b8a97df29320d27421fca77aed21807d38",
           "createdAt": "2026-10-13T08:47:46.139Z"
         },
         {
@@ -5694,8 +5712,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-a8257914-77b1-4e7e-95f8-33f2aabe9d4c-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 19422,
-          "sha": "ecdb62cc5c3dce8ad516e37256be00029709359c",
           "description": "",
+          "sha": "ecdb62cc5c3dce8ad516e37256be00029709359c",
           "createdAt": "2026-10-13T08:47:48.369Z"
         },
         {
@@ -5705,8 +5723,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-7612f6c9-5a57-4bfb-a097-4f568f1d293e-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 10134,
-          "sha": "b07861968ddcc798b387f735d4c40976870d5cbf",
           "description": "",
+          "sha": "b07861968ddcc798b387f735d4c40976870d5cbf",
           "createdAt": "2026-10-13T08:47:50.504Z"
         },
         {
@@ -5716,8 +5734,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-3fe89757-8832-41fa-ad5b-3f8a1d46c2a3-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 16971,
-          "sha": "0d76dd172e4771fac7ea01d588e0067b1862b4a8",
           "description": "",
+          "sha": "0d76dd172e4771fac7ea01d588e0067b1862b4a8",
           "createdAt": "2026-10-13T08:47:52.891Z"
         },
         {
@@ -5727,8 +5745,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-5af18e1f-23b8-4527-a767-8cff96a20113-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 79266,
-          "sha": "1014ae1888538bab165bc48f749277e1e57727c4",
           "description": "",
+          "sha": "1014ae1888538bab165bc48f749277e1e57727c4",
           "createdAt": "2026-10-13T08:47:55.552Z"
         },
         {
@@ -5738,8 +5756,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-bbc0be7f-95d3-43a3-a44a-7efda031ba8f-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 9519,
-          "sha": "893512b678a646e23235682948f7714e8d99a2d2",
           "description": "",
+          "sha": "893512b678a646e23235682948f7714e8d99a2d2",
           "createdAt": "2026-10-13T08:47:57.678Z"
         },
         {
@@ -5749,8 +5767,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-e6929c6a-2cf1-4aa6-8cc7-107fdbc16e8c-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 23193,
-          "sha": "b87b332632ec268b60d9f21516d9e6d50c2a4d21",
           "description": "",
+          "sha": "b87b332632ec268b60d9f21516d9e6d50c2a4d21",
           "createdAt": "2026-10-13T08:48:00.571Z"
         },
         {
@@ -5760,8 +5778,8 @@
           "path": "assets/images/note-599cd9d9-2e54-4767-9067-7fc7f9bc541f/image-03284eac-c8a4-487c-8180-001eee630563-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 20436,
-          "sha": "2dd1050b034b890a0347bb7f03ab65c67756e393",
           "description": "",
+          "sha": "2dd1050b034b890a0347bb7f03ab65c67756e393",
           "createdAt": "2026-10-13T08:48:03.353Z"
         }
       ],
@@ -5784,8 +5802,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-6875ceac-7a5c-40b5-9772-d3a3cec7e49f-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 59517,
-          "sha": "42e41d835c045f87e5a0534ad6e074887a61b543",
           "description": "",
+          "sha": "42e41d835c045f87e5a0534ad6e074887a61b543",
           "createdAt": "2026-10-13T08:48:06.367Z"
         },
         {
@@ -5795,8 +5813,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-422d13fc-82dc-4f07-af14-605ea95c3553-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 69438,
-          "sha": "9260dbb1956bd5a4d73be52154b0f6b6af47b687",
           "description": "",
+          "sha": "9260dbb1956bd5a4d73be52154b0f6b6af47b687",
           "createdAt": "2026-10-13T08:48:09.675Z"
         },
         {
@@ -5806,8 +5824,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-b0b8c777-8b18-46bb-a529-d4416a57fa9b-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 431766,
-          "sha": "abb473bce99d75142f0f30a88c45a976dce03554",
           "description": "",
+          "sha": "abb473bce99d75142f0f30a88c45a976dce03554",
           "createdAt": "2026-10-13T08:48:13.923Z"
         },
         {
@@ -5817,8 +5835,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-41a36b1c-2e7a-4dc4-b5da-4c4bfa017e2e-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 91278,
-          "sha": "1b45709d50683907dbadf247ac4b38aafda07bfb",
           "description": "",
+          "sha": "1b45709d50683907dbadf247ac4b38aafda07bfb",
           "createdAt": "2026-10-13T08:48:16.636Z"
         },
         {
@@ -5828,8 +5846,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-9915bb21-92fb-4724-ac2e-b6456ed1e69d-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 150753,
-          "sha": "bb372267410c7d6c52412f1fbed6985b2217f0b3",
           "description": "",
+          "sha": "bb372267410c7d6c52412f1fbed6985b2217f0b3",
           "createdAt": "2026-10-13T08:48:20.423Z"
         },
         {
@@ -5839,8 +5857,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-be963fe9-15b6-466b-8675-9ca01fa44558-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 76638,
-          "sha": "eed929bd32d33d6505a877997cec895796e87f20",
           "description": "",
+          "sha": "eed929bd32d33d6505a877997cec895796e87f20",
           "createdAt": "2026-10-13T08:48:24.186Z"
         },
         {
@@ -5850,8 +5868,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-1dfe8204-f456-4896-8e65-0f4ffa7cec83-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 195504,
-          "sha": "e0895334488cbba0b0d4b9775df72b38bacd858d",
           "description": "",
+          "sha": "e0895334488cbba0b0d4b9775df72b38bacd858d",
           "createdAt": "2026-10-13T08:48:28.781Z"
         },
         {
@@ -5861,8 +5879,8 @@
           "path": "assets/images/note-99910ffc-eb90-4d28-9a4c-7fee2aa5412e/image-c01cf3fb-dd08-4cb1-8864-bf8a06a8dc24-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 207861,
-          "sha": "81992dbbe81542168861583019d796215f53965f",
           "description": "",
+          "sha": "81992dbbe81542168861583019d796215f53965f",
           "createdAt": "2026-10-13T08:48:32.490Z"
         }
       ],
@@ -5897,8 +5915,8 @@
           "path": "assets/images/note-73ed791b-afc4-4ebb-8c58-2eae025167f4/image-5dd85684-ac79-4400-8159-6811e3878fe7-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 113742,
-          "sha": "74fbfef60547bf6ce33a7a8d2bd527e59fb650d4",
           "description": "",
+          "sha": "74fbfef60547bf6ce33a7a8d2bd527e59fb650d4",
           "createdAt": "2026-10-13T08:48:35.458Z"
         },
         {
@@ -5908,8 +5926,8 @@
           "path": "assets/images/note-73ed791b-afc4-4ebb-8c58-2eae025167f4/image-38844af0-13a7-4e71-ae80-5b0160f06940-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 95157,
-          "sha": "149769310b2456bb30ba3951d096e97baa2c6dc3",
           "description": "",
+          "sha": "149769310b2456bb30ba3951d096e97baa2c6dc3",
           "createdAt": "2026-10-13T08:48:39.016Z"
         }
       ],
@@ -5932,8 +5950,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-73a6cd5b-17ac-472f-aea4-29d7163fcb46-word-image.png.png",
           "mimeType": "image/png",
           "size": 87273,
-          "sha": "b693afcb3a2b2bcef92bbfa1ca14fc620b249d91",
           "description": "",
+          "sha": "b693afcb3a2b2bcef92bbfa1ca14fc620b249d91",
           "createdAt": "2026-10-13T08:48:43.615Z"
         },
         {
@@ -5943,8 +5961,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-58f12e59-cbb7-4d42-9c16-92088e8c60ef-word-image.png.png",
           "mimeType": "image/png",
           "size": 73101,
-          "sha": "14d3547174d75a1295f3fa11174605f2d5d3df8e",
           "description": "",
+          "sha": "14d3547174d75a1295f3fa11174605f2d5d3df8e",
           "createdAt": "2026-10-13T08:48:46.475Z"
         },
         {
@@ -5954,8 +5972,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-74534b88-2022-430a-b8da-52c4b26897f2-word-image.png.png",
           "mimeType": "image/png",
           "size": 206763,
-          "sha": "9c3d00e1cd31f169eb2d79205861b27bca3002d8",
           "description": "",
+          "sha": "9c3d00e1cd31f169eb2d79205861b27bca3002d8",
           "createdAt": "2026-10-13T08:48:49.812Z"
         },
         {
@@ -5965,8 +5983,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-4ea1ba37-e039-46ca-a817-7007fc5df2da-word-image.png.png",
           "mimeType": "image/png",
           "size": 220851,
-          "sha": "2bbc70755050bf06ccd91a6e41229f895f3b9b14",
           "description": "",
+          "sha": "2bbc70755050bf06ccd91a6e41229f895f3b9b14",
           "createdAt": "2026-10-13T08:48:52.844Z"
         },
         {
@@ -5976,8 +5994,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-0c73d6de-4ca4-4846-a8d2-b3efb3a2713f-word-image.png.png",
           "mimeType": "image/png",
           "size": 100962,
-          "sha": "cff485f8ef9104466b1295f5bf2482e6c0f9f82c",
           "description": "",
+          "sha": "cff485f8ef9104466b1295f5bf2482e6c0f9f82c",
           "createdAt": "2026-10-13T08:48:55.458Z"
         },
         {
@@ -5987,8 +6005,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-507257ca-fe1f-4f68-ab3b-7dc063d469d9-word-image.png.png",
           "mimeType": "image/png",
           "size": 127416,
-          "sha": "cbf4cc6a9c64c7c5cb8191d708376114de7b3480",
           "description": "",
+          "sha": "cbf4cc6a9c64c7c5cb8191d708376114de7b3480",
           "createdAt": "2026-10-13T08:48:58.198Z"
         },
         {
@@ -5998,8 +6016,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-5f2d0e0a-263e-4451-8af9-2aff1a279283-word-image.png.png",
           "mimeType": "image/png",
           "size": 122562,
-          "sha": "5177a8bde8687a6b2af0f3cb14ae436336443a9f",
           "description": "",
+          "sha": "5177a8bde8687a6b2af0f3cb14ae436336443a9f",
           "createdAt": "2026-10-13T08:49:01.918Z"
         },
         {
@@ -6009,8 +6027,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-ac0b5ca7-918c-4764-937c-1a67f165c46e-word-image.png.png",
           "mimeType": "image/png",
           "size": 79899,
-          "sha": "5b02f65a7faf730d0097336b49548fcc854d07c8",
           "description": "",
+          "sha": "5b02f65a7faf730d0097336b49548fcc854d07c8",
           "createdAt": "2026-10-13T08:49:05.775Z"
         },
         {
@@ -6020,8 +6038,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-b28f680d-5825-40f0-adeb-a84fb5251ecc-word-image.png.png",
           "mimeType": "image/png",
           "size": 88302,
-          "sha": "35e06d8a257fad45cd35e72adc00805dd8836e34",
           "description": "",
+          "sha": "35e06d8a257fad45cd35e72adc00805dd8836e34",
           "createdAt": "2026-10-13T08:49:09.372Z"
         },
         {
@@ -6031,8 +6049,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-0c18173c-7f49-4eeb-94dd-01d654bbd1bc-word-image.png.png",
           "mimeType": "image/png",
           "size": 50703,
-          "sha": "d864d3c8c336ac959c5593539adece3787370a79",
           "description": "",
+          "sha": "d864d3c8c336ac959c5593539adece3787370a79",
           "createdAt": "2026-10-13T08:49:12.044Z"
         },
         {
@@ -6042,8 +6060,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-0b5394cc-125d-472c-bd23-17d55773dc45-word-image.png.png",
           "mimeType": "image/png",
           "size": 175263,
-          "sha": "045cf270249b8137012ded12dcaea6310c4837c6",
           "description": "",
+          "sha": "045cf270249b8137012ded12dcaea6310c4837c6",
           "createdAt": "2026-10-13T08:49:15.641Z"
         },
         {
@@ -6053,8 +6071,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-5c4640b2-bc7e-4257-892d-bb3b38cee79b-word-image.png.png",
           "mimeType": "image/png",
           "size": 138651,
-          "sha": "e3090b15822740d588e3e180e1c6c6cd0f685188",
           "description": "",
+          "sha": "e3090b15822740d588e3e180e1c6c6cd0f685188",
           "createdAt": "2026-10-13T08:49:19.587Z"
         },
         {
@@ -6064,8 +6082,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-70f5c1a6-b7b4-45a5-a791-7fba4fce5d5a-word-image.png.png",
           "mimeType": "image/png",
           "size": 119337,
-          "sha": "83f6eb278cfdabf6fda83bb917edd9eb2276685e",
           "description": "",
+          "sha": "83f6eb278cfdabf6fda83bb917edd9eb2276685e",
           "createdAt": "2026-10-13T08:49:22.556Z"
         },
         {
@@ -6075,8 +6093,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-371f52f7-4e60-47e6-ae27-d4f56c0d3e3b-word-image.png.png",
           "mimeType": "image/png",
           "size": 43695,
-          "sha": "3a98caa6e88edc8c55bb70d00bdd875df719d660",
           "description": "",
+          "sha": "3a98caa6e88edc8c55bb70d00bdd875df719d660",
           "createdAt": "2026-10-13T08:49:25.041Z"
         },
         {
@@ -6086,8 +6104,8 @@
           "path": "assets/images/note-8d6cf4dd-5ba6-441e-bff1-6fa91d5699f0/image-61361aa2-eecd-4bac-aa7d-bd552551de2f-word-image.png.png",
           "mimeType": "image/png",
           "size": 144063,
-          "sha": "9601fc107c9201b868ef057e0af5843dc1f0953c",
           "description": "",
+          "sha": "9601fc107c9201b868ef057e0af5843dc1f0953c",
           "createdAt": "2026-10-13T08:49:27.681Z"
         }
       ],
@@ -6110,8 +6128,8 @@
           "path": "assets/images/note-0f7c3f30-452d-4b7d-a482-159530ab8bdd/image-19ce62f2-b1c0-431b-8136-4533cc0e0436-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 17505,
-          "sha": "15437c12f34caa5818efd264e55cc57572ca7de5",
           "description": "",
+          "sha": "15437c12f34caa5818efd264e55cc57572ca7de5",
           "createdAt": "2026-10-13T08:49:29.946Z"
         },
         {
@@ -6121,8 +6139,8 @@
           "path": "assets/images/note-0f7c3f30-452d-4b7d-a482-159530ab8bdd/image-49b340ff-cecb-419d-a208-91c504696fbf-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 13494,
-          "sha": "69a6261e730be62bcb297ab09602a80a811530c4",
           "description": "",
+          "sha": "69a6261e730be62bcb297ab09602a80a811530c4",
           "createdAt": "2026-10-13T08:49:32.134Z"
         },
         {
@@ -6132,8 +6150,8 @@
           "path": "assets/images/note-0f7c3f30-452d-4b7d-a482-159530ab8bdd/image-58857c82-8dde-440f-b272-edb281ab7abd-word-image.png.png",
           "mimeType": "image/png",
           "size": 14322,
-          "sha": "a3d2fd4c2a7a79a021a91612693aec524e6a513f",
           "description": "",
+          "sha": "a3d2fd4c2a7a79a021a91612693aec524e6a513f",
           "createdAt": "2026-10-13T08:49:35.183Z"
         },
         {
@@ -6143,8 +6161,8 @@
           "path": "assets/images/note-0f7c3f30-452d-4b7d-a482-159530ab8bdd/image-1fc401e5-5871-4769-8b38-caafcf8cea29-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 15177,
-          "sha": "c003c06fba75e76682a644e4a52b39319c24db83",
           "description": "",
+          "sha": "c003c06fba75e76682a644e4a52b39319c24db83",
           "createdAt": "2026-10-13T08:49:37.668Z"
         },
         {
@@ -6154,8 +6172,8 @@
           "path": "assets/images/note-0f7c3f30-452d-4b7d-a482-159530ab8bdd/image-b06d7b52-576a-4d08-a8e4-5e2a34fb06b0-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 13515,
-          "sha": "518623685b54cfb6028810bf55ea73f1e3f82ccb",
           "description": "",
+          "sha": "518623685b54cfb6028810bf55ea73f1e3f82ccb",
           "createdAt": "2026-10-13T08:49:40.152Z"
         }
       ],
@@ -6178,8 +6196,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-cc5f9127-b139-4df2-ae8d-a61ccf013e10-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:49:42.184Z"
         },
         {
@@ -6189,8 +6207,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-98736972-3ca1-4deb-a031-69771e83bec8-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:49:44.166Z"
         },
         {
@@ -6200,8 +6218,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-cffe5e90-dd8f-45dc-a372-5ddea03aafd0-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 9558,
-          "sha": "71a4a0c678de6f47ee1a46bb465f0e552f6b50a3",
           "description": "",
+          "sha": "71a4a0c678de6f47ee1a46bb465f0e552f6b50a3",
           "createdAt": "2026-10-13T08:49:46.385Z"
         },
         {
@@ -6211,8 +6229,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-78daa552-5c37-4c65-aff0-a9b5a7dab52e-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:49:48.860Z"
         },
         {
@@ -6222,8 +6240,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-ef0aa452-2d72-4ab6-a096-cbf4a559c557-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 6942,
-          "sha": "f5f00a2fea978d1a5c3f322f191c15ba5d95f798",
           "description": "",
+          "sha": "f5f00a2fea978d1a5c3f322f191c15ba5d95f798",
           "createdAt": "2026-10-13T08:49:51.007Z"
         },
         {
@@ -6233,8 +6251,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-87c4554f-05c7-442d-8ee8-badfaefcaa87-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:49:52.977Z"
         },
         {
@@ -6244,8 +6262,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-5ed1040e-e1f7-4f83-803f-5cc1ef7280d8-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 47970,
-          "sha": "4c8bf14a6f7f09e785bf655e857daa0a594b78ff",
           "description": "",
+          "sha": "4c8bf14a6f7f09e785bf655e857daa0a594b78ff",
           "createdAt": "2026-10-13T08:49:55.380Z"
         },
         {
@@ -6255,8 +6273,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-d498654b-6082-480c-9156-eb7e569b0ecc-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:49:57.485Z"
         },
         {
@@ -6266,8 +6284,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-e6fc2148-572f-4fce-95b0-e9d41a7ebb04-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 77142,
-          "sha": "f5eb4239d9840bdd6ea604e34807a36bd33705a5",
           "description": "",
+          "sha": "f5eb4239d9840bdd6ea604e34807a36bd33705a5",
           "createdAt": "2026-10-13T08:49:59.931Z"
         },
         {
@@ -6277,8 +6295,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-264741c4-3ea4-4870-8b12-5ee06cb73176-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:50:02.647Z"
         },
         {
@@ -6288,8 +6306,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-4504d9ba-8116-4c88-9ec1-2a43bee65187-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 80130,
-          "sha": "9f0c2c2cd83175f46a770e6f9dd03a55c8bf4fbd",
           "description": "",
+          "sha": "9f0c2c2cd83175f46a770e6f9dd03a55c8bf4fbd",
           "createdAt": "2026-10-13T08:50:05.417Z"
         },
         {
@@ -6299,8 +6317,8 @@
           "path": "assets/images/note-de5e33e7-bc69-4803-b0c9-bc9154fd531f/image-826a1132-5b0a-4747-9010-803bf0757fac-word-image.gif.gif",
           "mimeType": "image/gif",
           "size": 885,
-          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "description": "",
+          "sha": "58c83f563f001f138486d55af64dc27090628b34",
           "createdAt": "2026-10-13T08:50:07.443Z"
         }
       ],
@@ -6359,8 +6377,8 @@
           "path": "assets/images/note-695367d6-44aa-4da1-9d12-e85566b053d7/image-693d106c-77bf-40b1-8425-54ac5eb661f2-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 35226,
-          "sha": "05d640930e62ff2d67bdcbe679ba895cf1788b41",
           "description": "",
+          "sha": "05d640930e62ff2d67bdcbe679ba895cf1788b41",
           "createdAt": "2026-10-13T08:50:09.909Z"
         },
         {
@@ -6370,8 +6388,8 @@
           "path": "assets/images/note-695367d6-44aa-4da1-9d12-e85566b053d7/image-6b14e363-d7e8-4797-be68-e4c649c94369-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 35226,
-          "sha": "05d640930e62ff2d67bdcbe679ba895cf1788b41",
           "description": "",
+          "sha": "05d640930e62ff2d67bdcbe679ba895cf1788b41",
           "createdAt": "2026-10-13T08:50:13.148Z"
         },
         {
@@ -6381,8 +6399,8 @@
           "path": "assets/images/note-695367d6-44aa-4da1-9d12-e85566b053d7/image-930c3df6-04cc-48f7-9404-98aa99b80b07-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 7479,
-          "sha": "d589368f4c9096e2a4b73b4b5a30f820fb786520",
           "description": "",
+          "sha": "d589368f4c9096e2a4b73b4b5a30f820fb786520",
           "createdAt": "2026-10-13T08:50:15.363Z"
         }
       ],
@@ -6429,14 +6447,1178 @@
           "path": "assets/images/note-0fca1939-a0b1-44b3-960f-404f211bc54a/image-b2fafcc8-eca5-48b1-8be7-ecf3fe4728cd-word-image.jpg.jpg",
           "mimeType": "image/jpeg",
           "size": 372885,
-          "sha": "7b6e8637c9e4371b9228a7a1555ecaee295f3423",
           "description": "",
+          "sha": "7b6e8637c9e4371b9228a7a1555ecaee295f3423",
           "createdAt": "2026-10-13T08:50:18.919Z"
         }
       ],
       "attachments": [],
       "createdAt": "2026-10-13T08:42:20.575Z",
       "updatedAt": "2026-10-13T08:42:20.575Z"
+    },
+    {
+      "id": "note-61216f01-8fb1-47e2-bf02-16100242bf80",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "光电耦合器 vs 光电开关 vs 光电传感器：归类边界到底在哪？",
+      "content": "在商品归类工作中，我们经常会遇到这样一组容易混淆的产品——光电耦合器、光电开关和光电传感器。本文将对它们的技术差异及判定商品编码的关键依据作一个简要解析。<br><b>1. 光电耦合器 (Optocoupler)<span style=\"background-color:#ffff00\"> </span> </b><br>光电耦合器是内部包含一个发光二极管（LED，发射端）和一个光敏器件（如光电三极管，接收端）。它利用光作为媒介，从而切断了两个电路之间的电气连接。<br><b>电路图如下：</b><br><img src=\"[[img:image-0b6e9543-8844-43ad-93e4-2ef7a01a4c4c]]\" alt=\"\"><br><b>一般实物图如下：</b><br><img src=\"[[img:image-460e922e-858b-4baf-b52a-36935642c03b]]\" alt=\"\"><br><b>归类依据：</b>属于光敏半导体器件，归：8541.49<br><b>延伸：</b>固态继电器（solid state relay），又名：光电继电器。由普通二极管、电阻、光电耦合器、双向晶闸管组成，实现继电器功能，也归：8541.49<br><b>2. 光电传感器 (Photoelectric Sensor) 与 光电开关 (Photoelectric Switch)</b><br>这两个术语经常互换使用，光电开关属于一种特殊的光电传感器。由一个发光二极管（LED，发射端）和一个光敏器件（如光电三极管，接收端）+<b>主控电路</b>组成。它们都是指通过发射光束并检测光束的反射或遮挡来感知物体。<br><b>电路图如下：</b><br><img src=\"[[img:image-455e731b-eb33-42a8-9d56-17bb97d33849]]\" alt=\"\"><br><b>一般实物图如下：</b><br><img src=\"[[img:image-80ec5dfe-8d26-4608-99f4-f372c7035431]]\" alt=\"\"><br><b>归类依据：</b>比光电耦合器多了<b>主控电路</b>，结构超了8541（个人理解）。有海关归类决定：8543.70<br><b>延伸：</b>此前该产品曾被归入：9031.80（已废除）。因其工作原理是基于光路的遮挡与否来判断物体有无，而非对物体的运动状态或速度进行测量、检测，故不应归入测量、检测仪器类。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-0b6e9543-8844-43ad-93e4-2ef7a01a4c4c",
+          "originalName": "image-0b6e9543-8844-43ad-93e4-2ef7a01a4c4c-word-image.png.png",
+          "storedName": "image-0b6e9543-8844-43ad-93e4-2ef7a01a4c4c-word-image.png.png",
+          "path": "assets/images/note-61216f01-8fb1-47e2-bf02-16100242bf80/image-0b6e9543-8844-43ad-93e4-2ef7a01a4c4c-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 58173,
+          "sha": "d8457248e3edc69a04df63d8c864ea8c9d3a7d76",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:07.397Z"
+        },
+        {
+          "id": "image-460e922e-858b-4baf-b52a-36935642c03b",
+          "originalName": "image-460e922e-858b-4baf-b52a-36935642c03b-word-image.png.png",
+          "storedName": "image-460e922e-858b-4baf-b52a-36935642c03b-word-image.png.png",
+          "path": "assets/images/note-61216f01-8fb1-47e2-bf02-16100242bf80/image-460e922e-858b-4baf-b52a-36935642c03b-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 247218,
+          "sha": "a65082a05fb77a854f20ac5fe51d43221b237bb8",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:10.844Z"
+        },
+        {
+          "id": "image-455e731b-eb33-42a8-9d56-17bb97d33849",
+          "originalName": "image-455e731b-eb33-42a8-9d56-17bb97d33849-word-image.png.png",
+          "storedName": "image-455e731b-eb33-42a8-9d56-17bb97d33849-word-image.png.png",
+          "path": "assets/images/note-61216f01-8fb1-47e2-bf02-16100242bf80/image-455e731b-eb33-42a8-9d56-17bb97d33849-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 243066,
+          "sha": "81571cf5aefacd151b8120dc93c1e2b59accc762",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:14.124Z"
+        },
+        {
+          "id": "image-80ec5dfe-8d26-4608-99f4-f372c7035431",
+          "originalName": "image-80ec5dfe-8d26-4608-99f4-f372c7035431-word-image.png.png",
+          "storedName": "image-80ec5dfe-8d26-4608-99f4-f372c7035431-word-image.png.png",
+          "path": "assets/images/note-61216f01-8fb1-47e2-bf02-16100242bf80/image-80ec5dfe-8d26-4608-99f4-f372c7035431-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 509751,
+          "sha": "4be747c55921095a8eee2ba04e61df24200b20e6",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:17.365Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-10176731-ad4b-4300-a73d-df6e9088cde5",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "发光二极管 (Light-Emitting Diode, LED) 的三重归类身份：8541、8539、9405——罗与罗与罗",
+      "content": "在发光二极管（<b>Light-Emitting Diode, LED</b>）的商品归类实务中，常见会涉及三个税号：8541、8539 和 9405。看似同为“LED”，归类却各不相同，这其中的逻辑与边界究竟在哪里？今天就来系统探讨一下。<br>1 、<b>发光二极管 (Light-Emitting Diode, LED) </b>（8541品目）是一种能将电能直接转化为光能的半导体器件。<br><b>工作原理：物理机制</b><br>LED 的核心是一个 <b>P-N 结</b>。它由两层半导体材料组成：<br>· P型半导体（P-type）： 富含“空穴”（带有正电荷的空位）。<br>· N型半导体（N-type）： 富含“电子”（带有负电荷）。<br><b>LED 的物理结构</b><br>一个典型的 5mm 指示灯级 LED 主要包含以下部件：<br>· LED 芯片 (Die)： 发光的半导体核心。<br>· 金丝 (Gold Wire)： 连接芯片与引脚的细导线。<br>· 反射杯 (Reflector Cup)： 支架上的凹槽，用于将光线反射向前方。<br>· 阳极 (+) 与 阴极 (-)： 外部金属引脚。通常较长的一脚是阳极。<br>· 环氧树脂封装 (Epoxy Lens)： 保护内部结构，并起到透镜作用来聚焦光线。<br><b>常见形态</b><br>· 分立式LED（直插DIP、贴片SMD、COB封装）（《总注释》所指：（一）发光二极管（LED）器件）：<br><img src=\"[[img:image-0dcf4414-6d85-45a3-b47b-85da36eb0110]]\" alt=\"\"><br>· LED组件（无驱动电路）（《总注释》所指：（二）发光二极管（LED）组件）<br><img src=\"[[img:image-5bbfc455-6bf1-489d-9091-34987989ecc0]]\" alt=\"\"><br>二、<b>发光二极管 (Light-Emitting Diode, LED) 模块</b>（8539品目）是一种将多个发光二极管、电路板、驱动电路整合在一起的自持式照明单元，即光源。<br><img src=\"[[img:image-6ceb33e0-d6cc-4af0-8b41-19421416d477]]\" alt=\"\"><br>由多个发光二极管和调节电流和电压的<b>驱动电路</b>组成。驱动电路确保 LED在安全参数范围内运行，保持最佳亮度和颜色质量。常见图片如下：<br><img src=\"[[img:image-6d07b8b2-9c4f-42bd-bbc5-c20685f47d91]]\" alt=\"\"><br><img src=\"[[img:image-33d6acc6-f88e-4ce4-8a8a-8e6709154c79]]\" alt=\"\"><br>关于品目：8539的发光二极管（LED）灯泡(管)，这个相对容易判断，闲言少叙。<br>三、<b>发光二极管 (Light-Emitting Diode, LED) 灯具及照明装置</b>，是指以LED作为光源，具备完整照明功能、可直接安装并投入使用的成品照明设备。<br>通常包含：<br>· LED光源（LED模块或LED灯泡、灯管）<br>· 灯体结构（外壳、支架、安装件）<br>· 光学系统（透镜、反射器、扩散罩）<br>· 电气连接与安全结构<br>综上，总结如下：<br><b>LED，是发光核心；</b><br><b>LED模组/灯泡/灯管，是发光光源；</b><br><b>LED灯具，集成了光源、散热器和外壳等，组成了最终电器。</b><br>上述三类产品，虽都属于LED，商品编码却不同，正如罗永浩（产品/电子元器件）、罗振宇（输出知识/光源）与罗翔（法治框架/完成品），身份各异。其内在逻辑和适用边界截然不同。<br><span style=\"background-color:#ffff00\">四、</span><b>话外篇：品目8539封闭式聚光灯与9405聚光灯区别：</b><br><img src=\"[[img:image-84cf9f96-f379-4d6b-89bb-207a3d245243]]\" alt=\"\"><br><img src=\"[[img:image-3992eaa4-84d6-4b2f-99aa-167855ca64bf]]\" alt=\"\"><br>根据中英文《总注释》对照，封闭式聚光灯，英文为：sealed beam lamp，常应用于汽车上，产品图片如下：<br><br>聚光灯，英文为：spotlights，常应用于舞台上，产品图片如下：<br><img src=\"[[img:image-b651f193-5b2a-44a1-8c04-751144cb4245]]\" alt=\"\"><br>鉴于beam是光束之意，建议将品目8539的封闭式聚光灯（sealed beam lamp）翻译为：<b>封闭式光束灯</b>，或<b>密封式光束灯</b>，与品目9405聚光灯（spotlights）加以区分。<br>以上仅为个人理解。如有不同意见，欢迎探讨。<b>下周预告</b>：合成革——真假美！<b>点个关注不迷路！</b>",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-0dcf4414-6d85-45a3-b47b-85da36eb0110",
+          "originalName": "image-0dcf4414-6d85-45a3-b47b-85da36eb0110-word-image.png.png",
+          "storedName": "image-0dcf4414-6d85-45a3-b47b-85da36eb0110-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-0dcf4414-6d85-45a3-b47b-85da36eb0110-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 110904,
+          "sha": "0877a501a8caba559a6df05bba6a6a469b12f8ea",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:20.149Z"
+        },
+        {
+          "id": "image-5bbfc455-6bf1-489d-9091-34987989ecc0",
+          "originalName": "image-5bbfc455-6bf1-489d-9091-34987989ecc0-word-image.png.png",
+          "storedName": "image-5bbfc455-6bf1-489d-9091-34987989ecc0-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-5bbfc455-6bf1-489d-9091-34987989ecc0-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 77058,
+          "sha": "785823fde618cff8168defec8cb817f2fefb8101",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:22.910Z"
+        },
+        {
+          "id": "image-6ceb33e0-d6cc-4af0-8b41-19421416d477",
+          "originalName": "image-6ceb33e0-d6cc-4af0-8b41-19421416d477-word-image.png.png",
+          "storedName": "image-6ceb33e0-d6cc-4af0-8b41-19421416d477-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-6ceb33e0-d6cc-4af0-8b41-19421416d477-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 142260,
+          "sha": "eadd330950b6a21e24f6bdfbae6edeb2b6246292",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:25.686Z"
+        },
+        {
+          "id": "image-6d07b8b2-9c4f-42bd-bbc5-c20685f47d91",
+          "originalName": "image-6d07b8b2-9c4f-42bd-bbc5-c20685f47d91-word-image.png.png",
+          "storedName": "image-6d07b8b2-9c4f-42bd-bbc5-c20685f47d91-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-6d07b8b2-9c4f-42bd-bbc5-c20685f47d91-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 69117,
+          "sha": "167a0258b4007ab64361f532b133db94a09912f0",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:28.406Z"
+        },
+        {
+          "id": "image-33d6acc6-f88e-4ce4-8a8a-8e6709154c79",
+          "originalName": "image-33d6acc6-f88e-4ce4-8a8a-8e6709154c79-word-image.png.png",
+          "storedName": "image-33d6acc6-f88e-4ce4-8a8a-8e6709154c79-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-33d6acc6-f88e-4ce4-8a8a-8e6709154c79-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 52653,
+          "sha": "d960d9ea4fbae9162e0ae39900f3dbeb7a6b3330",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:30.992Z"
+        },
+        {
+          "id": "image-84cf9f96-f379-4d6b-89bb-207a3d245243",
+          "originalName": "image-84cf9f96-f379-4d6b-89bb-207a3d245243-word-image.png.png",
+          "storedName": "image-84cf9f96-f379-4d6b-89bb-207a3d245243-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-84cf9f96-f379-4d6b-89bb-207a3d245243-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 474996,
+          "sha": "71292cb3ec7725ffe9f98f852778018f74aef396",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:34.855Z"
+        },
+        {
+          "id": "image-3992eaa4-84d6-4b2f-99aa-167855ca64bf",
+          "originalName": "image-3992eaa4-84d6-4b2f-99aa-167855ca64bf-word-image.png.png",
+          "storedName": "image-3992eaa4-84d6-4b2f-99aa-167855ca64bf-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-3992eaa4-84d6-4b2f-99aa-167855ca64bf-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 257748,
+          "sha": "d62de7fcd7dd072c5b689feff41e60f6adc09bb3",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:39.011Z"
+        },
+        {
+          "id": "image-b651f193-5b2a-44a1-8c04-751144cb4245",
+          "originalName": "image-b651f193-5b2a-44a1-8c04-751144cb4245-word-image.png.png",
+          "storedName": "image-b651f193-5b2a-44a1-8c04-751144cb4245-word-image.png.png",
+          "path": "assets/images/note-10176731-ad4b-4300-a73d-df6e9088cde5/image-b651f193-5b2a-44a1-8c04-751144cb4245-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 433167,
+          "sha": "47dc09b052996a7ec45eb3c92e28d031bc39d772",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:42.254Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-568a7fa5-6243-4e6c-8939-7594310caa1c",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "品目8504的精度与品目9016的感量解析——吾与城北徐公孰丑",
+      "content": "<b>一、品目8504的精度解析：</b><br>很多人经常问我：税号8504.4014中，“精度低于万分之一”到底该怎么理解？每次被问到，我都会毫无保留地耐心解答。因为刚入商品归类行业时，这句话也把我绕得云里雾里。当年带我的师傅讲了好几遍，讲到我看他都快不耐烦了，我才不得不假装点头“听懂”了。正因为深知这个概念有多绕、口头有多难解释，所以决定写下这篇文章。以后再有人问起，直接把这条链接甩给他，自己看去！<br>先从上图的子目注释理解：精度低于万分之一，指的是数值大于万分之一。举例：比如千分之一，换算下即是万分之十，十大于一，所以千分之一这个精度是低于万分之一的，符合子目：8504.4014；比如万分之0.5,0.5小于一，所以万分之0.5这个精度是高于万分之一的，不符合子目：8504.4014。总结表格如下：<br><table><tr><td>举例数值：</td><td>换算成分母为万：</td><td>结论：</td></tr><tr><td>千分之一</td><td>万分之十</td><td>数值大于万分之一，即精度是低于万分之一，符合子目：8504.4014</td></tr><tr><td>万分之0.5</td><td>万分之0.5</td><td>数值小于万分之一，即精度是高于万分之一，不符合子目：8504.4014</td></tr></table><br>说到这里，大家应该对如何根据精度高低合理选择商品编码有了一定认识。如果还有疑惑，也不用着急，先看看下面这份决定，对否？<br><img src=\"[[img:image-20e6540e-d474-4ee4-8d0a-f79c4067c734]]\" alt=\"\"><br>所以这个问题在实际执行中也曾存在不同理解，更何况我们呢！<br>综上，建议将税则中8405.4014的“精度低于万分之一”修改为“<b>精度不优于万分之一</b>”，或者直接采用子目注释中的表述“<b>精度数值大于万分之一</b>”。如此不仅有利于减少理解歧义，也更便于初学者和社会公众准确把握条文含义，提高税则的可读性和适用性。<br><br><b>二、品目9016的感量解析：</b><br><br><img src=\"[[img:image-66de6dc5-d693-42fd-b431-b795094f29de]]\" alt=\"\"><br>同理，在品目9016里有个概念：感量，也是同精度一样的问题--很绕！感量越小（越精密）、灵敏度越高，是不是跟上面的品目8504的精度越低、数值越高，有着异曲同工之处？很多人一不小心就绕进去了，我以前便是。<br>其实，<b>“感量为0.1毫克或更精密的天平”这个概念并不绕。先看它对应的英文税则：Of a sensitivity of 0.1 mg or better，直译就是：灵敏度为0.1毫克或更高的天平。换句话说，感量数值越小，天平越灵敏。因此，只要天平的感量数值≤0.1毫克</b>（如0.1 mg、0.01 mg、0.001 mg等），都属于<b>0.1毫克或更精密</b>的范围，符合税则子目<b>9016.0010</b>的归类要求。<br>话都说到这里了，那么，感量数值到底在规格书中是如何体现的呢？根据本人多年的实践经验，总结如下：<br><img src=\"[[img:image-1f691744-6fa5-4d1f-8f30-506d01d6ce61]]\" alt=\"\"><br>英文单词：Readability（可读值）、Readout（读出值），即指的是感量数值。<br><br>由此，建议将税则表述“感量为0.1毫克或更精密的天平”修改为“可读值≤0.1毫克的天平”。该表述能够直接对应产品规格书中的技术参数，避免“感量”“灵敏度”等概念在理解上的混淆，使归类依据更加客观、直观、统一。同时，也有利于归类人员、初学者及社会公众准确理解税则规定，进一步提升税则条文的可读性、可操作性和传播效果。<br>总结表格如下（仅供学习参考）：<br>品目8504的精度与品目9016的感量解析总结.pdf<br><br><br><img src=\"[[img:image-2c35024f-7615-44d6-9f5b-d7223180b329]]\" alt=\"\"><br><b>总结</b>：商品归类中“精度”与“感量”因概念抽象易生歧义，真可谓“吾与城北徐公孰丑”，越比越绕。建议进行直观化改造：8504（精度）：  数值与精度成反比，建议修正为“精度不优于”；9016（感量）：  对标规格书指标，建议直接优化为“可读值”。用直观表述代替抽象概念，能有效降低沟通成本，提升归类适用效率。<br>个人观点，仅供参考。不妥之处，不吝赐教。感谢阅览。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-20e6540e-d474-4ee4-8d0a-f79c4067c734",
+          "originalName": "image-20e6540e-d474-4ee4-8d0a-f79c4067c734-word-image.png.png",
+          "storedName": "image-20e6540e-d474-4ee4-8d0a-f79c4067c734-word-image.png.png",
+          "path": "assets/images/note-568a7fa5-6243-4e6c-8939-7594310caa1c/image-20e6540e-d474-4ee4-8d0a-f79c4067c734-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 52302,
+          "sha": "f61e5d50a5fcf65a3582d0f2119a6b9727ea555d",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:44.895Z"
+        },
+        {
+          "id": "image-66de6dc5-d693-42fd-b431-b795094f29de",
+          "originalName": "image-66de6dc5-d693-42fd-b431-b795094f29de-word-image.png.png",
+          "storedName": "image-66de6dc5-d693-42fd-b431-b795094f29de-word-image.png.png",
+          "path": "assets/images/note-568a7fa5-6243-4e6c-8939-7594310caa1c/image-66de6dc5-d693-42fd-b431-b795094f29de-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 84219,
+          "sha": "b7657fb6ba156137efc8b54e64c3653944c5f695",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:47.551Z"
+        },
+        {
+          "id": "image-1f691744-6fa5-4d1f-8f30-506d01d6ce61",
+          "originalName": "image-1f691744-6fa5-4d1f-8f30-506d01d6ce61-word-image.png.png",
+          "storedName": "image-1f691744-6fa5-4d1f-8f30-506d01d6ce61-word-image.png.png",
+          "path": "assets/images/note-568a7fa5-6243-4e6c-8939-7594310caa1c/image-1f691744-6fa5-4d1f-8f30-506d01d6ce61-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 191436,
+          "sha": "b76abc4beb8108ad12389971d23a0e44609d2ef0",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:50.371Z"
+        },
+        {
+          "id": "image-2c35024f-7615-44d6-9f5b-d7223180b329",
+          "originalName": "image-2c35024f-7615-44d6-9f5b-d7223180b329-word-image.png.png",
+          "storedName": "image-2c35024f-7615-44d6-9f5b-d7223180b329-word-image.png.png",
+          "path": "assets/images/note-568a7fa5-6243-4e6c-8939-7594310caa1c/image-2c35024f-7615-44d6-9f5b-d7223180b329-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 76611,
+          "sha": "7cf6b6c0361072339836d2b152fe6ed8f6905ee5",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:52.979Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-03823e63-0f35-403a-9e35-406ea002b623",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "搞清外部接口与内部接口，一次读懂液晶显示屏的8524、8528归类逻辑",
+      "content": "拿到一份液晶显示屏的规格书，我们第一时间应该关注哪个关键词？答案是——“Interface”。接口的类型不仅决定了产品的连接方式，更是区分其商品编码（HS code）的核心要素。根据税则的相关注释，液晶屏的接口被严格划分为“内部接口”与“外部接口”两类。若仅含内部接口，通常归入 8524；一旦出现外部接口且结构符合特定要求，则需转归 8528。本文将带您详细解读这两类接口的具体形态及其归类逻辑。<br><img src=\"[[img:image-e2704d30-7e45-41b4-b82f-8340e3c66238]]\" alt=\"\"><br><img src=\"[[img:image-d23f6d89-fb17-413d-8003-cb9b2bd382c9]]\" alt=\"\">",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-e2704d30-7e45-41b4-b82f-8340e3c66238",
+          "originalName": "image-e2704d30-7e45-41b4-b82f-8340e3c66238-word-image.png.png",
+          "storedName": "image-e2704d30-7e45-41b4-b82f-8340e3c66238-word-image.png.png",
+          "path": "assets/images/note-03823e63-0f35-403a-9e35-406ea002b623/image-e2704d30-7e45-41b4-b82f-8340e3c66238-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 261693,
+          "sha": "6325334f468063d7daab2dd5b1acdd51ace2bb6b",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:56.790Z"
+        },
+        {
+          "id": "image-d23f6d89-fb17-413d-8003-cb9b2bd382c9",
+          "originalName": "image-d23f6d89-fb17-413d-8003-cb9b2bd382c9-word-image.png.png",
+          "storedName": "image-d23f6d89-fb17-413d-8003-cb9b2bd382c9-word-image.png.png",
+          "path": "assets/images/note-03823e63-0f35-403a-9e35-406ea002b623/image-d23f6d89-fb17-413d-8003-cb9b2bd382c9-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 152520,
+          "sha": "b672f004a5cbf6b0154af3468e220ebbe9537969",
+          "description": "",
+          "createdAt": "2026-10-14T08:01:59.856Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "连接器与接插件的归类辨析——老虎老鼠傻傻分不清楚",
+      "content": "关于连接器与接插件的归类区别，行业内一直存在争议。今天这篇文章，将通过深度对比，理清二者的关系。<br><b>一、接插件——能插（plug）的连接器（connector）：</b><br>接插件是一种连接电子线路的定位接头，由2部分构成，即插件、接件，一般状态下是可以完全分离的。接插件只有插入、拔除两种状态。本国子目注释接插件定义如下：<br><img src=\"[[img:image-5c8c1223-b3d2-4d13-b9d4-01848131b290]]\" alt=\"\"><br>由此可见，接插件即为一个<b>能插（plug）的连接器（connector）</b>。<br><br>另外，接插件端子（Terminal），在归类领域，也属于接插件，归：8536901：<br><img src=\"[[img:image-e7c6171f-5534-4e05-ad93-2225b6eda16f]]\" alt=\"\"><br>还有一种是那种拧上去的（带螺纹）连接器，有过归类决定，85369090：<br><img src=\"[[img:image-e6c4b225-597c-4d68-abd0-29fe0434e2ea]]\" alt=\"\"><br>接插件（8536901）与85369090对应产品、归类如下图：<br><img src=\"[[img:image-73f9ce37-ff6b-442f-ac21-bdf4ee26c401]]\" alt=\"\"><br><img src=\"[[img:image-5291eb2b-b12b-4882-98ad-b97f2859a61c]]\" alt=\"\"><br>接插件（8536901）与85369090对应产品、归类.pdf<br><b>二、关于《总注释》的三处建议：</b><br>各位可能都会有这样的疑问：为什么《税则》中列有“接插件”这一品名，而在《总注释》中却找不到对应表述？其实已在《总注释》8536中--三、电路的连接装置--（二）<b>其他连接器</b>、<b>接线柱</b>、<b>线端条</b>等里。<br>查阅资料发现：<br><b>其他连接器</b>即为：<b>接插件</b>；<br><b>接线柱</b>，即是：Terminal，也就是我们常说的：<b>接插件端子</b>；<br><b>线端条</b>，即是：Terminal strip、terminal block，也就是我们常说的：<b>接线端子、接线端子排</b>。<br><img src=\"[[img:image-0aeefd45-c4e2-4310-a679-87995160c8ff]]\" alt=\"\"><br><b>三、“异想天开”：</b><br>接插件在《总注释》里找到了具体位置，那连接器又在《总注释》里哪个位置呢？<br>首先看下：灯座、插头及插座。这是指用于交流电源的电源插头和插座，通过电缆连接到电动设备，接触片宽度、形状、方向和尺寸的不同组合形成了不可互换的连接器，属于电气连接器。<br>另外，光导纤维、光导纤维束或光缆用连接器，顾名思义，也属于连接器。<br>所以<b>连接器</b>应该是包含了：<b>灯座、插头及插座，光导纤维、光导纤维束或光缆用连接器，以及接插件、其他连接器</b>。<br>所以，基于对现行税则， 8536.69 至 8536.90 税号项下产品的分析，本人尝试对该品目区间的划分逻辑进行了如下优化调整，旨在提升归类的精准度与操作性：<br><img src=\"[[img:image-51df7677-5953-44a9-ba0d-bf70d8392afb]]\" alt=\"\"><br>此处税号调整后，长期困扰商品归类行业的一大归类难题将随之迎刃而解：插座（带线）：<br>该产品在工作中长期存在两种归类做法，一部分归入 8536，另一部分归入 8544，始终未形成权威性的定论。<br><img src=\"[[img:image-c2354191-fd46-4456-81d6-1c56e2317a1d]]\" alt=\"\"><br>根据《总注释》对品目 8544 的说明，其中“接头”的英文原文为 connector，即“连接器”。《总注释》明确列举，例如插头、插座、接线片、插孔、套管或接线柱等，均属于“接头”，本质上即连接器。<br>根据调整之后的税号，插座属连接器范畴，与《总注释》品目 8544 中关于接头即“连接器”（connector）的描述完全一致。因此，从条文解释及调整后的税号口径来看，该产品归入品目 <b>8544</b> 才是更为准确、合理的归类结论。<br><b>这回“老虎”归山，“老鼠”入洞，税号定准了，大家终于不用再对着这两类产品“傻傻分不清楚”了吧？</b><br>参考依据：<br>https://en.wikipedia.org/wiki/AC_power_plugs_and_sockets",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-5c8c1223-b3d2-4d13-b9d4-01848131b290",
+          "originalName": "image-5c8c1223-b3d2-4d13-b9d4-01848131b290-word-image.png.png",
+          "storedName": "image-5c8c1223-b3d2-4d13-b9d4-01848131b290-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-5c8c1223-b3d2-4d13-b9d4-01848131b290-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 122808,
+          "sha": "0ee0c95b7e852138dd5b94b26646c467a2a61b07",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:02.883Z"
+        },
+        {
+          "id": "image-e7c6171f-5534-4e05-ad93-2225b6eda16f",
+          "originalName": "image-e7c6171f-5534-4e05-ad93-2225b6eda16f-word-image.png.png",
+          "storedName": "image-e7c6171f-5534-4e05-ad93-2225b6eda16f-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-e7c6171f-5534-4e05-ad93-2225b6eda16f-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 157407,
+          "sha": "f9265e27b2224b7aad067e01602ea305cf81659c",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:05.832Z"
+        },
+        {
+          "id": "image-e6c4b225-597c-4d68-abd0-29fe0434e2ea",
+          "originalName": "image-e6c4b225-597c-4d68-abd0-29fe0434e2ea-word-image.png.png",
+          "storedName": "image-e6c4b225-597c-4d68-abd0-29fe0434e2ea-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-e6c4b225-597c-4d68-abd0-29fe0434e2ea-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 319254,
+          "sha": "a9c1fa9a68de3ae4c7121abb567827a6982c6469",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:09.630Z"
+        },
+        {
+          "id": "image-73f9ce37-ff6b-442f-ac21-bdf4ee26c401",
+          "originalName": "image-73f9ce37-ff6b-442f-ac21-bdf4ee26c401-word-image.png.png",
+          "storedName": "image-73f9ce37-ff6b-442f-ac21-bdf4ee26c401-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-73f9ce37-ff6b-442f-ac21-bdf4ee26c401-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 336345,
+          "sha": "aa97cbb2bc5cd3b3d6f90171be03df060b947590",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:12.922Z"
+        },
+        {
+          "id": "image-5291eb2b-b12b-4882-98ad-b97f2859a61c",
+          "originalName": "image-5291eb2b-b12b-4882-98ad-b97f2859a61c-word-image.png.png",
+          "storedName": "image-5291eb2b-b12b-4882-98ad-b97f2859a61c-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-5291eb2b-b12b-4882-98ad-b97f2859a61c-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 235581,
+          "sha": "c6dfc8c64caca9bcf29c54349d9a51d0b74c4ac2",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:16.128Z"
+        },
+        {
+          "id": "image-0aeefd45-c4e2-4310-a679-87995160c8ff",
+          "originalName": "image-0aeefd45-c4e2-4310-a679-87995160c8ff-word-image.png.png",
+          "storedName": "image-0aeefd45-c4e2-4310-a679-87995160c8ff-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-0aeefd45-c4e2-4310-a679-87995160c8ff-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 284631,
+          "sha": "93ba629e54dc5e1f3ec83a5ec48901eea2dd3f02",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:19.250Z"
+        },
+        {
+          "id": "image-51df7677-5953-44a9-ba0d-bf70d8392afb",
+          "originalName": "image-51df7677-5953-44a9-ba0d-bf70d8392afb-word-image.png.png",
+          "storedName": "image-51df7677-5953-44a9-ba0d-bf70d8392afb-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-51df7677-5953-44a9-ba0d-bf70d8392afb-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 480939,
+          "sha": "5d633458bf3cd26bad34c6d42f11a8aff81cfced",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:22.682Z"
+        },
+        {
+          "id": "image-c2354191-fd46-4456-81d6-1c56e2317a1d",
+          "originalName": "image-c2354191-fd46-4456-81d6-1c56e2317a1d-word-image.png.png",
+          "storedName": "image-c2354191-fd46-4456-81d6-1c56e2317a1d-word-image.png.png",
+          "path": "assets/images/note-784f94e0-dd4c-422a-9d08-76ca8ae1fd4e/image-c2354191-fd46-4456-81d6-1c56e2317a1d-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 633204,
+          "sha": "76f3eb6f2eaa1b94acec547fc0f23815e337e3eb",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:26.461Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-86e21eef-7b9f-45f5-a767-5c88a7705010",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "传感器类相关商品的归类经验梳理及分享",
+      "content": "笔者在处理通关异常中，碰到一个被现场质疑归类的商品案例。在沟通解决过程中，经历了从初期归类商品信息残缺不全、似是而非，到通过不断深入挖掘，结合归类技术分析，协助客户组织出了详细的商品归类思路说明，最终获海关认可，助客户顺利完成通关。在此，结合这个实际案例，抛砖引玉，分享一下传感器类相关商品的归类经验。<br><b>一、商品案例</b><br><img src=\"[[img:image-60964269-518c-4f38-845c-e2d4d7c445f8]]\" alt=\"\"><br><b>二、信息挖掘</b><br><b>（一）对于传感器及相近商品的归类，首先需确定是否为采用不可拆分封装形式制成的集成电路。</b><br>经与客户商品工程师沟通，获得关于此点的商品补充信息如下：该商品的制备构成方式为：由分立元件、有源元件及无源元件装配组合在统一保护壳体内构成，未经不可拆分封装，非集成电路。<br><b>（二）其次再需确定该商品是否为依靠外加电场引起电阻率的变化开展工作的半导体器件或半导体基换能器。</b><br>经与客户商品工程师沟通，获得关于此点的商品补充信息如下：该商品采用电感感应原理开展工作，并非利用半导体材料所具有的依靠外加电场引起电阻率的变化的属性来开展工作的，不是半导体器件或半导体基换能器。<br><b>（三）第三步需精准界定该商品形成的电信号的准确含义及实现了什么样的目的。</b><br>经与客户商品工程师沟通，获得关于此点的商品补充信息如下：该商品形成控制电路通断的开关量信号（ON或 OFF），控制电路通断。<br><b>三、归类分析</b><br>  经充分信息挖掘补充后，最终形成的完整商品信息如下：<br><img src=\"[[img:image-be7e1f5a-d2bc-45be-9aa2-f0ccc96f037f]]\" alt=\"\"><br><b>（一）优先归类品目85.42的排除</b><br><img src=\"[[img:image-7180d953-7ed9-4aba-9fbb-d57e1303fd56]]\" alt=\"\"><br>本文探讨的案例由分立元件、有源元件及无源元件装配组合在统一保护壳体内构成。未经不可拆分封装，仅从封装角度已不符合集成电路的定义，因此无法归入品目85.42。<br><b>（二）优先归类品目85.41的排除</b><br><img src=\"[[img:image-af154f76-1d72-4d7d-adb1-9209f92b8be8]]\" alt=\"\"><br>本文案例采用电感感应原理开展工作，随着“感知”目标接近位移感测模块，感应电流增加，会增加振荡电路上的负载，导致其振荡衰减或停止。传感器通过振幅检测电路检测该振荡状态的变化，形成用于控制电路通断的开关量信号（ON或 OFF）输出，从而达到控制电路通断的目的，并非利用半导体材料所具有的依靠外加电场引起电阻率的变化的属性来开展工作的，不符合半导体器件或半导体基换能器的定义，无法归入品目85.41。 <br><b>（三）其他品目甄选</b><br>排除了品目85.42和品目85.41两个优先归类品目后，根据深挖的商品信息可知：<br>本文案例商品，作为一种传感类型的器件，实际是通过电感式位移传感器, “感知”目标接近, 通过振幅检测电路检测该振荡状态的变化，自身即可形成开关量信号（ON或 OFF），控制电路通断，符合品目85.36关于“接近开关”的定义，故应归入品目85.36。<br><img src=\"[[img:image-3d7c7c70-34b4-48ed-a378-1186e4121b12]]\" alt=\"\"><br><b>四、经验总结</b><br>最后，结合上述案例，举一反三，在此对【传感器类相关商品】的归类思路、归类步骤及可能归类方向依据经验做一下概要梳理总结。<br>对于传感器类相关商品，从设计应用角度可分为两类：一类是通用型传感器，从设计之初，就面向开方的多种不同应用场景，此种传感器一般应按设计功能的整机，确定适配的相应归类品目；另一类是专门设计用作机器、设备、仪器的特定传感型零部件，应遵循第十六类注释二、第十七类注释二、第九十章注释二的规定，按具体列名优先归入笫八十四章、第八十五章、第九十章的相应品目。对有检测功能的传感器，视传感器的基本特征，按传感器感测对象相应测量装置的整机或零件归类。具体步骤如下：<br>（一）第一步判断是否符合品目85.42或85.41，如果符合，优先归入这两个品目。<br>   例如：W2024-17预裁定的“四端子”霍尔元件，因组成、封装形式及工作原理都符合品目85.41的定义，所以优先归入了品目85.41。<br><img src=\"[[img:image-e19fc1e0-5c94-4251-9466-c67ed41dc28c]]\" alt=\"\"><br>有些压电传感器(不含测量电路)，如符合品目85.41项下压电晶体的描述，属于已装配的压电晶体，也应归入品目85.41项下；<br>（二）如果上述两个优先归类品目均不符合，则需结合传感器的报验状态，进一步甄选其他适配品目。<br><b>1、当传感器自身不含检测模块及测量电路，因而不具备特定检测功能，尚处于电信号编码发生装置的报验状态（该电信号并不代表检测指标特定含义，必需经另购检测模块检测后才能得到特定指标的具体检测量值）时，应归入适配的“非检测类”相关品目：</b><br>（1）有符合的“非检测类”具体列名品目，相应归入列名品目。<br>示例①: <br><img src=\"[[img:image-6d847d80-d4ec-4f5e-b602-80bb1d21e55e]]\" alt=\"\"><br>①该预裁定的“直线位移传感器”，作为一种传感类型的器件，实际是由电位器（阻轨）；电刷；拉杆；铝制外壳；电气插头组成的一种滑动可变电阻器，符合品目85.33的定义。故归入品目85.33。<br>同理，相同归类思路的例子，还有本文前文探讨的商品，因其符合品目85.36的接近开关的定义，因而归入了品目85.36。<br>（2）没有符合的“非检测类”具体列名品目，则应归入电气装置的兜底品目85.43。<br>示例②:<br><img src=\"[[img:image-dc1a938e-3d9e-4d53-83a5-f0a0a6a0f807]]\" alt=\"\"><br>②该归类决定的“增量轴套型编码器”，属于一种传感类型的器件，其本身不含检测模块及测量电路，“仅是脉冲信号的发生装置，不具有完整的测量功能”，作为一种具有独立编码功能的装置，其在85章其他品目无具体列名，因此归入了品目85.43。<br>示例③:<br><img src=\"[[img:image-b5f2bd19-aa45-4ae1-ab71-bcb7e6871830]]\" alt=\"\"><br>③该预裁定的“流量传感器”，作为一种传感类型的器件，其本身不含检测模块及测量电路，输出的电信号并不代表流量的具体量值含义， “后续需由另购咖啡机的控制电路板读取、运算处理，才能得出具体的咖啡流量数值”，因其报验状态不具检测功能，仅属于一种具独立功能的电脉冲信号编码器，且在85章其他品目无具体列名，因此归入品目85.43。（尤其值得注意的是，该商品虽然品名叫“流量传感器”，实际上自身并未检测出流量结果。由这个商品实例，我们可以得到一种重要启示：对于传感器类的商品，切忌顾名思义按名归类，而应结合报验状态商品的硬件构成细节，本着硬件结构与具备功能相互认证的原则，准确界定报验状态传感器的功能边界，在此基础上再来准确确定报验状态传感器的归类，防止因品名误导而造成归类偏差）。<br><b>2、当传感器因自身含检测模块及测量电路，已具独立检测功能，其对外输出的电信号已代表检测指标的具体测量值含义时，应归入适配的“检测类”相关品目：</b><br>（1）有符合的“检测类”具体列名品目，相应归入列名品目。<br>示例④:<br><img src=\"[[img:image-747b5d92-b37a-44eb-8d76-1b3fc86bcc81]]\" alt=\"\"><br>④该预裁定的“毫米波雷达传感器”，符合品目85.26雷达设备的定义，因此归入品目85.26（注意并非所有的检测设备都在90章列目）。<br>示例⑤:<br><img src=\"[[img:image-9a76c121-e5ae-4cda-b13a-fbe00de1eb2a]]\" alt=\"\"><br>⑤该预裁定的“激光传感器”，具有品目90.15激光测距检测功能，因此按其他激光测距仪，归入了品目90.15。<br>示例⑥:<br><img src=\"[[img:image-7af32717-de72-46ef-9b0f-c2dc1eff6ed4]]\" alt=\"\"><br>⑥该预裁定的“气体分析仪用传感器”，具有品目90.27气体理化分析检测功能，因此归入品目90.27。<br>（2）没有符合的“检测类”具体列名品目，则应归入检测设备及装置的兜底品目90.31。<br>示例⑦: <br><img src=\"[[img:image-8590c390-a5ac-41c0-b079-370630f71324]]\" alt=\"\"><br>⑦该预裁定的“加速度传感器”，自身已具有测量质量加速度值的功能，该功能在90章无具体列名品目，因此归入检测装置的兜底品目90.31。<br>其他检测类传感器的情况还有很多，例如：<br>测量温度、湿度的传感器，按温度、湿度的测量装置归入品目90.25项下；<br>测量液体或气体流量的传感器，按流量的测量装置归入品目90.26项下;<br>测量电量的传感器，按电量的测量装置归入品目90.30项下;<br>测量位移的光栅传感器归入9031.4920项下；<br>测量力矩的传感器归入9031.8090项下；<br>具体商品实例不再一一列举。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-60964269-518c-4f38-845c-e2d4d7c445f8",
+          "originalName": "image-60964269-518c-4f38-845c-e2d4d7c445f8-word-image.png.png",
+          "storedName": "image-60964269-518c-4f38-845c-e2d4d7c445f8-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-60964269-518c-4f38-845c-e2d4d7c445f8-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 108633,
+          "sha": "a110194173f69715c590bb214f68926c53870116",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:29.158Z"
+        },
+        {
+          "id": "image-be7e1f5a-d2bc-45be-9aa2-f0ccc96f037f",
+          "originalName": "image-be7e1f5a-d2bc-45be-9aa2-f0ccc96f037f-word-image.png.png",
+          "storedName": "image-be7e1f5a-d2bc-45be-9aa2-f0ccc96f037f-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-be7e1f5a-d2bc-45be-9aa2-f0ccc96f037f-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 274344,
+          "sha": "16069e41fee4bc0ea0a0c331215662d6a09ae763",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:32.771Z"
+        },
+        {
+          "id": "image-7180d953-7ed9-4aba-9fbb-d57e1303fd56",
+          "originalName": "image-7180d953-7ed9-4aba-9fbb-d57e1303fd56-word-image.png.png",
+          "storedName": "image-7180d953-7ed9-4aba-9fbb-d57e1303fd56-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-7180d953-7ed9-4aba-9fbb-d57e1303fd56-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 447309,
+          "sha": "da384b072dfa2d79035a6a16ee7ed757709fcc06",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:35.560Z"
+        },
+        {
+          "id": "image-af154f76-1d72-4d7d-adb1-9209f92b8be8",
+          "originalName": "image-af154f76-1d72-4d7d-adb1-9209f92b8be8-word-image.png.png",
+          "storedName": "image-af154f76-1d72-4d7d-adb1-9209f92b8be8-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-af154f76-1d72-4d7d-adb1-9209f92b8be8-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 235971,
+          "sha": "adfb6eb658cf34f4d438a22f7e626907e4902a1b",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:38.665Z"
+        },
+        {
+          "id": "image-3d7c7c70-34b4-48ed-a378-1186e4121b12",
+          "originalName": "image-3d7c7c70-34b4-48ed-a378-1186e4121b12-word-image.png.png",
+          "storedName": "image-3d7c7c70-34b4-48ed-a378-1186e4121b12-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-3d7c7c70-34b4-48ed-a378-1186e4121b12-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 163770,
+          "sha": "86f2331451b79201bcd68859d924389ff534fccf",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:42.239Z"
+        },
+        {
+          "id": "image-e19fc1e0-5c94-4251-9466-c67ed41dc28c",
+          "originalName": "image-e19fc1e0-5c94-4251-9466-c67ed41dc28c-word-image.png.png",
+          "storedName": "image-e19fc1e0-5c94-4251-9466-c67ed41dc28c-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-e19fc1e0-5c94-4251-9466-c67ed41dc28c-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 90057,
+          "sha": "ac982e8c0876aed88279a84333d6811a4d51f656",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:45.090Z"
+        },
+        {
+          "id": "image-6d847d80-d4ec-4f5e-b602-80bb1d21e55e",
+          "originalName": "image-6d847d80-d4ec-4f5e-b602-80bb1d21e55e-word-image.png.png",
+          "storedName": "image-6d847d80-d4ec-4f5e-b602-80bb1d21e55e-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-6d847d80-d4ec-4f5e-b602-80bb1d21e55e-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 91230,
+          "sha": "8a4f8278d0ccd270baa25a57a15c3d4bfbcb6ac7",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:48.171Z"
+        },
+        {
+          "id": "image-dc1a938e-3d9e-4d53-83a5-f0a0a6a0f807",
+          "originalName": "image-dc1a938e-3d9e-4d53-83a5-f0a0a6a0f807-word-image.png.png",
+          "storedName": "image-dc1a938e-3d9e-4d53-83a5-f0a0a6a0f807-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-dc1a938e-3d9e-4d53-83a5-f0a0a6a0f807-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 214554,
+          "sha": "09f9579c599889d6733ed3f46a9bba4892ddd990",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:51.110Z"
+        },
+        {
+          "id": "image-b5f2bd19-aa45-4ae1-ab71-bcb7e6871830",
+          "originalName": "image-b5f2bd19-aa45-4ae1-ab71-bcb7e6871830-word-image.png.png",
+          "storedName": "image-b5f2bd19-aa45-4ae1-ab71-bcb7e6871830-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-b5f2bd19-aa45-4ae1-ab71-bcb7e6871830-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 153228,
+          "sha": "9815fa2c9edb71d4f03ded15938975441751f7a2",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:54.240Z"
+        },
+        {
+          "id": "image-747b5d92-b37a-44eb-8d76-1b3fc86bcc81",
+          "originalName": "image-747b5d92-b37a-44eb-8d76-1b3fc86bcc81-word-image.png.png",
+          "storedName": "image-747b5d92-b37a-44eb-8d76-1b3fc86bcc81-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-747b5d92-b37a-44eb-8d76-1b3fc86bcc81-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 196368,
+          "sha": "4d1183c202c8cef3c130810845793bcb3ff68ac1",
+          "description": "",
+          "createdAt": "2026-10-14T08:02:57.314Z"
+        },
+        {
+          "id": "image-9a76c121-e5ae-4cda-b13a-fbe00de1eb2a",
+          "originalName": "image-9a76c121-e5ae-4cda-b13a-fbe00de1eb2a-word-image.png.png",
+          "storedName": "image-9a76c121-e5ae-4cda-b13a-fbe00de1eb2a-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-9a76c121-e5ae-4cda-b13a-fbe00de1eb2a-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 82047,
+          "sha": "c3f42a9103b338b45d8d347385675a892cf225cb",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:00.660Z"
+        },
+        {
+          "id": "image-7af32717-de72-46ef-9b0f-c2dc1eff6ed4",
+          "originalName": "image-7af32717-de72-46ef-9b0f-c2dc1eff6ed4-word-image.png.png",
+          "storedName": "image-7af32717-de72-46ef-9b0f-c2dc1eff6ed4-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-7af32717-de72-46ef-9b0f-c2dc1eff6ed4-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 140163,
+          "sha": "d241c9b2e41b9681793ee6735c1afb22d985ddc5",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:04.045Z"
+        },
+        {
+          "id": "image-8590c390-a5ac-41c0-b079-370630f71324",
+          "originalName": "image-8590c390-a5ac-41c0-b079-370630f71324-word-image.png.png",
+          "storedName": "image-8590c390-a5ac-41c0-b079-370630f71324-word-image.png.png",
+          "path": "assets/images/note-86e21eef-7b9f-45f5-a767-5c88a7705010/image-8590c390-a5ac-41c0-b079-370630f71324-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 261876,
+          "sha": "eef1fe0040328248826246bd89502296d84a7c95",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:07.233Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-39505586-16a9-4bfb-bc77-57b34c72809a",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "各种“模具”的商品归类指南",
+      "content": "模具是用来制作成型物品的工具，这种工具由各种零件构成，不同的模具由不同的零件构成。它主要通过所成型材料物理状态的改变来实现物品外形的加工。<br>模具作为在进出口报关中常见的商品，其有时作为单独的产品进行申报，而有时作为机械设备的零件进行申报，也有可能按材质归类。归入不同税则号列可能会有近10%的税率差，一旦归错将可能导致补税和行政处罚。<br><b><span style=\"background-color:#ffff00\">01 模具</span><span style=\"background-color:#ffff00\">产品在税则中的分布</span></b><br>提到模具的分类，也可以从多个方面来进行。从模制方式来看，果子认为可以分为使用压力工作（如：冲压零件模具、挤压成型模具）和非使用压力工作（如：冰块模具、喷丝模具）；从使用材质来看，以金属材质为主（如：注塑模具、锻造模具）和其他材质做的模具（如：砂型、玻璃模具）等等。不同的模具需从多种方向来进行考虑。<br>为了让大家对模具的不同分布情况有个更为直观的认识，果子对注释做了统计，其中描述中包含“模具”的品目就涉及<b><span style=\"background-color:#ffff00\">68.15、69.03、82.07、84.34、84.38、84.79、84.80</span>，</b>其中还并不包括那些未具体列名但应按材质归类的模具（如：归入品目69.11的果冻模具）。所以说啊，不要一想到模具就奔82.07和84.80去找，被主观意识限制了商品归类范围就不好了。<br><b><span style=\"background-color:#ffff00\">02 主要</span><span style=\"background-color:#ffff00\">模具产品的归类介绍</span></b><br>下面，我们就给大家从几个方向介绍下不同的模具分类。<br><b><span style=\"background-color:#ffff00\">（1）<span style=\"background-color:#00ff00\"><span style=\"background-color:#00ff00\">品目84.80</span></span>的成型模具</span></b><br>要想了解<b>成型</b>与<b>塑形</b>的区别，我们不妨先了解两个概念，这就是成型与塑形最具代表性的工艺——注塑与冲压。<br><b>注塑</b>，就是注射成型。是将热塑性塑料融化为液态，然后注入通常用合金钢制成的注塑模具两部分形成的腔体中，待冷却后即形成各种形状的塑料制品，其生产是通过注塑机床和注塑模具来实现的。这种模具的特点就是两部分中间形成腔体，将液态产品固化。请看下图。<br><img src=\"[[img:image-46c62066-918a-4cf7-bf82-50453a7b4095]]\" alt=\"\"><br><b>冲压</b>，是通过压力机和冲压模具对板材、带材、管材和型材等施加外力，使之产生塑性变形或分离，从而获得所需形状和尺寸的工件（冲压件）的成形加工方法。这种模具的特点是完全包裹被加工产品从而使其塑形为模具的形状。具体看下图。<br><img src=\"[[img:image-16c2afae-bfb6-4ecd-a597-546ab766e597]]\" alt=\"\"><br>从这里我们就不难发现，注塑模具的特点是“成形”，而冲压模具的特点是“塑形”，这也恰恰是<span style=\"background-color:#00ff00\">品目82.07</span>和84.80的最大区分。但是，这个判断又是从哪里可以看出来呢？来看下面<br><b>品目84.80</b><br><span style=\"background-color:#00ff00\">本品目包括金属铸造用型箱、型模底板及阳模，除<span style=\"background-color:#ffff00\">某</span>些下文列明不包括的货品以外，本品目亦包括各种型模（不论是否铰接的，也不论是用手工操作还是供压力机或模制机使用的）。这些型模及型箱用于把下列材料模制成毛坯或成品：</span><br><span style=\"background-color:#00ff00\">（一）金属及硬质合金。</span><br><span style=\"background-color:#00ff00\">（二）玻璃（包括熔融石英或其他熔融硅石）或矿物材料（例如，陶瓷坯泥、水泥、石膏或混凝土等）。</span><br><span style=\"background-color:#00ff00\">（三）橡胶或塑料。</span><br>品目84.80的<b>加工方式</b><br>这里所称的模制主要就是前面谈到的成型过程，通常采用这种方式是不需要压力的，多是液态货品用重力自然填充型腔完成的制作。当然也有例外，比如一些流动性比较差的物料，如制砖工艺的砖泥，在模制的过程中就需要一点压力才能成型。是不是有点像用模具做月饼呢？没错的！当然，月饼模具不归这里，按木制品归入品目44.21。再比如，R-2-5200-2019-0045中描述的将磁粉粘结和块的压模也归品目84.80。<br>此类模具主要是以将<span style=\"background-color:#ffff00\">货品制造成形的方式进行工作</span>，最终得到的产品大多为较为初级的形态，如块、锭、球等等，但也会通过该种方式直接制成成品，如陶坯、塑料制品、玻璃器等等。<br>品目84.80的<b>适用材质</b><br>从注释条文中可以明确看出，品目84.80的模具<span style=\"background-color:#ffff00\">仅适用于加工金属、玻璃、矿物材料、塑料、橡胶</span>。而加工其他产品的模具<span style=\"background-color:#00ff00\">……</span>我们后面再说。<br><b><span style=\"background-color:#ffff00\">（2）品目82.07的塑形模具</span></b><br>我们再来看塑形模具的代表品目82.07，在其注释中有明确描述：<br><b>品目82.07</b><br><span style=\"background-color:#00ff00\">本品目则包括不能单独使用，但可装于下列货品上使用的工具：</span><br>……<br><span style=\"background-color:#00ff00\">三、品目84.67的工具，</span><br><span style=\"background-color:#00ff00\">用于对金属、硬质合金、木材、石料、硬橡胶、某些塑料或其他材料的锻压、冲压、冲孔、攻丝、钻孔、镗孔、铰孔、拉削、铣削、切齿、车削、切割、凿榫或拉拔等加工或用于上螺丝。</span><br>本品目的模具材质多为<b>贱金属制</b>，其中贱金属的范围可参考第十五类类注三的定义，但还有木制型箱。至于除此以外材质的模具，通常来说都是按其所属材质归类。如R-2-5300-2018-0003中所述石墨制的手机玻璃面板模具就归入品目68.15。<br>品目82.07<b>加工对象</b><br>品目84.80的模具与品目82.07的模具类似，主要都是用于硬质的可塑性材料，如金属、橡胶、矿物等等。<br>品目82.07<b>加工方式</b><br>我们从注释中已经明确本品目的模具主要是用来锻压、冲压和拉拔产品的，这就是我们所称的“塑形”，主要是将某个材料产品进行形变以制成特定形状。如锻造工艺就是通过反复锻压金属坯料使其增强机械性能的过程。（比如做面食，和面次数多了面团一定会变硬如果烙饼的话请醒面后不要再揉了——by：果厨）。如果是冲压的话多是制成成品或零件，而拉拔则是通过拉力将粗的金属材料通过模具变成较细的材料。<br>品目82.07<b>模具用途</b><br>前面谈到了，锻压和冲压都是需要借助较大压力实现加工过程的，所以其需要安装在可提供较大压力的机床上方可工作。与之对应的是品目84.80则不一定需要安装在机床上工作，如铸造的模具。<br><b><span style=\"background-color:#ffff00\">（3）按机器零件归类的模具</span></b><br>无论用于机器设备上的模具是否可以互换，也无论是成形还是塑形，除品目82.07和84.80所列的加工对象（硬质材料）以外，均应按机器的零件进行归类。这点注释中也有足够说明。<br><b>品目82.07</b><br>除上述列名的货品以外，机器或器具用的模具、冲头、钻头或其他可互换工具，应按所属机器或器具的零件归类。<br><b>品目84.80</b><br><span style=\"background-color:#00ff00\">本品目不包括：</span><br>除上述不包括的项目以外，在压力机及其他机器上用以模制本品目未列名材料的型模（应作为有关机器的零件归类）。<br><b>举个例子</b>：如用纸浆制作纸质鸡蛋托盘的成型模具，因其不是处理硬质材料所以不能归入品目82.07，又因为加工对象不符合品目84.80的范围，故最终按纸制品制造机器的专用零件归入品目84.41。<br><b><span style=\"background-color:#ffff00\">（4）按材质归类的模具</span></b><br>在品目82.07中所涉及的模具，前面我们提到了其构成材质是贱金属，而品目84.80虽然对其所述模具的构成材质没有特别描述，但通常情况下也是硬质金属（模具钢）为主，也有其他材质（如：木质模具）。但是，无论是什么材质，符合品目84.80范围内的模具不仅是用于机器设备，也包括手工操作的模具（如：浇筑混凝土的模板）。<br>进一步佐证归入机器零件和归入其他材质模具的依据还是品目84.80注释——<br><b>品目84.80</b><br>本品目不包括：<br><span style=\"background-color:#00ff00\">（一）用浸入液态橡胶、塑料等方法制造物品（例如，手套）的模壳（按其构成材料归类）。</span><br><span style=\"background-color:#00ff00\">（二）石墨或其他碳精制的型模（品目68.15）。</span><br><span style=\"background-color:#00ff00\">（三）陶瓷制的各种型模（酌情归入品目69.03或69.09）。</span><br><span style=\"background-color:#00ff00\">（四）玻璃制型模（品目70.20）。</span><br><span style=\"background-color:#00ff00\">（五）锭模（品目84.54）。</span><br><span style=\"background-color:#00ff00\">（六）制造半导体器件用的型模（品目84.86）。</span><br><span style=\"background-color:#00ff00\">（七）制唱片用的电铸型模及母片（品目85.23）。</span><br><span style=\"background-color:#00ff00\">（八）除上述不包括的项目以外，在压力机及其他机器上用以模制本品目未列名材料的型模（应作为有关机器的零件归类）。</span><br>仔细查阅以上注释就会发现，其中第（一）至（四）项是因模具的材质特殊而被排除在外，而第（五）至（七）项是因用途特殊而被排除。<br>所以，用于金属、玻璃、矿物质、塑料和橡胶成形生产的石墨、陶瓷、玻璃制的模具被排除在品目84.80。而用于其他货品的成型模具则应按模具的构成材质归类。<br><b>举个例子</b>：手工制作月饼的木制模具，因为其不属于贱金属制的，所以不满足品目82.07的范围，其加工对象和原理也不符合品目84.80的范围，其也不是用于机器，所以不能按机器零件归类，故最后归入品目44.21。<br><b><span style=\"background-color:#ffff00\">03 模具</span><span style=\"background-color:#ffff00\">的特殊归类说明</span></b><br>最近果子也碰到了一个归类差错的案例，是制鞋工厂用的采用发泡成型工艺制作塑料凉鞋的模具，话说这种鞋子十年前还是比较流行的。这是采用热固性塑料和交联剂、发泡剂、改性剂等混合后通过注射的方式注入模具中成型的。但是其归入8480.71还是8480.79就是值得思考的问题了。<br>要想解决这个问题，首先看税则中关于注模和压模的描述是“injection or compression ”，这里的确仅描述了采用“注射”方式成型，依旧无法判断其是否符合。这时我们参考GB∕T 8845-2017 模具术语的定义：<br><b>注射模具</b>：通过注射机的螺杆或柱塞，使料筒内塑化熔融的塑料经喷嘴与浇注系统注入闭合型腔，并固化成型所用的模具。<br><b>塑料发泡模具</b>：采用物理或化学发泡工艺，用于成型泡沫塑料制品、制件的模具。<br>我们这个产品虽然将原料注入型腔，但不是采用固化方式成型而是在热固性塑料中添加催化成分后在型腔中采用化学发泡工艺成型的。据此，我们认为这种发泡工艺的塑料成型模具不能按住模归入子目8480.71，而应按其他塑料模具归入子目8480.79。<br><b><span style=\"background-color:#ffff00\">04 模具</span><span style=\"background-color:#ffff00\">归类流程图</span></b><br>说这么多，希望各位没看晕，所以果子做了个流程图，一看便知<br><img src=\"[[img:image-4d8c677b-c9b7-4e20-af50-e2d900494bfb]]\" alt=\"\"><br>至于导图中最后的结论，请参照前面品目84.80注释，以及本文中所列举的各项产品来理解。<br><b><span style=\"background-color:#ffff00\">05 归类</span><span style=\"background-color:#ffff00\">操作要点</span></b><br>通过以上介绍，相信大家对于模具的归类有了一定认识，但是在报关实际操作中应当如何与客户进行沟通以便准确进行归类，或者说再归类操作中应当重点注意哪些问题呢？在此果子重点介绍一下。<br>（1）模具材质和结构，模具是用什么材质制造的，以及其结构如何。<br>（2）加工对象材质，模具是用来对哪类商品进行加工的。<br>（3）加工工艺，对货品的加工是成型还是塑形加工。<br>（4）模具用途，是用于手工操作还是安装在机器上面，其是否可以互换。<br>（5）材质变化，加工对象的变化是物理变化还是化学变化。<br>（6）工作原理，模具的工作原理是采用压力，还是注射或其他原理。<br>（7）产品状态，通过模具加工后的产品是制成品还是货物坯。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-46c62066-918a-4cf7-bf82-50453a7b4095",
+          "originalName": "image-46c62066-918a-4cf7-bf82-50453a7b4095-word-image.gif.gif",
+          "storedName": "image-46c62066-918a-4cf7-bf82-50453a7b4095-word-image.gif.gif",
+          "path": "assets/images/note-39505586-16a9-4bfb-bc77-57b34c72809a/image-46c62066-918a-4cf7-bf82-50453a7b4095-word-image.gif.gif",
+          "mimeType": "image/gif",
+          "size": 32877,
+          "sha": "b09d9b243ad39dbe3bf3957f6fe487fc1d04a9e0",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:09.988Z"
+        },
+        {
+          "id": "image-16c2afae-bfb6-4ecd-a597-546ab766e597",
+          "originalName": "image-16c2afae-bfb6-4ecd-a597-546ab766e597-word-image.gif.gif",
+          "storedName": "image-16c2afae-bfb6-4ecd-a597-546ab766e597-word-image.gif.gif",
+          "path": "assets/images/note-39505586-16a9-4bfb-bc77-57b34c72809a/image-16c2afae-bfb6-4ecd-a597-546ab766e597-word-image.gif.gif",
+          "mimeType": "image/gif",
+          "size": 145668,
+          "sha": "576aff49be262d3ccb8d48339a9968ee4979fbf7",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:13.075Z"
+        },
+        {
+          "id": "image-4d8c677b-c9b7-4e20-af50-e2d900494bfb",
+          "originalName": "image-4d8c677b-c9b7-4e20-af50-e2d900494bfb-word-image.png.png",
+          "storedName": "image-4d8c677b-c9b7-4e20-af50-e2d900494bfb-word-image.png.png",
+          "path": "assets/images/note-39505586-16a9-4bfb-bc77-57b34c72809a/image-4d8c677b-c9b7-4e20-af50-e2d900494bfb-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 163047,
+          "sha": "8ebfa7cbfcae116fa234d073317da863d94879fe",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:15.963Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-aba2a4e9-332b-4ae7-8ed7-63c7ecc4effd",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "8466.2000只有“工件夹具（Work holders）”？别漏了重要的Jigs（夹具）和Fixtures（固定装置）！",
+      "content": "<img src=\"[[img:image-d5a7a480-5b28-4ce6-8c5f-5a9d1d349094]]\" alt=\"\"><br>     在商品编码 8466.2000 下，<b>工件夹具（Work holders）</b>通常包括《总注释》中提及的车床顶尖、固定支架等产品。但在实际工作中，我们发现大家经常遇到两个容易混淆的概念：<b>Jigs（夹具/治具）</b>和<b> Fixtures（夹具/固定装置）</b>。这两个产品到底算不算工件夹具呢？今天我们就来聊聊这个话题。<br>    <b>Jigs</b>是一种制造工具，可在制造操作过程中支撑和定位工件并引导切削工具。通过固定工件和引导刀具来提高制造零件的重复性、精度和生产率。   <br>    <b>Fixtures</b>是一种制造工具，用于将工件固定、支撑和定位在机器上所需的位置。它减少了工件设置时间并提高了零件质量。可以精确地将零件定位在机器上，以减少机器闲置时间和操作员的工作量，并提高生产率。<br>     两者区别如下图:<br><img src=\"[[img:image-b6b54fe6-dfc4-4a35-8bc8-c85157a9148e]]\" alt=\"\"><br>    可见<b>Jigs（夹具、治具）</b>和<b>Fixtures（夹具、固定装置）</b>均属于<b>工件夹具（Work holders）</b>。<br><br>      <b>工件夹具（Work holders）</b>产品如下图，个人总结，欢迎交流。<br><img src=\"[[img:image-e074395d-6f39-4a71-a4b7-36330e8f19a4]]\" alt=\"\"><br>参考资料：<br>1、https://www.carrlane.com/engineering-resources/technical-information/design-standards-engineering-information/workholding-definitions2、https://www.theengineeringchoice.com/what-is-difference-between-jig-and-fixture/<br>塑料橡胶篇",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-d5a7a480-5b28-4ce6-8c5f-5a9d1d349094",
+          "originalName": "image-d5a7a480-5b28-4ce6-8c5f-5a9d1d349094-word-image.png.png",
+          "storedName": "image-d5a7a480-5b28-4ce6-8c5f-5a9d1d349094-word-image.png.png",
+          "path": "assets/images/note-aba2a4e9-332b-4ae7-8ed7-63c7ecc4effd/image-d5a7a480-5b28-4ce6-8c5f-5a9d1d349094-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 247809,
+          "sha": "4001e7e6a96c8d6adfcccefb386ab6dcc3ace6a6",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:19.286Z"
+        },
+        {
+          "id": "image-b6b54fe6-dfc4-4a35-8bc8-c85157a9148e",
+          "originalName": "image-b6b54fe6-dfc4-4a35-8bc8-c85157a9148e-word-image.png.png",
+          "storedName": "image-b6b54fe6-dfc4-4a35-8bc8-c85157a9148e-word-image.png.png",
+          "path": "assets/images/note-aba2a4e9-332b-4ae7-8ed7-63c7ecc4effd/image-b6b54fe6-dfc4-4a35-8bc8-c85157a9148e-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 142482,
+          "sha": "5c8e66bcee3bf7f490307a3afcdc1f5c3e9576f4",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:22.546Z"
+        },
+        {
+          "id": "image-e074395d-6f39-4a71-a4b7-36330e8f19a4",
+          "originalName": "image-e074395d-6f39-4a71-a4b7-36330e8f19a4-word-image.png.png",
+          "storedName": "image-e074395d-6f39-4a71-a4b7-36330e8f19a4-word-image.png.png",
+          "path": "assets/images/note-aba2a4e9-332b-4ae7-8ed7-63c7ecc4effd/image-e074395d-6f39-4a71-a4b7-36330e8f19a4-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 154410,
+          "sha": "8e2976e085e94a51ad3e494ed81da860eaa05d9a",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:25.653Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-3e84ab4f-b023-4165-8f8d-6703cc4d77f4",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "报关中化学纤维长丝和化学纤维短纤的区别及归类注意事项",
+      "content": "一提到纺织品的商品归类，很多关务同仁自然而然会想到服装，很多时候大家都会认为服装的商品归类甚至比机电产品还复杂。其实，我们如果仔细看过《协调制度》第十一类子目注释二（一）的话才会发现，其实无论什么纺织制成品，确定其面料才是最重要的。今天就让果子给大家介绍下化学纤维的商品归类知识。<br>我们仔细看第十一类的列目结构就可以发现本类各章分为三组：<br><b>第一组：第五十章至第五十五章</b><br><b>第二组：第五十六章至第六十章</b><br><b>第三组：第六十一章至第六十三章</b><br>其中在第一组的第五十章至第五十五章中又是按照动物材料→植物材料→化学材料的列目顺序进行排列。但是在这一分组中，经常发现有的朋友对第五十四章和第五十五章的化学纤维长丝和化学纤维短纤无法区分清楚。到底多长算长丝，多短算短纤呢？今天就让果子给大家介绍下。<br><b>关于长短的分析</b><br>正如前面所提到的，很多人都希望对纤维的长丝和短纤下一个定义，这样方便在归类的时候进行操作。但果子请大家注意两点：<br>· 长丝的“长”和短纤的“短”虽然在注释中有部分界定，但其并不是一个绝对值，而是相对而言的，其中短纤是相对于长丝，并且生产工艺无法达到长丝所要求的范围，所以叫做短纤，后面我们再详细讲。<br>· 长丝和短纤的判断多用于在纱线层面进行判断，而作为纺织制成品，尤其是服装，在没有看到实物，甚至没有织物镜的情况下，是几乎无法判断其是长丝还是短纤织成的面料。<br><b>化学纤维的分类及制造过程</b><br>化学纤维分为合成纤维和人造纤维两类，它们都有长丝和短纤的报验状态，但是要想真正区分化学纤维长丝和短纤的区别，就必须从其制造过程来讲起，否则真的没法完全理解其区分的要义。<br>（1）化纤的生产工艺<br><img src=\"[[img:image-c12dc68e-067f-4319-a35e-2d8266ee2182]]\" alt=\"\"><br>化学纤维的成型主要有<b>熔融纺丝、干法纺丝和湿法纺丝</b>三种方法，但无论是哪种，在生产工艺的主要流程都是相同的，都是通过聚合物切片→熔融→喷丝头喷出→干燥成型→卷绕的方法形成的。理论上来讲，只要持续投料生产，化学纤维的丝可以到无限长度（把地球包起来都是可以的）。<br>（2）合成纤维<br>合成纤维是由合成的高分子聚合物（品目39.01至39.14）为基本成分制成的，常用的合成纤维有涤纶、锦纶、腈纶、氯纶、维纶、氨纶、聚烯烃弹力丝等。<br>（3）人造纤维<br>人造纤维是用天然材料的纤维素，以小分子的有机化合物形式，经加聚反应或缩聚反应合成的线型聚合物为基本成分制成。如<b>莫代尔，是由产自欧洲的灌木林制成木质浆液后经过前述的人造纤维生产工艺纺丝后制作而成</b>。<br>（4）做个总结<br>我们将这些常见化学纤维的俗称和学名做了一个总结，方便大家运用。<br><img src=\"[[img:image-cfe75e46-7ff1-4aa9-aece-d58200f20064]]\" alt=\"\"><br><b>化学纤维长丝和短纤的区分</b><br>先说长丝。通过前面介绍大家应该发现了，无论是合成纤维还是人造纤维，其都是运用同样的方法来进行制造的，其长度在不截断的情况下是可以得到连续性纤维，可以无限延长。所以，化学纤维从生产的角度上来看就是长丝，因为它的确可以无限长。<br>再说短纤。理论上来说短纤分为两类，一类的天然纤维，还有一类就是化学纤维。在自然界所有天然纤维都是有一定长度的，客观条件让其长度不可能象化学纤维一样无限延长。比如，我们常见的棉、羊毛、亚麻，这些都属于短纤维。那么化学纤维既然可以无限延长，为什么也会出现短纤维呢？这很简单，把化学纤维长丝切成一段一段的不就成短纤维了嘛。<br>虽然说并未对化学纤维短纤的长度做明确定义，但在第五十五章总注释中给予了参考长度：<br><b>化学纤维短纤通常是有大量孔眼（有时多达数千个）的喷丝头挤压喷出而得；喷出的长丝收集起来成为丝束。这些丝束可直接拉伸并切成短段，或经过不同的加工工序（洗涤、漂白、染色等）后再进行拉伸并切成短段。纤维的长度通常切成25～180毫米之间，具体长度视化学纤维的种类、所需生产的纱线类型以及准备与之混纺的其他纺织纤维的性质而定。</b><br><b>化学纤维长丝和短纤织物的判断</b><br>我们看一组纱线的图片<br><img src=\"[[img:image-dfd405b8-04a7-4c19-a062-8ab584b209bf]]\" alt=\"\"><br>其中上图就是由化学纤维长丝构成的纱线，而下面则是化学纤维短纤通过纺纱工艺加工而成。由图可见，化学纤维长丝表面光滑，这使得织物表面光滑，光泽较强，比如丝绸。而化学纤维<span style=\"background-color:#00ff00\">短纤纺成的纱线拥有较多毛羽</span>，具有较强吸湿性，这些毛羽在纺织服装中可以形成很多空间让空气减少流动起保暖作用，比如毛衣。<br>如果<b>只有品名和模糊的材质描述</b>情形下，正因为长丝和短纤的上述特性，所以导致<span style=\"background-color:#ffff00\">长丝制的织物多是丝绸或化学纤维制的</span>，较少出现混纺的情况，这点一定要提前与客户确认清楚。如果是具有冬季特性的穿着于内衣和外衣之间的服装，多是短纤维制的，如：抓绒衣。<br>如果<b>有实物</b>的情形下，请仔细看实物的面料特征，如果手感柔顺象丝绸一样顺滑，则大概率是化学纤维长丝的，如：的确良衬衫。反之，如手感比较粗糙则多是短纤维制的。<br>如果<b>有织物镜</b>就更好了，直接在织物镜下看产品表面，如果无毛羽则是长丝，如果有较多毛羽则是短纤维。<br><b>其他两点提示</b><br>1、按化学纤维短纤归类的长丝<br>在第五十五章化学纤维短纤中也存在化学纤维长丝。我们仔细看品目55.01和55.02都是长丝丝束。为什么长丝会出现在短纤中呢？我们看第五十五章总注释：<br>本章包括短纤（即切段纤维）状或某些长丝丝束状的第五十四章总注释所述的化学纤维，也包括这些纤维或丝束在各个加工阶段所得的产品，含纱线和机织物。<br>我们思考一下，如果是化学纤维长丝制造出来会用于纺织，这时就应当直接被缠绕进卷轴可以直接使用了；但如果把一条一条长丝做成丝束（类似于捆）这样肯定不是用于纺织织物的。一般情况下，这样的报验状态都是为了将长丝丝束切断成短纤用的，所以自然放在第五十五章了。<br>2、对于新型纤维的判断<br>随着各种新技术的层出不穷和广告噱头的发布，越来越多新型纤维出现在市场上，无论是我们在生活中还是在报关工作中都难免碰到。果子发现，这些纤维无论叫什么名字，大多打“天然”、“舒适”的宣传口号，比如“天丝”、“牛奶纤维”等等。其实稍有常识就会发现，牛奶中怎么提取也是无法提取任何丝状物质的，其虽然采用某些天然提取物质，但最周还是通过聚合反应成为聚合物并且按前述人造纤维的生产工艺生产出来的，所以依旧是化学纤维（人造纤维）。<br>好了，关于化学纤维的长丝和短纤判断，也写了这么多，具体操作的时候还是要看各位按图索骥，根据本文中果子的建议进行判断。当然，在其他产品的归类中，或者与海关存在商品归类争议，欢迎大家跟果子（微信：sunkai0107）交流，果子会尽力帮助大家解决这些商品归类疑难问题的。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-c12dc68e-067f-4319-a35e-2d8266ee2182",
+          "originalName": "image-c12dc68e-067f-4319-a35e-2d8266ee2182-word-image.png.png",
+          "storedName": "image-c12dc68e-067f-4319-a35e-2d8266ee2182-word-image.png.png",
+          "path": "assets/images/note-3e84ab4f-b023-4165-8f8d-6703cc4d77f4/image-c12dc68e-067f-4319-a35e-2d8266ee2182-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 394902,
+          "sha": "367ec141c9a5c6d1538081d4758d407cdd836c9f",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:29.049Z"
+        },
+        {
+          "id": "image-cfe75e46-7ff1-4aa9-aece-d58200f20064",
+          "originalName": "image-cfe75e46-7ff1-4aa9-aece-d58200f20064-word-image.png.png",
+          "storedName": "image-cfe75e46-7ff1-4aa9-aece-d58200f20064-word-image.png.png",
+          "path": "assets/images/note-3e84ab4f-b023-4165-8f8d-6703cc4d77f4/image-cfe75e46-7ff1-4aa9-aece-d58200f20064-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 556416,
+          "sha": "88084024ea52d8aa8d8fd5a2eb20b88b6e8ee209",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:32.144Z"
+        },
+        {
+          "id": "image-dfd405b8-04a7-4c19-a062-8ab584b209bf",
+          "originalName": "image-dfd405b8-04a7-4c19-a062-8ab584b209bf-word-image.png.png",
+          "storedName": "image-dfd405b8-04a7-4c19-a062-8ab584b209bf-word-image.png.png",
+          "path": "assets/images/note-3e84ab4f-b023-4165-8f8d-6703cc4d77f4/image-dfd405b8-04a7-4c19-a062-8ab584b209bf-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 664872,
+          "sha": "cd319d1806f04e5b419196d120ad29d45e9b7cfe",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:35.847Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-343378f0-a27d-4bf0-bab7-52c6e763b855",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "为何聚酯既归39章又归54、55章？为何man-made fibres译为“化学纤维”而不是“人造纤维”？——真相只有一个",
+      "content": "在海关商品编码（HScode）这个看似严谨却又充满“谜题”的世界里，许多看似相同的材料，却因为形态、加工方式或用途的不同，被分到了完全不同的章节。同样是“聚酯”，为什么有时落在第39章塑料，有时却进入第54、55章合成纤维？为什么英语里的“man-made fibres”在中文里偏偏译作“化学纤维”，而非直译的“人造纤维”？面对这些让初学者抓狂、让老手深思的归类谜题，你可能会觉得商品归类逻辑的“高深莫测”，甚至怀疑是不是翻译出了岔子？这一期，我们只做一件事：拆解这两个令人容易混淆的归类陷阱，洞穿税则背后的本质，因为在商品归类这件事上，真相只有一个！<br><b>一、为何聚酯既归第39章又归第54、55章？</b><br>在我们申报报关单填写申报要素，有时会遇到这样的疑问：比如聚酯这个材质，还可以按PET申报，还可以按涤纶申报。既归第39章，又可以归第54、55章？类似材质还有聚酰胺、聚氨酯、聚丙烯等等。这到底存在着怎么一个逻辑关系呢？<br><img src=\"[[img:image-76ff0ea5-4c50-4b98-acaa-670599991d5a]]\" alt=\"\"><br>根据税则第五十四章注释，可见，有机单体聚合物（聚酯、聚酰胺、聚氨酯、聚丙烯等）即为39章塑料制品；有机聚合物的短纤或长丝即为54、55章的化学纤维。聚酯英文缩写是：PET，涤纶应是聚酯纤维的俗称，所以在填写申报要素时，39章编码材质可填写聚酯、PET，但是不能写涤纶；54/55章编码材质可填写：涤纶、聚酯纤维、PET纤维，而不能直接写聚酯、PET。类似产品还有：聚酰胺（PA、纤维俗称：尼龙、锦纶）、聚丙烯腈（PAN、纤维俗称：腈纶）、聚乙烯醇（PVA、纤维俗称：维纶）、聚氨酯（PU、氨纶）、聚丙烯（PP、丙纶）等等 。对应表格整理如下，仅供学习参考：<br><img src=\"[[img:image-b876bbff-e446-4a92-bad2-de8c870f93de]]\" alt=\"\"><br>为何聚酯既归39章又归54、55章.pdf<br><b>二、为何man-made fibres译为“化学纤维”而不是“人造纤维”？</b><br>一直有个疑问：既然合成纤维是通过人工合成的，应属于人造纤维，而<b>海关税则明确规定：化学纤维=合成纤维+人造纤维</b>。这是为什么呢？这个问题一直困扰了我很多很多年，直到三年前注意到税则里的英文--<b>化学纤维对应的英文竟然是：Man-made！</b><br><img src=\"[[img:image-3a9f7d52-1f08-4949-a6b1-80c65899202b]]\" alt=\"\"><br>由此我作了一个大胆的推论——当初把合成纤维（synthetic）理解成属于人造纤维（Man-made）是没错的，只不过我国税则把Man-made翻译成了化学纤维，而税则认为的人造纤维是：artificial。<br>鉴于税则是翻译自外文版协调制度的，而西方在编纂此书时，也是参考了各个行业的权威认证的，我在知名网站（纺织纤维行业，链接在最后），找到纺织纤维的分类如下：<br><img src=\"[[img:image-7f05700e-8a90-4911-af9d-b6c730779f92]]\" alt=\"\"><br>翻译成中文如下（本人版权，独家整理）：<br><img src=\"[[img:image-1c25d670-c54f-4c59-92b7-fbaea22c99b5]]\" alt=\"\"><br><img src=\"[[img:image-204ac9cb-d624-437e-9aa8-1d6fc9b3e41c]]\" alt=\"\"><br>Textile fbres纺织纤维种类大全.pdf<br>通过<b>英文直译、海关税则、纺织材料学、纺织纤维国家标准（GB/T 36612-2018）</b>，Man-made，分别翻译如下：<br><b>Man-made </b><br><b>人造纤维（英文直译）</b><br><b>化学纤维（海关税则）</b><br><b>化学纤维（纺织材料学）</b><br><b>化学纤维（国家标准）</b><br>另外，<b>Man-made由Synthetic polyme（合成纤维）、Natural polymer天然聚合物（英文直译）、Other组成。</b><br>通过<b>英文直译、海关税则、纺织材料学、纺织纤维国家标准（GB/T 36612-2018）</b>，对<b>natural polymers的翻译</b>如下：<br><b>Natural polymer</b> <br><b>天然聚合物（英文直译）</b><br><b>人造纤维（artificial fibres，海关税则）</b><br><b>没有这个概念（纺织材料学，在这里的用词为：再生纤维，Regenerated cellulose (rayon)再生纤维（人造丝））</b><br><b>人造纤维（artificial fibres，国家标准）</b><br>这里Natural polymer天然聚合物（英文直译），就是海关税则所指的：人造纤维（artificial fibres）。关于这一点，查了很长时间，终于在2022年版《总注释》第736页，英文版《协调制度》第1620页得到证实。<br><img src=\"[[img:image-99ae06b2-ae3a-4bf0-b082-2931e5163dcc]]\" alt=\"\"><br><img src=\"[[img:image-43354160-3736-470d-a647-dd0df58e9663]]\" alt=\"\"><br>虽然中文翻译将天然有机聚合物与人造纤维分开了，但在英文注释里很明显地说明natural organic polymers就是指的artificial fibres。<br><b>综上：合成纤维（Synthetic polymer）其实是个Man-made（人造纤维），但是海关税则、纺织材料学、纺织纤维国家标准（GB/T 36612-2018），将Man-made翻译为：化学纤维，artificial fibres翻译为为：人造纤维</b>。<br>所以，在商品归类时尽量结合中英文定义，做到查漏补缺。总结如下:<b>化学纤维（Man-made）=合成纤维（Synthetic polymer）+人造纤维（artificial fibres or Natural polymer）</b>。（提示：fibers与fibres都是纤维的意思，美式英语与英式英语的区别而已）<br>以上仅为个人理解。若有不同意见，欢迎探讨。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-76ff0ea5-4c50-4b98-acaa-670599991d5a",
+          "originalName": "image-76ff0ea5-4c50-4b98-acaa-670599991d5a-word-image.png.png",
+          "storedName": "image-76ff0ea5-4c50-4b98-acaa-670599991d5a-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-76ff0ea5-4c50-4b98-acaa-670599991d5a-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 312429,
+          "sha": "153e565c12df5bb16d3a08ab18210a88ece639ee",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:38.996Z"
+        },
+        {
+          "id": "image-b876bbff-e446-4a92-bad2-de8c870f93de",
+          "originalName": "image-b876bbff-e446-4a92-bad2-de8c870f93de-word-image.png.png",
+          "storedName": "image-b876bbff-e446-4a92-bad2-de8c870f93de-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-b876bbff-e446-4a92-bad2-de8c870f93de-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 256074,
+          "sha": "078342172f3ade1a1ccb8189af01c05551684836",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:42.288Z"
+        },
+        {
+          "id": "image-3a9f7d52-1f08-4949-a6b1-80c65899202b",
+          "originalName": "image-3a9f7d52-1f08-4949-a6b1-80c65899202b-word-image.png.png",
+          "storedName": "image-3a9f7d52-1f08-4949-a6b1-80c65899202b-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-3a9f7d52-1f08-4949-a6b1-80c65899202b-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 113517,
+          "sha": "b8645f28e664ef14f971c74371d472ee011f2390",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:45.039Z"
+        },
+        {
+          "id": "image-7f05700e-8a90-4911-af9d-b6c730779f92",
+          "originalName": "image-7f05700e-8a90-4911-af9d-b6c730779f92-word-image.png.png",
+          "storedName": "image-7f05700e-8a90-4911-af9d-b6c730779f92-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-7f05700e-8a90-4911-af9d-b6c730779f92-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 133041,
+          "sha": "9fe0c73c9c36a16c577abf161ef074e3e6219cb1",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:48.026Z"
+        },
+        {
+          "id": "image-1c25d670-c54f-4c59-92b7-fbaea22c99b5",
+          "originalName": "image-1c25d670-c54f-4c59-92b7-fbaea22c99b5-word-image.png.png",
+          "storedName": "image-1c25d670-c54f-4c59-92b7-fbaea22c99b5-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-1c25d670-c54f-4c59-92b7-fbaea22c99b5-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 135366,
+          "sha": "fdac638276dd6191719bd1c68d76977cbaf77cba",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:51.362Z"
+        },
+        {
+          "id": "image-204ac9cb-d624-437e-9aa8-1d6fc9b3e41c",
+          "originalName": "image-204ac9cb-d624-437e-9aa8-1d6fc9b3e41c-word-image.png.png",
+          "storedName": "image-204ac9cb-d624-437e-9aa8-1d6fc9b3e41c-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-204ac9cb-d624-437e-9aa8-1d6fc9b3e41c-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 148692,
+          "sha": "e1fc19f913b3133c74dfc303ac9e01d2ffc17f8e",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:55.044Z"
+        },
+        {
+          "id": "image-99ae06b2-ae3a-4bf0-b082-2931e5163dcc",
+          "originalName": "image-99ae06b2-ae3a-4bf0-b082-2931e5163dcc-word-image.png.png",
+          "storedName": "image-99ae06b2-ae3a-4bf0-b082-2931e5163dcc-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-99ae06b2-ae3a-4bf0-b082-2931e5163dcc-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 172605,
+          "sha": "ede1177a0154d03700f28278d1c79a3797141afa",
+          "description": "",
+          "createdAt": "2026-10-14T08:03:57.882Z"
+        },
+        {
+          "id": "image-43354160-3736-470d-a647-dd0df58e9663",
+          "originalName": "image-43354160-3736-470d-a647-dd0df58e9663-word-image.png.png",
+          "storedName": "image-43354160-3736-470d-a647-dd0df58e9663-word-image.png.png",
+          "path": "assets/images/note-343378f0-a27d-4bf0-bab7-52c6e763b855/image-43354160-3736-470d-a647-dd0df58e9663-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 196920,
+          "sha": "436a8f4fa7cfdef440676c76cbdc0f7625aeb0bb",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:00.710Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "同是合成革，为何有时归3921、有时归5903？——真假美猴王",
+      "content": "初涉商品归类领域时，从业者常会被一个现象困扰：同为“合成革”，为何在税则中却游走于3921与5903两个税号之间？归类的唯一性原则在这里似乎失效了。本文将以此为切入点，深度剖析合成革在塑料与纺织材料之间的归类界限，到底3921与5903的合成革，谁才是真正的合成革？谁才是真大圣？<br><b>一、合成革发展史：</b><br>第1代：PVC人造革（20世纪30年代-60年代）：主要是以织物为底基，涂敷聚氯乙烯（PVC）树脂及各种增塑剂、稳定剂。生产工艺简单，价格极低。手感僵硬、气味重、耐寒性差、不透气。<br><img src=\"[[img:image-32ec1934-c7f1-43ea-b06e-5d51bd8cadb0]]\" alt=\"\"><br>第2代：聚氨酯PU合成革（20世纪60年代-80年代）：杜邦公司（DuPont）研发出聚氨酯（PU）合成革，标志着合成革进入了“仿真”时代。PU革比PVC更柔软、耐磨，光泽和纹理已经非常接近真皮。<br><img src=\"[[img:image-59c0cc77-41f2-4f69-8538-95056b33da2f]]\" alt=\"\"><br>第3代：超细纤维合成革（20世纪80年代末至今）：利用超细纤维（微米级）加工成具有三维网络结构的非织造布，再灌注聚氨酯树脂。物理性能（抗拉强度、耐折度）甚至优于天然皮革。<br><img src=\"[[img:image-475e03d4-8743-47df-9f6a-0a2075a52a84]]\" alt=\"\"><br>第4代：绿色环保与生物基合成革（21世纪10年代至今）：随着环保意识的觉醒，合成革行业正在经历一场“去毒化”转型。提取菠萝叶、苹果皮、蘑菇（菌丝体）或仙人掌纤维制成的皮革。<br><img src=\"[[img:image-049092a7-6d45-45ff-9911-80c6855498f3]]\" alt=\"\"><br><b>二、合成革的定义：</b><br>国家标准：人造革与合成革术语  标准号：GB/T 34443-2017<br><img src=\"[[img:image-fdff1b3a-472e-44e0-9208-ede9b9a50575]]\" alt=\"\"><br><br><br>英文定义：<br>人造革（Artificial leather），亦称合成革（synthetic leather）。 另外还有名称：leatherette（人造革）<span style=\"background-color:#ffff00\">、 </span>imitation leather（仿皮）、faux leather（合成皮）、 vegan leather（素食皮革）、pleather（仿皮）等等。<br>通常由coating（涂层材料，3921的pvc或pu树脂）+base（基材材料，5903织物）+少量增塑剂、稳定剂制成。<br>一般情况下：<br>用聚氯乙烯（PVC）树脂生产的人造革称为PVC人造革（人造革）；<br>用聚氨酯（PU）树脂与<b>传统织物</b>生产的人造革称为PU人造革（<b>人造革</b>）；<br>用聚氨酯（PU）树脂与<b>无纺布</b>生产的合成革称为PU合成革（<b>合成革</b>）。<br>由此可见，人造革与合成革的区别，其实是base（基材材料）的不同导致。<br><b>三、商品编码的区别：</b><br>综上，我们阐述了合成革、人造革的来龙去脉与定义。因此根据《税则》、《总注释》，当：<br>coating，即涂层材料（pvc或pu树脂）的成分含量超过了50%，该产品归：3912合适；<br>base，即基材材料（传统织物、无纺布）的成分含量超过了50%，该产品归：5903合适。<br>在写这篇文章之前，我一直坚定地认为5903才是“血统纯正”的合成革，而3912顶多是个“编外人员”。可写到这，在查了一堆资料后，我自个也犯迷糊。索性不纠结，到底谁是“美猴王”，谁又是“六耳猕猴”？就留给各位去判断吧！看看谁有这个火眼金睛（留言谈论）？！<br><b>四、延伸：</b><br>研究过程中，一类“三明治”结构的产品引起了我的注意：双面涂层，基材居中。它究竟算不算合成革？这在业界其实是个“见仁见智”的题目。有专家将其归入此类，我则有不同看法，个中权衡，各位读者不妨自行裁量。<br>虽有定义之争，归类操作倒是有迹可循。这类产品往往观察两边涂层材质，一般情况下占比更大，便按该材质属性进行归类即可，如下：<br>两边涂层的材质若是塑料，即归3912；<br>两个涂层的材质若是织物，即归5903。<br><b>参考依据：</b><br>1、国家标准：人造革与合成革术语  标准号：GB/T 34443-2017人造革与合成革术语  GB T 34443-2017.pdf<br>2、陈征科著：《商品归类精要》<br>3、https://www.fauxleatherfactory.com/news/internal-differences-between-synthetic-leather-and-artificial-leather.html",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-32ec1934-c7f1-43ea-b06e-5d51bd8cadb0",
+          "originalName": "image-32ec1934-c7f1-43ea-b06e-5d51bd8cadb0-word-image.png.png",
+          "storedName": "image-32ec1934-c7f1-43ea-b06e-5d51bd8cadb0-word-image.png.png",
+          "path": "assets/images/note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4/image-32ec1934-c7f1-43ea-b06e-5d51bd8cadb0-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 38409,
+          "sha": "3a335557d7411f8f5d5d7ee1001b5953c20a6c36",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:03.562Z"
+        },
+        {
+          "id": "image-59c0cc77-41f2-4f69-8538-95056b33da2f",
+          "originalName": "image-59c0cc77-41f2-4f69-8538-95056b33da2f-word-image.png.png",
+          "storedName": "image-59c0cc77-41f2-4f69-8538-95056b33da2f-word-image.png.png",
+          "path": "assets/images/note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4/image-59c0cc77-41f2-4f69-8538-95056b33da2f-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 48642,
+          "sha": "0c1ae066197e3c95e4f8b2c466111795b195c176",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:06.516Z"
+        },
+        {
+          "id": "image-475e03d4-8743-47df-9f6a-0a2075a52a84",
+          "originalName": "image-475e03d4-8743-47df-9f6a-0a2075a52a84-word-image.png.png",
+          "storedName": "image-475e03d4-8743-47df-9f6a-0a2075a52a84-word-image.png.png",
+          "path": "assets/images/note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4/image-475e03d4-8743-47df-9f6a-0a2075a52a84-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 34860,
+          "sha": "d6e010f444dc1b019fad09dea93027c82cd1a87b",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:09.344Z"
+        },
+        {
+          "id": "image-049092a7-6d45-45ff-9911-80c6855498f3",
+          "originalName": "image-049092a7-6d45-45ff-9911-80c6855498f3-word-image.png.png",
+          "storedName": "image-049092a7-6d45-45ff-9911-80c6855498f3-word-image.png.png",
+          "path": "assets/images/note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4/image-049092a7-6d45-45ff-9911-80c6855498f3-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 48429,
+          "sha": "30fd22f987da92868f938ab4619a47f1ed74c6c3",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:12.499Z"
+        },
+        {
+          "id": "image-fdff1b3a-472e-44e0-9208-ede9b9a50575",
+          "originalName": "image-fdff1b3a-472e-44e0-9208-ede9b9a50575-word-image.png.png",
+          "storedName": "image-fdff1b3a-472e-44e0-9208-ede9b9a50575-word-image.png.png",
+          "path": "assets/images/note-9fb4e0f7-9513-4b69-a46d-07ddcd5eeca4/image-fdff1b3a-472e-44e0-9208-ede9b9a50575-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 129471,
+          "sha": "14742fea7edfad240d51f690094e5a4d24de3fbc",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:15.516Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-db1fa608-cf69-438e-9f40-f32fc03eea22",
+      "categoryId": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
+      "title": "从晶圆发展史，理解38180019的归类区别——This is the way",
+      "content": "最近有人问了个归类问题，很有趣：<br>进口8英寸晶圆片，归类被“卡”住了！纠结点在于：选3818001910 还是 3818001920？ 如果按数学换算，8英寸=20.32cm，妥妥的归1920；但客户说实物是200mm（20cm），按实际尺寸这就得归1910。 一个是名义叫法，一个是实际规格，正好卡在临界线上。到底该按哪个算？今天咱们来深扒一下这个问题。<br><br><br><br><img src=\"[[img:image-252e3969-bbf8-4137-882f-c978ff6f82d0]]\" alt=\"\"><br>根据《税则》条文，将厘米换算成英寸可知，15.24cm=6英寸、 20.32cm=8英寸 、30.48 cm=12英寸 ，即海关是以英寸来划分具体子目的。<br><br>这还是没解决疑惑。于是我特意去查阅了晶圆的发展历程。这一看豁然开朗——原来其中的逻辑是这样的：<br><img src=\"[[img:image-876e1fd9-61df-4452-87e1-1ed6fc4a17ab]]\" alt=\"\"><br><img src=\"[[img:image-c377f2e6-bc4f-46ce-8d6d-a4ceef8b6101]]\" alt=\"\"><br><img src=\"[[img:image-f917dc1c-55f0-4d49-92e6-e91f99fe3730]]\" alt=\"\"><br>晶圆生产是以公制（即mm）为单位生产的。<b>200mm的晶圆，实际换算=7.9英寸，由于称呼：7.9英寸在行业中并不直观、不顺口，最终约定俗成地称为：8英寸</b>。这也正是当前争议产生的根源。（同理：150mm=5.9英寸，行业称：6英寸；300mm=11.8英寸，行业称：12英寸）<br>既然我们现在知道了，8英寸晶圆实际只有7.9英寸，即=200mm，按照《中华人民共和国海关进出口货物商品归类管理规定》，进出口货物的商品归类应当按照收发货人或者其代理人向海关申报时货物的实际状态确定归类，所以归：<b>3818001910</b>才是正解。<br>我们在进行商品归类时，除了熟悉《税则》及《总注释》之外，<b>不妨多追溯产品本身的来龙去脉与行业背景</b>，往往更有助于厘清看似矛盾的细节、化解归类中的困惑。最后，用我很喜欢的一部美剧《曼达洛人》中的一句经典台词，作为今天话题的收尾：<b>This is the way</b>！也希望大家能通过这个案例，探索出属于自己的归类之道（The Way）。<br>以上仅为个人理解。若有不同意见，欢迎大家探讨。<b>预告</b>：我们下周见：接插件与连接器的归类区别。<br>参考依据：<br>1、https://en.wikipedia.org/wiki/Wafer_(electronics)<br>2、https://waferpro.com/the-gradual-growth-of-silicon-wafer-sizes-an-evolutionary-history/",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-252e3969-bbf8-4137-882f-c978ff6f82d0",
+          "originalName": "image-252e3969-bbf8-4137-882f-c978ff6f82d0-word-image.png.png",
+          "storedName": "image-252e3969-bbf8-4137-882f-c978ff6f82d0-word-image.png.png",
+          "path": "assets/images/note-db1fa608-cf69-438e-9f40-f32fc03eea22/image-252e3969-bbf8-4137-882f-c978ff6f82d0-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 94725,
+          "sha": "2cbddfd27576783d920e632d249e521b7c3bf2a2",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:18.697Z"
+        },
+        {
+          "id": "image-876e1fd9-61df-4452-87e1-1ed6fc4a17ab",
+          "originalName": "image-876e1fd9-61df-4452-87e1-1ed6fc4a17ab-word-image.png.png",
+          "storedName": "image-876e1fd9-61df-4452-87e1-1ed6fc4a17ab-word-image.png.png",
+          "path": "assets/images/note-db1fa608-cf69-438e-9f40-f32fc03eea22/image-876e1fd9-61df-4452-87e1-1ed6fc4a17ab-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 110079,
+          "sha": "20e34aa5454c52791685a5c2a1c035238f891661",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:21.651Z"
+        },
+        {
+          "id": "image-c377f2e6-bc4f-46ce-8d6d-a4ceef8b6101",
+          "originalName": "image-c377f2e6-bc4f-46ce-8d6d-a4ceef8b6101-word-image.png.png",
+          "storedName": "image-c377f2e6-bc4f-46ce-8d6d-a4ceef8b6101-word-image.png.png",
+          "path": "assets/images/note-db1fa608-cf69-438e-9f40-f32fc03eea22/image-c377f2e6-bc4f-46ce-8d6d-a4ceef8b6101-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 212589,
+          "sha": "9ba1e26e20a7c2589fa6b559b5361bf70cd2a48b",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:24.885Z"
+        },
+        {
+          "id": "image-f917dc1c-55f0-4d49-92e6-e91f99fe3730",
+          "originalName": "image-f917dc1c-55f0-4d49-92e6-e91f99fe3730-word-image.png.png",
+          "storedName": "image-f917dc1c-55f0-4d49-92e6-e91f99fe3730-word-image.png.png",
+          "path": "assets/images/note-db1fa608-cf69-438e-9f40-f32fc03eea22/image-f917dc1c-55f0-4d49-92e6-e91f99fe3730-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 194571,
+          "sha": "157eeca110d3efd9e59a783cb26130b19c73f3a0",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:28.029Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-776f4761-947a-4b5f-9778-d08c0bfd71e5",
+      "categoryId": "category-751d35fa-cb82-4e0c-9aef-734cb80d31a2",
+      "title": "一文搞懂软件进出口如何报关？",
+      "content": "<b>本文要点概述如下：</b><br><b>1.软件进口经常会涉及到特许权使用费，特别是进口，用于支付著作权，申报前一定要确认清楚（结合合同与实际情况），此项也是还是事后核查的重点；</b><br><b>2.对于含有介质进口的软件，通常报关的品名为：****软件（介质为****），这样海关在审核归类时能够做出准确判断；</b><br><b>3.归类的要求：软件进口时应按照其载体所归商品编号归类。</b><br><b>4.出口注意事项：生效的软件出口合同正本到当地商务厅(委、局)领取《软件出口合同登记证书》。</b><br><b>一、法律、<span style=\"background-color:#ffff00\">法规依据</span></b><br><b>1.中华人民共和国海关审定进出口货物完税价格办法（海关总署第213号令）</b><br><b>　第十三条符合下列条件之一的特许权使用费，应当视为与进口货物有关：</b>…………………………<br>（三）<b>特许权使用费</b>是用于支付著作权，且进口货物属于下列情形之一的：<br>1.含有<b>软件</b>、文字、乐曲、图片、图像或者其他类似内容的进口货物，包括磁带、磁盘、光盘或者其他类似载体的形式；<br>2.含有其他享有著作权内容的进口货物。<br>第三十四条进口载有专供数据处理设备用软件的介质，具有下列情形之一的，应当以介质本身的价值或者成本为基础审查确定完税价格：<br>（一）介质本身的价值或者成本与所载软件的价值分列；<br>（二）介质本身的价值或者成本与所载软件的价值虽未分列，但是纳税义务人能够提供介质本身的价值或者成本的证明文件，或者能提供所载软件价值的证明文件。<br>含有美术、摄影、声音、图像、影视、游戏、电子出版物的介质不适用前款规定<br>第五十一条本办法中下列用语的含义：<br>特许权使用费，是指进口货物的买方为取得知识产权权利人及权利人有效授权人关于专利权、商标权、专有技术、著作权、分销权或者销售权的许可或者转让而支付的费用。<br>技术培训费用，是指基于卖方或者与卖方有关的第三方对买方派出的技术人员进行与进口货物有关的技术指导，进口货物的买方支付的培训师资及人员的教学、食宿、交通、医疗保险等其他费用。<br><b>软件，是指《计算机软件保护条例》规定的用于数据处理设备的程序和文档。</b><br>专有技术，是指以图纸、模型、技术资料和规范等形式体现的尚未公开的工艺流程、配方、产品设计、质量控制、检测以及营销管理等方面的知识、经验、方法和诀窍等。<br>轻度加工，是指稀释、混合、分类、简单装配、再包装或者其他类似加工。<br>同等级或者同种类货物，是指由特定产业或者产业部门生产的一组或者一系列货物中的货物，包括相同货物或者类似货物。<br><b>介质，是指磁带、磁盘、光盘。</b><br><b>软件是《计算机软件保护条例》规定的用于数据处理设备的程序和文档，不包括美术、摄影、声像、录像、影视、游戏等电子制品及电子出版物。</b><br><b>2.中华人民共和国海关进出境印刷品及音像制品监管办法（海关总署第161号令）</b><br>第十五条  随机器设备同时进口，以及进口后随机器设备复出口的记录操作系统、设备说明、专用软件等内容的印刷品及音像制品进口时，进口单位应当按照海关的要求交验合同、发票、有关报关单证及其他需要提供的文件，但是<b>可以免领《批准单》</b>等批准文件。<br><b>3.海关总署公告2011年第80号（关于调整统计商品品目9803商品名称与统计范围）</b><br>总署公告〔2011〕80号<br>为正确实施联合国货物贸易统计标准与服务贸易统计标准，现调整《海关统计商品目录》中品目9803及项下本国子目的商品名称和统计范围，具体如下：<br>一、 自2012年起，品目98.03及项下本国子目仅用于申报专门针对特定用户的特定需求而开发的出口软件；非定制型的出口软件以及进口软件应按照载体归类并统计。　　<br>二、品目98.03的商品名称修改为“定制型计算机软件（仅用于出口，不包括与产品固化或集成为一体的软件）”；本国子目9803.0010的商品名称修改为“定制型系统软件（指构成计算机系统或其他数字计算装置运行环境、平台的操作系统软件，支持应用软件运行）”；本国子目9803.0020的商品名称修改为“定制型支撑软件（指在操作系统软件和应用软件之间，提供应用软件设计，系统测试运行等辅助功能的软件）”；本国子目9803.0030的商品名称修改为“定制型应用软件”；本国子目9803.0090的商品名称修改为“其他定制型软件”。　　<br>三、自2012年起，品目98.03不再列入我国对外货物贸易统计范围，海关对其实施单项统计。<br>　　特此公告。<br>　　　　　　　　　　　　　　　　　　二○一一年十二月二十六日<br><b>二、进出口程序</b><br><b>（一）常见载体的归类指引</b><br><b>加密狗/U盘</b>：归入8523.5120.90（其他已录制的固态非易失性存储器件）。<br><b>软件光盘</b>：归类编码：85234920.90（其他用于重放声音、图像以外信息的光学媒体）注：如光盘与印有用户密码的纸质说明书配套使用，可一并归入光盘；否则应分别按载体归类申报。<br><b>纸质秘钥卡</b>：归入4911.9910.10（赋予软件使用权的印刷品）。<br><b>2. 关键注意事项</b><br>若光盘与印有密码的纸质说明书配套销售，可一并按光盘归类；否则应分开申报。<br>软件如与设备一同进口且在合同中分别计价，必须分开申报。<br><b>（二）进口软件</b><br><b>进口按照有无介质分类，对于无介质进口而言，由于软件本身属于一种技术，按照《技术进出口合同登记管理办法》第八条的规定：</b><br>第八条　国家对自由进出口技术合同实行<b>网上在线登记管理</b>。技术进出口经营者应登陆商务部政府网站上的“技术进出口合同信息管理系统”（网址：jsjckqy.fwmys.mofcom.gov.cn）进行合同登记，并持技术进（出）口合同登记申请书、技术进（出）口合同副本（包括中文译本）和签约双方法律地位的证明文件，到商务主管部门履行登记手续。商务主管部门在收到上述文件起3个工作日内，对合同登记内容进行核对，并向技术进出口经营者颁发《技术进口合同登记证》或《技术出口合同登记证》。<br><b><span style=\"background-color:#ffff00\">无介质的软件属于技术进出口，实体进出口则直接报关，</span>技术进出口没有“进出关境”的实体行为，不需要报关，但是为了统计和收付汇需要则需办理合同备案。</b><br>凭借《技术进口合同登记证》直接办理付汇手续，而无需以报关单办理付汇手续。<br>即为下述情况：<br><b><span style=\"background-color:#ffff00\"><span style=\"background-color:#ffff00\">通过“网上传输方式”完成</span></span><br></b><br>无需向海关申报，对需要支付的软件费用可以通过服务贸易的非贸付汇。<br>电子交付（没有光盘和介质从国外进入国内）的软件是否需要走进出口手续？<br><img src=\"[[img:image-14997174-4d82-4161-bf77-4bca278221d5]]\" alt=\"\"><br><b><span style=\"background-color:#ffff00\">“没有实体的光盘和介质的软件从国外进入国内”不属于海关业务。</span></b><br><b><span style=\"background-color:#ffff00\">通过“海关通关方式”完成</span></b><br>按照载体申报如下：<br><img src=\"[[img:image-9109c388-9700-49c1-950d-ebaa2c37cf00]]\" alt=\"\"><br><b><span style=\"background-color:#ffff00\">• 光盘</span><span style=\"background-color:#ffff00\">作为载体</span></b><br><img src=\"[[img:image-8c4a82e0-3c64-43e3-b10f-361f8e9a7ed2]]\" alt=\"\"><br><b>注：如光盘（或磁盘）与印有用户密码的纸质说明书配套使用，可一并归入光盘（或磁盘），否则应按各自的载体分别归类申报。</b><br><b><span style=\"background-color:#ffff00\">• U盘作为载体</span></b><br><img src=\"[[img:image-787adfb1-8103-4b9e-878a-32c0098593d2]]\" alt=\"\"><br><b>注：对软件与进口设备一同进口，在合同中分别报价的情况需要分开申报。</b><br><b>（三）出口软件</b><br>按照有关规定，软件出口企业在软件出口合同中应明确软件出口方式，软件出口企业应在商务部业务系统统一平台中“<b>软件出口合同登记管理中心</b>”对软件出口合同进行在线登记。登记后按属地原则，持生效的软件出口合同正本到当地外经贸厅（委、局）领取《软件出口合同登记证书》。<br><b>通过“网上传输方式”完成 ：</b><br>   通过网上传输的软件出口，软件出口企业收汇后持《软件出口合同登记证书》和生效的《软件出口合同》（正本）直接到外汇指定银行办理收汇手续。<br><b><span style=\"background-color:#ffff00\">通过“海关通关方式”完成 </span></b><br>  对有载体出口的软件出口企业到海关办理软件出口报关手续时，应出示《软件出口合同登记证书》、生效的《软件出口合同》（正本）及其他报关单证，海关予以办理相应的通关手续。<br><img src=\"[[img:image-f8df14d2-2280-4bc7-a310-2ef3425e4c94]]\" alt=\"\"><br>软件出口合同登记范本<br>三、<b>软件进出口场景还原</b><br>时常有公司的工程技术人员咨询软件进口的问题？软件的载体也大致有几种：\"软件加密狗\"是一种插在计算机并行口上的软硬件结合的加密产品、光盘、纸质的密码。<br><b>加密狗（软件）</b>85235120.90  其他已录制的固态非易失性存储器件（闪速存储器） <br><img src=\"[[img:image-a3f808ef-9cbf-44cf-9981-d93e757b7421]]\" alt=\"\"><br><b>软件光盘 </b>   85234920.90  其他用于重放声音、图像以外信息的光学媒体 <br><img src=\"[[img:image-8c9dfadf-fb0c-4e3e-b384-886e9c9c5c6f]]\" alt=\"\"><br><b>秘钥卡</b>   49119910.10  给予存取、安装、复制或使用软件（含游戏）、数据、互联网内容物（含游戏内或应用程序内内容物）、服务或电信服务（含移动服务）权利的印刷品 。<br><img src=\"[[img:image-478629e2-84b4-4da9-880e-b618356f6587]]\" alt=\"\"><br>【软件使用许可证凭证】<br><img src=\"[[img:image-f048288d-ae45-4462-b417-31d7cc119f0f]]\" alt=\"\"><br><b>四、<span style=\"background-color:#ffff00\">常见问题问答</span></b><br><b>1问：什么是软件？</b><br>答：软件是指《计算机软件保护条例》规定的用于数据处理设备的程序和文档。根据软件存储的载体与传输方式的不同，一般分为“海关通关方式”软件与“网上传输方式”软件进出口，软件进出口企业在软件进出口合同中应明确软件进出口方式。<br><b>2，问：采用“海关通关方式”的软件进口应如何归类？</b><br>答：软件进口时应按照其载体所归商品编号归类，即软件光盘按光盘归类；软件磁盘按磁盘归类；印有用户密码的纸质说明书按纸张归类。<br>当上述物品同时进口时，如光盘（或磁盘）与印有用户密码的纸质说明书配套使用，可一并按光盘（或磁盘），否则应按各自的载体分别归类。<br>3，<b>问：通过网络传输进口的软件，没有光盘等载体，应如何报关？关税和增值税为多少？</b><br>答：<b>无需报关。</b>根据《中华人民共和国进出口关税条例》（中华人民共和国国务院令第392号）第二条的规定，“中华人民共和国准许进出口的货物、进境物品，除法律、行政法规另有规定外，海关依照本条例规定征收进出口关税”。即海关对实际进出口的货物、进境物品进行征税。通过网络直接下载安装的软件，无实际有形货物进口，海关不对网络直接下载及货款支付行为进行征税。  <br>4，<b>问：软件出口有何管理规定？</b><br>,答：根据《软件出口管理和统计办法》规定，软件出口分为“海关通关方式”与“网上传输方式”（在软件出口合同中应明确），软件出口合同正式生效后，软件出口企业应在“软件出口合同登记管理中心”对软件出口合同进行在线登记。并按属地原则，持生效的软件出口合同正本到当地商务厅(委、局)领取《软件出口合同登记证书》。<br><b>5，问：可以通过网络传输，是否还需要报关？如果不报关怎么对外付汇？</b><br>如果没有实物载体，依靠网络传输方式出口的软件，无需向海关报关；海关监管的是实物进出口；对于这种服务贸易类对外付汇可以依据服务贸易外汇管理规定，在证明交易真实性的前提下对外付汇。<br><b>国家外汇管理局关于印发服务贸易外汇管理法规的通知 汇发〔2013〕30 号</b><br><b>国家税务总局 国家外汇管理局关于服务贸易等项目对外支付税务备案有关问题的公告 国家税务总局 国家外汇管理局公告 2013 年第 40 号</b><br>境内机构和个人向境外单笔支付等值5万美元(不含)以上下列外汇资金,除本公告第三条规定的情形外,均应向所在地主管国税机关进行税务备案,主管税务机关仅为地税机关的,应向所在地同级国税机关备案:<br>(一)境外机构或个人从境内获得的包括运输、旅游、通信、建筑安装及劳务承包、保险服务、金融服务、计算机和信息服务、专有权利使用和特许、体育文化和娱乐服务、其他商业服务、政府服务等服务贸易收入;<br>(二)境外个人在境内的工作报酬,境外机构或个人在境内获得的股息、红利、利润、直接债务利息、担保费以及非资本转移的捐赠、赔偿、税收、偶然性所得等收益和经常转移收入;<br>(三)境外机构或个人在境内获得的融资租赁租金、不动产的转让收入、股权转让所得以及外国投资者其他合法所得。外国投资者以境内直接<br>2019年8月1日，国家税务总局在官方网站上发布了《对十三届全国人大二次会议第6396号建议的答复》（以下简称《答复》）<br>《国家税务总局 国家外汇管理局关于服务贸易等项目对外支付税务备案有关问题的公告》（国家税务总局国家外汇管理局公告2013年第40号）规定了需要进行税务备案的对外支付情形以及税务备案的流程，但并没有规定建议中提到的“对外付汇必须先完成税款扣缴手续”。服务贸易等项目对外支付备案属于纳税人事中信息报告环节，备案人提交资料齐全，填报《服务贸易等项目对外支付税务备案表》完整的，应当场办结。除非确已发现境外收款人欠税，并出具从支付款项中扣缴欠税的书面决定外，税务机关不得以其他任何理由拒绝受理备案或者缓期办理支付备案。<br><b>什么情况需要备案？</b><br>境内机构或个人向境外单笔支付等值 5万美元以上（不含5万）服务贸易、收益、经常转移等外汇资金<br><b>具体范围：</b><br>服务贸易类<br>· 运输、旅游、通信服务<br>· 金融、保险服务<br>· 计算机和信息服务<br>· 专有权利使用费<br>· 文化娱乐服务<br>收益类<br>· 境外个人在境内工作报酬<br>· 股息、红利、利润<br>· 利息、担保费<br>· 资本项目类<br>· 融资租赁租金<br>· 不动产转让收入<br>· 股权转让所得<br><b>备案流程三步走</b><br>· 第一步：准备材料<br>《服务贸易等项目对外支付税务备案表》<br> 相关合同协议<br> 发票或支付凭证<br>· 第二步：提交备案<br> 向主管国税机关提交<br> 资料齐全，应当场办结<br>· 第三步：银行付汇<br> 凭备案表回执<br> 到外汇指定银行办理付汇<br>重要提醒<br>✅ 5万美元以下：无需备案<br>✅ 备案非审批：资料齐全应当场办结<br>✅ 无需先缴税：备案不要求先完成税款扣缴<br>❌ 不得拒办：税务机关无正当理由不得拒绝备案<br>6，<b>问：“与图书共同进口的光盘”该如何归类</b><br>有些书中附有软盘的清关，时常要关务感到困惑。有些人认为这种附有软盘的图书，坚持要作为第85章的计算机软件归类。而有些人则认为这种图书应归入海关税则的第49章（书籍、报纸、印刷图画及其他印刷品）。经过讨论研究：应该澄清这样一个界限，即本质上属于计算机软件的货物，与本质上属于图书，只不过随附了些附件的货物之间的界限。归类总规则的规定，特别是总规则三(二)，对用于零售的成套货品的归类规定，必须牢记在心。每一批进口货物的归类，应视具体情况而定。当随附的软件只是对图书的内容进行解释时(比如物理书或化学书随附的含有数值练习的软盘)，整套书及软盘应作为图书归入第49章中。另一方面，当软盘上的软件是进口的主要商品，随附的印刷品只是软件的操作指南(比如MicroSoft微软等软件随附的使用手册)，此时，整套商品就应该归入品目85章。<br>7，<b>问：无载体软件出口该如何收汇</b><br>法规依据<br>外经贸技发【2001】604号《软件出口管理和统计办法》<br>2001年外经贸部等六部委发布《关于软件出口有关问题的通知》<br>《关于调整出口货物退税率的补充通知》（财税[2003]238号）<br>外经贸技发【2001】604号<br>根据《软件出口管理和统计办法》第八条规定,“网上传输方式”软件出口的管理： <br> (一)通过网上传输的软件出口，软件出口企业收汇后持《软件出口合同登记证书》和生效的《软件出口合同》(正本)直接到外汇指定银行办理收汇手续。<br> (二)银行在“软件出口合同登记管理中心”对《软件出口合同》登记的有效性、软件出口方式等核查无误后，予以办理结汇或入帐手续，并出具《软件出口已收汇证明》<br>根据财政部、国家税务总局《关于调整出口货物退税率的补充通知》（财税[2003]238号）第三条的规定：计算机软件出口（海关出口商品码9803）实行免税，其进项税额不予抵扣或退税。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-14997174-4d82-4161-bf77-4bca278221d5",
+          "originalName": "image-14997174-4d82-4161-bf77-4bca278221d5-word-image.png.png",
+          "storedName": "image-14997174-4d82-4161-bf77-4bca278221d5-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-14997174-4d82-4161-bf77-4bca278221d5-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 354231,
+          "sha": "1cb1a07f2c9e38d2afd52456e0b86df9fb78e395",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:31.276Z"
+        },
+        {
+          "id": "image-9109c388-9700-49c1-950d-ebaa2c37cf00",
+          "originalName": "image-9109c388-9700-49c1-950d-ebaa2c37cf00-word-image.png.png",
+          "storedName": "image-9109c388-9700-49c1-950d-ebaa2c37cf00-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-9109c388-9700-49c1-950d-ebaa2c37cf00-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 220161,
+          "sha": "464b9605c129db5c98f1911f171270250f4ac89c",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:34.470Z"
+        },
+        {
+          "id": "image-8c4a82e0-3c64-43e3-b10f-361f8e9a7ed2",
+          "originalName": "image-8c4a82e0-3c64-43e3-b10f-361f8e9a7ed2-word-image.png.png",
+          "storedName": "image-8c4a82e0-3c64-43e3-b10f-361f8e9a7ed2-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-8c4a82e0-3c64-43e3-b10f-361f8e9a7ed2-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 111612,
+          "sha": "c7d0d7fccdce9f996351009bdb9ba200f30830fc",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:37.714Z"
+        },
+        {
+          "id": "image-787adfb1-8103-4b9e-878a-32c0098593d2",
+          "originalName": "image-787adfb1-8103-4b9e-878a-32c0098593d2-word-image.png.png",
+          "storedName": "image-787adfb1-8103-4b9e-878a-32c0098593d2-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-787adfb1-8103-4b9e-878a-32c0098593d2-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 118452,
+          "sha": "f3b2535a31a15510517e48a187ad1967b6b8a7dc",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:40.510Z"
+        },
+        {
+          "id": "image-f8df14d2-2280-4bc7-a310-2ef3425e4c94",
+          "originalName": "image-f8df14d2-2280-4bc7-a310-2ef3425e4c94-word-image.png.png",
+          "storedName": "image-f8df14d2-2280-4bc7-a310-2ef3425e4c94-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-f8df14d2-2280-4bc7-a310-2ef3425e4c94-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 904497,
+          "sha": "e1ca34a5a3ed9d88823a299853af2e4d95ddbeee",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:44.702Z"
+        },
+        {
+          "id": "image-a3f808ef-9cbf-44cf-9981-d93e757b7421",
+          "originalName": "image-a3f808ef-9cbf-44cf-9981-d93e757b7421-word-image.png.png",
+          "storedName": "image-a3f808ef-9cbf-44cf-9981-d93e757b7421-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-a3f808ef-9cbf-44cf-9981-d93e757b7421-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 96027,
+          "sha": "deb7766703dc9cabd10d860d320a35882119b397",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:47.804Z"
+        },
+        {
+          "id": "image-8c9dfadf-fb0c-4e3e-b384-886e9c9c5c6f",
+          "originalName": "image-8c9dfadf-fb0c-4e3e-b384-886e9c9c5c6f-word-image.png.png",
+          "storedName": "image-8c9dfadf-fb0c-4e3e-b384-886e9c9c5c6f-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-8c9dfadf-fb0c-4e3e-b384-886e9c9c5c6f-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 42327,
+          "sha": "159ad740e316268003a54583ec96ebbdd75329c3",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:51.626Z"
+        },
+        {
+          "id": "image-478629e2-84b4-4da9-880e-b618356f6587",
+          "originalName": "image-478629e2-84b4-4da9-880e-b618356f6587-word-image.png.png",
+          "storedName": "image-478629e2-84b4-4da9-880e-b618356f6587-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-478629e2-84b4-4da9-880e-b618356f6587-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 36000,
+          "sha": "3305e104f2db37b935ff95e9bb94849bcfcc9e79",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:54.142Z"
+        },
+        {
+          "id": "image-f048288d-ae45-4462-b417-31d7cc119f0f",
+          "originalName": "image-f048288d-ae45-4462-b417-31d7cc119f0f-word-image.png.png",
+          "storedName": "image-f048288d-ae45-4462-b417-31d7cc119f0f-word-image.png.png",
+          "path": "assets/images/note-776f4761-947a-4b5f-9778-d08c0bfd71e5/image-f048288d-ae45-4462-b417-31d7cc119f0f-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 391953,
+          "sha": "f867a1ceedc8d2954a63767f7338e7554e22edcc",
+          "description": "",
+          "createdAt": "2026-10-14T08:04:57.866Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-80cd78ce-0550-4840-954f-402184d82c59",
+      "categoryId": "category-751d35fa-cb82-4e0c-9aef-734cb80d31a2",
+      "title": "软件出口合同登记流程",
+      "content": "《关于印发〈软件出口管理和统计办法〉的通知》（外经贸技发〔2001〕604号） 第二条 本办法适用于依照《中华人民共和国对外贸易法》从事对外经贸经营活动的法人和其他组织，采取通关或网上传输方式向境外出口软件产品、转让软件技术和提供相关服务。 软件出口企业在软件出口合同中应明确软件出口方式：“海关通关方式”或“网上传输方式”。<br><b>受理条件：</b><br>1，进出口经营资质的企业<br>2，对外签订有效的软件出口合同，采取通关或网上传输方式向境外出口软件产品、转让软件技术和提供相关服务<br>3，软件出口项目不在国家禁止或者限制出口的目录内<br><b>办理流程：</b><br>受理--&gt; 审核--&gt;决定（含制证与送达）<br>（受理；审核；决定，发证）<br><b><span style=\"background-color:#ffff00\">一、无实物软件</span></b><br>海关对出境货物的监管仅限于实体货物，而软件并无实物，故无需走海关申报手续。但出口商账户仍然要收取货款，应如何处理账务、保证流程合理合规呢？这就需要我们在商务部的网站上进行备案。<br><b>备案分为以下几个步骤：</b><br><img src=\"[[img:image-cf829cc6-bbd4-43b7-bdf0-bb707ad18e4d]]\" alt=\"\"><br>1、<b>商务部备案</b>：登录商务部业务系统统一平台（企业端）网站<i>https://ecomp.mofcom.gov.cn/loginCorp.html</i><b> </b><br>2、登录之后，选择<b>进入应用：服务外包及软件出口信息管理应用</b>。<br><img src=\"[[img:image-fc3ea831-b673-499b-8a74-a72b1d0c2ef3]]\" alt=\"\"><br>3、在日常业务中找到服务外包业务，点击其中的接包合同，可以清晰地看出目前的业务流程，点击其数字即可进入下一步：<b>建立或查看合同</b>。<br><img src=\"[[img:image-627d634f-9361-437a-b4ba-1c4f350d7ca4]]\" alt=\"\"><br>进入之后，我们可以根据目前的进度来进行操作，首先需要新增一份合同。<br><img src=\"[[img:image-56e5b2c2-a924-4aa4-98e0-d664a390dbbd]]\" alt=\"\"><br>然后根据系统要求填写软件相关信息，填写完成后保存。<br>4、待国外的款到账后，完善上一步填写的合同中的付款时间，并通过合同后面的操作界面进行点击上报，这个软件的系统备案申请就完成了。还可以在此页面查看合同的状态。<br><img src=\"[[img:image-02d3cb98-907d-40a0-b87e-2bc727199c45]]\" alt=\"\"><br>在网站中上报合同后，还需要发送一封邮件给商务厅的软件业务负责人提示初审。<br><b>邮件包括以下内容：</b>已签字盖章的有效合同、银行水单以及水单清单表。<br><br><table><tr><td><b>项目<br></b></td><td><b>名称<br></b></td><td><b>填写内容<br></b></td></tr><tr><td>1<br></td><td>合同号<br></td><td>软件合同号码<br></td></tr><tr><td>2<br></td><td>水单号</td><td>银行水单号吗<br></td></tr><tr><td>3<br></td><td>日期</td><td>收款日期<br></td></tr><tr><td>4<br></td><td>收款方<br></td><td>公司名称<br></td></tr><tr><td>5<br></td><td>付款方<br></td><td>公司名称<br></td></tr><tr><td>6<br></td><td>付款方国别<br></td><td>付款方国家<br></td></tr><tr><td>7<br></td><td>水单原币金额<br></td><td>合同金额(人民币)<br></td></tr><tr><td>8<br></td><td>折美元金额</td><td>折美元金额</td></tr><tr><td>9<br></td><td>所属执行金额</td><td>合同金额</td></tr></table><br><b>水单清单表（如上）</b><br>邮件的主题需要注意格式：<b>软件中文名称+企业名称+合同号</b>，正文注明要审批的合同号。软件款无需单独付款，可以与其他货款一同支付，只需要备注即可。<br><img src=\"[[img:image-2b5fd5d8-1910-4fd2-a188-c213c0bfcd67]]\" alt=\"\"><br><b>邮件信息</b><br>5、审核时长：一般在邮件发送3天以内通过初审；随后由市区部门审核，耗时约7个工作日。待全部审核完成之后，即可预约商务厅的老师领取证书。<br><img src=\"[[img:image-c8541c68-f2af-400a-bea3-088f89fb0fad]]\" alt=\"\"><br>6、备案证书暂时不支持自主打印。取证前企业需拨打审核部门的电话，与软件审核负责人预约取件时间，然后根据指示在规定的时间去窗口取件。<br>领到证书之后，企业就可以结算归档了。<br><b>资料模版</b><br>一、软件出口申请报告<br><img src=\"[[img:image-85b35165-9cc9-4d1b-a258-eca27f6ddc5b]]\" alt=\"\"><br><img src=\"[[img:image-f7df208d-fdd2-4ea5-a0f4-bc58c04d4927]]\" alt=\"\"><br>二、正式生效的软件出口合同正本<br><img src=\"[[img:image-96fc9a3f-e323-4930-9315-c1b1aa50992c]]\" alt=\"\"><br><img src=\"[[img:image-8bed4c70-2ccd-4a18-93d9-f785ad3484f5]]\" alt=\"\"><br>三、企业法人营业执照<br>四、授权委托书<br><img src=\"[[img:image-22d8da1f-f6b2-4a58-93a5-c781577f2112]]\" alt=\"\">",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-cf829cc6-bbd4-43b7-bdf0-bb707ad18e4d",
+          "originalName": "image-cf829cc6-bbd4-43b7-bdf0-bb707ad18e4d-word-image.png.png",
+          "storedName": "image-cf829cc6-bbd4-43b7-bdf0-bb707ad18e4d-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-cf829cc6-bbd4-43b7-bdf0-bb707ad18e4d-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 172095,
+          "sha": "a757739d42ee93cd670f9fda56a901f90f2ca2c8",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:00.574Z"
+        },
+        {
+          "id": "image-fc3ea831-b673-499b-8a74-a72b1d0c2ef3",
+          "originalName": "image-fc3ea831-b673-499b-8a74-a72b1d0c2ef3-word-image.png.png",
+          "storedName": "image-fc3ea831-b673-499b-8a74-a72b1d0c2ef3-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-fc3ea831-b673-499b-8a74-a72b1d0c2ef3-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 99420,
+          "sha": "8cd185c9a952fd1a655d3c92c020bffae60cd4ae",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:04.547Z"
+        },
+        {
+          "id": "image-627d634f-9361-437a-b4ba-1c4f350d7ca4",
+          "originalName": "image-627d634f-9361-437a-b4ba-1c4f350d7ca4-word-image.png.png",
+          "storedName": "image-627d634f-9361-437a-b4ba-1c4f350d7ca4-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-627d634f-9361-437a-b4ba-1c4f350d7ca4-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 162942,
+          "sha": "223484394483b6ffb0c514a3963104b87a2618c2",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:07.579Z"
+        },
+        {
+          "id": "image-56e5b2c2-a924-4aa4-98e0-d664a390dbbd",
+          "originalName": "image-56e5b2c2-a924-4aa4-98e0-d664a390dbbd-word-image.png.png",
+          "storedName": "image-56e5b2c2-a924-4aa4-98e0-d664a390dbbd-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-56e5b2c2-a924-4aa4-98e0-d664a390dbbd-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 146163,
+          "sha": "6533eee58850763b0e69c2abf1217c764eb41bab",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:10.841Z"
+        },
+        {
+          "id": "image-02d3cb98-907d-40a0-b87e-2bc727199c45",
+          "originalName": "image-02d3cb98-907d-40a0-b87e-2bc727199c45-word-image.png.png",
+          "storedName": "image-02d3cb98-907d-40a0-b87e-2bc727199c45-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-02d3cb98-907d-40a0-b87e-2bc727199c45-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 26568,
+          "sha": "776809b4bafe16a020bd002c5587c56e6c95c390",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:13.503Z"
+        },
+        {
+          "id": "image-2b5fd5d8-1910-4fd2-a188-c213c0bfcd67",
+          "originalName": "image-2b5fd5d8-1910-4fd2-a188-c213c0bfcd67-word-image.png.png",
+          "storedName": "image-2b5fd5d8-1910-4fd2-a188-c213c0bfcd67-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-2b5fd5d8-1910-4fd2-a188-c213c0bfcd67-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 99477,
+          "sha": "afa459be3d510b81f12ff61c7c2aea1b4c46f727",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:16.422Z"
+        },
+        {
+          "id": "image-c8541c68-f2af-400a-bea3-088f89fb0fad",
+          "originalName": "image-c8541c68-f2af-400a-bea3-088f89fb0fad-word-image.png.png",
+          "storedName": "image-c8541c68-f2af-400a-bea3-088f89fb0fad-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-c8541c68-f2af-400a-bea3-088f89fb0fad-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 22878,
+          "sha": "4e35fce7be4938264e71ffe0e0980c07ac33f39c",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:18.994Z"
+        },
+        {
+          "id": "image-85b35165-9cc9-4d1b-a258-eca27f6ddc5b",
+          "originalName": "image-85b35165-9cc9-4d1b-a258-eca27f6ddc5b-word-image.png.png",
+          "storedName": "image-85b35165-9cc9-4d1b-a258-eca27f6ddc5b-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-85b35165-9cc9-4d1b-a258-eca27f6ddc5b-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 16131,
+          "sha": "b23b47fb23d5507827f459cadffba8471ee70e36",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:21.416Z"
+        },
+        {
+          "id": "image-f7df208d-fdd2-4ea5-a0f4-bc58c04d4927",
+          "originalName": "image-f7df208d-fdd2-4ea5-a0f4-bc58c04d4927-word-image.png.png",
+          "storedName": "image-f7df208d-fdd2-4ea5-a0f4-bc58c04d4927-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-f7df208d-fdd2-4ea5-a0f4-bc58c04d4927-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 537330,
+          "sha": "594bb9c58e0ce85f548b4f16bcdecc16f852198d",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:25.233Z"
+        },
+        {
+          "id": "image-96fc9a3f-e323-4930-9315-c1b1aa50992c",
+          "originalName": "image-96fc9a3f-e323-4930-9315-c1b1aa50992c-word-image.png.png",
+          "storedName": "image-96fc9a3f-e323-4930-9315-c1b1aa50992c-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-96fc9a3f-e323-4930-9315-c1b1aa50992c-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 425283,
+          "sha": "beb2dcad4196313aaec85a4fdc495724202e248c",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:28.646Z"
+        },
+        {
+          "id": "image-8bed4c70-2ccd-4a18-93d9-f785ad3484f5",
+          "originalName": "image-8bed4c70-2ccd-4a18-93d9-f785ad3484f5-word-image.png.png",
+          "storedName": "image-8bed4c70-2ccd-4a18-93d9-f785ad3484f5-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-8bed4c70-2ccd-4a18-93d9-f785ad3484f5-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 441750,
+          "sha": "66281250bf839faa588988eb607eab8dc2d361a2",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:32.176Z"
+        },
+        {
+          "id": "image-22d8da1f-f6b2-4a58-93a5-c781577f2112",
+          "originalName": "image-22d8da1f-f6b2-4a58-93a5-c781577f2112-word-image.png.png",
+          "storedName": "image-22d8da1f-f6b2-4a58-93a5-c781577f2112-word-image.png.png",
+          "path": "assets/images/note-80cd78ce-0550-4840-954f-402184d82c59/image-22d8da1f-f6b2-4a58-93a5-c781577f2112-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 19368,
+          "sha": "639237d901eff7c596a609daa8d6846492a19be7",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:34.507Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-062ef326-0dce-4c03-bc80-23ba3fa9f4f1",
+      "categoryId": "category-751d35fa-cb82-4e0c-9aef-734cb80d31a2",
+      "title": "实务答疑：软件产品及软件服务相关税收问答",
+      "content": "<b>1、软件服务和软件产品销售在税务上如何区分？若公司销售的产品为软件包形式，本地部署（也就是销售方无法掌握用户本地数据使用信息），但用户是有产品使用期限的，到期不续费会影响功能。这种产品一般界定为软件服务还是软件产品？嵌入式软件产品销售在实操上怎么计算即征即退税额？</b><br>答：（1）软件服务，是指提供软件开发服务、软件维护服务、软件测试服务的业务活动。（依据：《财政部、国家税务总局关于全面推开营业税改征增值税试点的通知》（财税〔2016〕36号）附件1营业税改征增值税试点实施办法）<br>软件产品，是指信息处理程序及相关文档和数据。软件产品包括计算机软件产品、信息系统和嵌入式软件产品。嵌入式软件产品是指嵌入在计算机硬件、机器设备中并随其一并销售，构成计算机硬件、机器设备组成部分的软件产品。（依据：财税[2011]100号  关于软件产品增值税政策的通知）<br>（2）问题中提到的软件包，小编认为应界定为软件产品。<br><b>（3）嵌入式软件产品增值税即征即退税额的计算：</b>（依据：财税[2011]100号  关于软件产品增值税政策的通知）<br>即征即退税额=当期嵌入式软件产品增值税应纳税额-当期嵌入式软件产品销售额×3%<br>当期嵌入式软件产品增值税应纳税额=当期嵌入式软件产品销项税额-当期嵌入式软件产品可抵扣进项税额<br>当期嵌入式软件产品销项税额=当期嵌入式软件产品销售额×13%<br>当期嵌入式软件产品销售额=当期嵌入式软件产品与计算机硬件、机器设备销售额合计-当期计算机硬件、机器设备销售额‍‍<br><b>2.出口软件产品或软件技术服务，在出口免退税实操方面有什么差异？</b><br>答：生产企业出口软件产品，其具体范围是指海关税则号前四位为“9803”的货物。需要向海关报关出口，实行免征增值税政策，其对应进项税额转出。<br>生产企业如果向境外单位提供的完全在境外消费软件服务的，实行增值税零税率，即增值税征税率是6%，增值税出口退税率是6%，按月向主管退税的税务机关申报办理增值税退（免）税手续。<br><b>相关依据1：</b><br>依据财政部 国家税务总局关于出口货物劳务增值税和消费税政策的通知（财税[2012]39号）第六条、适用增值税免税政策的出口货物劳务：“对符合下列条件的出口货物劳务，除适用本通知第七条规定外，按下列规定实行免征增值税（以下称增值税免税）政策：……适用增值税免税政策的出口货物劳务，是指：1.出口企业或其他单位出口规定的货物，具体是指：……软件产品。其具体范围是指海关税则号前四位为“9803”的货物。”<br><b>相关依据2：</b><br>财税[2016]36号附件4：跨境应税行为适用增值税零税率和免税政策的规定：“一、中华人民共和国境内（以下称境内）的单位和个人销售的下列服务和无形资产，适用增值税零税率：（三）向境外单位提供的完全在境外消费的下列服务：5.软件服务。”‍‍<br><b>3.员工个人代垫支付的国外技术服务费（如在亚马逊采购国外云平台服务），回公司报销时，是否需要去税务代扣代缴税款？</b><br>答：如销售方在境内未设有经营机构的，购买方应代扣代缴相关税款。<br>依据《财政部、国家税务总局关于全面推开营业税改征增值税试点的通知》（财税〔2016〕36号）附件1第六条规定：“中华人民共和国境外（以下称境外）单位或者个人在境内发生应税行为，在境内未设有经营机构的，以购买方为增值税扣缴义务人； 第十二条规定， 在境内销售服务、无形资产或者不动产，是指：（一）服务（租赁不动产除外）或者无形资产（自然资源使用权除外）的销售方或者购买方在境内。”‍‍<br><b>4.公司销售软件产品取得验收资料，还未到合同约定收款期间，是否需要申报未票收入？</b><br>答：未提前开票的情况下，不需申报未票收入。<br>依据《财政部、国家税务总局关于全面推开营业税改征增值税试点的通知》（财税〔2016〕36号）附件1第四十五条：“增值税纳税义务、扣缴义务发生时间为：<br>（一）纳税人发生应税行为并收讫销售款项或者取得索取销售款项凭据的当天；先开具发票的，为开具发票的当天。<br>收讫销售款项，是指纳税人销售服务、无形资产、不动产过程中或者完成后收到款项。<br>取得索取销售款项凭据的当天，是指书面合同确定的付款日期；未签订书面合同或者书面合同未确定付款日期的，为服务、无形资产转让完成的当天或者不动产权属变更的当天。”‍‍<br><b>5：软件产品出口可以申报退税吗？</b><br>答：根据《软件出口管理和统计办法》规定，软件出口分为“海关通关方式”与“网上传输方式”两种方式。软件产品出口是否可以退税，需根据软件的交付方式和具体业务类型判断：方式一海关通关方式：通过有形介质的软件报关出口，如果报关时海关税号前四位为“9803”的货物，则不可以退税，适用免税政策。若报关时海关税号并非“9803”，在完成报关离境且符合退税条件的情况下，可与当地税局进行沟通，确认是否能够申报退税。方式二网上传输方式：软件通过网络传输等方式出口，无法进行报关出口，因此不能申报出口退税，此类软件出口可申请免税。提醒：出口企业在软件出口合同中应明确软件出口方式“海关通关方式”或“网上传输方式”。软件出口合同正式生效后，企业应在“软件出口合同登记管理中心”对软件出口合同进行在线登记，并按属地原则，持生效的软件出口合同正本到当地商务厅(委、局)领取《软件出口合同登记证书》。政策依据：1）对外经济贸易合作部 信息产业部 国家税务总局 海关总署 国家外汇管理局 国家统计局关于软件出口有关问题的通知（外经贸技发[2000]680号）2）关于印发《软件出口管理和统计办法》的通知（外经贸技发〔2001〕604号 ）3）财政部国家税务总局关于出口货物劳务增值税和消费税政策的通知（财税[2012]39号）<br><b>6：软件产品出口与向境外企业提供软件服务退税一样吗？</b><br>答：不一样。【软件产品】指信息处理程序及相关文档和数据。软件产品包括计算机软件产品、信息系统和嵌入式软件产品。【软件服务】是指提供软件开发服务、软件维护服务、软件测试服务的业务活动。符合退税条件的软件产品出口，可依据报关单及外销发票进行申报；而软件服务出口并无报关单，若符合退税条件，则根据外销发票、技术合同登记证书及收汇水单进行申报。政策依据：1）《财政部 国家税务总局关于软件产品增值税政策的通知》（财税〔2011〕100号）2）《财政部、国家税务总局关于全面推开营业税改征增值税试点的通知》（财税〔2016〕36号）<br><b>7：生产企业出口设备中的软件是嵌入式销售的，软件未单独报关，软件还可以享受即征即退吗？</b><br>答：不可以。财税[2012]39号公告规定，出口企业若同时存在适用增值税免抵退的项目以及增值税即征即退的项目，增值税即征即退项目不参与出口项目的免抵退税计算。政策依据：1）国家税务总局关于纳税人既享受增值税即征即退先征后退政策又享受免抵退税政策有关问题的公告（国家税务总局公告2011年第69号）2）财政部 国家税务总局关于出口货物劳务增值税和消费税政策的通知（财税[2012]39号 ）<br><b>8：销售软件收取了维护费、培训费等费用，这些费用可以享受即征即退政策吗？</b><br>答：是否可以享受即征即退政策，企业需区分情况判断：情形一：软件产品随同销售一并收取的软件安装费、维护费、培训费等收入，按照增值税混合销售的有关规定征收增值税，并可享受软件产品增值税即征即退政策。情形二：软件产品交付使用后，按期或按次单独收取的维护、技术服务费、培训费等不属于即征即退政策的适用范围。政策依据：国家税务总局关于增值税若干政策的通知（财税〔2005〕165号）",
+      "marked": false,
+      "collapsed": false,
+      "images": [],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-ef0a5d5e-42f3-4d72-ba64-285d222a774c",
+      "categoryId": "category-751d35fa-cb82-4e0c-9aef-734cb80d31a2",
+      "title": "以案说归类之进出口软件",
+      "content": "进口软件是指《计算机软件保护条例》规定的数据处理设备使用的程序或者文档（不包括音像、游戏等电子出版物，也不包括专利或者专有技术等）。软件用于生产或者服务的需要，一部分通过网络下载，并由软件供应商提供激活码，激活后使用于生产或者服务活动之中，进口商同时对外支付软件使用费；一部分通过介质载体将软件携带、运输进境，并安装于机械、电子或者数据处理设备之上，应用于生产或者服务活动之中，进口商对外支付软件使用费；还有一部分直接安装于机械、电子或者数据处理设备之上，与货物一并进口使用，进口商对外单独支付软件使用费。<br>软件，是一种无形的程序或者文档，与有形的货物、物品不同，软件进口时，软件使用费是否需要向海关申报缴纳关税和进口环节税？如果需要申报则以何种税则号列（商品编号）向海关申报纳税？这是两个颇具争议而法律规定又不甚明确的问题。<br>老林认为，软件不论以上述何种方式进口，只要与进口的货物有关且作为进口货物销售的一项条件，为进口软件支付的费用，都将可能被海关要求申报，按客观量化的数据资料分摊计入进口货物的完税价格，并缴纳相应的关税和进口环节税款。但是，那些通过网络下载，与任何进口货物没有关联的信息技术，或者应用于国产机器或者设备而定制的进口软件，对外支付的费用，则不需要向海关申报，不需要缴纳进口税款。<br>因此，进口软件支付的特许权使用费，实践中存在三个不明确且具争议的问题，一个是软件费用要不要计入进口货物的完税价格申报纳税？一个是计入完税价格的，是适用承载软件的介质载体税率计核税款，还是适用使用软件的设备税率计核税款？如果发生软件费用未申报或者申报错误的，海关可能会如何处理？我们通过一个典型案例来说一说这个事情。<br><b><span style=\"background-color:#ffff00\">案例一</span>、 某<span style=\"background-color:#ffff00\">公司网络下载进口软件申报不实违规案</span></b><br><b>简要案情：</b>某公司从网络上下载了一批通信设备应用软件包，保障进口通讯设备程序的正常运行。该软件包进口过程中，公司委托某国际货运代理有限公司申报进口，并向海关缴纳相应进口环节增值税款。但是，报关公司当时申报进口的商品是5000张光盘，根据光盘介质载体归类，申报商品编号当时为85234020，该介质载体的关税税率为0%，增值税税率为13%，申报商品总价格人民币1.2亿元，申报缴纳税款人民币1400万元。<br>海关经核查发现，该票进口软件并非从介质载体（5000张光盘）运输进口，而是从网络上直接下载进口，进口载件全部为网络下载，并用于“数字式程控电话或电报交换机用零件”，实际商品编号应当根据该软件所应用的通信设备进行归类，当时商品编号是85177010，关税税率为0，增值税税率为17%。<br>经计核，本案完税价格为人民币1.2亿元，应纳增值税款为人民币1800万元，海关认为公司申报进口软件费用，税则号列申报不实漏缴税款人民币410万元。<br><b>案件处理：</b>海关根据《海关行政处罚实施条例》第五条、第十五条（四）项的规定，对该通信公司处以漏缴税款约80%的罚款，计人民币330万元，同时责令补缴税款人民币410万元。<br><b>本案引发的相关问题法律分析如下：</b><br><b>对外支付的软件费，是否需要向海关申报纳税？</b><br>为进口软件而支付的费用，要不要计入完税价格向海关申报纳税，取决于软件费的对外支付与进口货物有没有关联性。如果进口软件不但应用于进口货物或者设备之上，而且如果没有该应用软件，进口设备就无法驱动运转或者无法发挥正常的功能，则认为该软件费与进口货物有关；如果该软件虽然加载于进口货物（设备）之上，但是，没有加装该软件并不会影响设备的基础运转，或者该软件属于通用软件，不是特制软件，除了可以加装于该进口货物（设备）之上，也可以加装于其他设备之上，则认为该软件与进口货物不一定相关，对外支付的软件费也不一定必须计入设备完税价格申报纳税。<br><b>与进口货物相关的软件费应当分摊计税</b><br>如果企业支付的软件费，与企业进口货物相关，而且费用支付是货物销售的一项条件，则企业支付的软件费应当计入完税价格。但是，软件费的支付可能是一次性的，而企业进口相关货物可能是多次的，反复的，那么，对外支付的软件费用应当分摊于每一期进口货物之上。如本案中进口的通信设备，分多次进口或者反复多次进口同样的设备，而且合同约定多次进口的同样设备，均可以应用从网络上一次性下载的软件包，那么，支付的软件费应当分摊到当期进口的通信设备之上，企业应当根据客观可量化的财务数据资料和国际公认的会计准则，予以量化分摊计核应缴税款。<br><b>适用介质载体还是进口设备的税率计核软件费用的税款？</b><br>软件是信息技术，属于无形的商品，既不是货物，也不是物品，根据HScode，无法进行商品归类，没有相应的商品编号，所以，也就没有相应的软件计税税率。那么，进口软件的费用，如果计入完税价格，应当用什么样的税率计核应缴税款呢？<br><b>1、 适用相关进口货物（设备）的税率计核税款</b><br>如果应用软件安装在进口货物（设备）上，与相关的货物一同进口，且软件费另行支付，不包含在进口货物的价款之中，则软件费应当计入进口货物的完税价格，并适用进口货物的税率计核税款，但前提是软件应当与进口货物相关，且为货物（设备）销售的一项条件。<br><b>2、软件与设备分别申报进口，也可以适用设备的税率计核税款</b><br>如果信息技术应用软件没有直接安装在进口货物（设备）上，而是用载有软件的介质载体，与相关货物分别申报进口，如光盘、磁盘、U盘等软件介质载体。那么，软件费应当与承载软件的介质一并申报纳税，还是与应用软件的设备一并申报纳税？<br>根据《海关审价办法》（海关总署213号令）第34条规定，进口载有专供数据处理设备用软件的介质（8524项下），如果进口介质本身的价值是清楚明确的，或者进口软件价值是清楚明确的，则软件费用均不应当计入介质的完税价格申报纳税。老林认为，上述规定，虽然明确了软件费不计入介质的完税价格，但并没有排除软件费不需要向海关申报纳税，如果该软件费与进口货物（设备）有关，并作为货物（设备）销售的一项条件，则该软件费应当与进口设备一并申报纳税。<br><b>3、 网络下载软件，与介质承载软件和设备自带软件无本质区别</b><br>如果作为信息技术的软件是通过网络下载进口，并对外支付了特许权使用费，由于进口时属于无形商品且无介质载体，海关有可能认为应当根据使用该软件的进口货物（设备）的商品编码申报进口，这种情况与软件从介质载体携带进口或者直接安装在设备上进口，没有本质区别，都有可能适用进口货物的税率计核税款。<br><b>本案属于归类申报不实行为还是价格申报不实行为？</b><br>本案是否构成申报不实，属于归类申报不实的违规行为，还是属于价格申报不实违规？由于此类案件的软件费是否应当申报纳税，是一个比较复杂的技术问题，判断支付的软件费是否与进口货物有关？是否属于货物（设备）销售的一项条件？在实践中具有较大的不确定性。所以，作为软件费的特许权使用费，即便申报不正确，需要进行价格调整，也不属于申报不实违法行为，但是，企业如果将应当适用进口货物（设备）的商品编号，申报为承载软件介质的商品编号，明显违反了《审价办法》第34条排除介质税号计税的规定，这样的申报错误会被海关认定为税则号列申报不实的违规行为。<br>本案进口商品为无载体的网络下载软件，而当事人向海关申报为有光盘载体的软件，根据归类规则，当事人将软件费计入8523的介质价格并向海关申报纳税。而实际上，涉案商品“网络下载软件“并无介质，进口时不涉及有形货物，进口无单独税号，如能够确定买方为进口软件而支付的费用与进口货物有关，并作为该货物销售条件的，则应与进口货物一并归类计税。本案网络下载软件虽为单独进口，但其应用于进口货物“通信平台”上，而且通信平台没有这些软件包将无法正常运行，可以判断为与进口货物有关。据此，按照海关《审价办法》第11-13条的规定，应当计入进口货物（设备）的完税价格，按照相关进口货物（设备）进行归类，归入8517项下，当事人申报错误，具有主观过错，应当根据《海关行政处罚实施条例》第15条（4）项的规定，予以行政处罚。<br><b>本案是货主的违规责任，还是报关行的违规责任？</b><br>本案应当将谁作为当事人？由谁承担法律责任？关键在于谁将商品编码申报错误，谁具有主观过错。本案通信公司在委托报关企业申报时，递交了申报材料，在申报材料中写明了该下载软件的申报税号是8517，而报关企业收到报关材料后，经审核发现，通信公司提供的8517税号不对，应当申报8523税号为妥，并将此建议通报通信公司，通信公司相关人员口头认可此建议。<br>这说明虽然通信公司提交的税号刚开始是对的，但报关企业提出修改建议后，通信公司确认了报关公司的修改建议，应当认为通信公司申报了8523的错误税号，本案主要过错还是通信公司，应当依法追究通信公司的法律责任。<br>但是，假如报关企业的申报修改没有通过通信的确认，自作主张向海关申报为8523，则主要法律责任应当由报关企业承担，根据《行政处罚法》第33条第2款的规定，通信公司不应当承担法律责任。<br><b>案例二、</b>经我关调查，当事人有以下违法行为：当事人委托上海**报关有限公司，于2023年11月9日向海关申报出口一般贸易项下共计44项货物，其中第44项货物高速公路收费软件1个，申报规格型号为“未录制”，申报价格FOB173555.6美元，申报商品编号8523511000，出口退税率13%，报关单号22312023000400****。<br>经查，上述出口货物实际规格型号为“已录制”，应归入商品编号9803004000，出口退税率0%。<br><b>二案例分析</b><br><br><b>(一)  本案例涉及的商品</b><br>软件是与计算机系统的操作有关的计算机程序、规程和可能相关的文档。（GB/T 11457-2006 信息技术软件工程术语）。<br>软件可分为系统软件、支撑软件、应用软件、嵌入式软件、信息安全软件、工业软件和其他软件等。(GB/T 36475-2018《软件产品分类》。<br>系统软件system software，是能够对硬件资源进行调度和管理、为应用软件提供运行支撑的软件。例如，操作系统、驱动程序。<br>支持软件support software，是支撑软件开发、运行、维护、管理，以及和网络连接或组成相关的支撑类软件。<br>例如，编译程序、装入程序和其他实用程序。<br><br>应用软件application software，解决特定业务的软件，包括通用应用软件和行业应用软件两个类别。例如电子导航、ERP等。<br>软件可以采用虚拟载体及物理载体两大类。<br>虚拟载体以电子数据形式存在，通过互联网、专线网络或API接口等数字通道传输。物理载体可分为磁性存储介质（磁盘、磁带等）、光学存储介质（光盘）、半导体存储介质（U盘、硬盘等）、其他介质等。<br><b>(二)  本案例涉及的品目</b><br><img src=\"[[img:image-142aecd2-b4e3-4411-843e-2d4b96146f66]]\" alt=\"\"><br><b>(三)  本案例商品归类分析</b><br>软件作为服务贸易的一种形式，在进出口活动中也很常见。<br>如采用网上传输方式，无需向海关申报。<br>而采用物理载体时，则需要申报。<br>本案例中的企业申报商品编号8523511000，申报规格型号为“未录制”，应是使用了固态非易失性存储器件作为载体，申报HS与申报要素没有逻辑错误。<br>而申报的高速公路收费软件、价格FOB173555.6美元，则可以认为申报的“高速公路收费软件”与商品编号8523511000（未录制的固态非易失性存储器件）不相符，且申报价格与规格型号“未录制”存在明显矛盾。<br>根据海关总署公告2011年第80号（关于调整统计商品品目9803商品名称与统计范围），海关最终认定应归入9803004000，说明该企业申报的出口软件是针对特定用户的特定需求而开发的定制型软件。<br><b>需要注意的是，该公告仅用于申报专门针对特定用户的特定需求而开发的出口软件，非定制型的出口软件以及进口软件应按照载体归类。</b><br><b>三案例启示</b><br><br>随着我国软件出口业务的持续增长，相关企业应重视合规性。<br>注意可能造成申报差异的各项因素，<b>明确软件是纯数字交付（无需申报）还是物理载体出口（需申报），载体介质类型是光盘半导体存储介质、半导体存储介质还是其他介质，软件类型是定制型还是通用型等</b>，避免因归类错误导致补税、信用降级等风险。",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-142aecd2-b4e3-4411-843e-2d4b96146f66",
+          "originalName": "image-142aecd2-b4e3-4411-843e-2d4b96146f66-word-image.png.png",
+          "storedName": "image-142aecd2-b4e3-4411-843e-2d4b96146f66-word-image.png.png",
+          "path": "assets/images/note-ef0a5d5e-42f3-4d72-ba64-285d222a774c/image-142aecd2-b4e3-4411-843e-2d4b96146f66-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 66489,
+          "sha": "d9e0d325aa66a10fc500fdd3263f1d2f2160ad16",
+          "description": "",
+          "createdAt": "2026-10-14T08:05:37.238Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T08:01:01.927Z",
+      "updatedAt": "2026-10-14T08:01:01.927Z"
     }
   ]
 }
