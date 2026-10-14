@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T09:09:56.973Z",
+  "updatedAt": "2026-10-14T09:11:05.387Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -156,7 +156,7 @@
       "id": "category-82c3d2f1-b2ae-4794-83dc-63a057538f12",
       "name": "塑料橡胶篇",
       "parentId": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
-      "order": 1,
+      "order": 2,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
@@ -166,7 +166,7 @@
       "id": "category-df8254aa-2d67-4c7c-9ec4-1d89c9c94b41",
       "name": "机电篇",
       "parentId": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
-      "order": 2,
+      "order": 1,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
