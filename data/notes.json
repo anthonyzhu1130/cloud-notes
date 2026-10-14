@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T09:09:11.901Z",
+  "updatedAt": "2026-10-14T09:09:56.973Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
       "name": "关务政策",
       "parentId": null,
-      "order": 1,
+      "order": 0,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
@@ -116,7 +116,7 @@
       "id": "category-5b3e7310-82e9-434c-a2e1-f94205ddc29f",
       "name": "国际关务",
       "parentId": null,
-      "order": 0,
+      "order": 1,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
