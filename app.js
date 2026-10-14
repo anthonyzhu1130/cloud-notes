@@ -8,7 +8,7 @@
   var state = {
     data: null, remoteUpdatedAt: null, token: null, editing: false,
     searchKeyword: '', busy: false,
-    collapsedCategories: {}, collapsedNotes: {},
+    expandedCategories: {}, collapsedNotes: {},
     currentView: 'dashboard', currentNoteId: null,
     batchMode: false, batchSelected: {}
   };
@@ -71,12 +71,9 @@
     var url = contentsUrl(CONFIG.NOTES_PATH) + '?ref=' + encodeURIComponent(CONFIG.BRANCH||'main') + '&t=' + Date.now();
     return ghFetch(url, {token: tok}).then(function(r){
       if(!r) throw new AppError('远端 notes.json 返回空数据。', 0);
-      // 小文件：GitHub 直接返回 base64 内容
       if(r.content && r.encoding === 'base64'){
         return parseNotesJson(base64ToUtf8(r.content), r.sha);
       }
-      // 大文件（超过 1 MB）：GitHub 不给 content，用 git/blobs API 拿完整内容
-      // 这个 API 和 contents API 一样在 api.github.com 下，不会走 raw.githubusercontent.com
       if(r.sha){
         var blobUrl = apiBase() + '/git/blobs/' + encodeURIComponent(r.sha) + '?t=' + Date.now();
         return ghFetch(blobUrl, {token: tok}).then(function(b){
@@ -97,8 +94,8 @@
     if(raw.notes!==undefined&&!Array.isArray(raw.notes))throw new AppError('notes 必须是数组。',0);
     var now=new Date().toISOString();
     var d={version:(typeof raw.version==='number')?raw.version:2,updatedAt:(typeof raw.updatedAt==='string')?raw.updatedAt:now,categories:[],notes:[]};
-    (raw.categories||[]).forEach(function(c){if(!c||typeof c!=='object')return;d.categories.push({id:String(c.id||newId('category')),name:String(c.name||'未命名目录'),parentId:(c.parentId==null)?null:String(c.parentId),marked:!!c.marked,collapsed:!!c.collapsed,createdAt:String(c.createdAt||now),updatedAt:String(c.updatedAt||c.createdAt||now)});});
-    (raw.notes||[]).forEach(function(n){if(!n||typeof n!=='object')return;d.notes.push({id:String(n.id||newId('note')),categoryId:String(n.categoryId||''),title:String(n.title||'无标题笔记'),content:(typeof n.content==='string')?n.content:'',marked:!!n.marked,collapsed:!!n.collapsed,images:Array.isArray(n.images)?n.images.map(normalizeImage).filter(Boolean):[],attachments:Array.isArray(n.attachments)?n.attachments.map(normalizeFile).filter(Boolean):[],createdAt:String(n.createdAt||now),updatedAt:String(n.updatedAt||n.createdAt||now)});});
+    (raw.categories||[]).forEach(function(c){if(!c||typeof c!=='object')return;d.categories.push({id:String(c.id||newId('category')),name:String(c.name||'未命名目录'),parentId:(c.parentId==null)?null:String(c.parentId),order:(typeof c.order==='number')?c.order:null,marked:!!c.marked,collapsed:!!c.collapsed,createdAt:String(c.createdAt||now),updatedAt:String(c.updatedAt||c.createdAt||now)});});
+    (raw.notes||[]).forEach(function(n){if(!n||typeof n!=='object')return;d.notes.push({id:String(n.id||newId('note')),categoryId:String(n.categoryId||''),title:String(n.title||'无标题笔记'),content:(typeof n.content==='string')?n.content:'',order:(typeof n.order==='number')?n.order:null,marked:!!n.marked,collapsed:!!n.collapsed,images:Array.isArray(n.images)?n.images.map(normalizeImage).filter(Boolean):[],attachments:Array.isArray(n.attachments)?n.attachments.map(normalizeFile).filter(Boolean):[],createdAt:String(n.createdAt||now),updatedAt:String(n.updatedAt||n.createdAt||now)});});
     return d;
   }
 
@@ -304,10 +301,11 @@
       }
     });
   }
+
   /* ================= 天气 ================= */
   var WEATHER_KEY_EXTRA = 'cloudNotes.weather.extraCity';
   var WEATHER_KEY_AUTO = 'cloudNotes.weather.autoCity';
-  var WEATHER_REFRESH_INTERVAL = 60 * 60 * 1000; // 1 小时
+  var WEATHER_REFRESH_INTERVAL = 60 * 60 * 1000;
 
   var weatherState = {
     autoCity: null,
@@ -389,7 +387,6 @@
 
   function locateAutoCity(){
     return new Promise(function(resolve){
-      // 兜底：如果 10 秒内定位不成功，直接返回北京
       var finished=false;
       function fallback(){
         if(finished)return;
@@ -397,7 +394,6 @@
         resolve({name:'北京',shortName:'北京',latitude:39.9042,longitude:116.4074,fallback:true});
       }
       var timer=setTimeout(fallback,10000);
-
       if(!navigator.geolocation){fallback();return;}
       navigator.geolocation.getCurrentPosition(function(pos){
         if(finished)return;
@@ -410,7 +406,6 @@
           .catch(function(){
             if(finished)return;
             finished=true;clearTimeout(timer);
-            // 反向地理编码失败，直接用坐标配一个"当前位置"
             resolve({name:'当前位置',shortName:'当前位置',latitude:pos.coords.latitude,longitude:pos.coords.longitude});
           });
       },function(){
@@ -464,13 +459,12 @@
     var now=Date.now();
     if(!force&&weatherState.lastUpdated&&(now-weatherState.lastUpdated<WEATHER_REFRESH_INTERVAL)){renderWeather();return Promise.resolve();}
     weatherState.loading=true;
-    renderWeather(); // 先渲染一次（可能已有缓存城市）
+    renderWeather();
 
     function ensureAutoCity(){
       if(weatherState.autoCity)return Promise.resolve(weatherState.autoCity);
       return locateAutoCity().then(function(city){
         saveWeatherAutoCity(city);
-        // 立刻重绘，让城市名先显示出来
         renderWeather();
         return city;
       });
@@ -542,26 +536,24 @@
 
   /* ================= 富文本内容处理 ================= */
   function looksLikeHtml(s){
-    return /<(b|strong|i|em|u|s|strike|del|br|p|div|span|img)\b/i.test(String(s||''));
+    return /<(b|strong|i|em|u|s|strike|del|br|p|div|span|img|table|mark)\b/i.test(String(s||''));
   }
 
   function sanitizeHtml(html){
     if(!html)return '';
     var d=document.createElement('div');
     d.innerHTML=String(html);
-    // 递归清理
     function walk(node){
       var children=Array.prototype.slice.call(node.childNodes);
       children.forEach(function(ch){
-        if(ch.nodeType===3)return; // 文本
+        if(ch.nodeType===3)return;
         if(ch.nodeType!==1){node.removeChild(ch);return;}
         var tag=ch.tagName.toUpperCase();
-        if(!ALLOWED_TAGS[tag]){ // 不允许的标签：把子节点提升
+        if(!ALLOWED_TAGS[tag]){
           while(ch.firstChild)node.insertBefore(ch.firstChild,ch);
           node.removeChild(ch);
           return;
         }
-        // 清理属性
         var attrs=Array.prototype.slice.call(ch.attributes);
         attrs.forEach(function(a){
           var an=a.name.toLowerCase();
@@ -571,7 +563,6 @@
           if((tag==='TH'||tag==='TD')&&(an==='colspan'||an==='rowspan'))return;
           ch.removeAttribute(a.name);
         });
-        // 过滤 style 只保留 color/background-color
         if(tag==='SPAN'){
           var st=ch.getAttribute('style')||'';
           var parts=st.split(';');
@@ -593,7 +584,6 @@
     return d.innerHTML;
   }
 
-  /* 把 content 渲染到容器（支持 HTML 子集，图片 ID 替换为真实图片） */
   function renderContent(container,content,images,keyword){
     container.textContent='';
     var imageMap={};
@@ -603,10 +593,8 @@
       container.appendChild(p);return;
     }
     if(looksLikeHtml(content)){
-      // 用临时 div 解析 HTML，然后遍历，把 img 占位替换为真实图片
       var tmp=document.createElement('div');
       tmp.innerHTML=sanitizeHtml(content);
-      // 遍历，把 src 为 [[img:ID]] 的 img 处理
       var imgs=tmp.querySelectorAll('img');
       Array.prototype.forEach.call(imgs,function(im){
         var src=im.getAttribute('src')||'';
@@ -617,10 +605,8 @@
           else{var sp=document.createElement('span');sp.className='missing-image';sp.textContent='[图片未找到：'+m[1]+']';im.parentNode.replaceChild(sp,im);}
         }
       });
-      // 把 tmp 的孩子搬到 container
       while(tmp.firstChild)container.appendChild(tmp.firstChild);
       if(keyword){
-        // 简单高亮：对文本节点做替换
         (function walkHl(node){
           var kids=Array.prototype.slice.call(node.childNodes);
           kids.forEach(function(k){
@@ -643,7 +629,6 @@
         })(container);
       }
     }else{
-      // 纯文本：按换行分段渲染
       var lines=String(content).split(/\n/);
       lines.forEach(function(line){
         var p=document.createElement('p');
@@ -671,9 +656,43 @@
 
   /* ================= 目录/笔记数据结构 ================= */
   function isLevel1(cat){return !cat.parentId;}
-  function getLevel1(){if(!state.data)return [];var l=state.data.categories.filter(isLevel1);l.sort(function(a,b){var ma=a.marked?1:0,mb=b.marked?1:0;if(ma!==mb)return mb-ma;return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);});return l;}
-  function getChildren(pid){if(!state.data)return [];var l=state.data.categories.filter(function(c){return c.parentId===pid;});l.sort(function(a,b){return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);});return l;}
-  function getSortedNotes(cid){if(!state.data)return [];var l=state.data.notes.filter(function(n){return n.categoryId===cid;});l.sort(function(a,b){var ma=a.marked?1:0,mb=b.marked?1:0;if(ma!==mb)return mb-ma;return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);});return l;}
+  function getLevel1(){
+    if(!state.data)return [];
+    var l=state.data.categories.filter(isLevel1);
+    var n=0;
+    l.forEach(function(c){if(typeof c.order!=='number')c.order=n++;});
+    l.sort(function(a,b){
+      if(a.order!==b.order)return a.order-b.order;
+      var ma=a.marked?1:0,mb=b.marked?1:0;
+      if(ma!==mb)return mb-ma;
+      return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);
+    });
+    return l;
+  }
+  function getChildren(pid){
+    if(!state.data)return [];
+    var l=state.data.categories.filter(function(c){return c.parentId===pid;});
+    var n=0;
+    l.forEach(function(c){if(typeof c.order!=='number')c.order=n++;});
+    l.sort(function(a,b){
+      if(a.order!==b.order)return a.order-b.order;
+      return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);
+    });
+    return l;
+  }
+  function getSortedNotes(cid){
+    if(!state.data)return [];
+    var l=state.data.notes.filter(function(n){return n.categoryId===cid;});
+    var n=0;
+    l.forEach(function(nn){if(typeof nn.order!=='number')nn.order=n++;});
+    l.sort(function(a,b){
+      if(a.order!==b.order)return a.order-b.order;
+      var ma=a.marked?1:0,mb=b.marked?1:0;
+      if(ma!==mb)return mb-ma;
+      return (new Date(b.updatedAt||0).getTime()||0)-(new Date(a.updatedAt||0).getTime()||0);
+    });
+    return l;
+  }
   function getCategory(id){if(!state.data)return null;return state.data.categories.find(function(c){return c.id===id;})||null;}
   function noteMatches(note,keyword){
     if(!keyword)return false;
@@ -686,7 +705,7 @@
     return hit;
   }
 
-  function isCatCollapsed(cat){if(Object.prototype.hasOwnProperty.call(state.collapsedCategories,cat.id))return !!state.collapsedCategories[cat.id];return !!cat.collapsed;}
+  function isCatCollapsed(cat){return !state.expandedCategories[cat.id];}
   function isNoteCollapsed(note){if(Object.prototype.hasOwnProperty.call(state.collapsedNotes,note.id))return !!state.collapsedNotes[note.id];return !!note.collapsed;}
 
   /* ================= 侧边栏渲染 ================= */
@@ -715,7 +734,16 @@
           cb.addEventListener('click',function(e){e.stopPropagation();state.batchSelected['note:'+note.id]=cb.checked;updateBatchBar();});
           li.appendChild(cb);
         }
-        li.appendChild(a);ul.appendChild(li);
+        li.appendChild(a);
+        if(state.editing){
+          var nUp=document.createElement('span');nUp.className='move-btn';nUp.textContent='↑';nUp.title='上移';
+          nUp.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();moveNote(note.id,'up');});
+          li.appendChild(nUp);
+          var nDn=document.createElement('span');nDn.className='move-btn';nDn.textContent='↓';nDn.title='下移';
+          nDn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();moveNote(note.id,'down');});
+          li.appendChild(nDn);
+        }
+        ul.appendChild(li);
       });
       return ul;
     }
@@ -740,10 +768,18 @@
         cb1.addEventListener('click',function(e){e.stopPropagation();state.batchSelected['cat:'+cat.id]=cb1.checked;updateBatchBar();});
         head.appendChild(cb1);
       }
-      head.addEventListener('click',function(e){if(e.target.tagName==='INPUT')return;state.collapsedCategories[cat.id]=!isCatCollapsed(cat);renderSidebar();});
+      head.addEventListener('click',function(e){if(e.target.tagName==='INPUT'||(e.target.classList&&e.target.classList.contains('move-btn')))return;state.expandedCategories[cat.id]=!state.expandedCategories[cat.id];renderSidebar();});
       var tog=document.createElement('span');tog.textContent=collapsed?'▶':'▼';tog.style.fontSize='0.7rem';tog.style.width='12px';head.appendChild(tog);
       var nm=document.createElement('span');nm.className='cat-nav-name';setHighlightedText(nm,cat.name,keyword);head.appendChild(nm);
       var ct=document.createElement('span');ct.className='cat-nav-count';ct.textContent=String(total);head.appendChild(ct);
+      if(state.editing){
+        var upB=document.createElement('span');upB.className='move-btn';upB.textContent='↑';upB.title='上移一级目录';
+        upB.addEventListener('click',function(e){e.stopPropagation();moveCategory(cat.id,'up');});
+        head.appendChild(upB);
+        var dnB=document.createElement('span');dnB.className='move-btn';dnB.textContent='↓';dnB.title='下移一级目录';
+        dnB.addEventListener('click',function(e){e.stopPropagation();moveCategory(cat.id,'down');});
+        head.appendChild(dnB);
+      }
       item.appendChild(head);
 
       if(!collapsed){
@@ -763,10 +799,18 @@
             cb2.addEventListener('click',function(e){e.stopPropagation();state.batchSelected['cat:'+child.id]=cb2.checked;updateBatchBar();});
             chHead.appendChild(cb2);
           }
-          chHead.addEventListener('click',function(e){if(e.target.tagName==='INPUT')return;state.collapsedCategories[child.id]=!isCatCollapsed(child);renderSidebar();});
+          chHead.addEventListener('click',function(e){if(e.target.tagName==='INPUT'||(e.target.classList&&e.target.classList.contains('move-btn')))return;state.expandedCategories[child.id]=!state.expandedCategories[child.id];renderSidebar();});
           var ctog=document.createElement('span');ctog.textContent=cc?'▶':'▼';ctog.style.fontSize='0.7rem';ctog.style.width='12px';chHead.appendChild(ctog);
           var cnm=document.createElement('span');cnm.className='cat-nav-name';setHighlightedText(cnm,child.name,keyword);chHead.appendChild(cnm);
           var cct=document.createElement('span');cct.className='cat-nav-count';cct.textContent=String(cNotes.length);chHead.appendChild(cct);
+          if(state.editing){
+            var cupB=document.createElement('span');cupB.className='move-btn';cupB.textContent='↑';cupB.title='上移二级目录';
+            cupB.addEventListener('click',function(e){e.stopPropagation();moveCategory(child.id,'up');});
+            chHead.appendChild(cupB);
+            var cdnB=document.createElement('span');cdnB.className='move-btn';cdnB.textContent='↓';cdnB.title='下移二级目录';
+            cdnB.addEventListener('click',function(e){e.stopPropagation();moveCategory(child.id,'down');});
+            chHead.appendChild(cdnB);
+          }
           chItem.appendChild(chHead);
           if(!cc){
             var vis=keyword?cNotes.filter(function(n){return noteMatches(n,keyword);}):cNotes;
@@ -862,7 +906,7 @@
     var tip=opts.silent?null:notify('info','正在读取远端数据…',0);
     return fetchRemoteNotes().then(function(r){
       state.data=r.json;state.remoteUpdatedAt=r.json.updatedAt;
-      state.collapsedCategories={};state.collapsedNotes={};
+      state.expandedCategories={};state.collapsedNotes={};
       render();if(tip)tip.remove();if(!opts.silent)notify('success','远端数据已加载。',4000);
     }).catch(function(e){if(tip)tip.remove();render();notify('error',(e&&e.message)||'读取失败。',12000);}).then(function(){state.busy=false;});
   }
@@ -914,7 +958,6 @@
       byId('editNoteTitle').value=note.title;
       fillCategorySelect(byId('editNoteCategory'),note.categoryId);
       var editor=byId('editNoteContent');
-      // 如果 content 是纯文本，则直接设置 textContent；如果是 HTML，清理后设置 innerHTML
       if(looksLikeHtml(note.content)){
         editor.innerHTML=sanitizeHtml(note.content).replace(/src="\[\[img:([a-zA-Z0-9_-]+)\]\]"/g,function(all,id){
           var im=(note.images||[]).find(function(x){return x.id===id;});
@@ -975,16 +1018,28 @@
   }
 
   function handleEditNoteFileSelect(files){
+    if(!editNoteCtx.noteId){notify('error','请先填写笔记标题并选择目录。',6000);return;}
     var probs=[];
     Array.prototype.forEach.call(files,function(f){
       var e=validateAttachmentFile(f);if(e){probs.push(f.name+'：'+e);return;}
-      editNoteCtx.files.push({id:newId('file'),file:f,status:'waiting',statusText:'等待上传'});
+      var item={id:newId('file'),file:f,status:'uploading',statusText:'正在上传',uploadedMeta:null};
+      editNoteCtx.files.push(item);
+      bindEditNotePreviews();
+      uploadAttachment('file',editNoteCtx.noteId,item).then(function(meta){
+        item.uploadedMeta=meta;
+        item.status='done';item.statusText='已上传';
+        if(item.statusEl){item.statusEl.className='pending-status status-done';item.statusEl.textContent='已上传';}
+        notify('success','附件已上传：'+meta.originalName,4000);
+      }).catch(function(e){
+        item.status='error';item.statusText='上传失败';
+        if(item.statusEl){item.statusEl.className='pending-status status-error';item.statusEl.textContent='上传失败';}
+        notify('error','附件上传失败：'+((e&&e.message)||''),10000);
+      });
     });
     if(probs.length)notify('error','以下附件未通过校验：\n'+probs.join('\n'),12000);
     bindEditNotePreviews();
   }
 
-  /* 插入图片到 contenteditable */
   function insertImageAtCursor(){
     if(!editNoteCtx.noteId){notify('error','请先填写笔记标题并选择目录。',6000);return;}
     byId('editNoteImageInput').value='';
@@ -1011,7 +1066,6 @@
     }).catch(function(e){working.remove();notify('error','图片上传失败：'+((e&&e.message)||''),10000);});
   }
 
-  /* 从编辑器读出 content：把 img 替换为占位标记 src="[[img:ID]]" */
   function extractEditorHtml(){
     var editor=byId('editNoteContent');
     var clone=editor.cloneNode(true);
@@ -1019,7 +1073,6 @@
     Array.prototype.forEach.call(imgs,function(im){
       var id=im.getAttribute('data-img-id');
       if(!id){
-        // 尝试从 src 反推
         var src=im.getAttribute('src')||'';
         var all=(editNoteCtx.existingImages||[]).concat(editNoteCtx.newImages||[]);
         var found=all.find(function(x){return assetUrl(x.path)===src;});
@@ -1058,6 +1111,10 @@
     var uploadedFiles=[],reallyRemovedFiles=[];
     var chain=Promise.resolve();
     editNoteCtx.files.forEach(function(it){
+      if(it.uploadedMeta){
+        uploadedFiles.push(it.uploadedMeta);
+        return;
+      }
       chain=chain.then(function(){
         updateStatus(it,'uploading');
         return uploadAttachment('file',noteId,it).then(function(m){uploadedFiles.push(m);updateStatus(it,'done');})
@@ -1074,12 +1131,10 @@
       });
     }
     chain.then(function(){
-      // 合并图片元数据
       var allImgs=[];
       var seen={};
       (editNoteCtx.existingImages||[]).forEach(function(x){if(!seen[x.id]){seen[x.id]=1;allImgs.push(x);}});
       (editNoteCtx.newImages||[]).forEach(function(x){if(!seen[x.id]){seen[x.id]=1;allImgs.push(x);}});
-      // 只保留被 content 引用的
       var usedIds=[];
       var re=/\[\[img:([a-zA-Z0-9_-]+)\]\]/g;var m;
       while((m=re.exec(content))!==null){usedIds.push(m[1]);}
@@ -1147,10 +1202,8 @@
     askConfirm({title:'批量删除',message:msg,confirmText:'确认删除'}).then(function(ok){
       if(!ok)return;
       var working=notify('info','正在删除…',0);var warnings=[];
-      // 收集要删除的笔记（含子目录内的）
       var noteIdsToDelete={};
       var catIdsToDelete={};
-      var descendants={};
       (sel.cats||[]).forEach(function(cid){
         catIdsToDelete[cid]=1;
         var stack=[cid];
@@ -1161,7 +1214,6 @@
       });
       state.data.notes.forEach(function(n){if(catIdsToDelete[n.categoryId])noteIdsToDelete[n.id]=1;});
       (sel.notes||[]).forEach(function(nid){noteIdsToDelete[nid]=1;});
-      // 删除所有相关笔记的图片和附件
       var chain=Promise.resolve();
       var deletedFiles=[];
       Object.keys(noteIdsToDelete).forEach(function(nid){
@@ -1230,6 +1282,48 @@
     });
   }
 
+  function moveCategory(catId,dir){
+    if(!state.editing)return;
+    var next=deepClone(state.data);
+    var cat=next.categories.find(function(c){return c.id===catId;});
+    if(!cat)return;
+    var siblings=next.categories.filter(function(c){return (c.parentId||null)===(cat.parentId||null);});
+    siblings.sort(function(a,b){var oa=(typeof a.order==='number')?a.order:0;var ob=(typeof b.order==='number')?b.order:0;return oa-ob;});
+    siblings.forEach(function(c,i){c.order=i;});
+    var idx=siblings.findIndex(function(c){return c.id===catId;});
+    if(idx===-1)return;
+    var targetIdx=dir==='up'?idx-1:idx+1;
+    if(targetIdx<0||targetIdx>=siblings.length)return;
+    var tmp=siblings[idx].order;
+    siblings[idx].order=siblings[targetIdx].order;
+    siblings[targetIdx].order=tmp;
+    var tip=notify('info','正在保存顺序…',0);
+    commitData(next,'调整目录顺序：'+cat.name).then(function(){
+      tip.remove();notify('success','已保存到 GitHub。',4000);renderSidebar();
+    }).catch(function(e){tip.remove();notify('error',(e&&e.message)||'保存失败。',12000);});
+  }
+
+  function moveNote(noteId,dir){
+    if(!state.editing)return;
+    var next=deepClone(state.data);
+    var note=next.notes.find(function(n){return n.id===noteId;});
+    if(!note)return;
+    var siblings=next.notes.filter(function(n){return n.categoryId===note.categoryId;});
+    siblings.sort(function(a,b){var oa=(typeof a.order==='number')?a.order:0;var ob=(typeof b.order==='number')?b.order:0;return oa-ob;});
+    siblings.forEach(function(n,i){n.order=i;});
+    var idx=siblings.findIndex(function(n){return n.id===noteId;});
+    if(idx===-1)return;
+    var targetIdx=dir==='up'?idx-1:idx+1;
+    if(targetIdx<0||targetIdx>=siblings.length)return;
+    var tmp=siblings[idx].order;
+    siblings[idx].order=siblings[targetIdx].order;
+    siblings[targetIdx].order=tmp;
+    var tip=notify('info','正在保存顺序…',0);
+    commitData(next,'调整笔记顺序：'+note.title).then(function(){
+      tip.remove();notify('success','已保存到 GitHub。',4000);renderSidebar();
+    }).catch(function(e){tip.remove();notify('error',(e&&e.message)||'保存失败。',12000);});
+  }
+
   function exportBackup(){
     if(!state.data){notify('warn','数据尚未加载。',5000);return;}
     var text=JSON.stringify(state.data,null,2);
@@ -1252,7 +1346,7 @@
     return mammothPromise;
   }
 
-    var JSZIP_CDNS=['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'];
+  var JSZIP_CDNS=['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'];
   var jszipPromise=null;
   function loadJSZip(){
     if(window.JSZip)return Promise.resolve();
@@ -1336,8 +1430,7 @@
     });
     return wrap.innerHTML;
   }
-  
-  /* mammoth 输出的 HTML 里提取段落、标题、图片（含样式） */
+
   function extractBlocksFromHtml(html){
     var parser=new DOMParser();
     var doc=parser.parseFromString(html,'text/html');
@@ -1346,13 +1439,9 @@
     function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
     function inlineHtmlOf(node){
-      // 把 node 的子节点转为带样式（b/i/u/s/mark/span[style]/img）的 HTML
       var out='';
       Array.prototype.forEach.call(node.childNodes,function(ch){
-        if(ch.nodeType===3){
-          out+=escapeHtml(ch.textContent);
-          return;
-        }
+        if(ch.nodeType===3){out+=escapeHtml(ch.textContent);return;}
         if(ch.nodeType!==1)return;
         var tag=ch.tagName.toLowerCase();
         if(tag==='strong'||tag==='b'){out+='<b>'+inlineHtmlOf(ch)+'</b>';}
@@ -1386,7 +1475,6 @@
           if(m)out+='[[IMG_B64:'+m[1]+':'+m[2]+']]';
         }
         else if(tag==='p'||tag==='div'||/^h[1-6]$/.test(tag)){
-          // 块级元素在 inline 上下文里转成 <br> 分隔
           var inner2=inlineHtmlOf(ch);
           if(inner2){
             if(out&&!/<br>$/.test(out))out+='<br>';
@@ -1552,7 +1640,6 @@
         return window.mammoth.convertToHtml({arrayBuffer:buf}).then(function(res){
           var html=(res&&res.value)||'';
           html=applyHighlightSpans(html,spans);
-          console.log('[Word导入] 处理后的 HTML 前 500 字符：',html.slice(0,500));
           return html;
         });
       });
@@ -1569,15 +1656,15 @@
       notify('error',(e&&e.message)||'解析 Word 失败。',12000);
     });
   }
-  
+
   function executeWordImport(){
     if(!state.editing){notify('warn','请先进入编辑模式。',5000);return;}
     var pv=wordCtx.preview;if(!pv)return;
     var btn=byId('btnWordImportConfirm');if(btn.disabled)return;btn.disabled=true;
     var working=notify('info','正在导入并上传图片…',0);
     var next=deepClone(state.data);var now=new Date().toISOString();
-    function findOrCreateL1(name){var c=next.categories.find(function(x){return x.parentId==null&&x.name===name;});if(!c){c={id:newId('category'),name:name,parentId:null,marked:false,collapsed:false,createdAt:now,updatedAt:now};next.categories.push(c);}return c;}
-    function findOrCreateL2(pid,name){var c=next.categories.find(function(x){return x.parentId===pid&&x.name===name;});if(!c){c={id:newId('category'),name:name,parentId:pid,marked:false,collapsed:false,createdAt:now,updatedAt:now};next.categories.push(c);}return c;}
+    function findOrCreateL1(name){var c=next.categories.find(function(x){return x.parentId==null&&x.name===name;});if(!c){c={id:newId('category'),name:name,parentId:null,order:null,marked:false,collapsed:false,createdAt:now,updatedAt:now};next.categories.push(c);}return c;}
+    function findOrCreateL2(pid,name){var c=next.categories.find(function(x){return x.parentId===pid&&x.name===name;});if(!c){c={id:newId('category'),name:name,parentId:pid,order:null,marked:false,collapsed:false,createdAt:now,updatedAt:now};next.categories.push(c);}return c;}
 
     var pending=[];
     pv.tree.forEach(function(l1){
@@ -1594,7 +1681,6 @@
       var noteId=newId('note');
       var images=[];
       var finalHtml='';
-      // 处理 segments
       chain=chain.then(function(){
         var idx=0;
         function step(){
@@ -1604,7 +1690,6 @@
           }
           var seg=p.note.segments[idx++];
           var html=seg.html||'';
-          // 找 [[IMG_B64:...]] 逐个上传
           var re=/\[\[IMG_B64:([^:]+):([^\]]+)\]\]/g;
           var pos=0;var parts=[];var mm;var hasImg=false;
           while((mm=re.exec(html))!==null){
@@ -1620,7 +1705,6 @@
             finalHtml+=(finalHtml?'<br>':'')+html;
             return step();
           }
-          // 逐个上传
           var pi=0;
           function stepPart(){
             if(pi>=parts.length)return step();
@@ -1670,7 +1754,6 @@
     safeBind('confirmOkBtn','click',function(){resolveConfirm(true);});
     safeBind('confirmCancelBtn','click',function(){resolveConfirm(false);});
 
-    // 侧边栏折叠
     function toggleSidebarCollapse(){
       var sb=byId('sidebar');
       var isCol=sb.classList.toggle('collapsed');
@@ -1721,7 +1804,6 @@
     safeBind('btnQuickReload','click',function(){loadRemoteData({});});
     safeBind('btnQuickExport','click',exportBackup);
     safeBind('btnImportWordDash','click',function(){byId('wordFileInput').click();});
-    // 天气相关
     safeBind('btnWeatherRefresh','click',function(){
       weatherState.lastUpdated=0;
       notify('info','正在刷新天气…',3000);
@@ -1729,7 +1811,7 @@
     });
     safeBind('btnEditExtraCity','click',openWeatherCityModal);
     safeBind('btnWeatherCitySearch','click',searchWeatherCity);
-        safeBind('btnWeatherAutoCitySearch','click',function(){
+    safeBind('btnWeatherAutoCitySearch','click',function(){
       var q=String(byId('weatherAutoCityInput').value||'').trim();
       var box=byId('weatherAutoCityResults');
       box.textContent='';
@@ -1765,13 +1847,12 @@
       });
     });
     safeBind('btnWeatherCityCancel','click',function(){hideModal('weatherCityModal');});
-    
+
     safeBind('btnBackToDash','click',function(){state.currentView='dashboard';state.currentNoteId=null;render();});
     safeBind('btnEditCurrentNote','click',function(){if(state.currentNoteId)openEditNote(state.currentNoteId);});
     safeBind('btnDeleteCurrentNote','click',function(){if(state.currentNoteId)deleteNote(state.currentNoteId);});
     safeBind('btnToggleMarkCurrentNote','click',function(){if(state.currentNoteId)toggleNoteMarked(state.currentNoteId);});
 
-    // 编辑笔记里的格式化按钮
     document.querySelectorAll('.fmt-btn').forEach(function(b){
       b.addEventListener('click',function(e){
         e.preventDefault();
@@ -1788,7 +1869,6 @@
     safeBind('editBgColor','input',function(){
       var c=byId('editBgColor').value;
       try{
-        // 用 hiliteColor 或 backColor
         if(!document.execCommand('hiliteColor',false,c)){
           document.execCommand('backColor',false,c);
         }
@@ -1798,6 +1878,7 @@
     safeBind('btnInsertImage','click',insertImageAtCursor);
     safeBind('editNoteImageInput','change',function(ev){var f=ev.target.files&&ev.target.files[0];ev.target.value='';if(f)handleInsertImageFile(f);});
     safeBind('editNoteFiles','change',function(ev){var files=ev.target.files;ev.target.value='';if(files&&files.length)handleEditNoteFileSelect(files);});
+    safeBind('btnAddAttachment','click',function(){byId('editNoteFiles').value='';byId('editNoteFiles').click();});
     safeBind('btnSaveEditNote','click',saveEditNote);
     safeBind('btnCancelEditNote','click',closeEditNoteModal);
 
@@ -1805,7 +1886,6 @@
     safeBind('btnWordImportConfirm','click',executeWordImport);
     safeBind('btnWordImportCancel','click',function(){wordCtx.blocks=null;wordCtx.preview=null;wordCtx.fileName='';hideModal('wordImportModal');});
 
-    // 批量操作
     safeBind('btnBatchMode','click',function(){
       if(state.batchMode)exitBatchMode();else enterBatchMode();
     });
@@ -1836,7 +1916,6 @@
     try{render();}catch(e){console.error('render 出错：',e);}
     updatePomodoroDisplay();renderReminderList();
     setInterval(checkDueReminders,30000);
-   // 天气：读取配置并加载
     loadWeatherFromStorage();
     loadAllWeather(false);
     setInterval(function(){loadAllWeather(true);},WEATHER_REFRESH_INTERVAL);
