@@ -204,3 +204,11 @@ mark.hl{background:#ffe680;color:#3d2a00;padding:0 2px;border-radius:3px}
 .rich-editor mark{background:#fff59d;color:inherit;padding:0 2px;border-radius:3px}
 .note-view-content [style*="background-color"],
 .rich-editor [style*="background-color"]{padding:0 2px;border-radius:3px}
+/* ========= 附件上传按钮 ========= */
+.toolbar-hint{font-size:0.78rem;color:var(--text-muted)}
+
+/* ========= 顺序调整箭头 ========= */
+.cat-nav-notes li{display:flex;align-items:center;gap:4px}
+.cat-nav-notes li>a{flex:1;min-width:0}
+.move-btn{cursor:pointer;font-size:0.9rem;font-weight:800;color:#9aab8e;padding:2px 5px;user-select:none;flex-shrink:0;border-radius:4px;line-height:1}
+.move-btn:hover{color:var(--primary);background:#eef4e9}
