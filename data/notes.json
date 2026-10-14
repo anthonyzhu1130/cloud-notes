@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T09:12:18.637Z",
+  "updatedAt": "2026-10-14T09:49:37.185Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -191,6 +191,16 @@
       "collapsed": false,
       "createdAt": "2026-10-14T08:01:01.927Z",
       "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "category-dd41f426-e6df-43bd-bcce-931932dfd2f1",
+      "name": "归类争议内容",
+      "parentId": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
+      "order": null,
+      "marked": false,
+      "collapsed": false,
+      "createdAt": "2026-10-14T09:49:13.116Z",
+      "updatedAt": "2026-10-14T09:49:13.116Z"
     }
   ],
   "notes": [
@@ -7887,6 +7897,74 @@
       "attachments": [],
       "createdAt": "2026-10-14T08:01:01.927Z",
       "updatedAt": "2026-10-14T08:01:01.927Z"
+    },
+    {
+      "id": "note-859c1243-a097-4160-b588-143aba8b0977",
+      "categoryId": "category-dd41f426-e6df-43bd-bcce-931932dfd2f1",
+      "title": "1，化工品类",
+      "content": "化工品归类争议<br><img src=\"[[img:image-d3186bb5-ebcb-4e3f-98ec-8844ec54d4c8]]\" alt=\"\"><br>39.19  包含各种不规则形状<br>39.20；；  39.21  是否扁平，形状规则<br>扁平形状：宏观上，<br>39章章注<br><img src=\"[[img:image-fb27afce-44c5-44ca-92d9-ad4456e9f539]]\" alt=\"\"><br>按照子目注释；半导体材料用的光刻胶,<br>去借助注释，<br>2月份公告归类决定，有相应的解读。  参考的标准，国标  行标，新媒体的<br>广州海关征管中心<br><img src=\"[[img:image-bf4aa423-db05-4de4-aaab-8fdbc9b92841]]\" alt=\"\"><br>归类思路：助剂和固化剂，关注类助涨助<br>3组合材料<br><img src=\"[[img:image-dfc6fbc9-4bfd-4a67-963c-17997369c81e]]\" alt=\"\"><br>主管信息和客观信息：价值和重量，哪种材料起到主要特征和功能。<br>其主要作用的部分由那种材料，就按照那种材料归类。<br>复合材料制品，<br>第15类类注，2通用零件，基本特征的认定。价值成分超过60%<br>4，<br><img src=\"[[img:image-92177d19-c40f-4d26-abeb-4f645d2eb229]]\" alt=\"\"><br>按照材料类，包含<br>永磁体 应根据成分来看<br>归类争议：商品成分 含量<br>从哪里来<br>生产工艺<br>到哪里去~用途：39~用途<br>商品属性认定：~本着客观公正，站在全行业上看，而非自身企业来看。<br>归类技术争议：<br>商品资料：不得已<br>企业写的归类依据，<br>大数据的支持<br>无人机归入88章<br>塑料垫圈<br>39269010~塑料制机器及仪器用零件，84、85、90零件<br>39269090垫圈    从后",
+      "marked": false,
+      "collapsed": false,
+      "images": [
+        {
+          "id": "image-d3186bb5-ebcb-4e3f-98ec-8844ec54d4c8",
+          "originalName": "image-d3186bb5-ebcb-4e3f-98ec-8844ec54d4c8-word-image.png.png",
+          "storedName": "image-d3186bb5-ebcb-4e3f-98ec-8844ec54d4c8-word-image.png.png",
+          "path": "assets/images/note-859c1243-a097-4160-b588-143aba8b0977/image-d3186bb5-ebcb-4e3f-98ec-8844ec54d4c8-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 896979,
+          "sha": "9d26180322af40b2ba8ad2a2caf37bb53a004c27",
+          "description": "",
+          "createdAt": "2026-10-14T09:49:17.701Z"
+        },
+        {
+          "id": "image-fb27afce-44c5-44ca-92d9-ad4456e9f539",
+          "originalName": "image-fb27afce-44c5-44ca-92d9-ad4456e9f539-word-image.png.png",
+          "storedName": "image-fb27afce-44c5-44ca-92d9-ad4456e9f539-word-image.png.png",
+          "path": "assets/images/note-859c1243-a097-4160-b588-143aba8b0977/image-fb27afce-44c5-44ca-92d9-ad4456e9f539-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 1224285,
+          "sha": "8d57e4e995143a7698b2c0f32cf4d34cfb57f15f",
+          "description": "",
+          "createdAt": "2026-10-14T09:49:22.938Z"
+        },
+        {
+          "id": "image-bf4aa423-db05-4de4-aaab-8fdbc9b92841",
+          "originalName": "image-bf4aa423-db05-4de4-aaab-8fdbc9b92841-word-image.png.png",
+          "storedName": "image-bf4aa423-db05-4de4-aaab-8fdbc9b92841-word-image.png.png",
+          "path": "assets/images/note-859c1243-a097-4160-b588-143aba8b0977/image-bf4aa423-db05-4de4-aaab-8fdbc9b92841-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 1049181,
+          "sha": "fe25231363c8063ee63cee6da8c50e308bc46e1f",
+          "description": "",
+          "createdAt": "2026-10-14T09:49:27.075Z"
+        },
+        {
+          "id": "image-dfc6fbc9-4bfd-4a67-963c-17997369c81e",
+          "originalName": "image-dfc6fbc9-4bfd-4a67-963c-17997369c81e-word-image.png.png",
+          "storedName": "image-dfc6fbc9-4bfd-4a67-963c-17997369c81e-word-image.png.png",
+          "path": "assets/images/note-859c1243-a097-4160-b588-143aba8b0977/image-dfc6fbc9-4bfd-4a67-963c-17997369c81e-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 967284,
+          "sha": "a84180cccb068bc3c53288ab387403681ef18a7c",
+          "description": "",
+          "createdAt": "2026-10-14T09:49:31.054Z"
+        },
+        {
+          "id": "image-92177d19-c40f-4d26-abeb-4f645d2eb229",
+          "originalName": "image-92177d19-c40f-4d26-abeb-4f645d2eb229-word-image.png.png",
+          "storedName": "image-92177d19-c40f-4d26-abeb-4f645d2eb229-word-image.png.png",
+          "path": "assets/images/note-859c1243-a097-4160-b588-143aba8b0977/image-92177d19-c40f-4d26-abeb-4f645d2eb229-word-image.png.png",
+          "mimeType": "image/png",
+          "size": 945432,
+          "sha": "a78f9317798cceeee58a4fff513f22553fa9c763",
+          "description": "",
+          "createdAt": "2026-10-14T09:49:34.758Z"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2026-10-14T09:49:13.116Z",
+      "updatedAt": "2026-10-14T09:49:13.116Z"
     }
   ]
 }
