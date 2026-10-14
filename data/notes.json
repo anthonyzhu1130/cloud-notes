@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-14T10:31:45.402Z",
+  "updatedAt": "2026-10-14T10:32:32.940Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -156,7 +156,7 @@
       "id": "category-82c3d2f1-b2ae-4794-83dc-63a057538f12",
       "name": "塑料橡胶篇",
       "parentId": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
-      "order": 2,
+      "order": 3,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
@@ -196,7 +196,7 @@
       "id": "category-dd41f426-e6df-43bd-bcce-931932dfd2f1",
       "name": "归类争议内容",
       "parentId": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
-      "order": 0,
+      "order": 2,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-14T09:49:13.116Z",
@@ -7989,7 +7989,8 @@
       ],
       "attachments": [],
       "createdAt": "2026-10-14T10:31:35.513Z",
-      "updatedAt": "2026-10-14T10:31:35.513Z"
+      "updatedAt": "2026-10-14T10:31:35.513Z",
+      "order": 0
     },
     {
       "id": "note-19c655d8-9f29-4376-bf68-74797a89c0d1",
@@ -8001,7 +8002,8 @@
       "images": [],
       "attachments": [],
       "createdAt": "2026-10-14T10:31:35.513Z",
-      "updatedAt": "2026-10-14T10:31:35.513Z"
+      "updatedAt": "2026-10-14T10:31:35.513Z",
+      "order": 1
     },
     {
       "id": "note-8cc30656-6638-44a3-8fe0-4e6db5536642",
@@ -8036,7 +8038,8 @@
       ],
       "attachments": [],
       "createdAt": "2026-10-14T10:31:35.513Z",
-      "updatedAt": "2026-10-14T10:31:35.513Z"
+      "updatedAt": "2026-10-14T10:31:35.513Z",
+      "order": 2
     }
   ]
 }
