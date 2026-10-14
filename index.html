@@ -234,7 +234,14 @@
     <div class="form-row checkbox-row"><input type="checkbox" id="editNoteMarked" /><label for="editNoteMarked">设为重点笔记</label></div>
     <h3 class="sub-title">附件</h3>
     <div id="editNoteExistingFiles" class="preview-list"></div>
-    <div class="form-row"><label class="field-label" for="editNoteFiles">添加附件</label><input type="file" id="editNoteFiles" class="input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" multiple /></div>
+    <div class="form-row">
+      <label class="field-label">添加附件</label>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button type="button" id="btnAddAttachment" class="btn btn-ghost">📎 选择文件并上传</button>
+        <span class="toolbar-hint">支持 PDF / Word / Excel / PPT / TXT / CSV / ZIP，单个不超过 10 MB</span>
+      </div>
+      <input type="file" id="editNoteFiles" class="hidden-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" multiple />
+    </div>
     <div id="editNoteFilePreview" class="preview-list"></div>
     <p id="editNoteError" class="error-text hidden"></p>
     <div class="modal-actions">
