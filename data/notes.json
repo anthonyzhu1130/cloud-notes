@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-15T10:41:50.449Z",
+  "updatedAt": "2026-10-15T10:42:22.753Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -136,7 +136,7 @@
       "id": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
       "name": "商品归类",
       "parentId": null,
-      "order": 3,
+      "order": 2,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
@@ -236,7 +236,7 @@
       "id": "category-1a332d7a-ad97-4f4d-8a12-70f0b73e499a",
       "name": "关务流程",
       "parentId": null,
-      "order": 2,
+      "order": 3,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-15T10:35:41.399Z",
