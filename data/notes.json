@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-16T06:11:06.676Z",
+  "updatedAt": "2026-10-16T06:12:04.117Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -136,7 +136,7 @@
       "id": "category-57636f88-95f2-48fb-b182-2736fa5fca94",
       "name": "商品归类",
       "parentId": null,
-      "order": 2,
+      "order": 3,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
@@ -176,7 +176,7 @@
       "id": "category-997b8db3-35b1-4434-b8f9-585360f13e36",
       "name": "特殊商品申报",
       "parentId": null,
-      "order": 4,
+      "order": 5,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-14T08:01:01.927Z",
@@ -236,7 +236,7 @@
       "id": "category-1a332d7a-ad97-4f4d-8a12-70f0b73e499a",
       "name": "关务流程",
       "parentId": null,
-      "order": 3,
+      "order": 4,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-15T10:35:41.399Z",
@@ -256,7 +256,7 @@
       "id": "category-22c6be9b-b73f-46ff-a829-44f6daf6ecdb",
       "name": "特殊商品类",
       "parentId": null,
-      "order": null,
+      "order": 2,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-16T06:10:53.800Z",
@@ -266,7 +266,7 @@
       "id": "category-40f85dcb-5a7b-4333-beca-77e7b87d9ba0",
       "name": "集成电路",
       "parentId": "category-22c6be9b-b73f-46ff-a829-44f6daf6ecdb",
-      "order": null,
+      "order": 0,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-16T06:10:53.800Z",
@@ -8546,7 +8546,8 @@
       ],
       "attachments": [],
       "createdAt": "2026-10-16T06:10:53.800Z",
-      "updatedAt": "2026-10-16T06:10:53.800Z"
+      "updatedAt": "2026-10-16T06:10:53.800Z",
+      "order": 0
     }
   ]
 }
