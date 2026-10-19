@@ -68,12 +68,30 @@
 
   function fetchRemoteNotes(token){
     var tok = token || state.token || null;
+
+    // 【新增】如果是只读模式（没有 Token），直接请求当前网站下的 data/notes.json
+    // 这样完全绕过 GitHub API，不会触发匿名 IP 的每小时 60 次限制
+    if(!tok){
+      var staticUrl = './' + (CONFIG.NOTES_PATH || 'data/notes.json').replace(/^\//, '') + '?t=' + Date.now();
+      return fetch(staticUrl, {cache:'no-store'}).then(function(r){
+        if(!r.ok) throw new AppError('读取静态 notes.json 失败（HTTP ' + r.status + '）。', r.status);
+        return r.text();
+      }).then(function(t){
+        return parseNotesJson(t, null); // 只读模式不需要 sha
+      }).catch(function(e){
+        throw new AppError('读取失败，请检查网络或稍后重试：' + (e.message || ''), 0);
+      });
+    }
+
+    // 如果有 Token（编辑模式），走原有的 GitHub API 逻辑以获取 sha 并准备写入
     var url = contentsUrl(CONFIG.NOTES_PATH) + '?ref=' + encodeURIComponent(CONFIG.BRANCH||'main') + '&t=' + Date.now();
     return ghFetch(url, {token: tok}).then(function(r){
       if(!r) throw new AppError('远端 notes.json 返回空数据。', 0);
+      // 小文件：GitHub 直接返回 base64 内容
       if(r.content && r.encoding === 'base64'){
         return parseNotesJson(base64ToUtf8(r.content), r.sha);
       }
+      // 大文件（超过 1 MB）：GitHub 不给 content，用 git/blobs API 拿完整内容
       if(r.sha){
         var blobUrl = apiBase() + '/git/blobs/' + encodeURIComponent(r.sha) + '?t=' + Date.now();
         return ghFetch(blobUrl, {token: tok}).then(function(b){
