@@ -13,7 +13,6 @@
   API_VERSION: '2022-11-28',
   SHOW_SAMPLE_DATA: false,
   QUICK_LINKS: [
-    { name: '光聆导航', url: 'https://anthonyzhu1130.github.io/nav/#/', icon: '🧭' },
     { name: 'DeepSeek', url: 'https://chat.deepseek.com', icon: '🐳' },
     { name: '豆包', url: 'https://www.doubao.com', icon: '🫘' },
     { name: '虫部落', url: 'https://www.chongbuluo.com', icon: '🐛' },
