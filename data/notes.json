@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T02:37:05.142Z",
+  "updatedAt": "2026-11-05T02:49:44.428Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -54,13 +54,13 @@
     },
     {
       "id": "category-596d9e41-8b25-466b-b15e-8eded3e3fd66",
-      "name": "合规&特殊监管方式",
+      "name": "特殊监管方式",
       "parentId": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
       "order": 4,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-13T08:33:08.508Z",
-      "updatedAt": "2026-10-13T08:33:08.508Z"
+      "updatedAt": "2026-11-05T02:49:41.368Z"
     },
     {
       "id": "category-5dff4647-6dcb-460b-b28d-036b323592f1",
