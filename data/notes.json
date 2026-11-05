@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T02:35:53.627Z",
+  "updatedAt": "2026-11-05T02:37:05.142Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -251,16 +251,6 @@
       "collapsed": false,
       "createdAt": "2026-10-15T10:35:41.399Z",
       "updatedAt": "2026-10-15T10:35:41.399Z"
-    },
-    {
-      "id": "category-22c6be9b-b73f-46ff-a829-44f6daf6ecdb",
-      "name": "特殊商品类",
-      "parentId": null,
-      "order": 4,
-      "marked": false,
-      "collapsed": false,
-      "createdAt": "2026-10-16T06:10:53.800Z",
-      "updatedAt": "2026-10-16T06:10:53.800Z"
     },
     {
       "id": "category-40f85dcb-5a7b-4333-beca-77e7b87d9ba0",
