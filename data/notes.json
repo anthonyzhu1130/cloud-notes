@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T02:26:28.595Z",
+  "updatedAt": "2026-11-05T02:26:50.204Z",
   "categories": [
     {
       "id": "category-e144d503-1ef9-42f4-aaf3-80ae27bb56ca",
@@ -265,12 +265,12 @@
     {
       "id": "category-40f85dcb-5a7b-4333-beca-77e7b87d9ba0",
       "name": "集成电路",
-      "parentId": "category-22c6be9b-b73f-46ff-a829-44f6daf6ecdb",
-      "order": 0,
+      "parentId": "category-997b8db3-35b1-4434-b8f9-585360f13e36",
+      "order": 1,
       "marked": false,
       "collapsed": false,
       "createdAt": "2026-10-16T06:10:53.800Z",
-      "updatedAt": "2026-10-16T06:10:53.800Z"
+      "updatedAt": "2026-11-05T02:26:47.573Z"
     }
   ],
   "notes": [
