@@ -333,6 +333,23 @@
   </div>
 </div>
 
+<!-- 【新增】重命名目录 -->
+<div class="modal-backdrop hidden" id="renameCategoryModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-title">重命名目录</h2>
+    <p class="modal-note" id="renameCategoryHint"></p>
+    <div class="form-row">
+      <label class="field-label" for="renameCategoryInput">新名称</label>
+      <input type="text" id="renameCategoryInput" class="input" maxlength="60" />
+    </div>
+    <p id="renameCategoryError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnRenameCategoryConfirm" class="btn btn-primary">确认修改</button>
+      <button type="button" id="btnRenameCategoryCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+  
 <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" />
 <input type="file" id="wordFileInput" accept=".docx" class="hidden-input" />
 <input type="file" id="editNoteImageInput" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" class="hidden-input" />
