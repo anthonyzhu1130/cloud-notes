@@ -19,6 +19,9 @@
   var reminderState = { list: [], filter:{search:'',cat:'all',sort:'remaining',dir:'asc'}, editing:null, notified:{} };
   var editNoteCtx = { noteId: null, newImages: [], files: [], removedFiles: [] };
   var importCandidate = null;
+  // 【新增】移动操作上下文
+  var moveNoteCtx = { noteId: null };
+  var moveCategoryCtx = { catId: null };
 
   function byId(id){return document.getElementById(id);}
   function deepClone(v){return JSON.parse(JSON.stringify(v));}
@@ -69,29 +72,26 @@
   function fetchRemoteNotes(token){
     var tok = token || state.token || null;
 
-    // 【新增】如果是只读模式（没有 Token），直接请求当前网站下的 data/notes.json
-    // 这样完全绕过 GitHub API，不会触发匿名 IP 的每小时 60 次限制
+    // 如果是只读模式（没有 Token），直接请求当前网站下的 data/notes.json
     if(!tok){
       var staticUrl = './' + (CONFIG.NOTES_PATH || 'data/notes.json').replace(/^\//, '') + '?t=' + Date.now();
       return fetch(staticUrl, {cache:'no-store'}).then(function(r){
         if(!r.ok) throw new AppError('读取静态 notes.json 失败（HTTP ' + r.status + '）。', r.status);
         return r.text();
       }).then(function(t){
-        return parseNotesJson(t, null); // 只读模式不需要 sha
+        return parseNotesJson(t, null);
       }).catch(function(e){
         throw new AppError('读取失败，请检查网络或稍后重试：' + (e.message || ''), 0);
       });
     }
 
-    // 如果有 Token（编辑模式），走原有的 GitHub API 逻辑以获取 sha 并准备写入
+    // 有 Token（编辑模式），走 GitHub API 逻辑以获取 sha 并准备写入
     var url = contentsUrl(CONFIG.NOTES_PATH) + '?ref=' + encodeURIComponent(CONFIG.BRANCH||'main') + '&t=' + Date.now();
     return ghFetch(url, {token: tok}).then(function(r){
       if(!r) throw new AppError('远端 notes.json 返回空数据。', 0);
-      // 小文件：GitHub 直接返回 base64 内容
       if(r.content && r.encoding === 'base64'){
         return parseNotesJson(base64ToUtf8(r.content), r.sha);
       }
-      // 大文件（超过 1 MB）：GitHub 不给 content，用 git/blobs API 拿完整内容
       if(r.sha){
         var blobUrl = apiBase() + '/git/blobs/' + encodeURIComponent(r.sha) + '?t=' + Date.now();
         return ghFetch(blobUrl, {token: tok}).then(function(b){
@@ -760,6 +760,10 @@
           var nDn=document.createElement('span');nDn.className='move-btn';nDn.textContent='↓';nDn.title='下移';
           nDn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();moveNote(note.id,'down');});
           li.appendChild(nDn);
+          // 【新增】移动到其他目录按钮
+          var nMv=document.createElement('span');nMv.className='move-btn';nMv.textContent='↪';nMv.title='移动到其他目录';
+          nMv.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openMoveNoteModal(note.id);});
+          li.appendChild(nMv);
         }
         ul.appendChild(li);
       });
@@ -828,6 +832,10 @@
             var cdnB=document.createElement('span');cdnB.className='move-btn';cdnB.textContent='↓';cdnB.title='下移二级目录';
             cdnB.addEventListener('click',function(e){e.stopPropagation();moveCategory(child.id,'down');});
             chHead.appendChild(cdnB);
+            // 【新增】二级目录移动到其他一级目录按钮
+            var cMv=document.createElement('span');cMv.className='move-btn';cMv.textContent='↪';cMv.title='移动到其他一级目录';
+            cMv.addEventListener('click',function(e){e.stopPropagation();openMoveCategoryModal(child.id);});
+            chHead.appendChild(cMv);
           }
           chItem.appendChild(chHead);
           if(!cc){
@@ -959,7 +967,8 @@
     try{sessionStorage.removeItem(TOKEN_STORAGE_KEY);}catch(e){}
     byId('tokenInput').value='';
     editNoteCtx.noteId=null;editNoteCtx.newImages=[];editNoteCtx.files=[];editNoteCtx.removedFiles=[];
-    hideModal('editNoteModal');hideModal('tokenModal');
+    hideModal('editNoteModal');hideModal('tokenModal');hideModal('moveNoteModal');hideModal('moveCategoryModal');
+    moveNoteCtx.noteId=null;moveCategoryCtx.catId=null;
     document.body.classList.remove('edit-mode');state.batchMode=false;state.batchSelected={};
     render();notify('info','已退出编辑模式。',5000);
   }
@@ -1340,6 +1349,151 @@
     commitData(next,'调整笔记顺序：'+note.title).then(function(){
       tip.remove();notify('success','已保存到 GitHub。',4000);renderSidebar();
     }).catch(function(e){tip.remove();notify('error',(e&&e.message)||'保存失败。',12000);});
+  }
+
+  /* ================= 移动二级目录到其他一级目录（新增） ================= */
+  function openMoveCategoryModal(catId){
+    if(!state.editing)return;
+    var cat=getCategory(catId);
+    if(!cat||!cat.parentId){notify('info','只有二级目录才能移动。',4000);return;}
+    moveCategoryCtx.catId=catId;
+    byId('moveCategoryName').textContent='当前二级目录：'+cat.name;
+    var sel=byId('moveCategoryTarget');sel.textContent='';
+    var l1s=getLevel1();
+    var curParentId=cat.parentId;
+    var count=0;
+    l1s.forEach(function(p){
+      if(p.id===curParentId)return;
+      var o=document.createElement('option');
+      o.value=p.id;o.textContent=p.name;
+      sel.appendChild(o);count++;
+    });
+    if(count===0){
+      var o2=document.createElement('option');
+      o2.value='';o2.textContent='（没有其他一级目录可移动）';
+      sel.appendChild(o2);
+    }
+    byId('moveCategoryError').classList.add('hidden');
+    byId('moveCategoryError').textContent='';
+    showModal('moveCategoryModal');
+    byId('moveCategoryTarget').focus();
+  }
+
+  function confirmMoveCategory(){
+    var catId=moveCategoryCtx.catId;
+    if(!catId)return;
+    var errEl=byId('moveCategoryError');errEl.classList.add('hidden');errEl.textContent='';
+    var target=String(byId('moveCategoryTarget').value||'');
+    if(!target){errEl.textContent='请选择目标一级目录。';errEl.classList.remove('hidden');return;}
+    var cat=getCategory(catId);
+    if(!cat)return;
+    var parent=getCategory(target);
+    if(!parent||parent.parentId){errEl.textContent='目标必须是一级目录。';errEl.classList.remove('hidden');return;}
+    if(parent.id===cat.parentId){hideModal('moveCategoryModal');moveCategoryCtx.catId=null;return;}
+
+    var next=deepClone(state.data);
+    var c=next.categories.find(function(x){return x.id===catId;});
+    if(!c)return;
+    var siblings=next.categories.filter(function(x){return x.parentId===target;});
+    var maxOrder=-1;
+    siblings.forEach(function(x){if(typeof x.order==='number'&&x.order>maxOrder)maxOrder=x.order;});
+    c.parentId=target;
+    c.order=maxOrder+1;
+    c.updatedAt=new Date().toISOString();
+
+    var tip=notify('info','正在保存…',0);
+    commitData(next,'移动二级目录：'+c.name+' → '+parent.name).then(function(){
+      tip.remove();
+      hideModal('moveCategoryModal');
+      moveCategoryCtx.catId=null;
+      notify('success','目录已移动并保存到 GitHub。',5000);
+      render();
+    }).catch(function(e){
+      tip.remove();
+      errEl.textContent=(e&&e.message)||'移动失败。';
+      errEl.classList.remove('hidden');
+      notify('error',errEl.textContent,12000);
+    });
+  }
+
+  /* ================= 移动笔记到其他目录（新增） ================= */
+  function openMoveNoteModal(noteId){
+    if(!state.editing)return;
+    var note=state.data?state.data.notes.find(function(n){return n.id===noteId;}):null;
+    if(!note)return;
+    moveNoteCtx.noteId=noteId;
+    byId('moveNoteName').textContent='笔记：'+note.title;
+    var sel=byId('moveNoteTarget');sel.textContent='';
+    var curCat=note.categoryId;
+    var l1s=getLevel1();
+    var count=0;
+    l1s.forEach(function(p){
+      var children=getChildren(p.id);
+      // 一级目录直属（允许笔记从二级"提"到一级）
+      if(p.id!==curCat){
+        var og=document.createElement('option');
+        og.value=p.id;og.textContent='【一级】'+p.name;
+        sel.appendChild(og);count++;
+      }
+      if(children.length>0){
+        var grp=document.createElement('optgroup');
+        grp.label='【一级】'+p.name;
+        var hasOption=false;
+        children.forEach(function(ch){
+          if(ch.id===curCat)return;
+          var o2=document.createElement('option');
+          o2.value=ch.id;o2.textContent='　'+ch.name;
+          grp.appendChild(o2);hasOption=true;
+        });
+        if(hasOption){sel.appendChild(grp);count++;}
+      }
+    });
+    if(sel.options.length===0){
+      var o=document.createElement('option');
+      o.value='';o.textContent='（没有其他目录可移动）';
+      sel.appendChild(o);
+    }
+    byId('moveNoteError').classList.add('hidden');
+    byId('moveNoteError').textContent='';
+    showModal('moveNoteModal');
+    byId('moveNoteTarget').focus();
+  }
+
+  function confirmMoveNote(){
+    var noteId=moveNoteCtx.noteId;
+    if(!noteId)return;
+    var errEl=byId('moveNoteError');errEl.classList.add('hidden');errEl.textContent='';
+    var target=String(byId('moveNoteTarget').value||'');
+    if(!target){errEl.textContent='请选择目标目录。';errEl.classList.remove('hidden');return;}
+    var targetCat=getCategory(target);
+    if(!targetCat){errEl.textContent='目标目录不存在。';errEl.classList.remove('hidden');return;}
+    var note=state.data.notes.find(function(n){return n.id===noteId;});
+    if(!note)return;
+    if(note.categoryId===target){hideModal('moveNoteModal');moveNoteCtx.noteId=null;return;}
+
+    var next=deepClone(state.data);
+    var n=next.notes.find(function(x){return x.id===noteId;});
+    if(!n)return;
+    var siblings=next.notes.filter(function(x){return x.categoryId===target;});
+    var maxOrder=-1;
+    siblings.forEach(function(x){if(typeof x.order==='number'&&x.order>maxOrder)maxOrder=x.order;});
+    n.categoryId=target;
+    n.order=maxOrder+1;
+    n.updatedAt=new Date().toISOString();
+
+    var tip=notify('info','正在保存…',0);
+    commitData(next,'移动笔记：'+n.title+' → '+targetCat.name).then(function(){
+      tip.remove();
+      hideModal('moveNoteModal');
+      moveNoteCtx.noteId=null;
+      notify('success','笔记已移动并保存到 GitHub。',5000);
+      render();
+    }).catch(function(e){
+      tip.remove();
+      errEl.textContent=(e&&e.message)||'移动失败。';
+      errEl.classList.remove('hidden');
+      notify('error',errEl.textContent,12000);
+    });
   }
 
   function exportBackup(){
@@ -1895,10 +2049,25 @@
     });
     safeBind('btnInsertImage','click',insertImageAtCursor);
     safeBind('editNoteImageInput','change',function(ev){var f=ev.target.files&&ev.target.files[0];ev.target.value='';if(f)handleInsertImageFile(f);});
-    safeBind('editNoteFiles','change',function(ev){var files=ev.target.files;ev.target.value='';if(files&&files.length)handleEditNoteFileSelect(files);});
+
+    // 【修复】附件上传：先复制 FileList 为数组，再清空 input，
+    // 否则某些浏览器在 input.value='' 时同步清空 FileList，导致选完文件后不触发上传。
+    safeBind('editNoteFiles','change',function(ev){
+      var input=ev.target;
+      var files=Array.prototype.slice.call(input.files||[]);
+      input.value='';
+      if(files.length)handleEditNoteFileSelect(files);
+    });
+
     safeBind('btnAddAttachment','click',function(){byId('editNoteFiles').value='';byId('editNoteFiles').click();});
     safeBind('btnSaveEditNote','click',saveEditNote);
     safeBind('btnCancelEditNote','click',closeEditNoteModal);
+
+    // 【新增】移动二级目录 / 笔记 的确认与取消
+    safeBind('btnMoveCategoryConfirm','click',confirmMoveCategory);
+    safeBind('btnMoveCategoryCancel','click',function(){moveCategoryCtx.catId=null;hideModal('moveCategoryModal');});
+    safeBind('btnMoveNoteConfirm','click',confirmMoveNote);
+    safeBind('btnMoveNoteCancel','click',function(){moveNoteCtx.noteId=null;hideModal('moveNoteModal');});
 
     safeBind('wordFileInput','change',function(ev){var f=ev.target.files&&ev.target.files[0];ev.target.value='';if(f)handleWordFile(f);});
     safeBind('btnWordImportConfirm','click',executeWordImport);
@@ -1921,6 +2090,8 @@
       if(!byId('reminderModal').classList.contains('hidden')){reminderState.editing=null;hideModal('reminderModal');return;}
       if(!byId('weatherCityModal').classList.contains('hidden')){hideModal('weatherCityModal');return;}
       if(!byId('wordImportModal').classList.contains('hidden')){hideModal('wordImportModal');return;}
+      if(!byId('moveCategoryModal').classList.contains('hidden')){moveCategoryCtx.catId=null;hideModal('moveCategoryModal');return;}
+      if(!byId('moveNoteModal').classList.contains('hidden')){moveNoteCtx.noteId=null;hideModal('moveNoteModal');return;}
     });
   }
 

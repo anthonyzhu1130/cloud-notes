@@ -299,6 +299,40 @@
   </div>
 </div>
 
+<!-- 【新增】移动二级目录到其他一级目录 -->
+<div class="modal-backdrop hidden" id="moveCategoryModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-title">移动二级目录</h2>
+    <p class="modal-note" id="moveCategoryName"></p>
+    <div class="form-row">
+      <label class="field-label" for="moveCategoryTarget">移动到一级目录</label>
+      <select id="moveCategoryTarget" class="input"></select>
+    </div>
+    <p id="moveCategoryError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnMoveCategoryConfirm" class="btn btn-primary">确认移动</button>
+      <button type="button" id="btnMoveCategoryCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- 【新增】移动笔记到其他目录 -->
+<div class="modal-backdrop hidden" id="moveNoteModal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2 class="modal-title">移动笔记</h2>
+    <p class="modal-note" id="moveNoteName"></p>
+    <div class="form-row">
+      <label class="field-label" for="moveNoteTarget">移动到目录</label>
+      <select id="moveNoteTarget" class="input"></select>
+    </div>
+    <p id="moveNoteError" class="error-text hidden"></p>
+    <div class="modal-actions">
+      <button type="button" id="btnMoveNoteConfirm" class="btn btn-primary">确认移动</button>
+      <button type="button" id="btnMoveNoteCancel" class="btn btn-ghost">取消</button>
+    </div>
+  </div>
+</div>
+
 <input type="file" id="importFileInput" accept="application/json,.json" class="hidden-input" />
 <input type="file" id="wordFileInput" accept=".docx" class="hidden-input" />
 <input type="file" id="editNoteImageInput" accept=".jpg,.jpeg,.png,.gif,.webp,image/*" class="hidden-input" />
