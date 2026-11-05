@@ -22,6 +22,7 @@
   // 【新增】移动操作上下文
   var moveNoteCtx = { noteId: null };
   var moveCategoryCtx = { catId: null };
+  var renameCategoryCtx = { catId: null };   // 【新增】重命名目录上下文
 
   function byId(id){return document.getElementById(id);}
   function deepClone(v){return JSON.parse(JSON.stringify(v));}
@@ -801,6 +802,10 @@
         var dnB=document.createElement('span');dnB.className='move-btn';dnB.textContent='↓';dnB.title='下移一级目录';
         dnB.addEventListener('click',function(e){e.stopPropagation();moveCategory(cat.id,'down');});
         head.appendChild(dnB);
+        // 【新增】重命名一级目录
+        var rnB=document.createElement('span');rnB.className='move-btn';rnB.textContent='✏️';rnB.title='重命名目录';
+        rnB.addEventListener('click',function(e){e.stopPropagation();openRenameCategoryModal(cat.id);});
+        head.appendChild(rnB);
         // 【新增】一级目录下（含子目录）没有任何笔记时，可删除该空目录
         if(total===0){
           var delB=document.createElement('span');delB.className='move-btn';delB.textContent='🗑';delB.title='删除空目录';
@@ -842,6 +847,10 @@
             var cMv=document.createElement('span');cMv.className='move-btn';cMv.textContent='↪';cMv.title='移动到其他一级目录';
             cMv.addEventListener('click',function(e){e.stopPropagation();openMoveCategoryModal(child.id);});
             chHead.appendChild(cMv);
+            // 【新增】重命名二级目录
+            var cRnB=document.createElement('span');cRnB.className='move-btn';cRnB.textContent='✏️';cRnB.title='重命名目录';
+            cRnB.addEventListener('click',function(e){e.stopPropagation();openRenameCategoryModal(child.id);});
+            chHead.appendChild(cRnB);
             // 【新增】二级目录下没有笔记时，可删除该空目录
             if(cNotes.length===0){
               var cDelB=document.createElement('span');cDelB.className='move-btn';cDelB.textContent='🗑';cDelB.title='删除空目录';
@@ -980,8 +989,8 @@
     try{sessionStorage.removeItem(TOKEN_STORAGE_KEY);}catch(e){}
     byId('tokenInput').value='';
     editNoteCtx.noteId=null;editNoteCtx.newImages=[];editNoteCtx.files=[];editNoteCtx.removedFiles=[];
-    hideModal('editNoteModal');hideModal('tokenModal');hideModal('moveNoteModal');hideModal('moveCategoryModal');
-    moveNoteCtx.noteId=null;moveCategoryCtx.catId=null;
+    hideModal('editNoteModal');hideModal('tokenModal');hideModal('moveNoteModal');hideModal('moveCategoryModal');hideModal('renameCategoryModal');
+    moveNoteCtx.noteId=null;moveCategoryCtx.catId=null;renameCategoryCtx.catId=null;
     document.body.classList.remove('edit-mode');state.batchMode=false;state.batchSelected={};
     render();notify('info','已退出编辑模式。',5000);
   }
@@ -1508,6 +1517,60 @@
       notify('error',errEl.textContent,12000);
     });
   }
+
+    /* ================= 重命名目录（新增） ================= */
+  function openRenameCategoryModal(catId){
+    if(!state.editing)return;
+    var cat=getCategory(catId);
+    if(!cat)return;
+    renameCategoryCtx.catId=catId;
+    byId('renameCategoryHint').textContent=(cat.parentId?'二级目录':'一级目录')+'：'+cat.name;
+    byId('renameCategoryInput').value=cat.name;
+    byId('renameCategoryError').classList.add('hidden');
+    byId('renameCategoryError').textContent='';
+    showModal('renameCategoryModal');
+    var inp=byId('renameCategoryInput');inp.focus();inp.select();
+  }
+
+  function confirmRenameCategory(){
+    var catId=renameCategoryCtx.catId;
+    if(!catId)return;
+    var errEl=byId('renameCategoryError');errEl.classList.add('hidden');errEl.textContent='';
+    var name=String(byId('renameCategoryInput').value||'').trim();
+    if(!name){errEl.textContent='目录名称不能为空。';errEl.classList.remove('hidden');return;}
+    if(name.length>60){errEl.textContent='目录名称不能超过 60 个字符。';errEl.classList.remove('hidden');return;}
+    var cat=getCategory(catId);
+    if(!cat)return;
+    if(cat.name===name){hideModal('renameCategoryModal');renameCategoryCtx.catId=null;return;}
+    // 同级重名校验
+    var siblings=state.data.categories.filter(function(c){
+      if(c.id===catId)return false;
+      return (c.parentId||null)===(cat.parentId||null);
+    });
+    var dup=siblings.some(function(c){return c.name===name;});
+    if(dup){errEl.textContent='同一级下已存在同名目录。';errEl.classList.remove('hidden');return;}
+
+    var next=deepClone(state.data);
+    var c=next.categories.find(function(x){return x.id===catId;});
+    if(!c)return;
+    var oldName=c.name;
+    c.name=name;
+    c.updatedAt=new Date().toISOString();
+    var tip=notify('info','正在保存…',0);
+    commitData(next,'重命名目录：'+oldName+' → '+name).then(function(){
+      tip.remove();
+      hideModal('renameCategoryModal');
+      renameCategoryCtx.catId=null;
+      notify('success','目录已重命名并保存到 GitHub。',5000);
+      render();
+    }).catch(function(e){
+      tip.remove();
+      errEl.textContent=(e&&e.message)||'重命名失败。';
+      errEl.classList.remove('hidden');
+      notify('error',errEl.textContent,12000);
+    });
+  }
+  
   /* ================= 删除空目录（新增） ================= */
   function categoryHasNotes(catId){
     if(!state.data)return false;
@@ -2128,6 +2191,9 @@
     safeBind('btnMoveCategoryCancel','click',function(){moveCategoryCtx.catId=null;hideModal('moveCategoryModal');});
     safeBind('btnMoveNoteConfirm','click',confirmMoveNote);
     safeBind('btnMoveNoteCancel','click',function(){moveNoteCtx.noteId=null;hideModal('moveNoteModal');});
+    // 【新增】重命名目录的确认与取消
+    safeBind('btnRenameCategoryConfirm','click',confirmRenameCategory);
+    safeBind('btnRenameCategoryCancel','click',function(){renameCategoryCtx.catId=null;hideModal('renameCategoryModal');});
 
     safeBind('wordFileInput','change',function(ev){var f=ev.target.files&&ev.target.files[0];ev.target.value='';if(f)handleWordFile(f);});
     safeBind('btnWordImportConfirm','click',executeWordImport);
@@ -2152,6 +2218,7 @@
       if(!byId('wordImportModal').classList.contains('hidden')){hideModal('wordImportModal');return;}
       if(!byId('moveCategoryModal').classList.contains('hidden')){moveCategoryCtx.catId=null;hideModal('moveCategoryModal');return;}
       if(!byId('moveNoteModal').classList.contains('hidden')){moveNoteCtx.noteId=null;hideModal('moveNoteModal');return;}
+      if(!byId('renameCategoryModal').classList.contains('hidden')){renameCategoryCtx.catId=null;hideModal('renameCategoryModal');return;}
     });
   }
 
