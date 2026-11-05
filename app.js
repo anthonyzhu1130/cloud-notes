@@ -801,8 +801,14 @@
         var dnB=document.createElement('span');dnB.className='move-btn';dnB.textContent='↓';dnB.title='下移一级目录';
         dnB.addEventListener('click',function(e){e.stopPropagation();moveCategory(cat.id,'down');});
         head.appendChild(dnB);
+        // 【新增】一级目录下（含子目录）没有任何笔记时，可删除该空目录
+        if(total===0){
+          var delB=document.createElement('span');delB.className='move-btn';delB.textContent='🗑';delB.title='删除空目录';
+          delB.addEventListener('click',function(e){e.stopPropagation();deleteEmptyCategory(cat.id);});
+          head.appendChild(delB);
+        }
       }
-      item.appendChild(head);
+      item.appendChild(head);   
 
       if(!collapsed){
         var visL1=keyword?l1Notes.filter(function(n){return noteMatches(n,keyword);}):l1Notes;
@@ -836,7 +842,14 @@
             var cMv=document.createElement('span');cMv.className='move-btn';cMv.textContent='↪';cMv.title='移动到其他一级目录';
             cMv.addEventListener('click',function(e){e.stopPropagation();openMoveCategoryModal(child.id);});
             chHead.appendChild(cMv);
+            // 【新增】二级目录下没有笔记时，可删除该空目录
+            if(cNotes.length===0){
+              var cDelB=document.createElement('span');cDelB.className='move-btn';cDelB.textContent='🗑';cDelB.title='删除空目录';
+              cDelB.addEventListener('click',function(e){e.stopPropagation();deleteEmptyCategory(child.id);});
+              chHead.appendChild(cDelB);
+            }
           }
+          
           chItem.appendChild(chHead);
           if(!cc){
             var vis=keyword?cNotes.filter(function(n){return noteMatches(n,keyword);}):cNotes;
@@ -1495,7 +1508,54 @@
       notify('error',errEl.textContent,12000);
     });
   }
+  /* ================= 删除空目录（新增） ================= */
+  function categoryHasNotes(catId){
+    if(!state.data)return false;
+    // 该目录自身是否有笔记
+    if(state.data.notes.some(function(n){return n.categoryId===catId;}))return true;
+    // 子目录（递归）是否有笔记
+    var children=getChildren(catId);
+    for(var i=0;i<children.length;i++){
+      if(categoryHasNotes(children[i].id))return true;
+    }
+    return false;
+  }
 
+  function deleteEmptyCategory(catId){
+    if(!state.editing)return;
+    var cat=getCategory(catId);
+    if(!cat)return;
+    // 二次校验：目录（含子目录）下仍有笔记则拒绝删除
+    if(categoryHasNotes(catId)){
+      notify('warn','该目录下仍有笔记，不能删除。请先移动或删除其中的笔记。',8000);
+      return;
+    }
+    // 收集要删除的目录：自身 + 所有子目录
+    var idsToDelete={};
+    idsToDelete[catId]=1;
+    var stack=[catId];
+    while(stack.length){
+      var cur=stack.pop();
+      getChildren(cur).forEach(function(ch){idsToDelete[ch.id]=1;stack.push(ch.id);});
+    }
+    var count=Object.keys(idsToDelete).length;
+    var msg='确认删除空目录「'+cat.name+'」吗？';
+    if(count>1)msg+='\n（将同时删除其下 '+(count-1)+' 个空子目录）';
+    askConfirm({title:'删除空目录',message:msg,confirmText:'确认删除'}).then(function(ok){
+      if(!ok)return;
+      var next=deepClone(state.data);
+      next.categories=next.categories.filter(function(c){return !idsToDelete[c.id];});
+      var tip=notify('info','正在保存…',0);
+      commitData(next,'删除空目录：'+cat.name).then(function(){
+        tip.remove();
+        notify('success','空目录已删除并保存到 GitHub。',5000);
+        render();
+      }).catch(function(e){
+        tip.remove();
+        notify('error',(e&&e.message)||'删除失败。',12000);
+      });
+    });
+  }
   function exportBackup(){
     if(!state.data){notify('warn','数据尚未加载。',5000);return;}
     var text=JSON.stringify(state.data,null,2);
